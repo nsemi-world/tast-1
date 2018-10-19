@@ -1,6 +1,6 @@
 <?php
     
-include '../lib/classes/autoloader.php';
+include 'classes/autoloader.php';
 
 $order = 'voyageid';
 $filter = 'place';
