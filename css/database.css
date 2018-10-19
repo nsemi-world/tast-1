@@ -1,0 +1,20 @@
+#database {
+    background: transparent;
+    color: white;
+}
+
+
+#database .tab-content {
+    font-family: var(--headline-font);
+    background: white;
+}
+
+#ships, #owners, #captains, #places {
+    color: var(--main-color);
+    font-size: .7em;
+}
+
+
+
+
+

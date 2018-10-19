@@ -1,0 +1,133 @@
+* {
+    box-sizing: border-box;
+}
+
+.container-fluid {
+    border: none;
+    width: 100%;
+    margin: 0;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: var(--main-font);
+    font-size: 16px;
+    overflow-y: scroll;
+    background: linear-gradient(to right, var(--main-color), var(--sec-color));
+}
+
+#wrapper {
+    position: relative;
+    width: 100%;
+    min-height: var(--main-height);
+    overflow-x: hidden;
+}
+
+
+header {
+    height: var(--header-height);
+    background: black;
+    position: fixed;
+    top: 0;
+    z-index: 10000;
+    width: 100%
+}
+
+header .navbar-brand {
+    font-family: var(--brand-font);
+    color: var(--link-color);
+}
+
+
+/* MAIN */
+#content {
+    min-height: var(--main-height);
+}
+
+section {
+    position: relative;
+    width: 100%;
+    min-height: var(--main-height);
+    background: white;
+    color: var(--sec-color);
+}
+div.separator {
+    height: var(--separator-height);
+    /*height: var(--header-height);*/
+    background: linear-gradient(to right, var(--main-color), var(--sec-color));
+}
+
+
+footer {
+    height: var(--footer-height);
+    background: black;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+#menu a, #menu button, footer a {
+    color: var(--link-color);
+    background: transparent;
+    font-family: var(--link-font);
+}
+
+#menu a.active, #menu button.active, #wrapper > footer a.active {
+    color: var(--sec-color);
+}
+
+a i, button i {
+    margin: 0;
+    padding: 0;
+}
+
+#contact p, #about-us p, #impressum p {
+    font-family: var(--body-font);
+    font-size: 1.25em;
+    line-height: 1em;
+    text-align: justify;
+}
+
+#contact {
+    min-height: 0;
+    background: black;
+}
+
+#about-us {
+    min-height: 0;
+    background: transparent;
+    color: white;
+}
+
+#impressum {
+    min-height: 50vh;
+    background: black;
+    text-align: center;
+}
+#impressum-container {
+    text-align: center;
+}
+
+#impressum-container p {
+    text-align: center;
+}
+
+#contact i,
+#about-us i,
+#impressum i {
+    font-size: 300%;
+}
+
+table {
+    font-family: var(--headline-font);
+}
+
+.card-body {
+    font-family: var(--headline-font);
+}
+
+.loading {
+    color: var(--sec-color);
+}
+

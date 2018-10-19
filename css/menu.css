@@ -1,0 +1,7 @@
+header {
+    margin: 0 auto;
+}
+
+.nav {
+    color: var(--sec-color);
+}

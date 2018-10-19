@@ -1,0 +1,16 @@
+https://datatables.net/examples/basic_init/scroll_y.html
+
+SELECT 
+	p.value as place, 
+    q.value as region, 
+    COUNT(shipname) as ships, 
+    COUNT(voyageid) as voyages, 
+    SUM(crew) as crew, 
+    SUM(slaximp) as embarked, 
+    SUM(slamimp) as disembarked, 
+    SUM(slaximp)-SUM(slamimp) as died 
+FROM voyages v 
+JOIN places p ON v.mjbyptimp=p.value 
+JOIN places q ON v.majbyimp=q.value 
+WHERE v.mjbyptimp != '' AND v.majbyimp != '' 
+GROUP BY place

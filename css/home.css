@@ -1,0 +1,57 @@
+/* Home */
+#home {
+    position: relative;
+    height: var(--main-height);
+    text-align: center; 
+    background: rgba(0,0,0,1);
+}
+
+#home .bg-image {
+    height: 100%;
+    background-image: url(../img/African_woman_slave_trade.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-blend-mode: color;
+    opacity: .1;
+}
+
+#home #title {
+    font-family: var(--brand-font);
+    text-align: center;
+    font-size: 400%;
+}
+
+#citation {
+    height: var(--main-height);
+    text-align: center;
+    background: rgba(0,0,0,1);
+}
+
+#citation .quote {
+    color: var(--sec-color);
+    font-size: 300%;
+}
+
+#citation .author {
+    padding-bottom: 1em;
+}
+
+#citation .author a {
+    color: var(--link-color);
+    font-family: var(--headline-font);
+    font-weight: bold;
+    font-size: 1em;
+}
+
+#citation .source {
+    font-family: var(--headline-font);
+    font-weight: bold;
+}
+
+#citation .books img {
+    border: 4px solid yellow;
+    border-radius: 5%;
+    height: 140px;
+}
+

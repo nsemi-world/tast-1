@@ -1,0 +1,53 @@
+#participation {
+    position: relative;
+    height: var(--main-height);
+}
+
+#pplayer {
+    text-align: right;
+    position: absolute;
+    z-index: 50;
+    right: 0em;
+    top: 1em;
+}
+
+#pplayer button {
+    font-size: 75%;
+    color: var(--headline-color);
+}
+
+#world-container {
+    font-family: var(--brand-font);
+    height: var(--main-height);
+}
+
+#world-map {
+    height: 100%;    
+}
+
+p#year {
+    font-size: 300%;
+    color: rgba(0,0,0,.5);
+    position: absolute;
+    z-index: 30;
+    left: 1em;
+    top: 1em;
+}
+
+#countries-data {
+    font-size: 70%;
+    color: var(--main-color);
+}
+
+#countries-data table {
+    font-weight: normal;
+}
+
+#participation .hoverinfo {
+    font-family: var(--body-font);
+}
+
+circle.datamaps-bubble[data-info~="PRT"] {
+    background: blue;
+}
+

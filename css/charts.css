@@ -1,0 +1,18 @@
+#charts {
+    min-height: var(--main-height);
+}
+
+#charts .title {
+    font-weight: bold;
+    font-family: var(--headline-font);
+    text-align: center;
+}
+
+#charts .chart-legend p {
+    font-family: var(--body-font);
+    font-size: 1em;
+    color: #333;
+    font-weight: bold;
+    line-height: 1.25em;
+    text-align: justify;
+}

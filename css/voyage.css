@@ -1,0 +1,87 @@
+#voyages {
+    position: relative;
+    width: 100%;
+    height: var(--main-height);
+    background: transparent;
+}
+
+#vplayer {
+    text-align: right;
+    position: absolute;
+    z-index: 50;
+    right: 1em;
+    top: .5em;
+}
+
+#vplayer button {
+    font-size: 75%;
+    color: var(--headline-color);
+}
+
+#storymap-container {
+    position: relative;
+    height: var(--main-height);
+}
+#storymap {
+    font-family: var(--brand-font);
+    height: var(--main-height);
+}
+
+#details-container {
+    height: var(--main-height);
+    color: var(--main-color);
+    background: white;
+    overflow: scroll;
+}
+
+.card {
+    height: var(--main-height);
+    font-size: .7em;
+}
+
+.card-header {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+#details {
+    height: var(--main-height);
+}
+
+#details .entry {
+}
+
+#details .key {
+    color: var(--main-color);
+    text-align: left;
+    font-weight: bold;
+}
+
+#details .value {
+    color: var(--main-color);
+    text-align: right;
+}
+
+#details .value a,
+.headline .value a {
+    text-decoration: underline;
+    color: var(--link-color);
+}
+
+.headline {
+    color: var(--key-color);
+    font-family: var(--brand-font);
+    font-weight: bold;
+    text-align: center;
+}
+
+div.itinerary {
+    color: var(--key-color);
+    text-align: center;    
+    font-weight: bold;
+}
+div.itinerary a {
+    color: var(--key-color);
+    text-decoration: underline;
+}
+
