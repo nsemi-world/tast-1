@@ -1,6 +1,6 @@
 <?php 
 
-namespace info;
+
 
 class LandingInfo extends StageInfo {
     

@@ -1,6 +1,6 @@
 <?php 
 
-namespace info;
+
 
 abstract class StageInfo {
     

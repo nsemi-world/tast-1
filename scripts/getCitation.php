@@ -1,8 +1,9 @@
 <?php
 
-include 'classes/autoloader.php';
+include 'autoloader.php';
 
-$helper = new \db\VoyagesDatabaseHelper();
+
+$helper = new VoyagesDatabaseHelper();
 $citation = $helper->findCitation();
 
 header('Content-type:application/json;charset=utf-8');

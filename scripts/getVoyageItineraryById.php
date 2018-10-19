@@ -1,6 +1,6 @@
 <?php
     
-include '../lib/classes/autoloader.php';
+include 'autoloader.php';
 
 // MAIN
 
@@ -13,7 +13,7 @@ if(isset($_GET['voyageid'])) {
 //-------------------------------------
 // Prepare answer
 //-------------------------------------
-$vinfo = new info\VoyageInfo($voyageid);
+$vinfo = new VoyageInfo($voyageid);
 
 $result = [];
 $result['itinerary'] = $vinfo->getStages();

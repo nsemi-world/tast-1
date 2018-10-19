@@ -1,7 +1,5 @@
 <?php 
 
-namespace db;
-use PDO;
 
 //include 'VoyagesDatabaseQueries.php';
 

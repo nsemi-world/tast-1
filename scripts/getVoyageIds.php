@@ -1,6 +1,6 @@
 <?php
     
-include '../lib/classes/autoloader.php';
+include 'autoloader.php';
 
 $order = 'voyageid';
 $include_summary = false;
@@ -9,7 +9,7 @@ if(isset($_GET['include_summary'])) {
     $include_summary = $_GET['include_summary'];
 }
 
-$helper = new \db\VoyagesDatabaseHelper();
+$helper = new VoyagesDatabaseHelper();
 $db_ids = $helper->findAllVoyageIdsOrderBy($order);
 
 $ids = [];

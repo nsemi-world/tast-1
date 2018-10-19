@@ -1,6 +1,7 @@
 <?php
 
-include 'classes/autoloader.php';
+include 'autoloader.php';
+
 
 $keyword = 'title';
 $value = 'slave';
@@ -13,7 +14,7 @@ if(isset($_GET['value'])) {
     $value = $_GET['value'];
 }
 
-$helper = new \db\VoyagesDatabaseHelper();
+$helper = new VoyagesDatabaseHelper();
 $links = $helper->findAffiliateLinks($keyword, $value);
 
 header('Content-type:application/json;charset=utf-8');

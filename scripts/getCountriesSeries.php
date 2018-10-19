@@ -1,12 +1,13 @@
 <?php
-include 'classes/autoloader.php';
+
+include 'autoloader.php';
 
 $year = 0;
 if(isset($_GET['year'])) {
     $year = $_GET['year'];
 }
 
-$helper = new \db\VoyagesDatabaseHelper();
+$helper = new VoyagesDatabaseHelper();
 if($year == 0) {
     $result = $helper->findCountriesSummaries();
 }
