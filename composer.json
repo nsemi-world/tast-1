@@ -1,5 +1,2 @@
 {
- "require": {
-    "crate/crate-pdo":"~1.0.0"
-  }    
 }
