@@ -20,7 +20,7 @@ class VoyagesDatabaseHelper {
         $username = 'b0bd1223927bc6';
         $password = '707fe6cf';
         $dbname = 'heroku_1bca0db043051c1';
-        $this->pdo = new PDO("mysql:host=".$host."; dbname=".$dbname.'; charset=utf8', $username, $password);
+        $this->pdo = new \PDO("mysql:host=".$host."; dbname=".$dbname.'; charset=utf8', $username, $password);
     }
     public function findAll() {
         $erg = $this->pdo->query(VoyagesDatabaseQueries::queryAll());
