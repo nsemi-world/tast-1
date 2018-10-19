@@ -7,10 +7,20 @@ use PDO;
 
 class VoyagesDatabaseHelper {
     
+    /*
+    private $url = 'mysql:host=localhost;dbname=tastdb;charset=utf8';
+    private $username = 'root';
+    private $password = '';
+    */
     private $pdo;
 
     public function __construct() {
-        $this->pdo = new PDO('mysql:host=localhost;dbname=tastdb;charset=utf8', 'root', '');
+        //$url = 'mysql://b0bd1223927bc6:707fe6cf@us-cdbr-iron-east-01.cleardb.net/heroku_1bca0db043051c1?reconnect=true';
+        $host = 'us-cdbr-iron-east-01.cleardb.net';
+        $username = 'b0bd1223927bc6';
+        $password = '707fe6cf';
+        $dbname = 'heroku_1bca0db043051c1';
+        $this->pdo = new PDO("mysql:host=".$host."; dbname=".$dbname.'?reconnect=true', $username, $password);
     }
     public function findAll() {
         $erg = $this->pdo->query(VoyagesDatabaseQueries::queryAll());
