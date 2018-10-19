@@ -1,8 +1,7 @@
 <?php 
 
 namespace db;
-use PDO;
-
+require_once 'vendor/autoload.php';
 //include 'VoyagesDatabaseQueries.php';
 
 class VoyagesDatabaseHelper {
