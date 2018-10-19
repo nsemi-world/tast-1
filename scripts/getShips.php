@@ -2,7 +2,7 @@
 
 include '../lib/classes/autoloader.php';
 
-$helper = new db\VoyagesDatabaseHelper();
+$helper = new \db\VoyagesDatabaseHelper();
 $ships = $helper->findShipsSummaries();
 
 $result = [];

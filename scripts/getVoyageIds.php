@@ -9,7 +9,7 @@ if(isset($_GET['include_summary'])) {
     $include_summary = $_GET['include_summary'];
 }
 
-$helper = new db\VoyagesDatabaseHelper();
+$helper = new \db\VoyagesDatabaseHelper();
 $db_ids = $helper->findAllVoyageIdsOrderBy($order);
 
 $ids = [];

@@ -6,7 +6,7 @@ if(isset($_GET['year'])) {
     $year = $_GET['year'];
 }
 
-$helper = new db\VoyagesDatabaseHelper();
+$helper = new \db\VoyagesDatabaseHelper();
 if($year == 0) {
     $result = $helper->findCountriesSummaries();
 }

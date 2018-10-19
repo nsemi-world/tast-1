@@ -18,7 +18,7 @@ if(isset($_GET['include_summary'])) {
 }
 
 
-$helper = new db\VoyagesDatabaseHelper();
+$helper = new \db\VoyagesDatabaseHelper();
 $db_ids = $helper->findFilteredVoyageIdsOrderBy($order, $filter, $f);
 
 $ids = [];
