@@ -1,6 +1,6 @@
 <?php 
 
-namespace db;
+//namespace db;
 
 class VoyagesDatabaseQueries {
     

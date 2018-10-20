@@ -1,6 +1,6 @@
 <?php
 
-include 'autoloader.php';;
+//include 'autoloader.php';;
 
 $helper = new \db\VoyagesDatabaseHelper();
 $citation = $helper->findCitation();

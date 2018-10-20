@@ -1,8 +1,8 @@
 <?php 
 
-namespace info;
+//namespace info;
 
-class OutOfAfricaInfo extends StageInfo {
+class EndInfo extends StageInfo {
     
     public function __construct($voyage, $helper) {
         parent::__construct($voyage, $helper);
@@ -14,28 +14,27 @@ class OutOfAfricaInfo extends StageInfo {
 
     public function createDate() {
         $voyage = $this->getVoyage();
-        return $voyage->dateleftafr ?? (dlslatrc . '-' . dlslatrb . '-' . dlslatra);
+        return $voyage->dateend;
     }
-    
+
     public function createPlace() {
+        $voyage = $this->getVoyage();
+        return $voyage->portret;
     }
     
-    public function createRegion() {}
-    
+    public function createRegion() {
+        $voyage = $this->getVoyage();
+        return $voyage->regdis3;
+    }
+
     public function createNarrative() {}
     
     public function createStageName() {
-        return 'Middle Passage';
+        return 'End';
     }
     
-    public function setPlace($place) {
-        parent::setPlace($place);
-    }
     
-    public function setGeo($geo) {
-        parent::setGeo($geo);
-    }
-    }
+}
 
 
 

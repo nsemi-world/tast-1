@@ -1,6 +1,6 @@
 <?php 
 
-namespace info;
+//namespace info;
 
 class PurchaseInfo extends StageInfo {
     

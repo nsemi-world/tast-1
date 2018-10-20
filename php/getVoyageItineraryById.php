@@ -1,6 +1,6 @@
 <?php
     
-include 'autoloader.php';;
+//include 'autoloader.php';;
 
 // MAIN
 
@@ -13,7 +13,7 @@ if(isset($_GET['voyageid'])) {
 //-------------------------------------
 // Prepare answer
 //-------------------------------------
-$helper = new db\VoyagesDatabaseHelper();
+$helper = new VoyagesDatabaseHelper();
 $vinfo = new info\VoyageInfo($voyageid, $helper);
 
 $result = [];

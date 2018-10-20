@@ -1,6 +1,6 @@
 <?php 
 
-namespace info;
+//namespace info;
 
 class VoyageInfo {
     

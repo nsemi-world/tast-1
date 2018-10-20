@@ -1,7 +1,7 @@
 <?php 
-
-namespace info;
     
+//namespace info;
+
 class DepartureInfo extends StageInfo {
     
     public function __construct($voyage, $helper) {

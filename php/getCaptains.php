@@ -1,8 +1,8 @@
 <?php
 
-include 'autoloader.php';;
+//include 'autoloader.php';;
 
-$helper = new db\VoyagesDatabaseHelper();
+$helper = new VoyagesDatabaseHelper();
 $captains = $helper->findCaptainsSummaries();
 
 $result = [];
