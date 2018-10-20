@@ -1,7 +1,6 @@
 <?php
     
-include 'autoloader.php';
-
+include '../lib/classes/autoloader.php';
 
 $order = 'voyageid';
 $filter = 'place';
@@ -19,7 +18,7 @@ if(isset($_GET['include_summary'])) {
 }
 
 
-$helper = new VoyagesDatabaseHelper();
+$helper = new db\VoyagesDatabaseHelper();
 $db_ids = $helper->findFilteredVoyageIdsOrderBy($order, $filter, $f);
 
 $ids = [];
