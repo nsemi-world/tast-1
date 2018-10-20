@@ -61,21 +61,6 @@ class VoyagesDatabaseHelper {
         $erg = $this->pdo->query(VoyagesDatabaseQueries::queryAllVoyagesIdsOrderBy($order));
         return $erg->fetchAll(PDO::FETCH_OBJ);
     }
-    public function findFilteredVoyageIdsOrderBy($order, $filter, $value) {
-        $new_value = $value;
-        if($filter == 'place') {
-            $new_value = $this->findPlaceNamed($value)->value;
-        }
-        else if( $filter == 'country') {
-            $new_value = $this->findCountryNamed($value)->value;
-        }
-        else if( $filter == 'fate') {
-            $new_value = $this->findFateNamed($value)->value;
-        }
-        
-        $erg = $this->pdo->query(VoyagesDatabaseQueries::queryFilteredVoyagesIdsOrderBy($order, $filter, $new_value));
-        return $erg->fetchAll(PDO::FETCH_OBJ);
-    }
     public function findVoyageById($id) {
         $erg = $this->pdo->query(VoyagesDatabaseQueries::queryByVoyageId($id));
         return $erg->fetch(PDO::FETCH_ASSOC);

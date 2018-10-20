@@ -356,6 +356,7 @@ function loadVoyageData(index) {
         },
         dataType: 'json',
         success: function (result) {
+            console.log(result);
             $('#voyages').trigger('_voyage_loaded', [result, index]);
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -644,6 +645,7 @@ function getVoyagePlaces(data) {
     if (data) {
         var places = [];
         $.each(data.itinerary, function (i, v) {
+            console.log(v);
             if (v.place != null) {
                 var new_value = v.place
                     .replace(", port unspecified", "")
