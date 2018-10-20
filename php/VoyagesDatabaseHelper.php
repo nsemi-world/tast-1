@@ -1,6 +1,6 @@
 <?php 
 
-//namespace db;
+namespace app\php;
 //use PDO;
 
 //include 'VoyagesDatabaseQueries.php';
@@ -96,10 +96,6 @@ class VoyagesDatabaseHelper {
         return $erg->fetch(PDO::FETCH_OBJ);
     }
 
-    public function findSummariesByYear() {
-        $erg = $this->pdo->query(VoyagesDatabaseQueries::querySummariesByYear());
-        return $erg->fetchAll(PDO::FETCH_OBJ);
-    }
     
     public function findAllVoyagesSummary() {
         $erg = $this->pdo->query(VoyagesDatabaseQueries::queryAllVoyagesSummary());

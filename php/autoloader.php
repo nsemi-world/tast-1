@@ -1,6 +1,4 @@
 <?php
-namespace app\php;
-
 spl_autoload_extensions('.php');
 
 spl_autoload_register(function($name) {
