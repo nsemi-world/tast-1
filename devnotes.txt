@@ -1,22 +1,41 @@
-TODO: Publish app as subdomain of ngutu.org
+DONE: Set scroll_y option for datatables
+    - https://datatables.net/examples/basic_init/scroll_y.html
+DONE: Publish app as subdomain of ngutu.org (tast.ngutu.org)
 DONE: Make app depend on environment variables
     - getEnv("CLEARDB_DATABASE_URL");
-TODO: Paginate calls to Captains Tab content
+
+
+--------
+MONDAY
+--------
+TODO: Center icons in content
+TODO: Set Contacts and Impressum section height to var(--main-height)
+TODO: Center Impressum and contacts Content in corresponding sections
+TODO: Uncenter Impressum title
+
+--------
+TUESDAY
+--------
+TODO: Merge css files. It should only contain:
+    - reset.css (with css reset instructions)
+    - constants.css (with definitions for fonts, backgrounds and color)
+    - style.css (components css)
+    - player.css (player specific styling)
+    - datamaps.css (styling of external component)
+    - datatables.css (styling of external component)
+    - tastcharts.css (styling of external component)
+    - responsive.css (custom styling beyond bootstrap)
+
+
+------------------
+WEDNESDAY - FRIDAY
+------------------
+TODO: Make website responsible
+TODO: Rewrite Charts Legend/Content
 TODO: Merge calls to getCitation and getAffiliatedLinks together
 
-https://datatables.net/examples/basic_init/scroll_y.html
 
-SELECT 
-	p.value as place, 
-    q.value as region, 
-    COUNT(shipname) as ships, 
-    COUNT(voyageid) as voyages, 
-    SUM(crew) as crew, 
-    SUM(slaximp) as embarked, 
-    SUM(slamimp) as disembarked, 
-    SUM(slaximp)-SUM(slamimp) as died 
-FROM voyages v 
-JOIN places p ON v.mjbyptimp=p.value 
-JOIN places q ON v.majbyimp=q.value 
-WHERE v.mjbyptimp != '' AND v.majbyimp != '' 
-GROUP BY place
+TODO: Add pagination for eficciency to Captains/Ships/Owners/Places Tab content
+TODO: Add user switch for single / multiple page interaction. Which should be used as default?
+TODO: Specify user-interaction within each section
+TODO: Plan a new website to denounce slavery / racism
