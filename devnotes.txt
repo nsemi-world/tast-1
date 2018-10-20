@@ -1,3 +1,5 @@
+TODO: Make app depend on environment variables
+    - getEnv("CLEARDB_DATABASE_URL");
 TODO: Paginate calls to Captains Tab content
 TODO: Merge calls to getCitation and getAffiliatedLinks together
 
