@@ -1,5 +1,6 @@
 <?php
 
+namespace app\php;
 include 'autoloader.php';    
 header('Content-type:application/json; charset=utf-8');
 
