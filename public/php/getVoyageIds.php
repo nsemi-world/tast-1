@@ -1,6 +1,6 @@
 <?php
     
-include '../lib/classes/autoloader.php';
+include 'autoloader.php';;
 
 $order = 'voyageid';
 $include_summary = false;

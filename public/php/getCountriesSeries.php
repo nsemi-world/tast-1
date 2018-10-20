@@ -1,5 +1,5 @@
 <?php
-include '../lib/classes/autoloader.php';
+include 'autoloader.php';;
 
 $year = 0;
 if(isset($_GET['year'])) {
