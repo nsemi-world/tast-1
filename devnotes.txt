@@ -1,4 +1,5 @@
-TODO: Make app depend on environment variables
+TODO: Publish app as subdomain of ngutu.org
+DONE: Make app depend on environment variables
     - getEnv("CLEARDB_DATABASE_URL");
 TODO: Paginate calls to Captains Tab content
 TODO: Merge calls to getCitation and getAffiliatedLinks together
