@@ -1,6 +1,6 @@
 <?php 
 
-
+namespace db;
 
 class VoyagesDatabaseQueries {
     
@@ -68,7 +68,6 @@ class VoyagesDatabaseQueries {
     public static function queryAllByVariableList($varlist) {
         $columns = [];
         $joins = [];
-        
         foreach($varlist as $key => $value) {
             if(VoyagesDatabaseQueries::is_labelled($value)) {
                 array_push($columns, "$value.label AS $value");

@@ -20,7 +20,7 @@ class VoyagesDatabaseHelper {
         $username = 'b0bd1223927bc6';
         $password = '707fe6cf';
         $dbname = 'heroku_1bca0db043051c1';
-        $this->pdo = new PDO("mysql:host=".$host."; dbname=".$dbname.'?reconnect=true', $username, $password);
+        $this->pdo = new PDO("mysql:host=".$host."; dbname=".$dbname.'; charset=utf8', $username, $password);
     }
     public function findAll() {
         $erg = $this->pdo->query(VoyagesDatabaseQueries::queryAll());
@@ -32,19 +32,15 @@ class VoyagesDatabaseHelper {
     }
     
     public function findItinerary($voyageid) {
-        $variable_list = $this->createVariableList($this->findAllVariableNames());
+        $varnames = $this->findAllVariableNames();
+        $variable_list = $this->createVariableList($varnames);
 
         $query = VoyagesDatabaseQueries::queryByVariableList($voyageid, $variable_list);
-
         $erg = $this->pdo->query($query);
         return $erg->fetch(PDO::FETCH_OBJ);    
     }
     public function findAllVariableNames() {
-        $erg = $this->pdo->query(
-            "SELECT `COLUMN_NAME` as name
-                FROM `INFORMATION_SCHEMA`.`COLUMNS` 
-                WHERE `TABLE_SCHEMA`='tastdb' 
-                AND `TABLE_NAME`='voyages'");
+        $erg = $this->pdo->query("SELECT name FROM variables");
         return $erg->fetchAll(PDO::FETCH_OBJ);
     }
     

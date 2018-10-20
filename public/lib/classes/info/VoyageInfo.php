@@ -1,6 +1,6 @@
 <?php 
 
-
+namespace info;
 
 class VoyageInfo {
     
@@ -16,9 +16,9 @@ class VoyageInfo {
      * Constructor of VoyageInfo objects
      * @param $voyageid: Voyage id in the database
      */
-    public function __construct($voyageid) {
+    public function __construct($voyageid, $helper) {
         $this->voyageid = $voyageid;
-        $this->helper = new VoyagesDatabaseHelper();
+        $this->helper = new \db\VoyagesDatabaseHelper();
         $this->voyage = $this->helper->findItinerary($this->voyageid);
         $this->initDetails();
         $this->initStages();

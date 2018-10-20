@@ -13,7 +13,8 @@ if(isset($_GET['voyageid'])) {
 //-------------------------------------
 // Prepare answer
 //-------------------------------------
-$vinfo = new info\VoyageInfo($voyageid);
+$helper = new db\VoyagesDatabaseHelper();
+$vinfo = new info\VoyageInfo($voyageid, $helper);
 
 $result = [];
 $result['itinerary'] = $vinfo->getStages();
