@@ -1,3 +1,5 @@
+TODO: Merge calls to getCitation and getAffiliatedLinks together
+
 https://datatables.net/examples/basic_init/scroll_y.html
 
 SELECT 
