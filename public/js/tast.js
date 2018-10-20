@@ -210,7 +210,7 @@ function centerCitation() {
 }
 function getCitation() {
     $.ajax({
-        url: 'php/scripts/getCitation.php',
+        url: 'scripts/getCitation.php',
         success: function (data) {
             $('#citation').trigger('_citation_loaded', [data]);
         }
@@ -228,7 +228,7 @@ function addCitation(data) {
 }
 function getAffiliateLinks(keyword, value) {
     $.ajax({
-        url: 'php/scripts/getAffiliateLinks.php',
+        url: 'scripts/getAffiliateLinks.php',
         data: {
             keyword: keyword,
             value: value
@@ -309,7 +309,7 @@ function configureVoyagesPlayer() {
     });
 }
 function loadVoyageIds() {
-    var url = 'php/scripts/getVoyageIds.php';
+    var url = 'scripts/getVoyageIds.php';
     $.ajax({
         url: url,
         data: {include_summary: true},
@@ -324,7 +324,7 @@ function loadVoyageIds() {
     });
 }
 function loadFilteredVoyageIds(filter, filter_value) {
-    var url = 'php/scripts/getFilteredVoyageIds.php';
+    var url = 'scripts/getFilteredVoyageIds.php';
     $.ajax({
         url: url,
         data: {
@@ -348,7 +348,7 @@ function loadFilteredVoyageIds(filter, filter_value) {
     });
 }   
 function loadVoyageData(index) {
-    var url = 'php/scripts/getVoyageItineraryById.php';
+    var url = 'scripts/getVoyageItineraryById.php';
     $.ajax({
         url: url,
         data: {
@@ -919,7 +919,7 @@ function height(value) {
     return value * maxHeight / max;
 }
 function getCountriesSeries(y) {
-    var url = 'php/scripts/getCountriesSeries.php';
+    var url = 'scripts/getCountriesSeries.php';
 
     $.ajax({
         url: url,
@@ -1131,7 +1131,7 @@ function contractStoryMap() {
 
 function initCharts() {
     $.ajax({
-        url: 'php/scripts/allByYear.php',
+        url: 'scripts/allByYear.php',
         dataType: 'json',
         success: function (data) {
             initChart(data);
@@ -1379,7 +1379,7 @@ function initPlaces() {
 
 function getOwners() {
     $.ajax({
-        url: 'php/scripts/getOwners.php',
+        url: 'scripts/getOwners.php',
         success: function (data) {
             $('div#owners').trigger('_owners_loaded', [data]);
         },
@@ -1390,7 +1390,7 @@ function getOwners() {
 }
 function getCaptains() {
     $.ajax({
-        url: 'php/scripts/getCaptains.php',
+        url: 'scripts/getCaptains.php',
         success: function (data) {
             $('div#captains').trigger('_captains_loaded', [data]);
         },
@@ -1401,7 +1401,7 @@ function getCaptains() {
 }
 function getShips() {
     $.ajax({
-        url: 'php/scripts/getShips.php',
+        url: 'scripts/getShips.php',
         success: function (data) {
             $('div#ships').trigger('_ships_loaded', [data]);
         },
@@ -1411,7 +1411,7 @@ function getShips() {
     });
 }
 function getPlaces() {
-    var url = 'php/scripts/getPlaces.php';
+    var url = 'scripts/getPlaces.php';
     $.ajax({
         url: url,
         success: function (result) {
