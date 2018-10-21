@@ -139,6 +139,7 @@ function initMenu() {
         enterImpressum();
         activate($(this));
     });
+    
 }
 
 function enterHome() {
