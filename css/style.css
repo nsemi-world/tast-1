@@ -1,9 +1,12 @@
 section {
     position: relative;
     min-height: var(--main-height);
-    color: var(--sec-color);
 }
 
+section {
+    background: var(--section-background-color);
+    color: var(--white);
+}
 div.separator {
     height: var(--separator-height);
     background: linear-gradient(to right, var(--main-color), var(--sec-color));
@@ -17,23 +20,15 @@ div.separator {
 }
 
 #contact {
-    min-height: var(--main-height);
-    background: black;
 }
 
 #about-us {
-    min-height: 0;
-    background: transparent;
-    color: white;
 }
 
 #impressum {
-    min-height: 50vh;
-    background: black;
     text-align: center;
 }
 #impressum-container {
-    text-align: center;
 }
 
 #impressum-container p {

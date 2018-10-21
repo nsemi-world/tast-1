@@ -3,7 +3,6 @@
     position: relative;
     height: var(--main-height);
     text-align: center; 
-    background: rgba(0,0,0,1);
 }
 
 #home .bg-image {
@@ -13,7 +12,7 @@
     background-position: center center;
     background-size: cover;
     background-blend-mode: color;
-    opacity: .1;
+    opacity: .05;
 }
 
 #home #title {
@@ -25,11 +24,9 @@
 #citation {
     height: var(--main-height);
     text-align: center;
-    background: rgba(0,0,0,1);
 }
 
 #citation .quote {
-    color: var(--sec-color);
     font-size: 300%;
 }
 
@@ -38,7 +35,6 @@
 }
 
 #citation .author a {
-    color: var(--link-color);
     font-family: var(--headline-font);
     font-weight: bold;
     font-size: 1em;

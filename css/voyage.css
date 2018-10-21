@@ -1,8 +1,6 @@
 #voyages {
     position: relative;
-    width: 100%;
     height: var(--main-height);
-    background: transparent;
 }
 
 #vplayer {
@@ -30,13 +28,13 @@
 #details-container {
     height: var(--main-height);
     color: var(--main-color);
-    background: white;
     overflow: scroll;
 }
 
 .card {
     height: var(--main-height);
     font-size: .7em;
+    background: transparent;
 }
 
 .card-header {

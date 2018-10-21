@@ -4,8 +4,14 @@
 
 :root {
     /* Main color scheme: White on dark semi-transparent background*/
-    --main-background: rgba(255,255,255,1);
-    --sec-background-color: #eea;
+    --main-color: #777;
+    --sec-color: #dad;
+    --white: white;
+    --black: #000;
+
+    --main-background-color: linear-gradient(to right, var(--main-color), var(--sec-color));
+    
+    --section-background-color: var(--black);
     
     --main-font: 'Trade Winds', cursive;
     --headline-font: 'Proza Libre', sans-serif;
@@ -13,19 +19,15 @@
     --brand-font: var(--main-font);
     --link-font: 'Trade Winds', cursive;
     
-    --main-color: #555;
-    --sec-color: #dad;    
-    --headline-color: cadetblue;
-    --body-color: black;
     --brand-color: var(--main-color);
     --key-color: #555;
     --value-color: cadetblue;    
-    --link-color: cadetblue;
-    --link-color-active: #ddd;    
+    --link-color: var(--main-color);
+    --link-color-active: var(--sec-color);    
 
     --header-height: 8vh;
     --footer-height: 6vh;
-    --main-height: 100vh;
+    --main-height: 92vh;
     
     --separator-height: .25em;
 }
