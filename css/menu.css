@@ -1,7 +1,28 @@
-header {
-    margin: 0 auto;
+header .navbar-brand {
+    width: 50%;
+    font-family: var(--brand-font);
+    color: var(--link-color);
 }
 
-.nav {
+
+#menu {
+    max-height: var(--header-height);
+    text-align: center;
+}
+
+#menu a, #menu button, footer a {
+    color: var(--link-color);
+    background: transparent;
+    font-family: var(--link-font);
+}
+
+#menu a.active, 
+#menu button.active, 
+#wrapper > footer a.active {
     color: var(--sec-color);
+}
+
+a i, button i {
+    margin: 0;
+    padding: 0;
 }
