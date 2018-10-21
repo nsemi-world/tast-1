@@ -6,6 +6,14 @@ DONE: Make app depend on environment variables
 
 
 --------
+SUNDAY
+--------
+TODO: [MENU_TOGGLE] Implement toggling for responsive menu
+TODO: [SMALL_FIRST] Implement SMALL-FIRST layouting
+TODO: [ENV_VAR_DB] Change development environment variable CLEARDB_DATABASE_URL to mysql://root:password@localhost/tastdb:
+    - Check that this address is processed by getPDO() function, and fine tune it to properly process development and production database
+
+--------
 MONDAY
 --------
 TODO: Center icons in content
@@ -39,3 +47,4 @@ TODO: Add pagination for eficciency to Captains/Ships/Owners/Places Tab content
 TODO: Add user switch for single / multiple page interaction. Which should be used as default?
 TODO: Specify user-interaction within each section
 TODO: Plan a new website to denounce slavery / racism
+TODO: Write a README file
