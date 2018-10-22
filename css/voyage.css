@@ -1,14 +1,11 @@
 #voyages {
     position: relative;
-    height: var(--main-height);
+    min-height: var(--main-height);
 }
 
 #vplayer {
-    text-align: right;
-    position: absolute;
-    z-index: 50;
-    right: 1em;
-    top: .5em;
+    text-align: center;
+    background: black;
 }
 
 #vplayer button {
@@ -18,7 +15,7 @@
 
 #storymap-container {
     position: relative;
-    height: var(--main-height);
+    min-height: var(--main-height);
 }
 #storymap {
     font-family: var(--brand-font);
@@ -26,13 +23,11 @@
 }
 
 #details-container {
-    height: var(--main-height);
+    min-height: var(--main-height);
     color: var(--main-color);
-    overflow: scroll;
 }
 
 .card {
-    height: var(--main-height);
     font-size: .7em;
     background: transparent;
 }
@@ -43,7 +38,6 @@
 }
 
 #details {
-    height: var(--main-height);
 }
 
 #details .entry {
