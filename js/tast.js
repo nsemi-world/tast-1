@@ -160,7 +160,41 @@ function enter(selector) {
                 status_tast.voyages.storymap.updateDisplay();
             }
             break;
+        case '#contacts':
+            centerContacts();
+            break;
+        case '#about-us':
+            centerAboutUs();
+            break;
+        case '#impressum':
+            centerImpressum();
+            break;
     }
+}
+
+
+function centerContacts() {
+    $('#contact-container').position({
+        my: 'center',
+        at: 'center',
+        of: '#contacts'
+    });
+}
+
+function centerAboutUs() {
+    $('#about-us-container').position({
+        my: 'center',
+        at: 'center',
+        of: '#about-us'
+    });    
+}
+
+function centerImpressum() {
+    $('#impressum-container').position({
+        my: 'center',
+        at: 'center',
+        of: '#impressum'
+    });
 }
 
 function goTo(selector) {
@@ -1363,7 +1397,7 @@ function createChart(datasets) {
             datasets: [
                 {
                     label: 'Yearly Deaths during Middle Passage',
-                    backgroundColor: 'black',
+                    backgroundColor: 'yellow',
                     borderColor: 'black',
                     borderWidth: .5,
                     data: datasets.died

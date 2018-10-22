@@ -38,6 +38,10 @@ table {
     font-family: var(--headline-font);
 }
 
+table thead {
+    background: var(--sec-color);
+}
+
 .card-body {
     font-family: var(--headline-font);
 }
