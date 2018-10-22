@@ -3,6 +3,7 @@
     position: relative;
     height: var(--main-height);
     text-align: center; 
+    margin-top: var(--header-height);
 }
 
 #home .bg-image {
