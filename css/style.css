@@ -18,24 +18,20 @@ div.separator {
 }
 
 
-#contact-container {
+#contact-container, #about-us-container {
     font-family: var(--body-font);
-}
-#impressum {
-    text-align: center;
-}
-
-#impressum-container {
 }
 
 #impressum-container p {
     text-align: center;
 }
 
-#contact i,
-#about-us i,
-#impressum i {
-    font-size: 300%;
+#impressum-container p span {
+    font-family: var(--main-font);
+}
+
+.h2 {
+    text-align: center;
 }
 
 table {
