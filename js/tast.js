@@ -49,12 +49,12 @@ var status_tast = {
         datatable: null,
         series: [],
         started: false
-    }    
+    }
 };
+var currentSection = null;
 
 $(document).ready(function () {
     initializeApp();
-    enterHome();
 });
 
 function initializeApp() {
@@ -65,123 +65,117 @@ function initializeApp() {
     status_tast.places.datatable = getPlacesDataTable();
 
     initMenu();
-    initHome();    
-    /*
+    initHome();
     initParticipation();
     initVoyages();
     initCharts();
     initTabs();
-    */
-    hideAllSectionsExcept('#home');
-    
-    $(document).on('scroll', onScroll);
-    
-}
+    $('#toggle_home').click();
 
-function hideAllSectionsExcept(selector) {
-    $('section').hide();
-    $(selector).show();
+    //$(document).on('scroll', onScroll);
+
 }
 
 function onScroll(event) {
     var headerHeight = $('header').height();
-    var scrollPosition = $(document).scrollTop() + screen.height/2;
+    var scrollPosition = $(document).scrollTop() + screen.height / 2;
     $('#menu a').each(function () {
         var currentLink = $(this);
         var refElement = $(currentLink.attr("href"));
         var height = refElement.height();
-            
+
         var top = refElement.position().top;
         var bottom = refElement.position().top + height;
-        
-            
-        if ( top <= scrollPosition && bottom > scrollPosition) {
-                activate(currentLink);
-            }
-        });
+
+
+        if (top <= scrollPosition && bottom > scrollPosition) {
+            activate(currentLink);
+        }
+    });
 }
 
 function initMenu() {
-    $('#toggle_home').on('click', function(event){
+    $('#toggle_home').on('click', function (event) {
         event.preventDefault();
-        enterHome();
+        enter('#home');
         activate($(this));
     });
-    $('#toggle_citation').on('click', function(event){
+    $('#toggle_citation').on('click', function (event) {
         event.preventDefault();
-        enterCitation();
+        enter('#citation');
         activate($(this));
     });
-    $('#toggle_map').on('click', function(event){
+    $('#toggle_map').on('click', function (event) {
         event.preventDefault();
-        enterVoyages();
+        enter('#voyages');
         activate($(this));
     });
-    $('#toggle_participation').on('click', function(event){
+    $('#toggle_participation').on('click', function (event) {
         event.preventDefault();
-        enterParticipation();
+        enter('#participation');
         activate($(this));
     });
-    $('#toggle_charts').on('click', function(event){
+    $('#toggle_charts').on('click', function (event) {
         event.preventDefault();
-        enterCharts();
+        enter('#charts');
         activate($(this));
     });
-    $('#toggle_database').on('click', function(event){
+    $('#toggle_database').on('click', function (event) {
         event.preventDefault();
-        enterDatabase();
+        enter('#database');
         activate($(this));
     });
-    $('#toggle_contact').on('click', function(event){
+    $('#toggle_contact').on('click', function (event) {
         event.preventDefault();
-        enterContacts();
+        enter('#contacts');
         activate($(this));
     });
-    $('#toggle_about_us').on('click', function(event){
+    $('#toggle_about_us').on('click', function (event) {
         event.preventDefault();
-        enterAboutUs();
+        enter('#about-us');
         activate($(this));
     });
-    $('#toggle_impressum').on('click', function(event){
+    $('#toggle_impressum').on('click', function (event) {
         event.preventDefault();
-        enterImpressum();
+        enter('#impressum');
         activate($(this));
     });
-    
+
 }
 
-function enterHome() {
-    goTo('#home');
+function enter(selector) {
+    goTo(selector);
+    switch (selector) {
+        case '#home':
+            centerHome();
+            break;
+        case '#citation':
+            centerCitation();
+            break;
+        case '#participation':
+            initParticipationMap();
+            break;
+        case '#voyages':
+            if(status_tast.voyages.storymap != null) {
+                status_tast.voyages.storymap.updateDisplay();
+            }
+            break;
+    }
 }
-function enterVoyages() {
-    goTo('#voyages');
-}
-function enterCitation() {
-    goTo('#citation');
-}
-function enterParticipation() {
-    goTo('#participation');
-}
-function enterCharts() {
-    goTo('#charts');
-}
-function enterDatabase() {
-    goTo('#database');
-}
-function enterContacts() {
-    goTo('#contacts');
-}
-function enterAboutUs() {
-    goTo('#about-us');
-}
-function enterImpressum() {
-    goTo('#impressum');
-}
+
 function goTo(selector) {
-     $('html, body').animate({
-        scrollTop: $(selector).offset().top - $('header').height()
-    }, 500);
+    hideAllSectionsExcept(selector);
 }
+
+function hideAllSectionsExcept(selector) {
+    if (currentSection != null) {
+        $(currentSection).hide();
+    }
+    $('section').hide();
+    $(selector).show();
+    currentSection = selector;
+}
+
 function activate(link) {
     $('#menu .active').removeClass('active');
     link.addClass('active');
@@ -191,7 +185,7 @@ function activate(link) {
 function initHome() {
     getCitation();
     centerHome();
-    
+
     $('#citation').on('_citation_loaded', function (event, data) {
         addCitation(data);
         getAffiliateLinks('author', data.author);
@@ -200,16 +194,19 @@ function initHome() {
         addAffiliateLinks(data);
     });
 }
+
 function centerHome() {
     centerTitle();
 }
+
 function centerTitle() {
-    $('#title').position({
+    $('#message .title').position({
         my: 'center',
         at: 'center',
-        of: '#home'
+        of: '#message'
     });
 }
+
 function centerCitation() {
     $('.ccontainer').position({
         my: 'center',
@@ -217,6 +214,7 @@ function centerCitation() {
         of: '#citation'
     });
 }
+
 function getCitation() {
     $.ajax({
         url: 'php/getCitation.php',
@@ -225,6 +223,7 @@ function getCitation() {
         }
     });
 }
+
 function addCitation(data) {
     $('.quote').html('<p>\"' + data.quote + '\"</p>');
     var $authorLink = $('<a></a>')
@@ -232,9 +231,10 @@ function addCitation(data) {
         .attr('title', data.refenrence)
         .attr('target', '_blank')
         .text(data.author);
-    
-    $('.author').append($authorLink);    
+
+    $('.author').append($authorLink);
 }
+
 function getAffiliateLinks(keyword, value) {
     $.ajax({
         url: 'php/getAffiliateLinks.php',
@@ -250,6 +250,7 @@ function getAffiliateLinks(keyword, value) {
         }
     });
 }
+
 function addAffiliateLinks(links) {
     $.each(links, function (key, value) {
         var $figure = $('<img class="m-0 p-0 mr-2"></img>');
@@ -263,46 +264,47 @@ function addAffiliateLinks(links) {
 
 function initVoyages() {
     configureVoyagesPlayer();
-    loadVoyageIds();  
+    loadVoyageIds();
 
     $('#voyages').on('_ids_loaded', function (event) {
         loadVoyageData(0);
     });
-        
+
     $('#voyages').on('_request_voyage_data', function (event, index) {
         loadVoyageData(index);
     });
-        
-    $('#voyages').on('_voyage_loaded', function(event, data, index) {
+
+    $('#voyages').on('_voyage_loaded', function (event, data, index) {
         createStoryMap(data, status_tast.voyages.ids[index]);
         status_tast.voyages.storymap.updateDisplay();
-        initData(data, index); 
+        initData(data, index);
         updateVPlayer(index);
     });
 
-    $('#voyages').on('click', 'a.filter', function(event){
+    $('#voyages').on('click', 'a.filter', function (event) {
         event.preventDefault();
         var filter = $(this).attr('href');
         var value = getFilterValue($(this));
         loadFilteredVoyageIds(filter, value);
         status_tast.voyages.context = filter + ' is ' + value;
-    });   
+    });
 }
+
 function configureVoyagesPlayer() {
     $('#vprev, #vpause').hide();
     $('#vnext').on('click', function (event) {
         event.preventDefault();
+        status_tast.voyages.index++;
         var ids = status_tast.voyages.ids;
         var index = status_tast.voyages.index;
         $('#voyages').trigger('_request_voyage_data', [index]);
-        status_tast.voyages.index++;        
     });
     $('#vprev').on('click', function (event) {
         event.preventDefault();
+        status_tast.voyages.index--;
         var ids = status_tast.voyages.ids;
         var index = status_tast.voyages.index;
         $('#voyages').trigger('_request_voyage_data', [index]);
-        status_tast.voyages.index--;        
     });
     $('#vplay').on('click', function (event) {
         event.preventDefault();
@@ -317,21 +319,25 @@ function configureVoyagesPlayer() {
         stopSlides();
     });
 }
+
 function loadVoyageIds() {
     var url = 'php/getVoyageIds.php';
     $.ajax({
         url: url,
-        data: {include_summary: true},
+        data: {
+            include_summary: true
+        },
         success: function (result) {
             if (result.ids) {
                 status_tast.voyages.ids = result.ids;
-                status_tast.voyages.index = 0;                
+                status_tast.voyages.index = 0;
                 $('#voyages').trigger('_ids_loaded', [result.ids]);
             }
         },
         error: function () {}
     });
 }
+
 function loadFilteredVoyageIds(filter, filter_value) {
     var url = 'php/getFilteredVoyageIds.php';
     $.ajax({
@@ -344,10 +350,9 @@ function loadFilteredVoyageIds(filter, filter_value) {
         success: function (result) {
             if (result.ids.length > 0) {
                 status_tast.voyages.ids = result.ids;
-                status_tast.voyages.index = 0;                
+                status_tast.voyages.index = 0;
                 $('#voyages').trigger('_ids_loaded', [result.ids]);
-            }
-            else {
+            } else {
                 alert('Voyages not found!')
             }
         },
@@ -355,7 +360,8 @@ function loadFilteredVoyageIds(filter, filter_value) {
 
         }
     });
-}   
+}
+
 function loadVoyageData(index) {
     var url = 'php/getVoyageItineraryById.php';
     $.ajax({
@@ -373,6 +379,7 @@ function loadVoyageData(index) {
         }
     });
 }
+
 function createStoryMap(data, id) {
     // storymap_data can be an URL or a Javascript object
     var slides = this.createSlides(data, id);
@@ -396,6 +403,7 @@ function createStoryMap(data, id) {
 
     $(document).trigger('_map_loaded');
 }
+
 function createSlides(voyage_data, id) {
     var slides = [];
 
@@ -403,13 +411,13 @@ function createSlides(voyage_data, id) {
     slides.push(overview);
 
     $.each(voyage_data.itinerary, function (key, value) {
-        var headline = 
+        var headline =
             '<div class="h6 headline">' +
-                '<div class="key">' + value.stage + '</div></hr>' +
-                '<div class="value">' + value.place + '</div>' +
-                '<div class="value">' + value.date + '</div>' +
+            '<div class="key">' + value.stage + '</div></hr>' +
+            '<div class="value">' + value.place + '</div>' +
+            '<div class="value">' + value.date + '</div>' +
             '</div>';
-        var text ='<div class="storymap-text">';
+        var text = '<div class="storymap-text">';
         text += '</div>';
 
 
@@ -425,7 +433,7 @@ function createSlides(voyage_data, id) {
                     "lat": value.geo.latitude,
                     "lon": value.geo.longitude,
                     "line": true
-                }, 
+                },
                 "options": {
                     "background": 'url(img/Slavery.jpg)',
                 }
@@ -436,98 +444,101 @@ function createSlides(voyage_data, id) {
 
     return slides;
 }
+
 function createOverview(voyage_data, id) {
-    var period = 
-        '[' + 
-            getFirstDate(voyage_data) + 
-            ', ' + 
-            getLastDate(voyage_data) + 
+    var period =
+        '[' +
+        getFirstDate(voyage_data) +
+        ', ' +
+        getLastDate(voyage_data) +
         ']';
-    
-    var headline = 
-        '<div class="h3 headline clearfix">' + 
-            '<p class="key">Voyage ' + 
-            '<span>' + id + '</span></p>' + 
+
+    var headline =
+        '<div class="h3 headline clearfix">' +
+        '<p class="key">Voyage ' +
+        '<span>' + id + '</span></p>' +
         '</div>';
-    
-    var text = 
-        '<div class="itinerary value clearfix">' + 
-            getVoyagePlaces(voyage_data) + 
+
+    var text =
+        '<div class="itinerary value clearfix">' +
+        getVoyagePlaces(voyage_data) +
         '</div>';
-    
+
     return {
         "type": "overview",
         "date": getFirstDate(voyage_data),
         "text": {
             "headline": headline,
-            "text": text, 
+            "text": text,
             "location": {
                 zoom: 4
             }
         }
     };
 }
+
 function initData(data, index) {
-    $('#details').empty();            
+    $('#details').empty();
     initInfo(data, index);
     initOutcome(data);
     initSlaveNumbers(data);
 }
+
 function initInfo(data, index) {
     var $voyage_context = createElement(
-        'info-context', 
-        "Filter: ", 
+        'info-context',
+        "Filter: ",
         status_tast.voyages.context);
 
     var $voyage_order = createElement(
-        'info-index', 
-        "Index: ", 
-        (index+1) + " out of " + status_tast.voyages.ids.length);
-    
+        'info-index',
+        "Index: ",
+        (index + 1) + " out of " + status_tast.voyages.ids.length);
+
     var $voyageid = createElement(
-        'info-voyageid', 
+        'info-voyageid',
         "Voyage Id: ",
         data.details.voyageid
     );
-    
+
     var period = getTimeInterval(data);
-    
+
     var $period = createElement(
-        'info-dates', 
-        'Dates: ', 
+        'info-dates',
+        'Dates: ',
         period
     );
-    
+
     var $places = createElement(
-        'info-itinerary', 
-        'Itinerary: ', 
+        'info-itinerary',
+        'Itinerary: ',
         getVoyagePlaces(data)
     );
-    
+
     var $shipname = createElement(
-        'info-ship', 
-        'Ship: ', 
+        'info-ship',
+        'Ship: ',
         '<a class="filter" href="shipname">' + data.details.shipname + '</a>'
     );
-    
+
     var $flag = createElement(
-        'info-country', 
-        'Country: ', 
+        'info-country',
+        'Country: ',
         '<a class="filter" href="country">' + data.details.flag + '</a>'
     );
-    
+
     var $owners = createElement(
-        'info-owners', 
-        'Owners: ', 
+        'info-owners',
+        'Owners: ',
         getVoyageOwners(data)
     );
-    
+
     var $captains = createElement(
-        'info-captains', 
-        'Captains: ', 
+        'info-captains',
+        'Captains: ',
         getVoyageCaptains(data)
     );
-    
+
     var $info = $('<div class="info"></div>');
     $info.appendTo('#details')
         .append($voyage_context)
@@ -542,100 +553,107 @@ function initInfo(data, index) {
         .append($owners)
         .append($captains);
 }
+
 function initOutcome(data) {
-    
+
     var $fate_voyage = createElement(
-        'outcome-voyage', 
-        'Voyage Outcome: ', 
+        'outcome-voyage',
+        'Voyage Outcome: ',
         '<a href="fate" class="filter">' + data.details.fate + '</a>'
-    ); 
+    );
 
     var $fate_slaves = createElement(
-        'outcome-slaves', 
-        'For slaves: ', 
+        'outcome-slaves',
+        'For slaves: ',
         '<a href="fate" class="filter">' + data.details.fate2 + '</a>'
-    ); 
-    
+    );
+
     var $fate_if_captured = createElement(
-        'outcome-captured', 
-        'Vessel captured: ', 
+        'outcome-captured',
+        'Vessel captured: ',
         '<a href="fate" class="filter">' + data.details.fate3 + '</a>'
-    ); 
+    );
 
     var $fate_owners = createElement(
-        'outcome-owner', 
-        'For owner: ', 
+        'outcome-owner',
+        'For owner: ',
         '<a href="fate" class="filter">' + data.details.fate4 + '</a>'
-    ); 
-    
+    );
+
     var $outcome = $('<div class="outcome"></div>');
-    
+
     $outcome.appendTo('#details')
         .append($fate_if_captured)
         .append($('<hr/>'))
         .append($fate_voyage)
         .append($fate_slaves)
         .append($fate_owners)
-        .append($('<hr/>'))
-    ;
+        .append($('<hr/>'));
 }
+
 function initSlaveNumbers(data) {
     var $embarked = createElement(
-        'slaves-embarked', 
-        'Embarked: ', 
+        'slaves-embarked',
+        'Embarked: ',
         getNumber('embarked', data.details.slaves.embarked)
-    ); 
-    
+    );
+
     var $disembarked = createElement(
-        'slaves-disembarked', 
-        'Disembarked: ', 
+        'slaves-disembarked',
+        'Disembarked: ',
         getNumber('disembarked', data.details.slaves.disembarked)
-    ); 
+    );
 
     var $died = createElement(
-        'slaves-died', 
-        'Died: ', 
+        'slaves-died',
+        'Died: ',
         getNumber('died', data.details.slaves.died)
-    ); 
-    
+    );
+
     var $slaves = $('<div class="slaves"></div>');
-    
+
     $slaves.appendTo('#details')
         .append($embarked)
         .append($disembarked)
         .append($died);
 }
-function createElement(id, key, value){
+
+function createElement(id, key, value) {
     var $key = $('<div class="key col-sm-4"></div>').text(key);
     var $value = $('<div class="value col-sm-8"></div>').html(value || '--');
     var $element = $('<div class="row p-1"></div>').attr('id', id);
-    
+
     $element.append($key).append($value);
 
     return $element;
 }
+
 function getPercentage(value, total) {
     return (100 * value / total).toFixed(2);
 }
+
 function getTimeInterval(data) {
-    var before  = '<a id="before"  class="filter" href="date" title="Before ' + getFirstDate(data) + '"><i class="fas fa-angle-left"></i></a> ' ;
-    var between = '<a id="between" class="filter" href="date"> [' + getFirstDate(data) +  ', ' + getLastDate(data) + ']</a> '
-    var after   = '<a id="after" class="filter" href="date" title="After ' + getLastDate(data) 
-        + '"><i class="fas fa-angle-right"></i></a>';
+    var before = '<a id="before"  class="filter" href="date" title="Before ' + getFirstDate(data) + '"><i class="fas fa-angle-left"></i></a> ';
+    var between = '<a id="between" class="filter" href="date"> [' + getFirstDate(data) + ', ' + getLastDate(data) + ']</a> '
+    var after = '<a id="after" class="filter" href="date" title="After ' + getLastDate(data) +
+        '"><i class="fas fa-angle-right"></i></a>';
 
     return before + between + after;
 }
+
 function getFirstDate(data) {
     if (data) {
         var itinerary = data.itinerary;
         return itinerary.departure.date;
     }
 }
+
 function getNumber(filter, value) {
-    var leftLink = '<a class="filter" href="'+ filter +'" title="<'+value+'"><i class="fas fa-angle-left"></i></a>';
-    var rightLink = '<a class="filter" href="'+ filter +'" title=">'+value+'"><i class="fas fa-angle-right"></i></a>'
+    var leftLink = '<a class="filter" href="' + filter + '" title="<' + value + '"><i class="fas fa-angle-left"></i></a>';
+    var rightLink = '<a class="filter" href="' + filter + '" title=">' + value + '"><i class="fas fa-angle-right"></i></a>'
     return leftLink + ' ' + value + ' ' + rightLink;
 }
+
 function getLastDate(data) {
     if (data) {
         var itinerary = data.itinerary;
@@ -650,6 +668,7 @@ function getLastDate(data) {
             itinerary['departure'].date;
     }
 }
+
 function getVoyagePlaces(data) {
     if (data) {
         var places = [];
@@ -667,47 +686,54 @@ function getVoyagePlaces(data) {
         return places.join(" | ");
     }
 }
+
 function getVoyageOwners(data) {
-    if(data) {
+    if (data) {
         var owners = [];
-        $.each(data.details.owners, function(i, v) {
+        $.each(data.details.owners, function (i, v) {
             console.log('CurrentOwner = ' + v);
-            owners.push('<a href="owner" class="filter">'+ v +'</a>');
+            owners.push('<a href="owner" class="filter">' + v + '</a>');
         });
         return owners.join(" | ");
     }
 }
+
 function getVoyageCaptains(data) {
-    if(data) {
+    if (data) {
         var captains = [];
-        $.each(data.details.captains, function(i, v) {
+        $.each(data.details.captains, function (i, v) {
             console.log('CurrentCaptain = ' + v);
-            captains.push('<a href="captain" class="filter">'+ v +'</a>');
+            captains.push('<a href="captain" class="filter">' + v + '</a>');
         });
         return captains.join(" | ");
     }
 }
+
 function onMapHover() {
     $('#storymap').hover(
-        function(){ expandStoryMap();},
-        function(){ contractStoryMap(); }
-    );    
+        function () {
+            expandStoryMap();
+        },
+        function () {
+            contractStoryMap();
+        }
+    );
 }
+
 function getFilterValue(element) {
-    if(element.attr('href') == 'date') {
+    if (element.attr('href') == 'date') {
         var title = element.attr('title');
         title = title.replace('Before ', '<');
         title = title.replace('After ', '>');
         return title;
-    }
-    else if(element.attr('href') == 'embarked' || element.attr('href') == 'disembarked' || element.attr('href') == 'died') {
+    } else if (element.attr('href') == 'embarked' || element.attr('href') == 'disembarked' || element.attr('href') == 'died') {
         var title = element.attr('title');
         return title;
-    }
-    else {
+    } else {
         return element.text();
     }
 }
+
 function updateVPlayer(index) {
     var nVoyages = status_tast.voyages.ids.length;
     if (index == 0) {
@@ -721,25 +747,26 @@ function updateVPlayer(index) {
         $('#vnext').show();
     }
 }
+
 function animateSlides() {
-    status_tast.voyages.intervalSlide = 
+    status_tast.voyages.intervalSlide =
         setInterval(clickNextSlide, 5000);
 }
+
 function stopSlides() {
     clearInterval(status_tast.voyages.intervalSlide);
 }
+
 function clickNextSlide() {
     var style = $('.vco-slidenav-next').attr('style');
     var index = status_tast.voyages.index;
     var last = status_tast.voyages.ids.length - 1;
-    
+
     if (!style.includes('display: none')) {
         $('.vco-slidenav-next').click();
-    } 
-    else if(index < last){
+    } else if (index < last) {
         $('#vnext').click();
-    }
-    else {
+    } else {
         $('#vpause').click();
     }
 }
@@ -758,11 +785,12 @@ function initParticipation() {
         initCountriesData();
     });
 }
+
 function configureParticipationPlayer() {
     $('#ppause').hide();
     $('#pplay').on('click', function (event) {
         event.preventDefault();
-        if(!status_tast.participation.animationStarted) {
+        if (!status_tast.participation.animationStarted) {
             cleanSeries();
             status_tast.participation.animationStarted = true;
         }
@@ -774,13 +802,14 @@ function configureParticipationPlayer() {
         stopParticipationAnimation();
         $('#pplay, #prefresh, #ppause').toggle();
     });
-    $('#prefresh').on('click', function() {
+    $('#prefresh').on('click', function () {
         stopParticipationAnimation();
         cleanSeries();
         status_tast.participation.animationStarted = false;
         initParticipationMap();
     });
 }
+
 function configureParticipationAppearence() {
     //$('#countries-data').css({overflowY: 'scroll'}, 1000);
 }
@@ -867,16 +896,16 @@ function initParticipationMap() {
     });
 
     datamap.bubbles(
-        getBubbles(), 
-        {
-            popupTemplate: function(geo, data) {
+        getBubbles(), {
+            popupTemplate: function (geo, data) {
                 return '<div class="hoverinfo">Country:' + data.country + '<hr>Embarked: ' + data.embarked + '</br>Disembarked: ' + data.disembarked + '</br>Died: ' + data.died + '';
             }
         });
-    
+
     datamap.graticule();
-    
+
 }
+
 function getFills() {
     return {
         GBR: 'blue',
@@ -890,6 +919,7 @@ function getFills() {
         defaultFill: 'rgba(0,0,0,.1)'
     }
 }
+
 function getBubbles() {
     var series = status_tast.participation.series;
     var bubbles = [];
@@ -909,9 +939,11 @@ function getBubbles() {
     });
     return bubbles;
 }
+
 function radius(value) {
-    return 2 + value/25000;
+    return 2 + value / 25000;
 }
+
 function getCountriesSeriesMax() {
     var series = status_tast.participation.series;
     var max = 0;
@@ -922,6 +954,7 @@ function getCountriesSeriesMax() {
     }
     return max;
 }
+
 function height(value) {
     var series = status_tast.participation.series;
     var max = series[0][3];
@@ -929,6 +962,7 @@ function height(value) {
 
     return value * maxHeight / max;
 }
+
 function getCountriesSeries(y) {
     var url = 'php/getCountriesSeries.php';
 
@@ -962,6 +996,7 @@ function getCountriesSeries(y) {
         }
     });
 }
+
 function indexOfInSeries(country) {
     var series = status_tast.participation.series;
     for (var i = 0; i < series.length; i++) {
@@ -976,128 +1011,209 @@ function indexOfInSeries(country) {
 function initCountriesData() {
     initParticipationTable();
 }
+
 function getParticipationDataTable() {
     return $('#example-participation').DataTable({
-            columns: [
-                {title: 'Country'}, 
-                {title: 'Id'}, 
-                {title: 'Code'},
-                {title: 'Embarked'}, 
-                {title: 'Disembarked'}, 
-                {title: 'Died'}],
-            paging: false,
-            filter: false,
-            info: true,
-            autoWidth: false,
-            deferRender: true,
-            columnDefs: [
-                {"targets": [1, 2], "visible": false, "searchable": false}
+        columns: [
+            {
+                title: 'Country'
+            },
+            {
+                title: 'Id'
+            },
+            {
+                title: 'Code'
+            },
+            {
+                title: 'Embarked'
+            },
+            {
+                title: 'Disembarked'
+            },
+            {
+                title: 'Died'
+            }],
+        paging: false,
+        filter: false,
+        info: true,
+        autoWidth: false,
+        deferRender: true,
+        columnDefs: [
+            {
+                "targets": [1, 2],
+                "visible": false,
+                "searchable": false
+            }
             ]
-        });
+    });
 }
+
 function getShipsDataTable() {
     return $('#example-ships').DataTable({
-            columns: [
-                {title: 'Shipname'},
-                {title: 'Voyages'},
-                {title: 'Owner'},
-                {title: 'Rig'},
-                {title: 'Embarked'}, 
-                {title: 'Disembarked'}, 
-                {title: 'Died'}],
-            paging: false,
-            filter: true,
-            info: true,
-            scrollY: '400px',
-            scrollCollapse: true,
-            deferRender: true
+        columns: [
+            {
+                title: 'Shipname'
+            },
+            {
+                title: 'Voyages'
+            },
+            {
+                title: 'Owner'
+            },
+            {
+                title: 'Rig'
+            },
+            {
+                title: 'Embarked'
+            },
+            {
+                title: 'Disembarked'
+            },
+            {
+                title: 'Died'
+            }],
+        paging: false,
+        filter: true,
+        info: true,
+        scrollY: '400px',
+        scrollCollapse: true,
+        deferRender: true
     });
 }
+
 function getOwnersDataTable() {
     return $('#example-owners').DataTable({
-            columns: [
-                {title: 'Name'},
-                {title: 'Ships'},
-                {title: 'Voyages'},
-                {title: 'Crew'},
-                {title: 'Embarked'}, 
-                {title: 'Disembarked'}, 
-                {title: 'Died'}],
-            paging: false,
-            filter: true,
-            info: true,
-            scrollY: '400px',
-            scrollCollapse: true,
-            deferRender: true
+        columns: [
+            {
+                title: 'Name'
+            },
+            {
+                title: 'Ships'
+            },
+            {
+                title: 'Voyages'
+            },
+            {
+                title: 'Crew'
+            },
+            {
+                title: 'Embarked'
+            },
+            {
+                title: 'Disembarked'
+            },
+            {
+                title: 'Died'
+            }],
+        paging: false,
+        filter: true,
+        info: true,
+        scrollY: '400px',
+        scrollCollapse: true,
+        deferRender: true
     });
 }
+
 function getCaptainsDataTable() {
     return $('#example-captains').DataTable({
-            columns: [
-                {title: 'Name'},
-                {title: 'Ships'},
-                {title: 'Voyages'},
-                {title: 'Crew'},
-                {title: 'Embarked'}, 
-                {title: 'Disembarked'}, 
-                {title: 'Died'}],
-            paging: false,
-            filter: true,
-            info: true,
-            scrollY: '400px',
-            scrollCollapse: true,
-            deferRender: true
+        columns: [
+            {
+                title: 'Name'
+            },
+            {
+                title: 'Ships'
+            },
+            {
+                title: 'Voyages'
+            },
+            {
+                title: 'Crew'
+            },
+            {
+                title: 'Embarked'
+            },
+            {
+                title: 'Disembarked'
+            },
+            {
+                title: 'Died'
+            }],
+        paging: false,
+        filter: true,
+        info: true,
+        scrollY: '400px',
+        scrollCollapse: true,
+        deferRender: true
     });
 }
+
 function getPlacesDataTable() {
     return $('#example-places').DataTable({
-            columns: [
-                {title: 'Place'},
-                {title: 'Region'},
-                {title: 'Voyages'},
-                {title: 'Embarked'}, 
-                {title: 'Disembarked'}, 
-                {title: 'Died'}],
-            paging: false,
-            filter: true,
-            info: true,
-            scrollY: '400px',
-            scrollCollapse: true,
-            deferRender: true
+        columns: [
+            {
+                title: 'Place'
+            },
+            {
+                title: 'Region'
+            },
+            {
+                title: 'Voyages'
+            },
+            {
+                title: 'Embarked'
+            },
+            {
+                title: 'Disembarked'
+            },
+            {
+                title: 'Died'
+            }],
+        paging: false,
+        filter: true,
+        info: true,
+        scrollY: '400px',
+        scrollCollapse: true,
+        deferRender: true
     });
 }
+
 function initParticipationTable() {
     var series = status_tast.participation.series;
-    
+
     status_tast.participation.datatable.clear();
     status_tast.participation.datatable.rows.add(series);
     status_tast.participation.datatable.draw();
 }
+
 function initShipsTable() {
     var series = status_tast.ships.series;
-    
+
     status_tast.ships.datatable.clear();
     status_tast.ships.datatable.rows.add(series);
     status_tast.ships.datatable.draw();
 }
+
 function initOwnersTable() {
-    var series = status_tast.owners.series;    
+    var series = status_tast.owners.series;
     status_tast.owners.datatable.clear();
     status_tast.owners.datatable.rows.add(series);
     status_tast.owners.datatable.draw();
 }
+
 function initCaptainsTable() {
-    var series = status_tast.captains.series;    
+    var series = status_tast.captains.series;
     status_tast.captains.datatable.clear();
     status_tast.captains.datatable.rows.add(series);
     status_tast.captains.datatable.draw();
 }
+
 function initPlacesTable() {
-    var series = status_tast.places.series;    
+    var series = status_tast.places.series;
     status_tast.places.datatable.clear();
     status_tast.places.datatable.rows.add(series);
     status_tast.places.datatable.draw();
 }
+
 function animateParticipation() {
     status_tast.participation.interval = setInterval(function () {
         var year = status_tast.participation.year;
@@ -1110,12 +1226,14 @@ function animateParticipation() {
         }
     }, 2000);
 }
+
 function stopParticipationAnimation() {
     clearInterval(status_tast.participation.interval);
 }
+
 function cleanSeries() {
     index = 0;
-    
+
     status_tast.participation.year = 1514;
     for (var i = 0; i < status_tast.participation.series.length; i++) {
         status_tast.participation.series[i][3] = 0;
@@ -1125,12 +1243,14 @@ function cleanSeries() {
     initCountriesData();
     $('p#year').text(status_tast.participation.year);
 }
+
 function expandStoryMap() {
     $('#storymap').animate({
         width: '95%',
         zIndex: '20'
     });
 }
+
 function contractStoryMap() {
     $('#storymap').animate({
         width: '70%',
@@ -1152,27 +1272,29 @@ function initCharts() {
         }
     });
 }
+
 function initChart(json) {
     var datasets = {
-        labels: [], 
-        voyages: [], 
-        ships: [], 
-        embarked: [], 
-        disembarked: [], 
+        labels: [],
+        voyages: [],
+        ships: [],
+        embarked: [],
+        disembarked: [],
         died: []
     };
 
     $.each(json, function (key, value) {
-        datasets.labels[key]      = value.year;
-        datasets.voyages[key]     = value.voyages;
-        datasets.ships[key]       = value.ships;
-        datasets.embarked[key]    = value.embarked;
+        datasets.labels[key] = value.year;
+        datasets.voyages[key] = value.voyages;
+        datasets.ships[key] = value.ships;
+        datasets.embarked[key] = value.embarked;
         datasets.disembarked[key] = value.disembarked;
-        datasets.died[key]        = value.died;
+        datasets.died[key] = value.died;
     });
 
     createChart(datasets);
 }
+
 function createChart(datasets) {
     var ctxVoyages = document.getElementById('cvoyages').getContext("2d");
     var ctxShips = document.getElementById('cships').getContext("2d");
@@ -1251,10 +1373,12 @@ function createChart(datasets) {
         options: {}
     });
 }
+
 function runYearlySimulation() {
     cleanupStatus();
     interval = setInterval(updateYearly, 100);
 }
+
 function cleanupStatus() {
     $('#voyages p.counter').text(0);
     $('#ships p.counter').text(0);
@@ -1262,6 +1386,7 @@ function cleanupStatus() {
     $('#emb p.counter').text(0);
     $('#desemb p.counter').text(0);
 }
+
 function updateYearly() {
     if (year <= 1864) {
         updateDataForYear();
@@ -1269,6 +1394,7 @@ function updateYearly() {
         clearInterval(interval);
     }
 }
+
 function updateDataForYear() {
     $.ajax({
         url: "assets/php/upToYear.php",
@@ -1287,6 +1413,7 @@ function updateDataForYear() {
 
     year++;
 }
+
 function updateStatus(data) {
     updateCounter($('#voyages p.counter'), data.voyages);
     updateCounter($('#ships p.counter'), data.ships);
@@ -1294,9 +1421,11 @@ function updateStatus(data) {
     updateCounter($('#emb p.counter'), data.emb);
     updateCounter($('#desemb p.counter'), data.desemb);
 }
+
 function updateCounter($element, value) {
     $element.text(value);
 }
+
 function initStats() {
     var period = $('#period').text();
     var dates = period.split(' ~ ');
@@ -1312,6 +1441,7 @@ function initStats() {
 
     //$averages.appendTo($summary);
 }
+
 function addAverage($element, years, label) {
     var total = parseInt($element.text());
     var vAvg = Math.ceil(total / years);
@@ -1331,7 +1461,7 @@ function initTabs() {
     initPlaces();
     $('#nav-tab a[href~="#ships"]').on('click', function (e) {
         e.preventDefault();
-        if(!status_tast.ships.started) {
+        if (!status_tast.ships.started) {
             getShips();
             status_tast.ships.started = true;
         }
@@ -1339,7 +1469,7 @@ function initTabs() {
     });
     $('#nav-tab a[href~="#owners"]').on('click', function (e) {
         e.preventDefault();
-        if(!status_tast.owners.started) {
+        if (!status_tast.owners.started) {
             getOwners();
             status_tast.owners.started = true;
         }
@@ -1347,7 +1477,7 @@ function initTabs() {
     });
     $('#nav-tab a[href~="#captains"]').on('click', function (e) {
         e.preventDefault();
-        if(!status_tast.captains.started) {
+        if (!status_tast.captains.started) {
             getCaptains();
             status_tast.captains.started = true;
         }
@@ -1355,7 +1485,7 @@ function initTabs() {
     });
     $('#nav-tab a[href~="#places"]').on('click', function (e) {
         e.preventDefault();
-        if(!status_tast.places.started) {
+        if (!status_tast.places.started) {
             getPlaces();
             status_tast.places.started = true;
         }
@@ -1363,30 +1493,34 @@ function initTabs() {
     });
     $('#nav-tab a[href~="#places"]').click();
 }
-function initOwners() {    
+
+function initOwners() {
     $('div#owners').on('_owners_loaded', function (event, data) {
         status_tast.owners.series = data;
         initOwnersTable();
     });
 }
+
 function initCaptains() {
     $('div#captains').on('_captains_loaded', function (event, data) {
         status_tast.captains.series = data;
         initCaptainsTable();
     });
 }
+
 function initShips() {
     $('div#ships').on('_ships_loaded', function (event, data) {
         status_tast.ships.series = data;
         initShipsTable();
     });
 }
+
 function initPlaces() {
     $('div#places').on('_places_loaded', function (event, data) {
         status_tast.places.series = data;
         initPlacesTable();
     });
-} 
+}
 
 function getOwners() {
     $.ajax({
@@ -1399,6 +1533,7 @@ function getOwners() {
         }
     });
 }
+
 function getCaptains() {
     $.ajax({
         url: 'php/getCaptains.php',
@@ -1410,6 +1545,7 @@ function getCaptains() {
         }
     });
 }
+
 function getShips() {
     $.ajax({
         url: 'php/getShips.php',
@@ -1421,6 +1557,7 @@ function getShips() {
         }
     });
 }
+
 function getPlaces() {
     var url = 'php/getPlaces.php';
     $.ajax({

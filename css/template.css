@@ -7,11 +7,6 @@ body {
     height: 100vh;
     font-family: var(--main-font);
     font-size: 14px;
-    background-color: linear-gradient(to right, var(--main-color), var(--sec-color));
-    background-image: url(../img/African_woman_slave_trade.jpg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
 }
 
 
