@@ -10,7 +10,7 @@ SUNDAY
 --------
 DONE: [MENU_TOGGLE] Implement toggling for responsive menu
 TODO: [SECTION_STYLING] Implement SMALL-FIRST layouting
-TODO: [SMALL_FIRST] Implement SMALL-FIRST layouting
+TODO: [SMALL_FIRST] Implement SMALL-FIRST responsive layouting
 TODO: [ENV_VAR_DB] Change development environment variable CLEARDB_DATABASE_URL to mysql://root:password@localhost/tastdb:
     - Check that this address is processed by getPDO() function, and fine tune it to properly process development and production database
 
