@@ -1,14 +1,11 @@
 #participation {
     position: relative;
-    height: var(--main-height);
+    min-height: var(--main-height);
 }
 
 #pplayer {
     text-align: right;
-    position: absolute;
-    z-index: 50;
-    right: 0em;
-    top: 1em;
+    background: white;
 }
 
 #pplayer button {
@@ -22,7 +19,7 @@
 }
 
 #world-map {
-    height: 100%;    
+    min-height: var(--main-height);    
 }
 
 p#year {

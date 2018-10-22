@@ -1,22 +1,25 @@
-#wrapper {
-}
-
 body {
     min-height: 100vh;
     font-family: var(--main-font);
     font-size: 14px;
-    overflow-y: scroll;
     background: linear-gradient(to right, var(--main-color), var(--sec-color));
 }
 
+#wrapper {
+    height: 100vh;
+}
+
+
 header {
     min-height: var(--header-height);
-    background: red;
+}
+
+main {
+    height: var(--main-height);
 }
 
 
 footer {
-    height: var(--footer-height);
-    background: red;
+    height: 0;
 }
 

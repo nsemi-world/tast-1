@@ -1,12 +1,10 @@
 section {
     position: relative;
     min-height: var(--main-height);
+    background: var(--section-background-color);
+    color: var(--sec-color);
 }
 
-section {
-    background: var(--section-background-color);
-    color: var(--white);
-}
 div.separator {
     height: var(--separator-height);
     background: linear-gradient(to right, var(--main-color), var(--sec-color));
@@ -28,6 +26,7 @@ div.separator {
 #impressum {
     text-align: center;
 }
+
 #impressum-container {
 }
 

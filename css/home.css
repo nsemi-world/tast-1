@@ -38,6 +38,7 @@
     font-family: var(--headline-font);
     font-weight: bold;
     font-size: 1em;
+    color: var(--link-color);
 }
 
 #citation .source {

@@ -126,7 +126,7 @@ function initMenu() {
     });
     $('#toggle_contact').on('click', function(event){
         event.preventDefault();
-        enterContact();
+        enterContacts();
         activate($(this));
     });
     $('#toggle_about_us').on('click', function(event){
@@ -160,8 +160,8 @@ function enterCharts() {
 function enterDatabase() {
     goTo('#database');
 }
-function enterContact() {
-    goTo('#contact');
+function enterContacts() {
+    goTo('#contacts');
 }
 function enterAboutUs() {
     goTo('#about-us');
@@ -826,10 +826,10 @@ function initParticipationMap() {
     datamap = new Datamap({
         element: document.getElementById('world-map'),
         setProjection: function (element) {
-            var projection = d3.geo.orthographic()
+            var projection = d3.geo.equirectangular()
                 .center([0, 0])
                 .rotate([10, -40])
-                .scale(300)
+                .scale(200)
                 .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
             var path = d3.geo.path()
                 .projection(projection);
