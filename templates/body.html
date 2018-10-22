@@ -56,9 +56,9 @@
 
 <section id="database" class="">
     <div class="separator"></div>
-    <div class="container pt-5 pb-5">
+    <div class="container-fluid pt-5 pb-5">
         <h2 class="title h2  pb-5">Search the Database</h2>
-        <nav>
+        <nav class="bg-transparent">
             <div class="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link" id="places-tab" data-toggle="tab" href="#places" role="tab" aria-controls="places" aria-selected="false">Places</a>
 
@@ -69,95 +69,78 @@
                 <a class="nav-item nav-link" id="captains-tab" data-toggle="tab" href="#captains" role="tab" aria-controls="captains" aria-selected="false">Captains</a>
             </div>
         </nav>
-        <div class="tab-content pt-3 pb-3" id="nav-tabContent">
-            <div class="tab-pane fade" id="places" role="tabpanel" aria-labelledby="places-tab">
-                <div class="col-sm-12">
-                    <table id="example-places" class="display hover row-border"></table>
-                </div>
-                <div class="col-sm-0"></div>
+        <div class="tab-content bg-light pt-5 container-fluid" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="places" role="tabpanel" aria-labelledby="places-tab">
+                <table id="example-places" class="display hover row-border"></table>
             </div>
 
-            <div class="tab-pane fade show active row m-3" id="ships" role="tabpanel" aria-labelledby="ships-tab">
-                <div class="col-sm-12">
-                    <table id="example-ships" class="display hover row-border"></table>
-                </div>
-                <div class="col-sm-0"></div>
+            <div class="tab-pane fade" id="ships" role="tabpanel" aria-labelledby="ships-tab">
+                <table id="example-ships" class="display hover row-border"></table>
             </div>
 
-            <div class="tab-pane fade row m-3" id="owners" role="tabpanel" aria-labelledby="owners-tab">
-                <div class="col-sm-12">
-                    <table id="example-owners" class="display hover row-border"></table>
-                </div>
-                <div class="col-sm-0"></div>
+            <div class="tab-pane fade" id="owners" role="tabpanel" aria-labelledby="owners-tab">
+                <table id="example-owners" class="display hover row-border"></table>
             </div>
 
             <div class="tab-pane fade" id="captains" role="tabpanel" aria-labelledby="captains-tab">
-                <div class="col-sm-12">
-                    <table id="example-captains" class="display hover row-border"></table>
-                </div>
-                <div class="col-sm-0"></div>
+                <table id="example-captains" class="display hover row-border"></table>
             </div>
-
         </div>
     </div>
 </section>
 
 <section id="charts">
     <div class="separator"></div>
-    <div class="charts-container p-5">
-        <h2 class="h2 m-5">Charts</h2>
-        <div class="row m-5">
-            <div class="left-column col-sm-6">
-                <h4 class="title h4">When we thought it couldn't get any worse...</h4>
-                <div class="chart"><canvas id="cvoyages"></canvas></div>
-                <div class="chart-legend">
-                    <p>They came, over and over again. From Portugal, Spain, France, Great Britain, The Netherlands, Denmark, Baltic, Hanse Towns, Brandenburg, Sweden, Sardinia, Genoa, U.S.A., Mexico, Argentina, Russia and others. As with arabs, we thought they were of the Mankind, and that they're gods resembled our's. But they didn't recognized us nor God. They made at least <b>35938</b> reported voyages.
-                    </p>
+    <div class="container-fluid p-5">
+        <h2 class="h2">Charts</h2>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 mt-5">
+                    <h4 class="title h4">When we thought it couldn't get any worse...</h4>
+                    <div class="chart"><canvas id="cvoyages"></canvas></div>
+                    <div class="chart-legend">
+                        <p>They came, over and over again. From Portugal, Spain, France, Great Britain, The Netherlands, Denmark, Baltic, Hanse Towns, Brandenburg, Sweden, Sardinia, Genoa, U.S.A., Mexico, Argentina, Russia and others. As with arabs, we thought they were of the Mankind, and that they're gods resembled our's. But they didn't recognized us nor God. They made at least <b>35938</b> reported voyages.
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="right-column col-sm-6">
-                <h4 class="title h4">The investment that made Europe possible</h4>
-                <div class="chart"><canvas id="cships"></canvas></div>
-                <div class="chart-legend">
-                    <p> You could tell it was Death comming personally. The Trojan Horse changed form but not the intentions. When they discovered our gold was good, our land blessed and our spirits fair, it was clear that they would do it. We counted 9213 distinct vessels, taking our riches, children, woman and men. Europe's first industrial revolution was on the way.</p>
+                <div class="col-lg-6 mt-5">
+                    <h4 class="title h4">The investment that made Europe possible</h4>
+                    <div class="chart"><canvas id="cships"></canvas></div>
+                    <div class="chart-legend">
+                        <p> You could tell it was Death comming personally. The Trojan Horse changed form but not the intentions. When they discovered our gold was good, our land blessed and our spirits fair, it was clear that they would do it. We counted 9213 distinct vessels, taking our riches, children, woman and men. Europe's first industrial revolution was on the way.</p>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <hr/>
-        <div class="row m-5">
-            <div class="left-column col-sm-6">
-                <h4 class="title h4">Black Pearls and Diamonds</h4>
-                <div class="chart"><canvas id="cslaves"></canvas></div>
-                <div class="chart-legend">
-                    <p>We we're the cargo! Because the are clean, strong, educated and beatiful. Because we have the rhythm to cultivate the land, to build cities, and to enjoy ourselves. Family after family, village after village, city after city, kingdom after kingdom, empire after empire, wrapped up and dispatched worldwide. They fed on us. 10645118 we're embarked and 9180918 made it to the Americas. In the end we we're decimated, and those who survived, here and there, we were bent on our knees.</p>
+                <div class="col-lg-6 mt-5">
+                    <h4 class="title h4">Black Pearls and Diamonds</h4>
+                    <div class="chart"><canvas id="cslaves"></canvas></div>
+                    <div class="chart-legend">
+                        <p>We we're the cargo! Because the are clean, strong, educated and beatiful. Because we have the rhythm to cultivate the land, to build cities, and to enjoy ourselves. Family after family, village after village, city after city, kingdom after kingdom, empire after empire, wrapped up and dispatched worldwide. They fed on us. 10645118 we're embarked and 9180918 made it to the Americas. In the end we we're decimated, and those who survived, here and there, we were bent on our knees.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="right-column col-sm-6">
-                <h4 class="title h4">Learn to know your Enemies!</h4>
-                <div class="chart"><canvas id="cdied"></canvas></div>
-                <div class="chart-legend">
-                    <p>Your enemy is that that feed the sharks with your flesh. Your enemy is that who rapes your children and wife. Your enemy is that who whip your elders.Your enemy is that who sits in the church just next to you. Over 1000000 african children, women and men were assassinated during the Middle Passage. Your enemy has a pleasure proportinal to your sufferings.</p>
+                <div class="col-lg-6 mt-5">
+                    <h4 class="title h4">Learn to know your Enemies!</h4>
+                    <div class="chart"><canvas id="cdied"></canvas></div>
+                    <div class="chart-legend">
+                        <p>Your enemy is that that feed the sharks with your flesh. Your enemy is that who rapes your children and wife. Your enemy is that who whip your elders.Your enemy is that who sits in the church just next to you. Over 1000000 african children, women and men were assassinated during the Middle Passage. Your enemy has a pleasure proportinal to your sufferings.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 </section>
 
 <section id="contacts">
     <div class="separator"></div>
-    <div class="container pt-5">
+    <div class="container-fluid p-5">
         <h2 class="title h2">Contact</h2>
-        <div id="contact-container" class="row">
-            <div id="contact-ngutu" class="p-5 col-sm-4">
-                <i class="fas fa-lightbulb pb-3"></i>
+        <div id="contact-container" class="row p-5">
+            <div id="contact-ngutu" class="col-md-6 pt-5">
+                <div class="h4"><i class="fas fa-lightbulb pr-3"></i>Contact ngutu.org</div>
                 <p>For ideas, improvements, critics and other general information you can send us an email to <a href="mailto:info@ngutu.org" target="_top">info@ngutu.org</a></p>
             </div>
-            <div id="contact-pirigrino" class="p-5 col-sm-4">
-                <i class="fas fa-desktop pb-3"></i>
-                <p>For help to build a personal website or specific programming tasks share your mind with our developer, <a href="mailto:perigrino.do.piri@gmail.com" target="_top">Pirigrino</a></p>
-            </div>
-            <div id="contact-social" class="p-5 col-sm-4">
-                <i class="fas fa-users pb-3"></i>
+            <div id="contact-social" class="col-md-6 pt-5">
+                <div class="h4"><i class="fas fa-users pr-3"></i>Join Us on Social Media</div>
                 <p>Of course you can join our community in social media and interact with other people interested studying the enslavement of African peoples and in fighting slavery today.</p>
             </div>
         </div>
@@ -166,20 +149,17 @@
 
 <section id="about-us">
     <div class="separator"></div>
-    <div class="container pt-5 pb-5">
+    <div class="container-fluid p-5">
         <h2 class="title h2">About Us</h2>
-        <div id="about-us-container" class="row">
-            <div id="about-ngutu" class="p-5 col-sm-6">
-                <i class="fab fa-connectdevelop pb-5"></i>
-                <p class="p-1">About Ngutu.org:</p>
+        <div id="about-us-container" class="row p-5">
+            <div id="about-ngutu" class="col-md-6 pt-5">
+                <div class="h4"><i class="fab fa-connectdevelop pr-3"></i>About Ngutu.org:</div>
                 <p>Ngutu.org is an idea with the goal to stablish a strong identity, social and economic for the re-connection of the African diasporas with each other and Mother Africa. We call for global solidarity among Black Africans to assume leadership and entrepeneurship towards the implementation of the great African Commomwealth, centered in Africa and with the diaspora playing an integreated role of embassators for Acquisition and Transfer of Knowledgle and Culture. A World where we all belong.</p>
             </div>
-            <div id="about-pirigrino" class="p-5 col-sm-6">
-                <i class="fas fa-user-ninja pb-5"></i>
-                <p class="p-1">About me:</p>
-                <p class="p-1">As an african living in Europe, that's what I believe: that we cannot fight racism nor the racist, by the simple fact that it is not your intrinsic problem. It's a sociopathic institutional problem that can be solved by the racist self only. We cannot impose an evolution of the racist mindset by exposing it; we are the proof of it. What we can do is to concentrate our focus to rebuild our well-acknowledge creative, productive, prosperous and conscious human civilization.
+            <div id="about-pirigrino" class="col-md-6 pt-5">
+                <div class="h4"><i class="fas fa-user-ninja pr-3"></i>About me:</div>
+                <p>As an african living in Europe, that's what I believe: that we cannot fight racism nor the racist, by the simple fact that it is not your intrinsic problem. It's a sociopathic institutional problem that can be solved by the racist self only. We cannot impose an evolution of the racist mindset by exposing it; we are the proof of it. What we can do is to concentrate our focus to rebuild our well-acknowledge creative, productive, prosperous and conscious human civilization.
                 </p>
-                <p class="p-1">I am a software developer, and build this website.</p>
             </div>
         </div>
     </div>
@@ -187,15 +167,16 @@
 
 <section id="impressum">
     <div class="separator"></div>
-    <div class="container pt-5 pb-5">
+    <div class="container-fluid p-5">
         <h2 class="title h2">Impressum</h2>
         <div id="impressum-container" class="row">
             <div class="col-sm-12">
-                <span>tastXplorer</span>
-                <p id="impressum-owner" class="pt-4">Alexandre Zua Caldeira</p>
-                <p id="impressum-streeet">Lehrter Str. 8</p>
-                <p id="impressum-postal-code">10557 Berlin</p>
-                <p id="impressum-country">Germany</p>
+                <p id="impressum-owner" class="pt-4">
+                <span>tastXplorer</span><br/>
+                Alexandre Zua Caldeira<br/>
+                Lehrter Str. 8<br/>
+                10557 Berlin<br/>
+                Germany</p>
             </div>
         </div>
     </div>

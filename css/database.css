@@ -1,16 +1,24 @@
 #database {
+    background: black;
+}
+
+
+#database .nav-tabs a {
+    color: var(--main-color);
+}
+
+#database .nav-tabs a.active {
+    color: var(--sec-color);
+    font-weight: bold;
 }
 
 
 #database .tab-content {
     font-family: var(--headline-font);
-}
-
-#ships, #owners, #captains, #places {
+    color: var(--main-color);
     font-size: .7em;
 }
 
-
-
-
-
+#database table tr td {
+    color: var(--main-color);
+}

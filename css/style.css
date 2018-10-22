@@ -10,34 +10,28 @@ div.separator {
     background: linear-gradient(to right, var(--main-color), var(--sec-color));
 }
 
-#contact p, #about-us p, #impressum p {
+#contacts p, #about-us p, #impressum p {
     font-family: var(--body-font);
     font-size: 1.25em;
-    line-height: 1em;
+    line-height: 1.25em;    
     text-align: justify;
 }
 
-#contact {
-}
 
-#about-us {
-}
-
-#impressum {
-    text-align: center;
-}
-
-#impressum-container {
+#contact-container, #about-us-container {
+    font-family: var(--body-font);
 }
 
 #impressum-container p {
     text-align: center;
 }
 
-#contact i,
-#about-us i,
-#impressum i {
-    font-size: 300%;
+#impressum-container p span {
+    font-family: var(--main-font);
+}
+
+.h2 {
+    text-align: center;
 }
 
 table {
