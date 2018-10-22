@@ -1,13 +1,7 @@
 #database {
-    background: white;
+    background: black;
 }
 
-
-#database .tab-content {
-    font-family: var(--headline-font);
-    color: var(--main-color);
-    font-size: .7em;
-}
 
 #database .nav-tabs a {
     color: var(--main-color);
@@ -19,4 +13,12 @@
 }
 
 
+#database .tab-content {
+    font-family: var(--headline-font);
+    color: var(--main-color);
+    font-size: .7em;
+}
 
+#database table tr td {
+    color: var(--main-color);
+}
