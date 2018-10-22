@@ -3,16 +3,6 @@
     min-height: var(--main-height);
 }
 
-#vplayer {
-    text-align: center;
-    background: black;
-}
-
-#vplayer button {
-    font-size: 75%;
-    color: var(--headline-color);
-}
-
 #storymap-container {
     position: relative;
     min-height: var(--main-height);

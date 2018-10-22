@@ -1,0 +1,15 @@
+#pplayer, #vplayer {
+    font-size: 2em;
+    text-align: center;
+    background: black;
+}
+
+
+#vplayer button, 
+#pplayer button,
+#vplayer a i, 
+#pplayer a i {
+    color: var(--sec-color);
+    background: transparent;
+}
+
