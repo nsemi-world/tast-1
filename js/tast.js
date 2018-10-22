@@ -66,13 +66,21 @@ function initializeApp() {
 
     initMenu();
     initHome();    
+    /*
     initParticipation();
     initVoyages();
     initCharts();
     initTabs();
+    */
+    hideAllSectionsExcept('#home');
     
     $(document).on('scroll', onScroll);
     
+}
+
+function hideAllSectionsExcept(selector) {
+    $('section').hide();
+    $(selector).show();
 }
 
 function onScroll(event) {

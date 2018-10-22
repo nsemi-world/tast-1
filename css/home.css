@@ -3,23 +3,15 @@
     position: relative;
     height: var(--main-height);
     text-align: center; 
-    margin-top: var(--header-height);
+    background: rgba(0,0,0,.95);
 }
 
-#home .bg-image {
-    height: 100%;
-    background-image: url(../img/African_woman_slave_trade.jpg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    background-blend-mode: color;
-    opacity: .05;
-}
-
-#home #title {
+#home .title {
+    position: absolute;
     font-family: var(--brand-font);
     text-align: center;
     font-size: 400%;
+    color: var(--sec-color);
 }
 
 #citation {
