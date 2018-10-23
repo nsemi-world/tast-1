@@ -22,6 +22,12 @@ div.separator {
     font-family: var(--body-font);
 }
 
+
+#contact-container .subtitle,
+#about-us-container .subtitle{
+    font-family: var(--headline-font);
+}
+
 #impressum-container p {
     text-align: center;
 }
