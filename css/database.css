@@ -1,5 +1,5 @@
 #database {
-    background: black;
+    min-height: var(--main-height);
 }
 
 
