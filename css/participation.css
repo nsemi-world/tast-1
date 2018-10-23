@@ -3,15 +3,6 @@
     min-height: var(--main-height);
 }
 
-#pplayer {
-    text-align: right;
-    background: white;
-}
-
-#pplayer button {
-    font-size: 75%;
-    color: var(--headline-color);
-}
 
 #world-container {
     font-family: var(--brand-font);
@@ -19,21 +10,21 @@
 }
 
 #world-map {
-    min-height: var(--main-height);    
+    height: var(--main-height);    
 }
 
+#pplayer {
+    background: white;
+}
 p#year {
-    font-size: 300%;
     color: rgba(0,0,0,.5);
-    position: absolute;
-    z-index: 30;
-    left: 1em;
-    top: 1em;
 }
 
 #countries-data {
     font-size: 70%;
     color: var(--main-color);
+    min-height: var(--main-height);
+    max-width: 100%;
 }
 
 #countries-data table {

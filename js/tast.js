@@ -222,17 +222,12 @@ function initHome() {
 }
 
 function centerHome() {
-    centerTitle();
-}
-
-function centerTitle() {
     $('#message .title').position({
         my: 'center',
         at: 'center',
         of: '#message'
     });
 }
-
 
 function initCitation() {
     getCitation();
