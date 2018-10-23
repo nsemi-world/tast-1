@@ -19,7 +19,7 @@
 #message .title {
     font-family: var(--brand-font);
     text-align: center;
-    font-size: 400%;
+    font-size: 2em;
     color: var(--sec-color);
 }
 
