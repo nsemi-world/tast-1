@@ -66,6 +66,7 @@ function initializeApp() {
 
     initMenu();
     initHome();
+    initCitation();
     initParticipation();
     initVoyages();
     initCharts();
@@ -105,7 +106,7 @@ function initMenu() {
         enter('#citation');
         activate($(this));
     });
-    $('#toggle_map').on('click', function (event) {
+    $('#toggle_voyages').on('click', function (event) {
         event.preventDefault();
         enter('#voyages');
         activate($(this));
@@ -156,7 +157,7 @@ function enter(selector) {
             initParticipationMap();
             break;
         case '#voyages':
-            if(status_tast.voyages.storymap != null) {
+            if (status_tast.voyages.storymap != null) {
                 status_tast.voyages.storymap.updateDisplay();
             }
             break;
@@ -186,7 +187,7 @@ function centerAboutUs() {
         my: 'center',
         at: 'center',
         of: '#about-us'
-    });    
+    });
 }
 
 function centerImpressum() {
@@ -217,16 +218,7 @@ function activate(link) {
 
 
 function initHome() {
-    getCitation();
     centerHome();
-
-    $('#citation').on('_citation_loaded', function (event, data) {
-        addCitation(data);
-        getAffiliateLinks('author', data.author);
-    });
-    $('#citation .books').on('_affiliated_loaded', function (event, data) {
-        addAffiliateLinks(data);
-    });
 }
 
 function centerHome() {
@@ -241,10 +233,22 @@ function centerTitle() {
     });
 }
 
+
+function initCitation() {
+    getCitation();
+    $('#citation').on('_citation_loaded', function (event, data) {
+        addCitation(data);
+        getAffiliateLinks('author', data.author);
+    });
+    $('#citation .books').on('_affiliated_loaded', function (event, data) {
+        addAffiliateLinks(data);
+    });
+}
+
 function centerCitation() {
-    $('.ccontainer').position({
+    $('.ccitation').position({
         my: 'center',
-        at: 'center',
+        at: 'center center',
         of: '#citation'
     });
 }
@@ -287,10 +291,19 @@ function getAffiliateLinks(keyword, value) {
 
 function addAffiliateLinks(links) {
     $.each(links, function (key, value) {
-        var $figure = $('<img class="m-0 p-0 mr-2"></img>');
-        $figure.attr('src', value.image);
-        $figure.attr('title', value.title);
-        $('.books').append($figure);
+        var $item = $('<li class="media pt-2 col-lg-6 float-md-left"></li>')
+
+        var $figure = $('<img></img>')
+            .attr('src', value.image)
+            .attr('title', value.title);
+
+        var $body = $('<media-body class="ml-2 mr-2"></media-body');
+        var $title = $('<h5 class="h5 book-title"></h5>').text(value.title)
+        $body.append($title);
+
+        $item.append($figure).append($body);
+
+        $('.books').append($item);
     });
     centerCitation();
 }

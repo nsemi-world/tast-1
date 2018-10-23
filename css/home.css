@@ -16,24 +16,18 @@
     height: 100%;
 }
 
-#message .title {
+#message .title,
+.quote.title {
     font-family: var(--brand-font);
     text-align: center;
     font-size: 2em;
     color: var(--sec-color);
 }
 
-#citation {
-    height: var(--main-height);
-    text-align: center;
-}
-
-#citation .quote {
-    font-size: 300%;
+#citation .ccontainer {
 }
 
 #citation .author {
-    padding-bottom: 1em;
 }
 
 #citation .author a {
@@ -48,9 +42,17 @@
     font-weight: bold;
 }
 
+#citation .books {
+}
+
+
 #citation .books img {
-    border: 4px solid yellow;
-    border-radius: 5%;
-    height: 140px;
+    width: 120px;
+    height: 200px;
+}
+
+#citation .book-title {
+    font-family: var(--body-font);
+    font-size: 1em;
 }
 
