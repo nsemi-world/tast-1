@@ -23,13 +23,13 @@
         <button id="ppause" href="#" class="btn fas fa-pause p-0 m-0"></button>
         <p id="year">1866</p>
     </div>
-    <div class="container-fluid m-0 p-0">
-        <div id="world-container" class="col-lg-6">
+    <div class="container-fluid m-0 p-0 clearfix">
+        <div id="world-container" class="col-lg-6 float-lg-left">
             <div id="world-map">
             </div>
         </div>
-        <div id="countries-data" class="col-lg-6">
-            <table id="example-participation" class="display" width="100%"></table>
+        <div id="countries-data" class="col-lg-6  float-lg-left">
+            <table id="example-participation" class="display"></table>
         </div>
     </div>
     <div class="separator"></div>
@@ -43,14 +43,16 @@
         <button id="vplay" href="#" class="btn fas fa-play m-0 p-0"></button>
         <button id="vpause" href="#" class="btn fas fa-pause m-0 p-0"></button>
     </div>
-    <div id="storymap-container">
-        <div id="storymap"></div>
-    </div>
-    <div id="details-container">
-        <div class="card">
-            <div class="card-header">Voyage Details</div>
-            <div class="card-body">
-                <div id="details">
+    <div class="container-fluid m-0 p-0">
+        <div id="storymap-container" class="col-lg-8 float-lg-left">
+            <div id="storymap"></div>
+        </div>
+        <div id="details-container">
+            <div class="card col-lg-4">
+                <div class="card-header">Voyage Details</div>
+                <div class="card-body">
+                    <div id="details">
+                    </div>
                 </div>
             </div>
         </div>

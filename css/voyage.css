@@ -4,8 +4,7 @@
 }
 
 #storymap-container {
-    position: relative;
-    min-height: var(--main-height);
+    height: var(--main-height);
 }
 #storymap {
     font-family: var(--brand-font);

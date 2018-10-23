@@ -24,7 +24,6 @@ p#year {
     font-size: 70%;
     color: var(--main-color);
     min-height: var(--main-height);
-    max-width: 100%;
 }
 
 #countries-data table {
