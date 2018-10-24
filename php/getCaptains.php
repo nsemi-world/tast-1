@@ -26,7 +26,7 @@ function findCaptainsSummaries($pdo) {
     $query = 
           "SELECT \n"
         . "	   captaina as name, \n"
-        . "    COUNT(shipname) as ships, \n"
+        . "    COUNT(DISTINCT shipname) as ships, \n"
         . "    COUNT(voyageid) as voyages, \n"
         . "    SUM(crew) as crew, \n"
         . "    SUM(slaximp) as embarked,\n"
