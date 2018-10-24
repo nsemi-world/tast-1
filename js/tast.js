@@ -1086,8 +1086,8 @@ function getParticipationDataTable() {
         scrollY: 400,
         scrollCollapse: true,
         scroller: true,
-        stateSave: true
-    });
+        stateSave: true,
+    }).page.len(50);
 }
 
 function getShipsDataTable() {
@@ -1118,8 +1118,8 @@ function getShipsDataTable() {
         scrollY: 400,
         scrollCollapse: true,
         scroller: true,
-        stateSave: true
-    });
+        stateSave: true,
+    }).page.len(50);
 }
 
 function getOwnersDataTable() {
@@ -1150,8 +1150,8 @@ function getOwnersDataTable() {
         scrollY: 400,
         scrollCollapse: true,
         scroller: true,
-        stateSave: true
-    });
+        stateSave: true,
+    }).page.len(50);
 }
 
 function getCaptainsDataTable() {
@@ -1183,7 +1183,7 @@ function getCaptainsDataTable() {
         scrollCollapse: true,
         scroller: true,
         stateSave: true
-    });
+    }).page.len(50);
 }
 
 function getPlacesDataTable() {
@@ -1211,7 +1211,8 @@ function getPlacesDataTable() {
         scrollY: 400,
         scrollCollapse: true,
         scroller: true,
-        stateSave: true
+        stateSave: true,
+        "pageLength": 50
     });
 }
 
