@@ -2,7 +2,7 @@
     min-height: var(--main-height);
 }
 
-#charts .title {
+#charts .subtitle {
     font-weight: bold;
     font-family: var(--headline-font);
     text-align: center;

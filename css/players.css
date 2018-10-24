@@ -4,6 +4,10 @@
     background: black;
 }
 
+span#year, span#filter {
+    color: rgba(0,0,0,.5);
+}
+
 
 #vplayer button, 
 #pplayer button,

@@ -1,14 +1,11 @@
 <section id="home">
-    <div class="separator"></div>
-    <div id="message">
+    <div class="content" id="message">
         <h2 class="h2 title p-3">The Trans-atlantic Slave Trade</h2>
     </div>
-    <div class="separator"></div>
 </section>
 
 <section id="citation">
-    <div class="separator"></div>
-    <div class="ccontainer container-fluid mt-5 mb-5">
+    <div class="content ccontainer container pt-3 pb-3">
         <h2 class="quote h2 title p-2"></h2>
         <div class="author text-center p-3"></div>
         <ul class="books list-unstyled p-3 clearfix"></ul>
@@ -16,14 +13,13 @@
 </section>
 
 <section id="participation">
-    <div class="separator"></div>
     <div id="pplayer" class="text-center">
         <button id="prefresh" href="#" class="btn fas fa-undo p-0 m-0"></button>
         <button id="pplay" href="#" class="btn fas fa-play p-0 m-0"></button>
         <button id="ppause" href="#" class="btn fas fa-pause p-0 m-0"></button>
-        <p id="year">1866</p>
+        <span id="year">1866</span>
     </div>
-    <div class="container-fluid m-0 p-0 clearfix">
+    <div class="content container-fluid pt-3 pb-3 clearfix">
         <div id="world-container" class="col-lg-6 float-lg-left">
             <div id="world-map">
             </div>
@@ -32,37 +28,31 @@
             <table id="example-participation" class="display"></table>
         </div>
     </div>
-    <div class="separator"></div>
 </section>
 
 <section id="voyages">
-    <div class="separator"></div>
     <div id="vplayer">
         <button id="vprev" href="#" class="btn fas fa-angle-left m-0 p-0"></button>
         <button id="vnext" href="#" class="btn fas fa-angle-right m-0 p-0"></button>
         <button id="vplay" href="#" class="btn fas fa-play m-0 p-0"></button>
         <button id="vpause" href="#" class="btn fas fa-pause m-0 p-0"></button>
+        <span id="filter">All</span>
     </div>
-    <div class="container-fluid m-0 p-0">
+    <div class="content container-fluid clearfix pt-3 pb-3">
         <div id="storymap-container" class="col-lg-8 float-lg-left">
             <div id="storymap"></div>
         </div>
-        <div id="details-container">
-            <div class="card col-lg-4">
-                <div class="card-header">Voyage Details</div>
-                <div class="card-body">
-                    <div id="details">
-                    </div>
+        <div id="details-container" class="col-lg-4 float-lg-left pt-3">
+            <h3 class="title h3">Voyage Details</h3>
+                <div id="details">
                 </div>
-            </div>
         </div>
     </div>
 </section>
 
 <section id="database">
-    <div class="separator"></div>
-    <h2 class="title h2 pt-5 pb-5">Search the Database</h2>
-    <div class="container-fluid p-3">
+    <div class="content container pb-3">
+        <h2 class="title h2 pt-5 pb-5">Search the Database</h2>
         <nav class="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
             <a class="nav-item nav-link pl-1 pr-1" id="places-tab" data-toggle="tab" href="#places" role="tab" aria-controls="places" aria-selected="false">Places</a>
 
@@ -93,53 +83,50 @@
 </section>
 
 <section id="charts">
-    <div class="separator"></div>
-    <div class="container-fluid pt-5 pb-5">
-        <h2 class="h2">Charts</h2>
-        <div class="container-fluid p-3">
-            <div class="row">
-                <div class="col-lg-6 mt-5">
-                    <h4 class="title h4">When we thought it couldn't get any worse...</h4>
-                    <div class="chart"><canvas id="cvoyages"></canvas></div>
-                    <div class="chart-legend">
-                        <p>They came, over and over again. From Portugal, Spain, France, Great Britain, The Netherlands, Denmark, Baltic, Hanse Towns, Brandenburg, Sweden, Sardinia, Genoa, U.S.A., Mexico, Argentina, Russia and others. As with arabs, we thought they were of the Mankind, and that they're gods resembled our's. But they didn't recognized us nor God. They made at least <b>35938</b> reported voyages.
-                        </p>
-                    </div>
+    <div class="content container">
+        <h2 class="h2 title pt-5 pb-5">Charts</h2>
+        <div class="row">
+            <div class="col-lg-6 mt-5">
+                <h4 class="subtitle h4">When we thought it couldn't get any worse...</h4>
+                <div class="chart"><canvas id="cvoyages"></canvas></div>
+                <div class="chart-legend">
+                    <p>They came, over and over again. From Portugal, Spain, France, Great Britain, The Netherlands, Denmark, Baltic, Hanse Towns, Brandenburg, Sweden, Sardinia, Genoa, U.S.A., Mexico, Argentina, Russia and others. As with arabs, we thought they were of the Mankind, and that they're gods resembled our's. But they didn't recognized us nor God. They made at least <b>35938</b> reported voyages.
+                    </p>
                 </div>
-                <div class="col-lg-6 mt-5">
-                    <h4 class="title h4">The investment that made Europe possible</h4>
-                    <div class="chart"><canvas id="cships"></canvas></div>
-                    <div class="chart-legend">
-                        <p> You could tell it was Death comming personally. The Trojan Horse changed form but not the intentions. When they discovered our gold was good, our land blessed and our spirits fair, it was clear that they would do it. We counted 9213 distinct vessels, taking our riches, children, woman and men. Europe's first industrial revolution was on the way.</p>
-                    </div>
+            </div>
+            <div class="col-lg-6 mt-5">
+                <h4 class="subtitle h4">The investment that made Europe possible</h4>
+                <div class="chart"><canvas id="cships"></canvas></div>
+                <div class="chart-legend">
+                    <p> You could tell it was Death comming personally. The Trojan Horse changed form but not the intentions. When they discovered our gold was good, our land blessed and our spirits fair, it was clear that they would do it. We counted 9213 distinct vessels, taking our riches, children, woman and men. Europe's first industrial revolution was on the way.</p>
                 </div>
-                <div class="col-lg-6 mt-5">
-                    <h4 class="title h4">Black Pearls and Diamonds</h4>
-                    <div class="chart"><canvas id="cslaves"></canvas></div>
-                    <div class="chart-legend">
-                        <p>We we're the cargo! Because the are clean, strong, educated and beatiful. Because we have the rhythm to cultivate the land, to build cities, and to enjoy ourselves. Family after family, village after village, city after city, kingdom after kingdom, empire after empire, wrapped up and dispatched worldwide. They fed on us. 10645118 we're embarked and 9180918 made it to the Americas. In the end we we're decimated, and those who survived, here and there, we were bent on our knees.</p>
-                    </div>
+            </div>
+            <div class="col-lg-6 mt-5">
+                <h4 class="subtitle h4">Black Pearls and Diamonds</h4>
+                <div class="chart"><canvas id="cslaves"></canvas></div>
+                <div class="chart-legend">
+                    <p>We we're the cargo! Because the are clean, strong, educated and beatiful. Because we have the rhythm to cultivate the land, to build cities, and to enjoy ourselves. Family after family, village after village, city after city, kingdom after kingdom, empire after empire, wrapped up and dispatched worldwide. They fed on us. 10645118 we're embarked and 9180918 made it to the Americas. In the end we we're decimated, and those who survived, here and there, we were bent on our knees.</p>
                 </div>
-                <div class="col-lg-6 mt-5">
-                    <h4 class="title h4">Learn to know your Enemies!</h4>
-                    <div class="chart"><canvas id="cdied"></canvas></div>
-                    <div class="chart-legend">
-                        <p>Your enemy is that that feed the sharks with your flesh. Your enemy is that who rapes your children and wife. Your enemy is that who whip your elders.Your enemy is that who sits in the church just next to you. Over 1000000 african children, women and men were assassinated during the Middle Passage. Your enemy has a pleasure proportinal to your sufferings.</p>
-                    </div>
+            </div>
+            <div class="col-lg-6 mt-5">
+                <h4 class="subtitle h4">Learn to know your Enemies!</h4>
+                <div class="chart"><canvas id="cdied"></canvas></div>
+                <div class="chart-legend">
+                    <p>Your enemy is that that feed the sharks with your flesh. Your enemy is that who rapes your children and wife. Your enemy is that who whip your elders.Your enemy is that who sits in the church just next to you. Over 1000000 african children, women and men were assassinated during the Middle Passage. Your enemy has a pleasure proportinal to your sufferings.</p>
                 </div>
             </div>
         </div>
     </div>
-
 </section>
 
 <section id="contacts">
-    <div class="separator"></div>
-    <div class="container-fluid pt-5 pb-5">
-        <h2 class="title h2">Contact</h2>
-        <div id="contact-container" class="row p-5">
+    <div class="content container" id="contact-container">
+        <h2 class="title h2 pt-5 pb-5">Contact</h2>
+        <div class="row">
             <div id="contact-ngutu" class="col-lg-6 pt-5">
-                <div class="h4 subtitle"><i class="fas fa-lightbulb pr-3"></i>Contact ngutu.org</div>
+                <div class="h4 subtitle">
+                    <i class="fas fa-lightbulb pr-3"></i> Contact ngutu.org
+                </div>
                 <p>For ideas, improvements, critics and other general information you can send us an email to <a href="mailto:info@ngutu.org" target="_top">info@ngutu.org</a></p>
             </div>
             <div id="contact-social" class="col-lg-6 pt-5">
@@ -151,10 +138,9 @@
 </section>
 
 <section id="about-us">
-    <div class="separator"></div>
-    <div class="container-fluid pt-5 pb-5">
-        <h2 class="title h2">About Us</h2>
-        <div id="about-us-container" class="row p-5">
+    <div class="content container" id="about-us-container" >
+        <h2 class="title h2 pt-5 pb-5">About Us</h2>
+        <div class="row">
             <div id="about-ngutu" class="col-lg-6 pt-5">
                 <div class="h4 subtitle"><i class="fab fa-connectdevelop pr-3"></i>About Ngutu.org:</div>
                 <p>Ngutu.org is an idea with the goal to stablish a strong identity, social and economic for the re-connection of the African diasporas with each other and Mother Africa. We call for global solidarity among Black Africans to assume leadership and entrepeneurship towards the implementation of the great African Commomwealth, centered in Africa and with the diaspora playing an integreated role of embassators for Acquisition and Transfer of Knowledgle and Culture. A World where we all belong.</p>
@@ -169,15 +155,10 @@
 </section>
 
 <section id="impressum">
-    <div class="separator"></div>
-    <div class="container-fluid p-5">
-        <h2 class="title h2">Impressum</h2>
-        <div id="impressum-container" class="row">
-            <div class="col-sm-12">
-                <p id="impressum-owner" class="pt-4">
-                    <span>tastXplorer</span><br/> Alexandre Zua Caldeira<br/> Lehrter Str. 8<br/> 10557 Berlin<br/> Germany
-                </p>
-            </div>
-        </div>
+    <div  class="content container" id="impressum-container">
+        <h2 class="title h2 pt-5 pb-5">Impressum</h2>
+        <p id="impressum-owner" class="pt-4">
+            <span>tastXplorer</span><br/> Alexandre Zua Caldeira<br/> Lehrter Str. 8<br/> 10557 Berlin<br/> Germany
+        </p>
     </div>
 </section>

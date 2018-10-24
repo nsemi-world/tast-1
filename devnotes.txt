@@ -9,21 +9,19 @@ DONE: Make app depend on environment variables
 SUNDAY
 --------
 DONE: [MENU_TOGGLE] Implement toggling for responsive menu
-TODO: [SECTION_STYLING] Implement SMALL-FIRST layouting
-TODO: [SMALL_FIRST] Implement SMALL-FIRST responsive layouting
-TODO: [ENV_VAR_DB] Change development environment variable CLEARDB_DATABASE_URL to mysql://root:password@localhost/tastdb:
-    - Check that this address is processed by getPDO() function, and fine tune it to properly process development and production database
+DONE: [SECTION_STYLING] Implement Section Styling layouting
 
 --------
 MONDAY
 --------
 TODO: Center icons in content
-TODO: Set Contacts and Impressum section height to var(--main-height)
-TODO: Center Impressum and contacts Content in corresponding sections
-TODO: Uncenter Impressum title
-TODO: [SMALL_FIRST] Implement SMALL-FIRST layouting
-TODO: [ENV_VAR_DB] Change development environment variable CLEARDB_DATABASE_URL to mysql://root:password@localhost/tastdb:
-    - Check that this address is processed by getPDO() function, and fine tune it to properly process development and production database
+DONE: Set Contacts and Impressum section height to var(--main-height)
+DONE: Center Impressum and contacts Content in corresponding sections
+DONE: Uncenter Impressum title
+DONE: [SMALL_FIRST] Implement SMALL-FIRST layouting
+TODO: [ENV_VAR_DB] Change development environment variable
+        CLEARDB_DATABASE_URL to mysql://root:password@localhost/tastdb:
+            - Check that this address is processed by getPDO() function, and fine tune it to properly process development and production database
 TODO: Add visitor counter
 TODO: Resize participation map on window resizings
 TODO: Add projection select for participation map
@@ -46,7 +44,7 @@ TODO: Merge css files. It should only contain:
 ------------------
 WEDNESDAY - FRIDAY
 ------------------
-TODO: Make website responsible
+DONE: Make website responsible
 TODO: Rewrite Charts Legend/Content
 TODO: Merge calls to getCitation and getAffiliatedLinks together
 

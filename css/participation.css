@@ -13,13 +13,6 @@
     height: var(--main-height);    
 }
 
-#pplayer {
-    background: white;
-}
-p#year {
-    color: rgba(0,0,0,.5);
-}
-
 #countries-data {
     font-size: 70%;
     color: var(--main-color);

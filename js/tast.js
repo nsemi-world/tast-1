@@ -175,7 +175,7 @@ function enter(selector) {
 
 
 function centerContacts() {
-    $('#contact-container').position({
+    $('#contacts .container .row').position({
         my: 'center',
         at: 'center',
         of: '#contacts'
@@ -183,7 +183,7 @@ function centerContacts() {
 }
 
 function centerAboutUs() {
-    $('#about-us-container').position({
+    $('#about-us .container .row').position({
         my: 'center',
         at: 'center',
         of: '#about-us'
@@ -1029,7 +1029,7 @@ function getCountriesSeries(y) {
                         status_tast.participation.series[i][5] += parseInt(data[key][5]);
                     }
                 });
-                $('p#year').text(y);
+                $('span#year').text(y);
             }
             $('#world-container, #countries-data').trigger('_series_loaded');
         },
@@ -1283,7 +1283,7 @@ function cleanSeries() {
         status_tast.participation.series[i][5] = 0;
     }
     initCountriesData();
-    $('p#year').text(status_tast.participation.year);
+    $('span#year').text(status_tast.participation.year);
 }
 
 function expandStoryMap() {
