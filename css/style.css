@@ -27,7 +27,6 @@ section {
 
 #contact-container, #about-us-container, #impressum-container {
     font-family: var(--body-font);
-    height: var(--main-height);
 }
 
 
