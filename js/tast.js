@@ -1211,9 +1211,8 @@ function getPlacesDataTable() {
         scrollY: 400,
         scrollCollapse: true,
         scroller: true,
-        stateSave: true,
-        "pageLength": 50
-    });
+        stateSave: true
+    }).page.len(50);
 }
 
 function initParticipationTable() {
