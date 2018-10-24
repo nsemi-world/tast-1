@@ -1083,9 +1083,10 @@ function getParticipationDataTable() {
             }
         ],
         deferRender: true,
-        scrollY: 200,
+        scrollY: 400,
         scrollCollapse: true,
-        scroller: true
+        scroller: true,
+        stateSave: true
     });
 }
 
@@ -1114,9 +1115,10 @@ function getShipsDataTable() {
                 title: 'Died'
             }],
         deferRender: true,
-        scrollY: 200,
+        scrollY: 400,
         scrollCollapse: true,
-        scroller: true
+        scroller: true,
+        stateSave: true
     });
 }
 
@@ -1145,9 +1147,10 @@ function getOwnersDataTable() {
                 title: 'Died'
             }],
         deferRender: true,
-        scrollY: 200,
+        scrollY: 400,
         scrollCollapse: true,
-        scroller: true
+        scroller: true,
+        stateSave: true
     });
 }
 
@@ -1176,9 +1179,10 @@ function getCaptainsDataTable() {
                 title: 'Died'
             }],
         deferRender: true,
-        scrollY: 200,
+        scrollY: 400,
         scrollCollapse: true,
-        scroller: true
+        scroller: true,
+        stateSave: true
     });
 }
 
@@ -1204,9 +1208,10 @@ function getPlacesDataTable() {
                 title: 'Died'
             }],
         deferRender: true,
-        scrollY: 200,
+        scrollY: 400,
         scrollCollapse: true,
-        scroller: true
+        scroller: true,
+        stateSave: true
     });
 }
 
