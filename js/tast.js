@@ -1075,18 +1075,17 @@ function getParticipationDataTable() {
             {
                 title: 'Died'
             }],
-        paging: false,
-        filter: false,
-        info: true,
-        autoWidth: false,
-        deferRender: true,
         columnDefs: [
             {
                 "targets": [1, 2],
                 "visible": false,
                 "searchable": false
             }
-            ]
+        ],
+        deferRender: true,
+        scrollY: 200,
+        scrollCollapse: true,
+        scroller: true
     });
 }
 
@@ -1114,12 +1113,10 @@ function getShipsDataTable() {
             {
                 title: 'Died'
             }],
-        paging: false,
-        filter: true,
-        info: true,
-        scrollY: '400px',
+        deferRender: true,
+        scrollY: 200,
         scrollCollapse: true,
-        deferRender: true
+        scroller: true
     });
 }
 
@@ -1147,12 +1144,10 @@ function getOwnersDataTable() {
             {
                 title: 'Died'
             }],
-        paging: false,
-        filter: true,
-        info: true,
-        scrollY: '400px',
+        deferRender: true,
+        scrollY: 200,
         scrollCollapse: true,
-        deferRender: true
+        scroller: true
     });
 }
 
@@ -1180,12 +1175,10 @@ function getCaptainsDataTable() {
             {
                 title: 'Died'
             }],
-        paging: false,
-        filter: true,
-        info: true,
-        scrollY: '400px',
+        deferRender: true,
+        scrollY: 200,
         scrollCollapse: true,
-        deferRender: true
+        scroller: true
     });
 }
 
@@ -1210,12 +1203,10 @@ function getPlacesDataTable() {
             {
                 title: 'Died'
             }],
-        paging: false,
-        filter: true,
-        info: true,
-        scrollY: '400px',
+        deferRender: true,
+        scrollY: 200,
         scrollCollapse: true,
-        deferRender: true
+        scroller: true
     });
 }
 
