@@ -46,12 +46,8 @@ table thead {
     background: var(--sec-color);
 }
 
-table tbody td {
-    background: transparent;
-}
-
-.card-body {
-    font-family: var(--headline-font);
+table tbody {
+    background: red;
 }
 
 .loading {

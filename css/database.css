@@ -22,3 +22,8 @@
 #database table tr td {
     color: var(--main-color);
 }
+
+
+.dataTables_wrapper {
+    padding: 2em;
+}
