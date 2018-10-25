@@ -219,6 +219,9 @@ function activate(link) {
 
 function initHome() {
     centerHome();
+    $(window).on('resize', function() {
+       centerHome(); 
+    });
 }
 
 function centerHome() {
@@ -237,7 +240,13 @@ function initCitation() {
     });
     $('#citation .books').on('_affiliated_loaded', function (event, data) {
         addAffiliateLinks(data);
+        centerCitation();
     });
+    
+    $(window).on('resize', function() {
+       centerCitation(); 
+    });
+
 }
 
 function centerCitation() {
@@ -318,8 +327,8 @@ function initVoyages() {
 
     $('#voyages').on('_voyage_loaded', function (event, data, index) {
         createStoryMap(data, status_tast.voyages.ids[index]);
-        status_tast.voyages.storymap.updateDisplay();
         initData(data, index);
+        status_tast.voyages.storymap.updateDisplay();
         updateVPlayer(index);
     });
 
@@ -330,6 +339,11 @@ function initVoyages() {
         loadFilteredVoyageIds(filter, value);
         status_tast.voyages.context = filter + ' is ' + value;
     });
+    
+    window.onresize = function (event) {
+        status_tast.voyages.storymap.updateDisplay(); // this isn't automatic
+    }
+
 }
 
 function configureVoyagesPlayer() {
@@ -413,7 +427,6 @@ function loadVoyageData(index) {
         },
         dataType: 'json',
         success: function (result) {
-            console.log(result);
             $('#voyages').trigger('_voyage_loaded', [result, index]);
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -438,10 +451,6 @@ function createStoryMap(data, id) {
     $('#storymap').empty();
     status_tast.voyages.storymap = new VCO.StoryMap(
         'storymap', storymap_data, storymap_options);
-
-    window.onresize = function (event) {
-        status_tast.voyages.storymap.updateDisplay(); // this isn't automatic
-    }
 
     $(document).trigger('_map_loaded');
 }
@@ -715,7 +724,6 @@ function getVoyagePlaces(data) {
     if (data) {
         var places = [];
         $.each(data.itinerary, function (i, v) {
-            console.log(v);
             if (v.place != null) {
                 var new_value = v.place
                     .replace(", port unspecified", "")
@@ -733,7 +741,6 @@ function getVoyageOwners(data) {
     if (data) {
         var owners = [];
         $.each(data.details.owners, function (i, v) {
-            console.log('CurrentOwner = ' + v);
             owners.push('<a href="owner" class="filter">' + v + '</a>');
         });
         return owners.join(" | ");
@@ -744,7 +751,6 @@ function getVoyageCaptains(data) {
     if (data) {
         var captains = [];
         $.each(data.details.captains, function (i, v) {
-            console.log('CurrentCaptain = ' + v);
             captains.push('<a href="captain" class="filter">' + v + '</a>');
         });
         return captains.join(" | ");
@@ -825,6 +831,10 @@ function initParticipation() {
     });
     $('#countries-data').on('_series_loaded', function (event) {
         initCountriesData();
+    });
+    
+    $(window).on('resize', function() {
+        //status_tast.participation.datamap
     });
 }
 
@@ -918,8 +928,7 @@ function initParticipationMap() {
                 projection: projection
             };
         },
-        //projection: 'equirectangular', // big world map
-        // countries don't listed in dataset will be painted with this color
+        responsive: true,
         fills: fills,
         data: dataset,
         geographyConfig: {
@@ -1042,7 +1051,6 @@ function getCountriesSeries(y) {
 function indexOfInSeries(country) {
     var series = status_tast.participation.series;
     for (var i = 0; i < series.length; i++) {
-        console.log(country);
         if (series[i][0] == country) {
             return i;
         }
@@ -1308,7 +1316,7 @@ function initCharts() {
             initChart(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log(textStatus);
+            console.log('Error: ' + textStatus);
         }
     });
 }

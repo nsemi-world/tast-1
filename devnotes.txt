@@ -21,10 +21,11 @@ DONE: [SMALL_FIRST] Implement SMALL-FIRST layouting
 DONE: [ENV_VAR_DB] Change development environment variable
         CLEARDB_DATABASE_URL to mysql://root:password@localhost/tastdb:
             - Check that this address is processed by getPDO() function, and fine tune it to properly process development and production database
-TODO: Add visitor counter
-TODO: Resize participation map on window resizings
-TODO: Add projection select for participation map
+DONE / INCOMPLETE: Resize on window resizings
+    - Still cannot resize / redraw participation map
+    - May be done manually
 TODO: Add Resistance logo for Voyages where resistance was recorded
+TODO: Add projection select for participation map
 
 --------
 TUESDAY
