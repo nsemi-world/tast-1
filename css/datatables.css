@@ -1,0 +1,12 @@
+
+table {
+    font-family: var(--headline-font);
+}
+
+table thead {
+    background: var(--sec-color);
+}
+
+.dataTables_wrapper {
+    padding: 2em;
+}
