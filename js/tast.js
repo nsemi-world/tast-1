@@ -1083,6 +1083,8 @@ function getParticipationDataTable() {
             }
         ],
         stateSave: true,
+        paging: false,
+        filter: false   
     }).page.len(50);
 }
 
