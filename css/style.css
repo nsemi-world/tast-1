@@ -178,6 +178,12 @@ div.itinerary a {
     text-decoration: underline;
 }
 
+.resistance {
+    color: red;
+    font-size: 200%;
+    border-radius: 50%;
+    overflow: hidden;
+}
 
 /*************************************
  Database

@@ -595,7 +595,6 @@ function initInfo(data, index) {
         .append($voyage_context)
         .append($voyage_order)
         .append($voyageid)
-        .append($('<hr/>'))
         .append($period)
         .append($places)
         .append($('<hr/>'))
@@ -635,7 +634,6 @@ function initOutcome(data) {
 
     $outcome.appendTo('#details')
         .append($fate_if_captured)
-        .append($('<hr/>'))
         .append($fate_voyage)
         .append($fate_slaves)
         .append($fate_owners)
@@ -660,13 +658,20 @@ function initSlaveNumbers(data) {
         'Died: ',
         getNumber('died', data.details.slaves.died)
     );
+    
+    var $resistance = createElement('resistance', 'Resistance', data.details.resistance);
+    
+    if(data.details.resistance != null) {
+        addResistanceIcon();
+    }
 
     var $slaves = $('<div class="slaves"></div>');
 
     $slaves.appendTo('#details')
         .append($embarked)
         .append($disembarked)
-        .append($died);
+        .append($died)
+        .append($resistance);
 }
 
 function createElement(id, key, value) {
@@ -677,6 +682,18 @@ function createElement(id, key, value) {
     $element.append($key).append($value);
 
     return $element;
+}
+
+function addResistanceIcon() {
+    var $icon = $('<i class="fas fa-registered resistance"></i>');
+    $icon
+        .prependTo('#details')
+        .css({
+            position: 'absolute',
+            zIndex: 30,
+            top: '1.25em',
+            left: '1em',
+        });
 }
 
 function getPercentage(value, total) {

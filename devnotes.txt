@@ -24,7 +24,7 @@ DONE: [ENV_VAR_DB] Change development environment variable
 DONE / INCOMPLETE: Resize on window resizings
     - Still cannot resize / redraw participation map
     - May be done manually
-TODO: Add Resistance logo for Voyages where resistance was recorded
+DONE: Add Resistance logo for Voyages where resistance was recorded
 TODO: Add projection select for participation map
 
 --------
