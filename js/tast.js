@@ -1082,10 +1082,6 @@ function getParticipationDataTable() {
                 "searchable": false
             }
         ],
-        deferRender: true,
-        scrollY: 400,
-        scrollCollapse: true,
-        scroller: true,
         stateSave: true,
     }).page.len(50);
 }
@@ -1114,6 +1110,7 @@ function getShipsDataTable() {
             {
                 title: 'Died'
             }],
+        info: false,
         deferRender: true,
         scrollY: 400,
         scrollCollapse: true,
@@ -1146,6 +1143,7 @@ function getOwnersDataTable() {
             {
                 title: 'Died'
             }],
+        info: false,
         deferRender: true,
         scrollY: 400,
         scrollCollapse: true,
@@ -1178,6 +1176,7 @@ function getCaptainsDataTable() {
             {
                 title: 'Died'
             }],
+        info: false,
         deferRender: true,
         scrollY: 400,
         scrollCollapse: true,
@@ -1207,6 +1206,7 @@ function getPlacesDataTable() {
             {
                 title: 'Died'
             }],
+        info: false,
         deferRender: true,
         scrollY: 400,
         scrollCollapse: true,

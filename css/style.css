@@ -38,18 +38,6 @@ section {
     font-family: var(--main-font);
 }
 
-table {
-    font-family: var(--headline-font);
-}
-
-table thead {
-    background: var(--sec-color);
-}
-
-table tbody {
-    background: red;
-}
-
 .loading {
     color: var(--sec-color);
 }
