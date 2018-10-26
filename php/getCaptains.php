@@ -5,7 +5,7 @@ $pdo = getPDO();
 
 $captains = findCaptainsSummaries($pdo);
 
-$result = [];
+$res = [];
 
 foreach($captains as $captain) {
     $s = [];
@@ -16,8 +16,9 @@ foreach($captains as $captain) {
     $s[] = $captain->embarked;
     $s[] = $captain->disembarked;
     $s[] = $captain->died;
-    $result[] = $s;
+    $res[] = $s;
 }
+$result['data'] = $res;
 
 header('Content-type:application/json;charset=utf-8');
 echo json_encode($result);

@@ -5,7 +5,7 @@ $pdo = getPDO();
 
 $places = findPlacesSummaries($pdo);
 
-$result = [];
+$res = [];
 
 foreach($places as $place) {
     $s = [];
@@ -15,8 +15,9 @@ foreach($places as $place) {
     $s[] = $place->embarked;
     $s[] = $place->disembarked;
     $s[] = $place->died;
-    $result[] = $s;
+    $res[] = $s;
 }
+$result['data'] = $res;
 
 header('Content-type:application/json;charset=utf-8');
 echo json_encode($result);

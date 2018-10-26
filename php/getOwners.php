@@ -5,7 +5,7 @@ $pdo = getPDO();
 
 $owners = findOwnersSummaries($pdo);
 
-$result = [];
+$res = [];
 
 foreach($owners as $owner) {
     $s = [];
@@ -16,8 +16,9 @@ foreach($owners as $owner) {
     $s[] = $owner->embarked;
     $s[] = $owner->disembarked;
     $s[] = $owner->died;
-    $result[] = $s;
+    $res[] = $s;
 }
+$result['data'] = $res;
 
 header('Content-type:application/json;charset=utf-8');
 echo json_encode($result);

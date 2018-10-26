@@ -58,12 +58,6 @@ $(document).ready(function () {
 });
 
 function initializeApp() {
-    status_tast.participation.datatable = getParticipationDataTable();
-    status_tast.ships.datatable = getShipsDataTable();
-    status_tast.owners.datatable = getOwnersDataTable();
-    status_tast.captains.datatable = getCaptainsDataTable();
-    status_tast.places.datatable = getPlacesDataTable();
-
     initMenu();
     initHome();
     initCitation();
@@ -839,6 +833,8 @@ function clickNextSlide() {
 
 
 function initParticipation() {
+    status_tast.participation.datatable = getParticipationDataTable();
+
     configureParticipationPlayer();
     configureParticipationAppearence();
     getCountriesSeries(0);
@@ -1115,6 +1111,7 @@ function getParticipationDataTable() {
 
 function getShipsDataTable() {
     return $('#example-ships').DataTable({
+        ajax: 'php/getShips.php',
         columns: [
             {
                 title: 'Shipname'
@@ -1140,7 +1137,7 @@ function getShipsDataTable() {
         info: false,
         deferRender: true,
         scrollY: 400,
-        scrollCollapse: true,
+        scrollCollapse: false,
         scroller: true,
         stateSave: true,
     }).page.len(50);
@@ -1148,6 +1145,7 @@ function getShipsDataTable() {
 
 function getOwnersDataTable() {
     return $('#example-owners').DataTable({
+        ajax: 'php/getOwners.php',
         columns: [
             {
                 title: 'Name'
@@ -1173,7 +1171,7 @@ function getOwnersDataTable() {
         info: false,
         deferRender: true,
         scrollY: 400,
-        scrollCollapse: true,
+        scrollCollapse: false,
         scroller: true,
         stateSave: true,
     }).page.len(50);
@@ -1181,6 +1179,7 @@ function getOwnersDataTable() {
 
 function getCaptainsDataTable() {
     return $('#example-captains').DataTable({
+        ajax: 'php/getCaptains.php',
         columns: [
             {
                 title: 'Name'
@@ -1206,7 +1205,7 @@ function getCaptainsDataTable() {
         info: false,
         deferRender: true,
         scrollY: 400,
-        scrollCollapse: true,
+        scrollCollapse: false,
         scroller: true,
         stateSave: true
     }).page.len(50);
@@ -1214,6 +1213,7 @@ function getCaptainsDataTable() {
 
 function getPlacesDataTable() {
     return $('#example-places').DataTable({
+        ajax: 'php/getPlaces.php',
         columns: [
             {
                 title: 'Place'
@@ -1236,7 +1236,7 @@ function getPlacesDataTable() {
         info: false,
         deferRender: true,
         scrollY: 400,
-        scrollCollapse: true,
+        scrollCollapse: false,
         scroller: true,
         stateSave: true
     }).page.len(50);
@@ -1250,34 +1250,6 @@ function initParticipationTable() {
     status_tast.participation.datatable.draw();
 }
 
-function initShipsTable() {
-    var series = status_tast.ships.series;
-
-    status_tast.ships.datatable.clear();
-    status_tast.ships.datatable.rows.add(series);
-    status_tast.ships.datatable.draw();
-}
-
-function initOwnersTable() {
-    var series = status_tast.owners.series;
-    status_tast.owners.datatable.clear();
-    status_tast.owners.datatable.rows.add(series);
-    status_tast.owners.datatable.draw();
-}
-
-function initCaptainsTable() {
-    var series = status_tast.captains.series;
-    status_tast.captains.datatable.clear();
-    status_tast.captains.datatable.rows.add(series);
-    status_tast.captains.datatable.draw();
-}
-
-function initPlacesTable() {
-    var series = status_tast.places.series;
-    status_tast.places.datatable.clear();
-    status_tast.places.datatable.rows.add(series);
-    status_tast.places.datatable.draw();
-}
 
 function animateParticipation() {
     status_tast.participation.interval = setInterval(function () {
@@ -1520,118 +1492,13 @@ function addAverage($element, years, label) {
 
 
 function initTabs() {
-    initShips();
-    initOwners();
-    initCaptains();
-    initPlaces();
-    $('#nav-tab a[href~="#ships"]').on('click', function (e) {
+    $('#nav-tab a').on('click', function (e) {
         e.preventDefault();
-        if (!status_tast.ships.started) {
-            getShips();
-            status_tast.ships.started = true;
-        }
         $(this).tab('show');
     });
-    $('#nav-tab a[href~="#owners"]').on('click', function (e) {
-        e.preventDefault();
-        if (!status_tast.owners.started) {
-            getOwners();
-            status_tast.owners.started = true;
-        }
-        $(this).tab('show');
-    });
-    $('#nav-tab a[href~="#captains"]').on('click', function (e) {
-        e.preventDefault();
-        if (!status_tast.captains.started) {
-            getCaptains();
-            status_tast.captains.started = true;
-        }
-        $(this).tab('show');
-    });
-    $('#nav-tab a[href~="#places"]').on('click', function (e) {
-        e.preventDefault();
-        if (!status_tast.places.started) {
-            getPlaces();
-            status_tast.places.started = true;
-        }
-        $(this).tab('show');
-    });
-    $('#nav-tab a[href~="#places"]').click();
+    getPlacesDataTable();
+    getShipsDataTable();
+    getOwnersDataTable();
+    getCaptainsDataTable(); 
 }
 
-function initOwners() {
-    $('div#owners').on('_owners_loaded', function (event, data) {
-        status_tast.owners.series = data;
-        initOwnersTable();
-    });
-}
-
-function initCaptains() {
-    $('div#captains').on('_captains_loaded', function (event, data) {
-        status_tast.captains.series = data;
-        initCaptainsTable();
-    });
-}
-
-function initShips() {
-    $('div#ships').on('_ships_loaded', function (event, data) {
-        status_tast.ships.series = data;
-        initShipsTable();
-    });
-}
-
-function initPlaces() {
-    $('div#places').on('_places_loaded', function (event, data) {
-        status_tast.places.series = data;
-        initPlacesTable();
-    });
-}
-
-function getOwners() {
-    $.ajax({
-        url: 'php/getOwners.php',
-        success: function (data) {
-            $('div#owners').trigger('_owners_loaded', [data]);
-        },
-        error: function () {
-            alert('Error VoyageOwners#getOwners()');
-        }
-    });
-}
-
-function getCaptains() {
-    $.ajax({
-        url: 'php/getCaptains.php',
-        success: function (data) {
-            $('div#captains').trigger('_captains_loaded', [data]);
-        },
-        error: function () {
-            alert('Error VoyageCaptains#getCaptains()');
-        }
-    });
-}
-
-function getShips() {
-    $.ajax({
-        url: 'php/getShips.php',
-        success: function (data) {
-            $('div#ships').trigger('_ships_loaded', [data]);
-        },
-        error: function () {
-            alert('Error VoyageShips#getShips()');
-        }
-    });
-}
-
-function getPlaces() {
-    var url = 'php/getPlaces.php';
-    $.ajax({
-        url: url,
-        success: function (result) {
-            $('div#places').trigger('_places_loaded', [result]);
-        },
-        error: function () {
-            alert("SHOW_PLACES_ERROR");
-        }
-    });
-}
