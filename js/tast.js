@@ -248,17 +248,6 @@ function initHome() {
     $(window).on('resize', function() {
        centerHome(); 
     });
-    $.ajax({
-        url: 'php/getHomeImage.php',
-        success: function(data) {
-            $('#home').css({
-                backgroundImage: data
-            });
-        },
-        error: function() {
-            alert('Error');
-        }
-    });
 }
 
 function centerHome() {
