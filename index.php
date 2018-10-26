@@ -1,4 +1,5 @@
 <?php
+ob_start("ob_gzhandler");
 
 $template = file_get_contents('./templates/template.html');
 
@@ -14,4 +15,5 @@ $template = str_replace('###FOOTER###', $footer, $template);
 
 echo $template;
 
+ob_end_flush();
 ?>
