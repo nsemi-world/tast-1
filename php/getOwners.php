@@ -1,4 +1,5 @@
 <?php
+ob_start("ob_gzhandler");
 
 require_once('./utils.php');
 $pdo = getPDO();
@@ -43,4 +44,6 @@ function findOwnersSummaries($pdo) {
     return $result;
 }
 
+    
+ob_end_flush();
 ?>

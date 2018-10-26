@@ -1,4 +1,5 @@
 <?php
+ob_start("ob_gzhandler");
     
 require_once('./utils.php');
 $pdo = getPDO();
@@ -757,4 +758,6 @@ class EndInfo extends StageInfo {
 }
 
 
+    
+ob_end_flush();
 ?>

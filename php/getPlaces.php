@@ -1,5 +1,6 @@
 <?php
 
+ob_start("ob_gzhandler");
 require_once('./utils.php');
 $pdo = getPDO();
 
@@ -42,4 +43,6 @@ function findPlacesSummaries($pdo) {
     return $result;
 }
 
+    
+ob_end_flush();
 ?>

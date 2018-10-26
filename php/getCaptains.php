@@ -1,6 +1,7 @@
 <?php
-
+ob_start("ob_gzhandler");
 require_once('./utils.php');
+
 $pdo = getPDO();
 
 $captains = findCaptainsSummaries($pdo);
@@ -44,5 +45,7 @@ function findCaptainsSummaries($pdo) {
 }
     
 
+    
+ob_end_flush();
 
 ?>
