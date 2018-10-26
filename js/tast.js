@@ -254,6 +254,9 @@ function initHome() {
             $('#home').css({
                 backgroundImage: data
             });
+        },
+        error: function() {
+            alert('Error');
         }
     });
 }
