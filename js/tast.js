@@ -51,6 +51,14 @@ var status_tast = {
         started: false
     }
 };
+var started = {
+    home: false,
+    citation: false,
+    participation: false,
+    voyages: false,
+    database: false,
+    charts: false
+}
 var currentSection = null;
 
 $(document).ready(function () {
@@ -59,12 +67,12 @@ $(document).ready(function () {
 
 function initializeApp() {
     initMenu();
-    initHome();
+    /*initHome();
     initCitation();
     initParticipation();
     initVoyages();
     initCharts();
-    initTabs();
+    initTabs();*/
     $('#toggle_home').click();
 
     //$(document).on('scroll', onScroll);
@@ -92,31 +100,55 @@ function onScroll(event) {
 function initMenu() {
     $('#toggle_home').on('click', function (event) {
         event.preventDefault();
+        if(!started.home) {
+            initHome();
+            started.home = true;
+        }
         enter('#home');
         activate($(this));
     });
     $('#toggle_citation').on('click', function (event) {
         event.preventDefault();
+        if(!started.citation) {
+            initCitation();
+            started.citation = true;
+        }
         enter('#citation');
         activate($(this));
     });
     $('#toggle_voyages').on('click', function (event) {
         event.preventDefault();
+        if(!started.voyages) {
+            initVoyages();
+            started.voyages = true;
+        }
         enter('#voyages');
         activate($(this));
     });
     $('#toggle_participation').on('click', function (event) {
         event.preventDefault();
+        if(!started.participation) {
+            initParticipation();
+            started.participation = true;
+        }
         enter('#participation');
         activate($(this));
     });
     $('#toggle_charts').on('click', function (event) {
         event.preventDefault();
+        if(!started.charts) {
+            initCharts();
+            started.charts = true;
+        }
         enter('#charts');
         activate($(this));
     });
     $('#toggle_database').on('click', function (event) {
         event.preventDefault();
+        if(!started.database) {
+            initTabs();
+            started.database = true;
+        }
         enter('#database');
         activate($(this));
     });

@@ -13,6 +13,7 @@ $template = str_replace('###HEADER###', $header, $template);
 $template = str_replace('###CONTENT###', $content, $template);
 $template = str_replace('###FOOTER###', $footer, $template);
 
+
 echo $template;
 
 ob_end_flush();
