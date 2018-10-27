@@ -5,10 +5,6 @@ section {
     color: var(--sec-color);
 }
 
-.content {
-    min-height: var(--main-height);
-}
-
 .title {
     font-family: var(--main-font);
     text-align: center;
@@ -46,6 +42,13 @@ section {
     font-size: 2em;
     color: var(--sec-color);
 }
+
+
+/**********************************
+ Articles 
+***********************************/
+
+
 
 /**********************************
  Citation 
