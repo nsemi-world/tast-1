@@ -1,7 +1,12 @@
 #pplayer, #vplayer {
     font-size: 2em;
     text-align: center;
-    background: black;
+    background: white;
+    box-shadow: 0 2px 2px 2px var(--main-color);
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 2000;
 }
 
 span#year, span#filter {

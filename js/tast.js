@@ -67,34 +67,7 @@ $(document).ready(function () {
 
 function initializeApp() {
     initMenu();
-    /*initHome();
-    initCitation();
-    initParticipation();
-    initVoyages();
-    initCharts();
-    initTabs();*/
     $('#toggle_home').click();
-
-    //$(document).on('scroll', onScroll);
-
-}
-
-function onScroll(event) {
-    var headerHeight = $('header').height();
-    var scrollPosition = $(document).scrollTop() + screen.height / 2;
-    $('#menu a').each(function () {
-        var currentLink = $(this);
-        var refElement = $(currentLink.attr("href"));
-        var height = refElement.height();
-
-        var top = refElement.position().top;
-        var bottom = refElement.position().top + height;
-
-
-        if (top <= scrollPosition && bottom > scrollPosition) {
-            activate(currentLink);
-        }
-    });
 }
 
 function initMenu() {
@@ -1172,6 +1145,7 @@ function getShipsDataTable() {
         scrollCollapse: false,
         scroller: true,
         stateSave: true,
+        autoWidth: false
     }).page.len(50);
 }
 
@@ -1527,6 +1501,10 @@ function initTabs() {
     $('#nav-tab a').on('click', function (e) {
         e.preventDefault();
         $(this).tab('show');
+    });
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+       $($.fn.dataTable.tables(true)).DataTable()
+          .columns.adjust();
     });
     getPlacesDataTable();
     getShipsDataTable();
