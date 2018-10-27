@@ -11,6 +11,7 @@
 
 span#year, span#filter {
     color: var(--main-color);
+    font-size: 1em;
 }
 
 
