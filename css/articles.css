@@ -1,7 +1,7 @@
 .article {
     font-family: var(--body-font);
     color: var(--black);
-    font-size: 3vw;
+    font-size: 2vw;
 }
 
 .article-header {
@@ -27,5 +27,5 @@
 .article-body {
     text-align: justify;    
     font-weight: 500;
-    font-size: 2vw;
+    font-size: 3vw;
 }
