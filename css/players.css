@@ -1,12 +1,14 @@
 #pplayer, #vplayer {
+    min-height: var(--header-height);
     font-size: 2em;
     text-align: center;
     background: white;
-    box-shadow: 0 2px 2px 2px var(--main-color);
+    box-shadow: 0 1px 2px 2px var(--main-color);
     position: sticky;
     top: 0;
     left: 0;
-    z-index: 2000;
+    z-index: 5000;
+    padding: .25em 0;
 }
 
 span#year, span#filter {

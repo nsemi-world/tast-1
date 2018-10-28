@@ -251,8 +251,8 @@ function loadLastestArticles() {
 }
 
 function createArticle(data) {
-    var $article = $('<article class="article content-fluid mt-5 mb-5"></article>');
-    var $header = $('<div class="article-header container-fluid mt-3 mb-3"></div>');
+    var $article = $('<article class="article content-fluid mb-5"></article>');
+    var $header = $('<div class="article-header container-fluid pt-3 pb-3"></div>');
     var $title = $('<h3 class="article-title h3 title"></h3>').text(data.title);
     var $author = $('<div class="article-author"></div>').text('by ' + data.author);
     var $body = $('<div class="article-body m-5"></div>').html(data.content);
@@ -1543,6 +1543,7 @@ function initTabs() {
        $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
     });
+    
     getPlacesDataTable();
     getShipsDataTable();
     getOwnersDataTable();
