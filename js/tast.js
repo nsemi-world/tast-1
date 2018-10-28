@@ -217,6 +217,7 @@ function activate(link) {
 
 function initHome() {
     centerHome();
+    loadLastestArticles();
     started.home = true;
 
     $(window).on('resize', function() {
@@ -230,6 +231,34 @@ function centerHome() {
         at: 'center',
         of: '#message'
     });
+}
+
+function loadLastestArticles() {
+    $.ajax({
+        url: 'php/getLatestArticles.php',
+        success: function(data) {
+            var $article = createArticle(data[0]);
+            console.log($article.text());
+
+            $('#home .articles').append($article);
+        },
+        error: function() {
+            alert("Error fetching latest articles");
+        }
+    });
+}
+
+function createArticle(data) {
+    var $article = $('<article class="article content-fluid mt-5 mb-5"></article>');
+    var $header = $('<div class="article-header container-fluid mt-3 mb-3"></div>');
+    var $title = $('<h3 class="article-title h3 title"></h3>').text(data.title);
+    var $author = $('<div class="article-author"></div>').text('by ' + data.author);
+    var $body = $('<div class="article-body m-5"></div>').html(data.content);
+    
+    $header.append($title).append($author);
+    $article.append($header).append($body);
+    
+    return $article;
 }
 
 function initCitation() {
