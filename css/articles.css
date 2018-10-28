@@ -1,3 +1,6 @@
+.articles {
+    background: white;
+}
 .article {
     font-family: var(--body-font);
     color: var(--text-color);
@@ -8,8 +11,10 @@
     position: sticky;
     top: 0;
     left: 0;
-    background: linear-gradient(to right, var(--main-color), var(--sec-color));
-    box-shadow: 1px 4px 4px 0px var(--main-color);
+    z-index: 5000;
+    background: white;
+    border-bottom: 1px solid var(--sec-color);
+    /*box-shadow: 1px 4px 4px 0px var(--main-color);*/
 }
 .article-title {
     font-family: var(--body-font);
@@ -20,6 +25,11 @@
 .article-author {
     text-align: center;
     font-style: italic;
+}
+
+.article-info {
+    text-align: center;
+    font-size: 1.25vw;    
 }
 
 

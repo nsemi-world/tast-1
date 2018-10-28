@@ -57,7 +57,9 @@ var started = {
     participation: false,
     voyages: false,
     database: false,
-    charts: false
+    charts: false,
+    articles: false,
+    contribute: false
 }
 var currentSection = null;
 
@@ -72,6 +74,8 @@ function initializeApp() {
     initParticipation();
     //initVoyages();
     initTabs();
+    initArticles();
+    initContribute();
     $('#toggle_home').click();
 }
 
@@ -140,6 +144,22 @@ function initMenu() {
         activate($(this));
     });
 
+    $('#toggle_articles').on('click', function (event) {
+        event.preventDefault();
+        if(!started.articles) {
+            initArticles();
+        }
+        enter('#articles');
+        activate($(this));
+    });
+    $('#toggle_contribute').on('click', function (event) {
+        event.preventDefault();
+        if(!started.contribute) {
+            initContribute();
+        }
+        enter('#contribute');
+        activate($(this));
+    });
 }
 
 function enter(selector) {
@@ -217,7 +237,6 @@ function activate(link) {
 
 function initHome() {
     centerHome();
-    loadLastestArticles();
     started.home = true;
 
     $(window).on('resize', function() {
@@ -233,35 +252,6 @@ function centerHome() {
     });
 }
 
-function loadLastestArticles() {
-    $.ajax({
-        url: 'php/getLatestArticles.php',
-        success: function(data) {
-            $.each(data, function(key, value) {
-                var $article = createArticle(data[0]);
-                console.log($article.text());
-
-                $('#home .articles').append($article);
-            });
-        },
-        error: function() {
-            alert("Error fetching latest articles");
-        }
-    });
-}
-
-function createArticle(data) {
-    var $article = $('<article class="article content-fluid mb-5"></article>');
-    var $header = $('<div class="article-header container-fluid pt-3 pb-3"></div>');
-    var $title = $('<h3 class="article-title h3 title"></h3>').text(data.title);
-    var $author = $('<div class="article-author"></div>').text('by ' + data.author);
-    var $body = $('<div class="article-body m-5"></div>').html(data.content);
-    
-    $header.append($title).append($author);
-    $article.append($header).append($body);
-    
-    return $article;
-}
 
 function initCitation() {
     getCitation();
@@ -1551,3 +1541,53 @@ function initTabs() {
     started.database = true;
 }
 
+
+function initArticles() {
+    loadLatestArticles();
+}
+
+function loadLatestArticles() {
+    $('#latest-articles').empty();
+    $.ajax({
+        url: 'php/getLatestArticles.php',
+        success: function(data) {
+            $.each(data, function(key, value) {
+                var $article = createArticle(data[0]);
+                console.log($article.text());
+
+                $('#latest-articles').append($article);
+            });
+        },
+        error: function() {
+            alert("Error fetching latest articles");
+        }
+    });
+}
+
+function createArticle(data) {
+    var $article = $('<article class="article content-fluid mb-5"></article>');
+    var $header = $('<div class="article-header container-fluid pt-3 pb-3"></div>');
+
+    var $title = $('<h3 class="article-title h3 title"></h3>').text(data.title);
+    var $author = $('<div class="article-author"></div>').text('by ' + data.author);
+    
+    var $info = $('<div class="article-info "></div>').text(data.location + " | " + data.date);
+    
+    var $body = $('<div class="article-body m-5"></div>').html(data.content);
+    
+    $header.append($title).append($author).append($info);
+    $article.append($header).append($body);
+    
+    
+    $header.on('click', function(event){
+        $author.slideToggle(1000);
+        $info.slideToggle(1000);
+        $body.slideToggle(1000);
+    });
+    
+    return $article;
+}
+
+function initContribute() {
+    
+}
