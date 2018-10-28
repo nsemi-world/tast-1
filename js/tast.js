@@ -1573,7 +1573,7 @@ function createArticle(data) {
     
     var $info = $('<div class="article-info "></div>').text(data.location + " | " + data.date);
     
-    var $body = $('<div class="article-body m-5"></div>').html(data.content);
+    var $body = $('<div class="article-body container mt-5"></div>').html(data.content);
     
     $header.append($title).append($author).append($info);
     $article.append($header).append($body);
