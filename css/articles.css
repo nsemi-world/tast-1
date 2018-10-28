@@ -44,5 +44,5 @@
 }
 
 .sharethis-inline-share-buttons {
-    height: var(--header-height);
+    background: red;
 }
