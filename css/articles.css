@@ -37,3 +37,12 @@
     text-align: justify;    
     font-weight: 500;
 }
+
+.circle {
+    border-radius: 50%;
+    background: var(--sec-color);
+}
+
+.sharethis-inline-share-buttons {
+    height: var(--header-height);
+}

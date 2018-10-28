@@ -1544,6 +1544,25 @@ function initTabs() {
 
 function initArticles() {
     loadLatestArticles();
+    positionAddArticleButton();
+}
+
+function positionAddArticleButton() {
+    $('#add-article, #comment-article').css({
+        position: 'fixed',
+        zIndex: '5000'
+    });
+
+    $('#add-article').css({
+        top: '4em',
+        right: '2em'
+    });
+    
+    $('#comment-article').position({
+        my: 'center top',
+        at: 'center bottom+1',
+        of: '#add-article'
+    });
 }
 
 function loadLatestArticles() {
@@ -1572,10 +1591,11 @@ function createArticle(data) {
     var $author = $('<div class="article-author"></div>').text('by ' + data.author);
     
     var $info = $('<div class="article-info "></div>').text(data.location + " | " + data.date);
-    
     var $body = $('<div class="article-body container mt-5"></div>').html(data.content);
     
-    $header.append($title).append($author).append($info);
+    var $social = $('<div class="sharethis-inline-share-buttons"></div>');    
+    
+    $header.append($title).append($author).append($info).append($social);
     $article.append($header).append($body);
     
     
