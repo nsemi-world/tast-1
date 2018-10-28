@@ -193,6 +193,7 @@ div.itinerary a {
 **************************************/
 #database {
     min-height: var(--main-height);
+    background: var(--black);
 }
 
 

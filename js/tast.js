@@ -67,6 +67,11 @@ $(document).ready(function () {
 
 function initializeApp() {
     initMenu();
+    initHome();
+    initCitation();
+    initParticipation();
+    initVoyages();
+    initTabs();
     $('#toggle_home').click();
 }
 
@@ -75,7 +80,6 @@ function initMenu() {
         event.preventDefault();
         if(!started.home) {
             initHome();
-            started.home = true;
         }
         enter('#home');
         activate($(this));
@@ -84,7 +88,6 @@ function initMenu() {
         event.preventDefault();
         if(!started.citation) {
             initCitation();
-            started.citation = true;
         }
         enter('#citation');
         activate($(this));
@@ -93,7 +96,6 @@ function initMenu() {
         event.preventDefault();
         if(!started.voyages) {
             initVoyages();
-            started.voyages = true;
         }
         enter('#voyages');
         activate($(this));
@@ -102,7 +104,6 @@ function initMenu() {
         event.preventDefault();
         if(!started.participation) {
             initParticipation();
-            started.participation = true;
         }
         enter('#participation');
         activate($(this));
@@ -111,7 +112,6 @@ function initMenu() {
         event.preventDefault();
         if(!started.charts) {
             initCharts();
-            started.charts = true;
         }
         enter('#charts');
         activate($(this));
@@ -120,7 +120,6 @@ function initMenu() {
         event.preventDefault();
         if(!started.database) {
             initTabs();
-            started.database = true;
         }
         enter('#database');
         activate($(this));
@@ -218,6 +217,8 @@ function activate(link) {
 
 function initHome() {
     centerHome();
+    started.home = true;
+
     $(window).on('resize', function() {
        centerHome(); 
     });
@@ -233,6 +234,7 @@ function centerHome() {
 
 function initCitation() {
     getCitation();
+    started.citation = true;
     $('#citation').on('_citation_loaded', function (event, data) {
         addCitation(data);
         getAffiliateLinks('author', data.author);
@@ -315,6 +317,7 @@ function addAffiliateLinks(links) {
 function initVoyages() {
     configureVoyagesPlayer();
     loadVoyageIds();
+    started.voyages = true;
 
     $('#voyages').on('_ids_loaded', function (event) {
         loadVoyageData(0);
@@ -843,6 +846,9 @@ function initParticipation() {
     configureParticipationPlayer();
     configureParticipationAppearence();
     getCountriesSeries(0);
+
+    started.participation = true;
+    
     $('#world-container').on('_series_loaded', function (event) {
         initParticipationMap();
 
@@ -1510,5 +1516,6 @@ function initTabs() {
     getShipsDataTable();
     getOwnersDataTable();
     getCaptainsDataTable(); 
+    started.database = true;
 }
 

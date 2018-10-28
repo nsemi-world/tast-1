@@ -4,7 +4,7 @@
 
 :root {
     /* Main color scheme: White on dark semi-transparent background*/
-    --main-color: #777;
+    --main-color: #555;
     --sec-color: #dad;
     --white: white;
     --black: #000;
@@ -24,7 +24,7 @@
     --value-color: cadetblue;    
     --link-color: var(--main-color);
     --link-color-active: var(--sec-color); 
-    --text-color: var(--black);
+    --text-color: #222;
 
     --header-height: 6vh;
     --footer-height: 6vh;
