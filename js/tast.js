@@ -70,7 +70,7 @@ function initializeApp() {
     initHome();
     initCitation();
     initParticipation();
-    initVoyages();
+    //initVoyages();
     initTabs();
     $('#toggle_home').click();
 }
