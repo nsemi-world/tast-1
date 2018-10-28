@@ -237,10 +237,12 @@ function loadLastestArticles() {
     $.ajax({
         url: 'php/getLatestArticles.php',
         success: function(data) {
-            var $article = createArticle(data[0]);
-            console.log($article.text());
+            $.each(data, function(key, value) {
+                var $article = createArticle(data[0]);
+                console.log($article.text());
 
-            $('#home .articles').append($article);
+                $('#home .articles').append($article);
+            });
         },
         error: function() {
             alert("Error fetching latest articles");

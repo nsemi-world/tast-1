@@ -8,7 +8,7 @@
     position: sticky;
     top: 0;
     left: 0;
-    background: white;
+    background: linear-gradient(to right, var(--main-color), var(--sec-color));
     box-shadow: 1px 4px 4px 0px var(--main-color);
 }
 .article-title {
