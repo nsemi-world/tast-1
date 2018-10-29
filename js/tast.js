@@ -1544,25 +1544,6 @@ function initTabs() {
 
 function initArticles() {
     loadLatestArticles();
-    positionAddArticleButton();
-}
-
-function positionAddArticleButton() {
-    $('#add-article, #comment-article').css({
-        position: 'fixed',
-        zIndex: '5000'
-    });
-
-    $('#add-article').css({
-        top: '4em',
-        right: '2em'
-    });
-    
-    $('#comment-article').position({
-        my: 'center top',
-        at: 'center bottom+1',
-        of: '#add-article'
-    });
 }
 
 function loadLatestArticles() {
