@@ -1572,8 +1572,6 @@ function loadLatestArticles() {
         success: function(data) {
             $.each(data, function(key, value) {
                 var $article = createArticle(data[0]);
-                console.log($article.text());
-
                 $('#latest-articles').append($article);
             });
         },
@@ -1585,17 +1583,23 @@ function loadLatestArticles() {
 
 function createArticle(data) {
     var $article = $('<article class="article content-fluid mb-5"></article>');
-    var $header = $('<div class="article-header container-fluid pt-3 pb-3"></div>');
+    var $header = $('<div class="article-header container-fluid"></div>');
 
     var $title = $('<h3 class="article-title h3 title"></h3>').text(data.title);
+    
     var $author = $('<div class="article-author"></div>').text('by ' + data.author);
+    var $info   = $('<div class="article-info"></div>').text(data.location + " | " + data.date);
+    var $social = $('<div class="addthis_inline_share_toolbox"></div>');
+
     
-    var $info = $('<div class="article-info "></div>').text(data.location + " | " + data.date);
-    var $body = $('<div class="article-body container mt-5"></div>').html(data.content);
-    
-    var $social = $('<div class="sharethis-inline-share-buttons"></div>');    
-    
-    $header.append($title).append($author).append($info).append($social);
+    //alert('Found ' + $social);
+    $header
+        .append($title)
+        .append($author)
+        .append($info)
+        .append($social);
+
+    var $body = $('<div class="article-body container mt-5"></div>').html(data.content);  
     $article.append($header).append($body);
     
     

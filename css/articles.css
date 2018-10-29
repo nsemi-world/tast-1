@@ -14,24 +14,23 @@
     z-index: 5000;
     background: white;
     border-bottom: 1px solid var(--sec-color);
+    text-align: center;    
     /*box-shadow: 1px 4px 4px 0px var(--main-color);*/
 }
 .article-title {
     font-family: var(--body-font);
-    font-size: 4vw;
+    font-size: 3vw;
     font-weight: bold;
 }
 
 .article-author {
-    text-align: center;
+    font-size: 90%;
     font-style: italic;
 }
 
 .article-info {
-    text-align: center;
-    font-size: 1.25vw;    
+    font-size: 80%;    
 }
-
 
 .article-body {
     text-align: justify;    
@@ -43,6 +42,3 @@
     background: var(--sec-color);
 }
 
-.sharethis-inline-share-buttons {
-    background: red;
-}
