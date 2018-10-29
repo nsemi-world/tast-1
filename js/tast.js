@@ -82,7 +82,7 @@ function initializeApp() {
 function initMenu() {
     $('#toggle_home').on('click', function (event) {
         event.preventDefault();
-        if(!started.home) {
+        if (!started.home) {
             initHome();
         }
         enter('#home');
@@ -90,7 +90,7 @@ function initMenu() {
     });
     $('#toggle_citation').on('click', function (event) {
         event.preventDefault();
-        if(!started.citation) {
+        if (!started.citation) {
             initCitation();
         }
         enter('#citation');
@@ -98,7 +98,7 @@ function initMenu() {
     });
     $('#toggle_voyages').on('click', function (event) {
         event.preventDefault();
-        if(!started.voyages) {
+        if (!started.voyages) {
             initVoyages();
         }
         enter('#voyages');
@@ -106,7 +106,7 @@ function initMenu() {
     });
     $('#toggle_participation').on('click', function (event) {
         event.preventDefault();
-        if(!started.participation) {
+        if (!started.participation) {
             initParticipation();
         }
         enter('#participation');
@@ -114,7 +114,7 @@ function initMenu() {
     });
     $('#toggle_charts').on('click', function (event) {
         event.preventDefault();
-        if(!started.charts) {
+        if (!started.charts) {
             initCharts();
         }
         enter('#charts');
@@ -122,7 +122,7 @@ function initMenu() {
     });
     $('#toggle_database').on('click', function (event) {
         event.preventDefault();
-        if(!started.database) {
+        if (!started.database) {
             initTabs();
         }
         enter('#database');
@@ -146,7 +146,7 @@ function initMenu() {
 
     $('#toggle_articles').on('click', function (event) {
         event.preventDefault();
-        if(!started.articles) {
+        if (!started.articles) {
             initArticles();
         }
         enter('#articles');
@@ -154,7 +154,7 @@ function initMenu() {
     });
     $('#toggle_contribute').on('click', function (event) {
         event.preventDefault();
-        if(!started.contribute) {
+        if (!started.contribute) {
             initContribute();
         }
         enter('#contribute');
@@ -239,8 +239,8 @@ function initHome() {
     centerHome();
     started.home = true;
 
-    $(window).on('resize', function() {
-       centerHome(); 
+    $(window).on('resize', function () {
+        centerHome();
     });
 }
 
@@ -264,9 +264,9 @@ function initCitation() {
         addAffiliateLinks(data);
         centerCitation();
     });
-    
-    $(window).on('resize', function() {
-       centerCitation(); 
+
+    $(window).on('resize', function () {
+        centerCitation();
     });
 
 }
@@ -362,7 +362,7 @@ function initVoyages() {
         loadFilteredVoyageIds(filter, value);
         status_tast.voyages.context = filter + ' is ' + value;
     });
-    
+
     window.onresize = function (event) {
         status_tast.voyages.storymap.updateDisplay(); // this isn't automatic
     }
@@ -681,10 +681,10 @@ function initSlaveNumbers(data) {
         'Died: ',
         getNumber('died', data.details.slaves.died)
     );
-    
+
     var $resistance = createElement('resistance', 'Resistance', data.details.resistance);
-    
-    if(data.details.resistance != null) {
+
+    if (data.details.resistance != null) {
         addResistanceIcon();
     }
 
@@ -869,7 +869,7 @@ function initParticipation() {
     getCountriesSeries(0);
 
     started.participation = true;
-    
+
     $('#world-container').on('_series_loaded', function (event) {
         initParticipationMap();
 
@@ -877,8 +877,8 @@ function initParticipation() {
     $('#countries-data').on('_series_loaded', function (event) {
         initCountriesData();
     });
-    
-    $(window).on('resize', function() {
+
+    $(window).on('resize', function () {
         //status_tast.participation.datamap
     });
 }
@@ -1137,7 +1137,7 @@ function getParticipationDataTable() {
         ],
         stateSave: true,
         paging: false,
-        filter: false   
+        filter: false
     }).page.len(50);
 }
 
@@ -1529,34 +1529,38 @@ function initTabs() {
         e.preventDefault();
         $(this).tab('show');
     });
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
-       $($.fn.dataTable.tables(true)).DataTable()
-          .columns.adjust();
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        $($.fn.dataTable.tables(true)).DataTable()
+            .columns.adjust();
     });
-    
+
     getPlacesDataTable();
     getShipsDataTable();
     getOwnersDataTable();
-    getCaptainsDataTable(); 
+    getCaptainsDataTable();
     started.database = true;
 }
 
 
 function initArticles() {
     loadLatestArticles();
+    window.addEventListener("hashchange", function () {
+        addthis.layers.refresh();
+    });
+
 }
 
 function loadLatestArticles() {
     $('#latest-articles').empty();
     $.ajax({
         url: 'php/getLatestArticles.php',
-        success: function(data) {
-            $.each(data, function(key, value) {
+        success: function (data) {
+            $.each(data, function (key, value) {
                 var $article = createArticle(data[0]);
                 $('#latest-articles').append($article);
             });
         },
-        error: function() {
+        error: function () {
             alert("Error fetching latest articles");
         }
     });
@@ -1564,35 +1568,35 @@ function loadLatestArticles() {
 
 function createArticle(data) {
     var $article = $('<article class="article content-fluid mb-5"></article>');
-    var $header = $('<div class="article-header container-fluid"></div>');
+    var $header = $('<div class="article-header container-fluid pt-3 pb-3"></div>');
 
     var $title = $('<h3 class="article-title h3 title"></h3>').text(data.title);
-    
     var $author = $('<div class="article-author"></div>').text('by ' + data.author);
-    var $info   = $('<div class="article-info"></div>').text(data.location + " | " + data.date);
-    var $social = $('<div class="addthis_inline_share_toolbox"></div>');
+    var $info = $('<div class="article-info"></div>').text(data.location + " | " + data.date);
 
-    
+
     //alert('Found ' + $social);
     $header
         .append($title)
         .append($author)
-        .append($info)
-        .append($social);
+        .append($info);
 
-    var $body = $('<div class="article-body container mt-5"></div>').html(data.content);  
-    $article.append($header).append($body);
+    var $body = $('<div class="article-body container mt-5"></div>').html(data.content);
+    var $social = $('<div class="addthis_inline_share_toolbox"></div>');
+    $article.append($header).append($body).append($social);
     
     
-    $header.on('click', function(event){
-        $author.slideToggle(1000);
+
+
+    $header.on('click', function (event) {
         $info.slideToggle(1000);
         $body.slideToggle(1000);
+        $header.css({transform: scale(.9)});
     });
-    
+
     return $article;
 }
 
 function initContribute() {
-    
+
 }

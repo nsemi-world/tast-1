@@ -4,7 +4,6 @@
 .article {
     font-family: var(--body-font);
     color: var(--text-color);
-    font-size: 2vw;
 }
 
 .article-header {
@@ -13,13 +12,14 @@
     left: 0;
     z-index: 5000;
     background: white;
+    border-top: 1px solid var(--sec-color);
     border-bottom: 1px solid var(--sec-color);
     text-align: center;    
     /*box-shadow: 1px 4px 4px 0px var(--main-color);*/
 }
 .article-title {
+    font-size: 110%;
     font-family: var(--body-font);
-    font-size: 3vw;
     font-weight: bold;
 }
 
