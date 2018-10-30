@@ -1590,15 +1590,13 @@ function loadArticle(id) {
         url: 'php/getLatestArticles.php',
         data: {articleid: id},
         success: function (data) {
-            $.each(data, function (key, value) {
-                var $article = createArticle(data[0]);
-                $article.css({
-                    background: 'gold'
-                });
-                $('#latest-articles').prepend($article);
+            var $article = createArticle(data[0]);
+            $article.css({
+                background: 'gold'
             });
-            
+            $('#latest-articles').prepend($article);           
             $('#toggle_articles').click();
+            $article.click();
         },
         error: function () {
             alert("Error fetching latest articles");
@@ -1619,23 +1617,11 @@ function createArticle(data) {
     var dataTitle = data.title;
     var dataDescription = data.content.split('\.')[0].replace('<p>', '').trim() + "...";
 
-    var $social = $('<div class="addthis_inline_share_toolbox"></div>');
+    var $social = $('<div class="addthis_inline_share_toolbox article-social"></div>');
     $social.attr('data-url', dataUrl);
     $social.attr('data-title', dataTitle);
     $social.attr('data-image', '../img/African_woman_slave_trade.jpg');
     $social.attr('data-description', dataDescription);
-    
-    $social.on('click', function(event){
-        event.preventDefault();
-        alert('clicked On Social');
-    });
-    /*var addthis_share = {
-        url: "THE URL",
-        title: "THE TITLE",
-        description: "THE DESCRIPTION",
-        media: "THE IMAGE"
-    }
-    */
     
     console.log('Created ' + $social.attr('class'));
     $header
@@ -1647,16 +1633,24 @@ function createArticle(data) {
     var $body = $('<div class="article-body container mt-5"></div>').html(data.content);
     $article.append($header).append($body);
 
-
-
+    
     $article.on('click', function (event) {
-        $info.slideToggle(1000);
-        $social.slideToggle(1000);
-        $body.slideToggle(1000);
+        activateArticle($article);
+        updateMetaTags(data.url, data.title, data.description, null);
     });
     
 
     return $article;
+}
+
+function activateArticle($article) {
+    $('article.active').removeClass('active');
+    $article.addClass('active');
+}
+
+function updateMetaTags(url, title, description, imageUrl) {
+    var $head = $('head');
+    $('meta[og:url]')
 }
 
 function initContribute() {

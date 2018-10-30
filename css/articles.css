@@ -26,15 +26,33 @@
 .article-author {
     font-size: 90%;
     font-style: italic;
+    display: none;
 }
 
 .article-info {
     font-size: 80%;    
+    display: none;
+}
+
+.article-social {
+    display: none;
 }
 
 .article-body {
     text-align: justify;    
     font-weight: 500;
+    display: none;
+}
+
+
+
+
+
+.article.active .article-author,
+.article.active .article-info,
+.article.active .article-social,
+.article.active .article-body {
+    display: block;
 }
 
 .circle {
