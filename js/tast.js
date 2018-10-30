@@ -1545,7 +1545,30 @@ function initTabs() {
 function initArticles() {
     loadLatestArticles();
     started.articles = true;
+    
+    var params = getSearchParameters();
+    
+    if(params.articleid != null) {
+        loadArticle(params.articleid);
+    }
+    
 }
+
+function getSearchParameters() {
+      var prmstr = window.location.search.substr(1);
+      return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+}
+
+function transformToAssocArray( prmstr ) {
+    var params = {};
+    var prmarr = prmstr.split("&");
+    for ( var i = 0; i < prmarr.length; i++) {
+        var tmparr = prmarr[i].split("=");
+        params[tmparr[0]] = tmparr[1];
+    }
+    return params;
+}
+
 
 function loadLatestArticles() {
     $('#latest-articles').empty();
@@ -1556,6 +1579,26 @@ function loadLatestArticles() {
                 var $article = createArticle(data[0]);
                 $('#latest-articles').append($article);
             });
+        },
+        error: function () {
+            alert("Error fetching latest articles");
+        }
+    });
+}
+function loadArticle(id) {
+    $.ajax({
+        url: 'php/getLatestArticles.php',
+        data: {articleid: id},
+        success: function (data) {
+            $.each(data, function (key, value) {
+                var $article = createArticle(data[0]);
+                $article.css({
+                    background: 'gold'
+                });
+                $('#latest-articles').prepend($article);
+            });
+            
+            $('#toggle_articles').click();
         },
         error: function () {
             alert("Error fetching latest articles");
@@ -1574,15 +1617,18 @@ function createArticle(data) {
     //var addThis 
     var dataUrl = 'http://tast.ngutu.org?articleid=' + data.articleid;
     var dataTitle = data.title;
-    var dataDescription = data.content.split('\.')[0].replace('<p>', '');
-
-    //alert(dataDescription);
+    var dataDescription = data.content.split('\.')[0].replace('<p>', '').trim() + "...";
 
     var $social = $('<div class="addthis_inline_share_toolbox"></div>');
     $social.attr('data-url', dataUrl);
     $social.attr('data-title', dataTitle);
+    $social.attr('data-image', '../img/African_woman_slave_trade.jpg');
     $social.attr('data-description', dataDescription);
-
+    
+    $social.on('click', function(event){
+        event.preventDefault();
+        alert('clicked On Social');
+    });
     /*var addthis_share = {
         url: "THE URL",
         title: "THE TITLE",
@@ -1603,11 +1649,12 @@ function createArticle(data) {
 
 
 
-    $header.on('click', function (event) {
+    $article.on('click', function (event) {
         $info.slideToggle(1000);
         $social.slideToggle(1000);
         $body.slideToggle(1000);
     });
+    
 
     return $article;
 }
