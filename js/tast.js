@@ -1544,10 +1544,7 @@ function initTabs() {
 
 function initArticles() {
     loadLatestArticles();
-    window.addEventListener("hashchange", function () {
-        addthis.layers.refresh();
-    });
-
+    started.articles = true;
 }
 
 function loadLatestArticles() {
@@ -1574,24 +1571,42 @@ function createArticle(data) {
     var $author = $('<div class="article-author"></div>').text('by ' + data.author);
     var $info = $('<div class="article-info"></div>').text(data.location + " | " + data.date);
 
+    //var addThis 
+    var dataUrl = 'http://tast.ngutu.org?articleid=' + data.articleid;
+    var dataTitle = data.title;
+    var dataDescription = data.content.split('\.')[0].replace('<p>', '');
 
-    //alert('Found ' + $social);
+    //alert(dataDescription);
+
+    var $social = $('<div class="addthis_inline_share_toolbox"></div>');
+    $social.attr('data-url', dataUrl);
+    $social.attr('data-title', dataTitle);
+    $social.attr('data-description', dataDescription);
+
+    /*var addthis_share = {
+        url: "THE URL",
+        title: "THE TITLE",
+        description: "THE DESCRIPTION",
+        media: "THE IMAGE"
+    }
+    */
+    
+    console.log('Created ' + $social.attr('class'));
     $header
         .append($title)
         .append($author)
-        .append($info);
+        .append($info)
+        .append($social);
 
     var $body = $('<div class="article-body container mt-5"></div>').html(data.content);
-    var $social = $('<div class="addthis_inline_share_toolbox"></div>');
-    $article.append($header).append($body).append($social);
-    
-    
+    $article.append($header).append($body);
+
 
 
     $header.on('click', function (event) {
         $info.slideToggle(1000);
+        $social.slideToggle(1000);
         $body.slideToggle(1000);
-        $header.css({transform: scale(.9)});
     });
 
     return $article;
