@@ -1636,7 +1636,7 @@ function createArticle(data) {
     
     $article.on('click', function (event) {
         activateArticle($article);
-        updateMetaTags(data.url, data.title, data.description, null);
+        updateMetaTags(dataUrl, dataTitle, dataDescription, 'http://tast.ngutu.org/img/African_woman_slave_trade.jpg');
     });
     
 
@@ -1650,7 +1650,17 @@ function activateArticle($article) {
 
 function updateMetaTags(url, title, description, imageUrl) {
     var $head = $('head');
-    $('meta[og:url]')
+
+    $('meta[property="og:url"]').attr('content', url);
+    $('meta[property="og:title"]').attr('content', title);
+    $('meta[property="og:description"]').attr('content', description);
+    $('meta[property="og:image"]').attr('content', imageUrl);
+
+    console.log('og:url - '         + $('meta[property="og:url"]').attr('content'));
+    console.log('og:title - '       + $('meta[property="og:title"]').attr('content'));
+    console.log('og:description - ' + $('meta[property="og:description"]').attr('content'));
+    console.log('og:image - '       + $('meta[property="og:image"]').attr('content'));
+
 }
 
 function initContribute() {
