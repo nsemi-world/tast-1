@@ -1616,11 +1616,12 @@ function createArticle(data) {
     var dataUrl = 'http://tast.ngutu.org?articleid=' + data.articleid;
     var dataTitle = data.title;
     var dataDescription = data.content.split('\.')[0].replace('<p>', '').trim() + "...";
+    var imageUrl = 'http://tast.ngutu.org/img/African_woman_slave_trade.jpg';
 
     var $social = $('<div class="addthis_inline_share_toolbox article-social"></div>');
     $social.attr('data-url', dataUrl);
     $social.attr('data-title', dataTitle);
-    $social.attr('data-image', '../img/African_woman_slave_trade.jpg');
+    $social.attr('data-image', imageUrl);
     $social.attr('data-description', dataDescription);
     
     console.log('Created ' + $social.attr('class'));
@@ -1636,7 +1637,7 @@ function createArticle(data) {
     
     $article.on('click', function (event) {
         activateArticle($article);
-        updateMetaTags(dataUrl, dataTitle, dataDescription, 'http://tast.ngutu.org/img/African_woman_slave_trade.jpg');
+        updateMetaTags(dataUrl, dataTitle, dataDescription, imageUrl);
     });
     
 
