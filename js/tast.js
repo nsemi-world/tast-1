@@ -272,7 +272,7 @@ function initCitation() {
 }
 
 function centerCitation() {
-    $('.ccitation').position({
+    $('.content').position({
         my: 'center',
         at: 'center center',
         of: '#citation'
