@@ -1,7 +1,7 @@
 section {
     position: relative;
     min-height: var(--main-height);
-    background: var(--white);
+    background: #ffe;
     color: var(--main-color);
 }
 
@@ -101,11 +101,9 @@ section {
 }
 
 #participation .hoverinfo {
-    font-family: var(--body-font);
 }
 
 #world-container {
-    font-family: var(--brand-font);
     min-height: var(--main-height);
 }
 
@@ -114,7 +112,6 @@ section {
 }
 
 #countries-data {
-    font-family: var(--headline-font);
     color: var(--main-color);
     min-height: var(--main-height);
 }
@@ -142,7 +139,6 @@ section {
 }
 
 #details {
-    font-family: var(--headline-font);
 }
 
 #details .entry {

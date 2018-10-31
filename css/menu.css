@@ -4,6 +4,7 @@ header {
     left: 0;
     z-Index: 5000;
     border-bottom: 1px solid var(--sec-color);
+    background: linear-gradient(to right, white, var(--sec-color));
 }
 header .navbar-brand {
     width: 50%;

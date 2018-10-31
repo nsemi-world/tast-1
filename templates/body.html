@@ -1,32 +1,41 @@
 <section id="home">
     <div class="content" id="message">
-        <h1 class="title">The Trans-atlantic Slave Trade</h1>
+        <h1 class="title shadow">The Trans-atlantic Slave Trade</h1>
     </div>
 </section>
 
 <section id="citation">
     <h2 class="title">Voices of Wisdom</h2>
-    <div class=".citation ccontainer container pt-5 pb-5">
-        <h3 class="quote">Quote of the Day</h3>
-        <div class="author"></div>
-        <ul class="books list-unstyled pt-5 clearfix"></ul>
+    <div class="citation articles ccontainer container">
+      <article class="article shadow">
+           <div class="article-header p-3">
+                <div class="article-title"></div>
+                <div class="article-author"></div>
+           </div>
+           <div class="article-body">
+               <ul class="books list-unstyled p-5 clearfix"></ul>
+           </div>
+      </article>
     </div>
 </section>
 
 <section id="participation">
     <h2 class="title">Participation in the Trans-atlantic Slave Trade</h2>
-    <div id="pplayer" class="text-center">
-        <button id="prefresh" class="btn fas fa-undo p-0 m-0"></button>
-        <button id="pplay" class="btn fas fa-play p-0 m-0"></button>
-        <button id="ppause" class="btn fas fa-pause p-0 m-0"></button>
-        <span id="year">1866</span>
-    </div>
-    <div class="content container-fluid">
-        <div id="world-container">
+    <div class="content container">
+        <div id="pplayer" class="text-center">
+            <button id="prefresh" class="btn fas fa-undo p-0 m-0"></button>
+            <button id="pplay" class="btn fas fa-play p-0 m-0"></button>
+            <button id="ppause" class="btn fas fa-pause p-0 m-0"></button>
+            <span id="year">1866</span>
+        </div>
+        <div id="world-container" class="shadow">
+           <h3 class="subtitle m-3">Top Slave Trade Countries - Map Visualization</h3>
             <div id="world-map">
             </div>
         </div>
-        <div id="countries-data">
+        <hr/>
+        <div id="countries-data" class=" shadow">
+            <h3 class="subtitle m-3">Top Slave Trade Countries - The Numbers</h3>       
             <table id="example-participation" class="display" style="width: 100%"></table>
         </div>
     </div>
@@ -34,20 +43,20 @@
 
 <section id="voyages">
     <h2 class="title">Voyage Itinerary</h2>
-    <div id="vplayer">
-        <button id="vprev" class="btn fas fa-angle-left m-0 p-0"></button>
-        <button id="vnext" class="btn fas fa-angle-right m-0 p-0"></button>
-        <button id="vplay" class="btn fas fa-play m-0 p-0"></button>
-        <button id="vpause" class="btn fas fa-pause m-0 p-0"></button>
-        <span id="filter">All</span>
-    </div>
-    <div class="content container-fluid">
-        <div id="storymap-container" class="">
+    <div class="content container">
+        <div id="vplayer" class="text-center">
+            <button id="vprev" class="btn fas fa-angle-left m-0 p-0"></button>
+            <button id="vnext" class="btn fas fa-angle-right m-0 p-0"></button>
+            <button id="vplay" class="btn fas fa-play m-0 p-0"></button>
+            <button id="vpause" class="btn fas fa-pause m-0 p-0"></button>
+            <span id="filter">All</span>
+        </div>
+        <div id="storymap-container"  class="shadow">
             <div id="storymap"></div>
         </div>
-        <div id="details-container" class="p-1 pt-5">
+        <div id="details-container" class="shadow">
             <h3 class="subtitle">Voyage Details</h3>
-            <div id="details" class="container"></div>
+            <div id="details"></div>
         </div>
     </div>
 </section>
@@ -56,15 +65,15 @@
     <h2 class="title">Search the Database</h2>
     <div class="content container p-3">
         <nav class="nav nav-pills nav-justified" id="nav-tab">
-            <a class="nav-item nav-link active pl-1 pr-1" id="places-tab" data-toggle="tab" href="#places" role="tab" aria-controls="places" aria-selected="false">Places</a>
+            <a class="nav-item nav-link active" id="places-tab" data-toggle="tab" href="#places" role="tab" aria-controls="places" aria-selected="false">Places</a>
 
-            <a class="nav-item nav-link  pl-1 pr-1" id="ships-tab" data-toggle="tab" href="#ships" role="tab" aria-controls="ships" aria-selected="true">Ships</a>
+            <a class="nav-item nav-link" id="ships-tab" data-toggle="tab" href="#ships" role="tab" aria-controls="ships" aria-selected="true">Ships</a>
 
-            <a class="nav-item nav-link pl-1 pr-1" id="owners-tab" data-toggle="tab" href="#owners" role="tab" aria-controls="owners" aria-selected="false">Owners</a>
+            <a class="nav-item nav-link" id="owners-tab" data-toggle="tab" href="#owners" role="tab" aria-controls="owners" aria-selected="false">Owners</a>
 
-            <a class="nav-item nav-link pl-1 pr-1" id="captains-tab" data-toggle="tab" href="#captains" role="tab" aria-controls="captains" aria-selected="false">Captains</a>
+            <a class="nav-item nav-link" id="captains-tab" data-toggle="tab" href="#captains" role="tab" aria-controls="captains" aria-selected="false">Captains</a>
         </nav>
-        <div class="tab-content mt-1" id="nav-tabContent">
+        <div class="tab-content mt-1 shadow" id="nav-tabContent">
             <div class="tab-pane fade show active" id="places" role="tabpanel" aria-labelledby="places-tab">
                 <table id="example-places" class="display hover row-border"></table>
             </div>

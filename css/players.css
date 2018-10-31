@@ -1,13 +1,7 @@
 #pplayer, #vplayer {
     min-height: var(--header-height);
     font-size: 2em;
-    text-align: center;
-    background: white;
-    position: sticky;
-    top: 0;
-    left: 0;
-    z-index: 5000;
-    padding: .25em 0;
+    background: linear-gradient(to right, var(--main-color), var(--sec-color));
 }
 
 span#year, span#filter {

@@ -76,6 +76,14 @@ function initializeApp() {
     initTabs();
     initArticles();
     initContribute();
+    
+
+    
+    $(document).on('click', 'article', function (event) {
+        $(this).toggleClass('active');
+    });
+    
+    
     $('#toggle_home').click();
 }
 
@@ -256,13 +264,13 @@ function centerHome() {
 function initCitation() {
     getCitation();
     started.citation = true;
+
     $('#citation').on('_citation_loaded', function (event, data) {
         addCitation(data);
         getAffiliateLinks('author', data.author);
     });
     $('#citation .books').on('_affiliated_loaded', function (event, data) {
         addAffiliateLinks(data);
-        centerCitation();
     });
 
     $(window).on('resize', function () {
@@ -289,14 +297,13 @@ function getCitation() {
 }
 
 function addCitation(data) {
-    $('.quote').html('<p>\"' + data.quote + '\"</p>');
+    $('.citation .article-title').text('\"' + data.quote + '\"');
     var $authorLink = $('<a></a>')
         .attr('href', data.reference)
-        .attr('title', data.refenrence)
+        .attr('title', data.reference)
         .attr('target', '_blank')
         .text(data.author);
-
-    $('.author').append($authorLink);
+    $('.citation .article-author').append($authorLink);
 }
 
 function getAffiliateLinks(keyword, value) {
@@ -331,7 +338,7 @@ function addAffiliateLinks(links) {
 
         $('.books').append($item);
     });
-    centerCitation();
+    //centerCitation();
 }
 
 
@@ -1026,8 +1033,13 @@ function getBubbles() {
     return bubbles;
 }
 
+/*
+    A = PI * r^2
+    r = SQRT(A/PI)
+*/
 function radius(value) {
-    return 2 + value / 25000;
+    var scale = 10;
+    return Math.sqrt(value/Math.PI)/scale;
 }
 
 function getCountriesSeriesMax() {
@@ -1127,7 +1139,8 @@ function getParticipationDataTable() {
         ],
         stateSave: true,
         paging: false,
-        filter: false
+        filter: false,
+        info: false
     }).page.len(50);
 }
 
@@ -1595,42 +1608,20 @@ function loadArticle(id) {
 }
 
 function createArticle(data) {
-    var $article = $('<article class="article"></article>');
+    var $article = $('<article class="article shadow"></article>');
     var $header = $('<div class="article-header p-3"></div>');
 
     var $title = $('<div class="article-title"></div>').text(data.title);
     var $author = $('<div class="article-author"></div>').text('by ' + data.author);
     var $info = $('<div class="article-info"></div>').text(data.location + " | " + data.date);
 
-    //var addThis 
-    var dataUrl = 'http://tast.ngutu.org?articleid=' + data.articleid;
-    var dataTitle = data.title;
-    var dataDescription = data.content.split('\.')[0].replace('<p>', '').trim() + "...";
-    var imageUrl = 'http://tast.ngutu.org/img/African_woman_slave_trade.jpg';
-
-    var $social = $('<div class="addthis_inline_share_toolbox article-social"></div>');
-    $social.attr('data-url', dataUrl);
-    $social.attr('data-title', dataTitle);
-    $social.attr('data-image', imageUrl);
-    $social.attr('data-description', dataDescription);
-    
     $header
         .append($title)
         .append($author)
-        .append($info)
-        .append($social);
+        .append($info);
 
     var $body = $('<div class="article-body container mt-5"></div>').html(data.content);
     $article.append($header).append($body);
-
-    
-    $article.on('click', function (event) {
-        $article.toggleClass('active');
-    });
-    
-    
-    
-
     return $article;
 }
 
