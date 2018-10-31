@@ -13,10 +13,10 @@
     
     --section-background-color: var(--black);
     
-    --main-font: 'Trade Winds', cursive;
-    --headline-font: 'Proza Libre', sans-serif;
+    --main-font: 'Cormorant Garamond', serif;
+    --headline-font: 'Cormorant Garamond', serif;
     --body-font: 'Cormorant Garamond', serif;
-    --brand-font: var(--main-font);
+    --brand-font: 'Trade Winds', cursive;
     --link-font: 'Trade Winds', cursive;
     
     --brand-color: var(--main-color);

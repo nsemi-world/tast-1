@@ -180,13 +180,13 @@ function enter(selector) {
             }
             break;
         case '#contacts':
-            centerContacts();
+            //centerContacts();
             break;
         case '#about-us':
-            centerAboutUs();
+            //centerAboutUs();
             break;
         case '#impressum':
-            centerImpressum();
+            //centerImpressum();
             break;
     }
 }
@@ -324,7 +324,7 @@ function addAffiliateLinks(links) {
             .attr('title', value.title);
 
         var $body = $('<media-body class="ml-2 mr-2"></media-body');
-        var $title = $('<h5 class="h5 book-title"></h5>').text(value.title)
+        var $title = $('<div class="book-title"></div>').text(value.title)
         $body.append($title);
 
         $item.append($figure).append($body);
@@ -959,26 +959,16 @@ function initParticipationMap() {
     // render map
     datamap = new Datamap({
         element: document.getElementById('world-map'),
-        setProjection: function (element) {
-            var projection = d3.geo.equirectangular()
-                .center([0, 0])
-                .rotate([10, -40])
-                .scale(200)
-                .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
-            var path = d3.geo.path()
-                .projection(projection);
-
-            return {
-                path: path,
-                projection: projection
-            };
+        projection: 'equirectangular',
+        projectConfig: {
+            center: [0, 0],
         },
         responsive: true,
         fills: fills,
         data: dataset,
         geographyConfig: {
             borderColor: 'pink',
-            background: 'white',
+            background: 'black',
             highlightBorderWidth: 2,
             // don't change color on mouse hover
             highlightFillColor: function (geo) {
@@ -1605,10 +1595,10 @@ function loadArticle(id) {
 }
 
 function createArticle(data) {
-    var $article = $('<article class="article content-fluid mb-5"></article>');
-    var $header = $('<div class="article-header container-fluid pt-3 pb-3"></div>');
+    var $article = $('<article class="article"></article>');
+    var $header = $('<div class="article-header p-3"></div>');
 
-    var $title = $('<h3 class="article-title h3 title"></h3>').text(data.title);
+    var $title = $('<div class="article-title"></div>').text(data.title);
     var $author = $('<div class="article-author"></div>').text('by ' + data.author);
     var $info = $('<div class="article-info"></div>').text(data.location + " | " + data.date);
 
@@ -1624,7 +1614,6 @@ function createArticle(data) {
     $social.attr('data-image', imageUrl);
     $social.attr('data-description', dataDescription);
     
-    console.log('Created ' + $social.attr('class'));
     $header
         .append($title)
         .append($author)
@@ -1636,9 +1625,10 @@ function createArticle(data) {
 
     
     $article.on('click', function (event) {
-        activateArticle($article);
-        updateMetaTags(dataUrl, dataTitle, dataDescription, imageUrl);
+        $article.toggleClass('active');
     });
+    
+    
     
 
     return $article;
@@ -1649,13 +1639,14 @@ function activateArticle($article) {
     $article.addClass('active');
 }
 
-function updateMetaTags(url, title, description, imageUrl) {
+function updateMetaTags(url, title, author, description, imageUrl) {
     var $head = $('head');
 
     $('meta[property="og:url"]').attr('content', url);
     $('meta[property="og:title"]').attr('content', title);
     $('meta[property="og:description"]').attr('content', description);
     $('meta[property="og:image"]').attr('content', imageUrl);
+    $('meta[property="article:author"]').attr('content', author);
 
     console.log('og:url - '         + $('meta[property="og:url"]').attr('content'));
     console.log('og:title - '       + $('meta[property="og:title"]').attr('content'));

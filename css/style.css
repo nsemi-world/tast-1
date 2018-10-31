@@ -1,17 +1,25 @@
 section {
     position: relative;
     min-height: var(--main-height);
-    background: var(--section-background-color);
-    color: var(--sec-color);
+    background: var(--white);
+    color: var(--main-color);
 }
 
 .title {
-    font-family: var(--main-font);
     text-align: center;
+    padding: 2em 0;
+    font-size: 200%;
+    font-weight: bold;
+    font-variant: small-caps;
+}
+
+#home .title {
+    border-bottom: none;
 }
 
 .subtitle {
-    font-family: var(--headline-font);
+    text-align: center;
+    font-size: 150%;
 }
 
 
@@ -39,7 +47,6 @@ section {
 .quote.title {
     font-family: var(--brand-font);
     text-align: center;
-    font-size: 2em;
     color: var(--sec-color);
 }
 
@@ -53,22 +60,23 @@ section {
 /**********************************
  Citation 
 ***********************************/
-#citation .ccontainer {
+#citation .quote {
+    text-align: center;
 }
 
 #citation .author {
+    text-align: center;
+    font-style: italic;
 }
 
 #citation .author a {
     font-family: var(--headline-font);
     font-weight: bold;
-    font-size: 1em;
     color: var(--link-color);
 }
 
 #citation .source {
     font-family: var(--headline-font);
-    font-weight: bold;
 }
 
 #citation .books {
@@ -76,15 +84,11 @@ section {
 
 
 #citation .books img {
-    width: 120px;
-    height: 200px;
+    height: 128px;
     border-radius: 4px;
 }
 
 #citation .book-title {
-    font-family: var(--body-font);
-    font-size: 1.1em;
-    font-weight: bolder;
 }
 
 
@@ -110,7 +114,6 @@ section {
 }
 
 #countries-data {
-    font-size: .8em;
     font-family: var(--headline-font);
     color: var(--main-color);
     min-height: var(--main-height);
@@ -140,8 +143,6 @@ section {
 
 #details {
     font-family: var(--headline-font);
-    font-size: .7em;
-    background: transparent;
 }
 
 #details .entry {
@@ -193,7 +194,6 @@ div.itinerary a {
 **************************************/
 #database {
     min-height: var(--main-height);
-    background: var(--black);
 }
 
 
@@ -212,7 +212,6 @@ div.itinerary a {
     background: white;
     color: var(--main-color);
     font-family: var(--headline-font);
-    font-size: .7em;
     border-radius: 4px;
 }
 
@@ -224,15 +223,9 @@ div.itinerary a {
     min-height: var(--main-height);
 }
 
-#charts .subtitle {
-    font-weight: bold;
-    font-family: var(--headline-font);
-    text-align: center;
-}
 
 #charts .chart-legend p {
     font-family: var(--body-font);
-    font-size: 1em;
     color: #333;
     font-weight: bold;
     line-height: 1.25em;
