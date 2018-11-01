@@ -76,14 +76,14 @@ function initializeApp() {
     initTabs();
     initArticles();
     initContribute();
-    
 
-    
+
+
     $(document).on('click', 'article', function (event) {
         $(this).toggleClass('active');
     });
-    
-    
+
+
     $('#toggle_home').click();
 }
 
@@ -264,19 +264,9 @@ function centerHome() {
 function initCitation() {
     getCitation();
     started.citation = true;
-
-    $('#citation').on('_citation_loaded', function (event, data) {
-        addCitation(data);
-        getAffiliateLinks('author', data.author);
-    });
-    $('#citation .books').on('_affiliated_loaded', function (event, data) {
-        addAffiliateLinks(data);
-    });
-
     $(window).on('resize', function () {
         centerCitation();
     });
-
 }
 
 function centerCitation() {
@@ -289,56 +279,62 @@ function centerCitation() {
 
 function getCitation() {
     $.ajax({
-        url: 'php/getCitation.php',
+        url: 'php/getAffiliatedBooks.php',
         success: function (data) {
-            $('#citation').trigger('_citation_loaded', [data]);
-        }
-    });
-}
-
-function addCitation(data) {
-    $('.citation .article-title').text('\"' + data.quote + '\"');
-    var $authorLink = $('<a></a>')
-        .attr('href', data.reference)
-        .attr('title', data.reference)
-        .attr('target', '_blank')
-        .text(data.author);
-    $('.citation .article-author').append($authorLink);
-}
-
-function getAffiliateLinks(keyword, value) {
-    $.ajax({
-        url: 'php/getAffiliateLinks.php',
-        data: {
-            keyword: keyword,
-            value: value
+            addAffiliateLinks(data);
         },
-        success: function (data) {
-            $('#citation .books').trigger('_affiliated_loaded', [data]);
-        },
-        error: function (data) {
-            alert('Error: home.js#getAffiliatedLinks()');
+        error: function (event) {
+            alert('Error loading books. Please Try again later.');
         }
     });
 }
 
 function addAffiliateLinks(links) {
-    $.each(links, function (key, value) {
-        var $item = $('<li class="media pt-2 col-lg-6 float-md-left"></li>')
-
-        var $figure = $('<img></img>')
-            .attr('src', value.image)
-            .attr('title', value.title);
-
-        var $body = $('<media-body class="ml-2 mr-2"></media-body');
-        var $title = $('<div class="book-title"></div>').text(value.title)
-        $body.append($title);
-
-        $item.append($figure).append($body);
-
-        $('.books').append($item);
+    var $articles = $('<div class="articles container-fluid"></div>');
+    $articles.appendTo($('#citation'));
+    
+    $.each(links, function (author, data) {
+        var $article = null;
+        if(data.citation[0]) {
+            $article = createAuthorArticle(author, data.citation[0].quote, data.books);
+        }
+        else {
+            $article = createAuthorArticle(author, '', data.books);
+        }
+        $article.appendTo($articles);
     });
-    //centerCitation();
+}
+
+function createAuthorArticle(author, citation, books) {
+    var $article = $('<article class="article shadow mb-5"></article>');
+    var $header = $('<div class="article-header pt-3 pb-3"></div>');
+    var $author = $('<div class="article-author"></div>').text(author);
+    var $books = $('<div class="article-body container books p-3"></div>');
+
+    $.each(books, function (key, book) {
+        
+        var $media = $('<div class="media book mt-3 mb-3"></div>');
+        var $mediaFigure = $('<img class="shadow"></img>').attr('src', book.image).attr('title', book.title);
+        var $mediaBody = $('<div class="media-body"></div>');
+        var $mediaTitle = $('<div class="book-title pl-3"></div>').text(book.title);
+
+        $media.append($mediaFigure).append($mediaBody.append($mediaTitle));           
+        $books.append($media);
+        
+    });
+
+    if(citation != null) {
+       var $title = $('<div class="article-title"></div>').text(citation);
+       $header.append($title);
+    }
+    $header.append($author);
+    
+    $article
+        .append($header)
+        .append($books);
+    
+    console.log($article);
+    return $article;
 }
 
 
@@ -1039,7 +1035,7 @@ function getBubbles() {
 */
 function radius(value) {
     var scale = 10;
-    return Math.sqrt(value/Math.PI)/scale;
+    return Math.sqrt(value / Math.PI) / scale;
 }
 
 function getCountriesSeriesMax() {
@@ -1548,24 +1544,24 @@ function initTabs() {
 function initArticles() {
     loadLatestArticles();
     started.articles = true;
-    
+
     var params = getSearchParameters();
-    
-    if(params.articleid != null) {
+
+    if (params.articleid != null) {
         loadArticle(params.articleid);
     }
-    
+
 }
 
 function getSearchParameters() {
-      var prmstr = window.location.search.substr(1);
-      return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+    var prmstr = window.location.search.substr(1);
+    return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
 }
 
-function transformToAssocArray( prmstr ) {
+function transformToAssocArray(prmstr) {
     var params = {};
     var prmarr = prmstr.split("&");
-    for ( var i = 0; i < prmarr.length; i++) {
+    for (var i = 0; i < prmarr.length; i++) {
         var tmparr = prmarr[i].split("=");
         params[tmparr[0]] = tmparr[1];
     }
@@ -1588,16 +1584,19 @@ function loadLatestArticles() {
         }
     });
 }
+
 function loadArticle(id) {
     $.ajax({
         url: 'php/getLatestArticles.php',
-        data: {articleid: id},
+        data: {
+            articleid: id
+        },
         success: function (data) {
             var $article = createArticle(data[0]);
             $article.css({
                 background: 'gold'
             });
-            $('#latest-articles').prepend($article);           
+            $('#latest-articles').prepend($article);
             $('#toggle_articles').click();
             $article.click();
         },
@@ -1608,7 +1607,7 @@ function loadArticle(id) {
 }
 
 function createArticle(data) {
-    var $article = $('<article class="article shadow"></article>');
+    var $article = $('<article class="article container-fluid shadow"></article>');
     var $header = $('<div class="article-header p-3"></div>');
 
     var $title = $('<div class="article-title"></div>').text(data.title);
@@ -1639,10 +1638,10 @@ function updateMetaTags(url, title, author, description, imageUrl) {
     $('meta[property="og:image"]').attr('content', imageUrl);
     $('meta[property="article:author"]').attr('content', author);
 
-    console.log('og:url - '         + $('meta[property="og:url"]').attr('content'));
-    console.log('og:title - '       + $('meta[property="og:title"]').attr('content'));
+    console.log('og:url - ' + $('meta[property="og:url"]').attr('content'));
+    console.log('og:title - ' + $('meta[property="og:title"]').attr('content'));
     console.log('og:description - ' + $('meta[property="og:description"]').attr('content'));
-    console.log('og:image - '       + $('meta[property="og:image"]').attr('content'));
+    console.log('og:image - ' + $('meta[property="og:image"]').attr('content'));
 
 }
 

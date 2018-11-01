@@ -1,4 +1,5 @@
 #pplayer, #vplayer {
+    max-width: 200px; 
     min-height: var(--header-height);
     font-size: 2em;
     background: linear-gradient(to right, var(--main-color), var(--sec-color));
