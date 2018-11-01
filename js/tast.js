@@ -290,7 +290,7 @@ function getCitation() {
 }
 
 function addAffiliateLinks(links) {
-    var $articles = $('<div class="articles container-fluid"></div>');
+    var $articles = $('<div class="articles"></div>');
     $articles.appendTo($('#citation'));
     
     $.each(links, function (author, data) {
@@ -306,7 +306,7 @@ function addAffiliateLinks(links) {
 }
 
 function createAuthorArticle(author, citation, books) {
-    var $article = $('<article class="article shadow mb-5"></article>');
+    var $article = $('<article class="article container shadow mb-5"></article>');
     var $header = $('<div class="article-header pt-3 pb-3"></div>');
     var $author = $('<div class="article-author"></div>').text(author);
     var $books = $('<div class="article-body container books p-3"></div>');
@@ -1607,7 +1607,7 @@ function loadArticle(id) {
 }
 
 function createArticle(data) {
-    var $article = $('<article class="article container-fluid shadow"></article>');
+    var $article = $('<article class="article container shadow"></article>');
     var $header = $('<div class="article-header p-3"></div>');
 
     var $title = $('<div class="article-title"></div>').text(data.title);
