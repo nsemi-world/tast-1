@@ -14,11 +14,10 @@
     top: 0;
     left: 0;
     z-index: 5000;
-    background: white;
+    background: linear-gradient(to right, var(--main-color), var(--sec-color));
     border-bottom: 1px solid var(--sec-color);
     text-align: center;
     padding: 1em 0;
-    /*box-shadow: 1px 4px 4px 0px var(--main-color);*/
 }
 
 .article-title {
@@ -29,7 +28,6 @@
 .article-author {
     font-style: italic;
 }
-
 
 .article-body {
     text-align: justify;

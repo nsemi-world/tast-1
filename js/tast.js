@@ -1607,7 +1607,7 @@ function loadArticle(id) {
 }
 
 function createArticle(data) {
-    var $article = $('<article class="article container shadow"></article>');
+    var $article = $('<article class="article shadow"></article>');
     var $header = $('<div class="article-header"></div>');
 
     var $title = $('<div class="article-title"></div>').text(data.title);
