@@ -290,7 +290,7 @@ function getCitation() {
 }
 
 function addAffiliateLinks(links) {
-    var $articles = $('<div class="articles"></div>');
+    var $articles = $('<div class="articles container"></div>');
     $articles.appendTo($('#citation'));
     
     $.each(links, function (author, data) {
@@ -306,17 +306,17 @@ function addAffiliateLinks(links) {
 }
 
 function createAuthorArticle(author, citation, books) {
-    var $article = $('<article class="article container shadow mb-5"></article>');
-    var $header = $('<div class="article-header pt-3 pb-3"></div>');
+    var $article = $('<article class="article  shadow"></article>');
+    var $header = $('<div class="article-header"></div>');
     var $author = $('<div class="article-author"></div>').text(author);
-    var $books = $('<div class="article-body container books p-3"></div>');
+    var $books = $('<div class="article-body books"></div>');
 
     $.each(books, function (key, book) {
         
-        var $media = $('<div class="media book mt-3 mb-3"></div>');
+        var $media = $('<div class="media book"></div>');
         var $mediaFigure = $('<img class="shadow"></img>').attr('src', book.image).attr('title', book.title);
         var $mediaBody = $('<div class="media-body"></div>');
-        var $mediaTitle = $('<div class="book-title pl-3"></div>').text(book.title);
+        var $mediaTitle = $('<div class="book-title"></div>').text(book.title);
 
         $media.append($mediaFigure).append($mediaBody.append($mediaTitle));           
         $books.append($media);
@@ -1594,7 +1594,7 @@ function loadArticle(id) {
         success: function (data) {
             var $article = createArticle(data[0]);
             $article.css({
-                background: 'gold'
+                border: '1px solid var(--sec-color)'
             });
             $('#latest-articles').prepend($article);
             $('#toggle_articles').click();
@@ -1608,7 +1608,7 @@ function loadArticle(id) {
 
 function createArticle(data) {
     var $article = $('<article class="article container shadow"></article>');
-    var $header = $('<div class="article-header p-3"></div>');
+    var $header = $('<div class="article-header"></div>');
 
     var $title = $('<div class="article-title"></div>').text(data.title);
     var $author = $('<div class="article-author"></div>').text('by ' + data.author);
@@ -1619,7 +1619,7 @@ function createArticle(data) {
         .append($author)
         .append($info);
 
-    var $body = $('<div class="article-body container mt-5"></div>').html(data.content);
+    var $body = $('<div class="article-body container"></div>').html(data.content);
     $article.append($header).append($body);
     return $article;
 }

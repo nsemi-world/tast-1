@@ -1,7 +1,7 @@
 section {
     position: relative;
     min-height: var(--main-height);
-    background: #ffe;
+    background: #111;
     color: var(--main-color);
 }
 

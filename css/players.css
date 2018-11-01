@@ -1,8 +1,11 @@
 #pplayer, #vplayer {
-    max-width: 200px; 
     min-height: var(--header-height);
     font-size: 2em;
     background: linear-gradient(to right, var(--main-color), var(--sec-color));
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 5000;    
 }
 
 span#year, span#filter {
