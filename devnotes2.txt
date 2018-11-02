@@ -1,0 +1,14 @@
+Books about slavery
+   - https://www.politico.com/magazine/story/2015/07/ten-books-on-slavery-you-need-to-read-120590
+   - https://socialjusticebooks.org/booklists/slavery/
+
+
+JSON Data structure for 
+
+Extend global summary to emcompass these values for each country
+participation: {
+	portugal:      {first_year: FY, last_year: LY, statsPT},
+	great_britain: {first_year: FY, last_year: LY, statsGB}
+	spain:         {first_year: FY, last_year: LY, statsSP}
+	...
+}

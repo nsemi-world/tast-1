@@ -1619,7 +1619,7 @@ function createArticle(data) {
         .append($author)
         .append($info);
 
-    var $body = $('<div class="article-body container"></div>').html(data.content);
+    var $body = $('<div class="article-body"></div>').html(data.content);
     $article.append($header).append($body);
     return $article;
 }
