@@ -13,7 +13,6 @@ header .navbar-brand {
     color: var(--link-color);
 }
 
-
 #menu {
     min-height: var(--header-height);
     text-align: center;

@@ -1,4 +1,4 @@
-    section {
+section {
     position: relative;
     min-height: var(--main-height);
     background: #111;
@@ -70,13 +70,6 @@
     background-position: center;
 }
 
-#about-us .frontpage {
-    background: url('../img/contact-us-1908763_1920.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
-
 #citation .frontpage {
     background: url('../img/giant-tortoise-3782239_1920.jpg');
     background-repeat: no-repeat;
@@ -108,7 +101,6 @@
 .frontpage .title-wrapper {
     background: linear-gradient(to right, black, transparent);
     height: var(--main-height);
-    width: 100%;
 }
 
 .title-wrapper .title {
@@ -187,13 +179,14 @@
  Voyages 
 ***********************************/
 #voyages {
-    position: relative;
-    min-height: var(--main-height);
+    height: var(--main-height);
 }
 
 #storymap-container {
     height: var(--main-height);
+    background: #111;
 }
+
 #storymap {
     font-family: var(--brand-font);
     height: var(--main-height);
@@ -202,6 +195,9 @@
 #details-container {
     min-height: var(--main-height);
     color: var(--main-color);
+    padding: 5%;
+    background: #111;
+    
 }
 
 #details {
@@ -246,7 +242,7 @@ div.itinerary a {
 
 .resistance {
     color: red;
-    font-size: 200%;
+    font-size: 500%;
     border-radius: 50%;
     overflow: hidden;
 }
@@ -269,11 +265,15 @@ div.itinerary a {
     color: white;
 }
 
+#database .content {
+    padding: 5%;
+}
 
 #database .tab-content {
     background: white;
     color: var(--main-color);
     font-family: var(--headline-font);
+    padding: 2%;
 }
 
 
@@ -284,6 +284,10 @@ div.itinerary a {
     min-height: var(--main-height);
 }
 
+.chart-wrapper {
+    padding: 2em;
+    margin: 0;
+}
 
 #charts .chart-legend p {
     font-family: var(--body-font);
@@ -295,12 +299,30 @@ div.itinerary a {
 
 
 
+/*****************************
+ About Us
+******************************/
+#about-ngutu, #about-pirigrino {
+    padding: 2em;
+    margin: 0;
+}
+
+.subtitle {
+    font-weight: bold;
+}
+
+#about-us p {
+    
+}
+#contact-container {
+}
+
 #impressum-container p {
     text-align: center;
 }
 
 #impressum-container p span {
-    font-family: var(--main-font);
+    font-family: var(--brand-font);
 }
 
 .loading {

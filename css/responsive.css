@@ -11,29 +11,22 @@
     font-size: 2.5vw;
   }
 }
-
-@media screen and (min-width: 401px) and (max-width: 600px) {
-  .article {
-    font-size: 3.5vw;
-  }
-}
-*/
-@media screen and (max-width: 600px) {
-    .container {
-        margin: 0;
-        padding: 0;
+@media screen and (min-width: 301px) and (max-width: 600px) {
+    body{
+        font-size: .85em;
     }
+        
     .article {
         padding: 0;
         margin: 0;
     }
-    .article-body p {
-        padding: .2em;
-    }
-    .book {
-        padding: .2em;
-    }
-    .world-map {
-        height: var(--main-height);
-    }
 }
+*/
+@media screen and (max-width: 300px) {
+    .container {
+        margin: 0;
+        padding: 0;
+    }
+
+}
+
