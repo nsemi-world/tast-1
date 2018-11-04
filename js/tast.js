@@ -169,6 +169,7 @@ function enter(selector) {
             centerCitation();
             break;
         case '#participation':
+            centerParticipation();
             initParticipationMap();
             break;
         case '#voyages':
