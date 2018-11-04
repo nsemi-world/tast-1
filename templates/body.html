@@ -1,16 +1,18 @@
 <section id="home">
-    <div class="content" id="message">
-        <h1 class="title shadow">The Trans-atlantic Slave Trade</h1>
+    <div class="frontpage" id="message">
+       <div class="title-wrapper">
+            <h1 class="h1 title">The Trans-atlantic Slave Trade</h1>
+       </div>
     </div>
 </section>
 
-<section id="citation">
-    <h2 class="title">Voices of Wisdom</h2>
-</section>
-
 <section id="participation">
-    <h2 class="title">Participation in the Trans-atlantic Slave Trade</h2>
-    <div class="content container">
+    <div class="frontpage">
+       <div class="title-wrapper">
+            <h2 class="h2 title">Participation in the Trans-atlantic Slave Trade</h2>
+       </div>
+    </div>
+    <div class="content">
         <div id="pplayer" class="text-center">
             <button id="prefresh" class="btn fas fa-undo p-0 m-0"></button>
             <button id="pplay" class="btn fas fa-play p-0 m-0"></button>
@@ -18,21 +20,24 @@
             <span id="year">1866</span>
         </div>
         <div id="world-container" class="shadow">
-           <h3 class="subtitle m-3">Top Slave Trade Countries - Map Visualization</h3>
+            <h3 class="subtitle m-3">Top Slave Trade Countries - Map Visualization</h3>
             <div id="world-map">
             </div>
         </div>
-        <hr/>
         <div id="countries-data" class=" shadow">
-            <h3 class="subtitle m-3">Top Slave Trade Countries - The Numbers</h3>       
-            <table id="example-participation" class="display" style="width: 100%"></table>
+            <h3 class="subtitle m-3">Top Slave Trade Countries - The Numbers</h3>
+            <table i d="example-participation" class="display" style="width: 100%"></table>
         </div>
     </div>
 </section>
 
 <section id="voyages">
-    <h2 class="title">Voyage Itinerary</h2>
-    <div class="content container">
+    <div class="frontpage">
+       <div class="title-wrapper">
+            <h2 class="h2 title">Voyage Itinerary</h2>
+       </div>
+    </div>
+    <div class="content itineraries">
         <div id="vplayer" class="text-center">
             <button id="vprev" class="btn fas fa-angle-left m-0 p-0"></button>
             <button id="vnext" class="btn fas fa-angle-right m-0 p-0"></button>
@@ -40,7 +45,7 @@
             <button id="vpause" class="btn fas fa-pause m-0 p-0"></button>
             <span id="filter">All</span>
         </div>
-        <div id="storymap-container"  class="shadow">
+        <div id="storymap-container" class="shadow">
             <div id="storymap"></div>
         </div>
         <div id="details-container" class="shadow">
@@ -51,9 +56,13 @@
 </section>
 
 <section id="database">
-    <h2 class="title">Search the Database</h2>
-    <div class="content container p-3">
-        <nav class="nav nav-pills nav-justified" id="nav-tab">
+    <div class="frontpage">
+       <div class="title-wrapper">
+            <h2 class="h2 title">Search the Database</h2>
+       </div>
+    </div>
+    <div class="content">
+        <nav class="nav nav-tabs nav-justified" id="nav-tab">
             <a class="nav-item nav-link active" id="places-tab" data-toggle="tab" href="#places" role="tab" aria-controls="places" aria-selected="false">Places</a>
 
             <a class="nav-item nav-link" id="ships-tab" data-toggle="tab" href="#ships" role="tab" aria-controls="ships" aria-selected="true">Ships</a>
@@ -62,7 +71,7 @@
 
             <a class="nav-item nav-link" id="captains-tab" data-toggle="tab" href="#captains" role="tab" aria-controls="captains" aria-selected="false">Captains</a>
         </nav>
-        <div class="tab-content mt-1 shadow" id="nav-tabContent">
+        <div class="tab-content shadow" id="nav-tabContent">
             <div class="tab-pane fade show active" id="places" role="tabpanel" aria-labelledby="places-tab">
                 <table id="example-places" class="display hover row-border"></table>
             </div>
@@ -83,45 +92,69 @@
 </section>
 
 <section id="charts">
-    <h2 class="title">Charts</h2>
-    <div class="content container p-3">
-        <div class="row">
-            <div class="col-lg-6 mt-5">
-                <h4 class="subtitle h4">When we thought it couldn't get any worse...</h4>
-                <div class="chart"><canvas id="cvoyages"></canvas></div>
-                <div class="chart-legend">
-                    <p>They came, over and over again. From Portugal, Spain, France, Great Britain, The Netherlands, Denmark, Baltic, Hanse Towns, Brandenburg, Sweden, Sardinia, Genoa, U.S.A., Mexico, Argentina, Russia and others. As with arabs, we thought they were of the Mankind, and that they're gods resembled our's. But they didn't recognized us nor God. They made at least <b>35938</b> reported voyages.
-                    </p>
-                </div>
+    <div class="frontpage">
+       <div class="title-wrapper">
+            <h2 class="h2 title">Charts</h2>
+       </div>
+    </div>
+    <div class="content">
+        <div class="chart-wrapper">
+            <h4 class="subtitle h4">When we thought it couldn't get any worse...</h4>
+            <div class="chart"><canvas id="cvoyages"></canvas></div>
+            <div class="chart-legend">
+                <p>They came, over and over again. From Portugal, Spain, France, Great Britain, The Netherlands, Denmark, Baltic, Hanse Towns, Brandenburg, Sweden, Sardinia, Genoa, U.S.A., Mexico, Argentina, Russia and others. As with arabs, we thought they were of the Mankind, and that they're gods resembled our's. But they didn't recognized us nor God. They made at least <b>35938</b> reported voyages.
+                </p>
             </div>
-            <div class="col-lg-6 mt-5">
-                <h4 class="subtitle h4">The investment that made Europe possible</h4>
-                <div class="chart"><canvas id="cships"></canvas></div>
-                <div class="chart-legend">
-                    <p> You could tell it was Death comming personally. The Trojan Horse changed form but not the intentions. When they discovered our gold was good, our land blessed and our spirits fair, it was clear that they would do it. We counted 9213 distinct vessels, taking our riches, children, woman and men. Europe's first industrial revolution was on the way.</p>
-                </div>
+        </div>
+        <div class="chart-wrapper">
+            <h4 class="subtitle h4">The investment that made Europe possible</h4>
+            <div class="chart"><canvas id="cships"></canvas></div>
+            <div class="chart-legend">
+                <p> You could tell it was Death comming personally. The Trojan Horse changed form but not the intentions. When they discovered our gold was good, our land blessed and our spirits fair, it was clear that they would do it. We counted 9213 distinct vessels, taking our riches, children, woman and men. Europe's first industrial revolution was on the way.</p>
             </div>
-            <div class="col-lg-6 mt-5">
-                <h4 class="subtitle h4">Black Pearls and Diamonds</h4>
-                <div class="chart"><canvas id="cslaves"></canvas></div>
-                <div class="chart-legend">
-                    <p>We we're the cargo! Because the are clean, strong, educated and beatiful. Because we have the rhythm to cultivate the land, to build cities, and to enjoy ourselves. Family after family, village after village, city after city, kingdom after kingdom, empire after empire, wrapped up and dispatched worldwide. They fed on us. 10645118 we're embarked and 9180918 made it to the Americas. In the end we we're decimated, and those who survived, here and there, we were bent on our knees.</p>
-                </div>
+        </div>
+        <div class="chart-wrapper">
+            <h4 class="subtitle h4">Black Pearls and Diamonds</h4>
+            <div class="chart"><canvas id="cslaves"></canvas></div>
+            <div class="chart-legend">
+                <p>We we're the cargo! Because the are clean, strong, educated and beatiful. Because we have the rhythm to cultivate the land, to build cities, and to enjoy ourselves. Family after family, village after village, city after city, kingdom after kingdom, empire after empire, wrapped up and dispatched worldwide. They fed on us. 10645118 we're embarked and 9180918 made it to the Americas. In the end we we're decimated, and those who survived, here and there, we were bent on our knees.</p>
             </div>
-            <div class="col-lg-6 mt-5">
-                <h4 class="subtitle h4">Learn to know your Enemies!</h4>
-                <div class="chart"><canvas id="cdied"></canvas></div>
-                <div class="chart-legend">
-                    <p>Your enemy is that that feed the sharks with your flesh. Your enemy is that who rapes your children and wife. Your enemy is that who whip your elders.Your enemy is that who sits in the church just next to you. Over 1000000 african children, women and men were assassinated during the Middle Passage. Your enemy has a pleasure proportinal to your sufferings.</p>
-                </div>
+        </div>
+        <div class="chart-wrapper">
+            <h4 class="subtitle h4">Learn to know your Enemies!</h4>
+            <div class="chart"><canvas id="cdied"></canvas></div>
+            <div class="chart-legend">
+                <p>Your enemy is that that feed the sharks with your flesh. Your enemy is that who rapes your children and wife. Your enemy is that who whip your elders.Your enemy is that who sits in the church just next to you. Over 1000000 african children, women and men were assassinated during the Middle Passage. Your enemy has a pleasure proportinal to your sufferings.</p>
             </div>
         </div>
     </div>
 </section>
 
-<section id="contacts">
-    <h2 class="title">Contact</h2>
-    <div class="content container p-3" id="contact-container">
+<section id="about-us">
+    <div class="frontpage">
+       <div class="title-wrapper">
+            <h2 class="title">About Us</h2>
+       </div>
+    </div>
+    <div class="content" id="about-us-container">
+        <div class="row">
+            <div id="about-ngutu" class="col-lg-6 pt-5">
+                <div class="subtitle"><i class="fab fa-connectdevelop pr-3"></i>About Ngutu.org:</div>
+                <p>Ngutu.org is an idea with the goal to stablish a strong identity, social and economic for the re-connection of the African diasporas with each other and Mother Africa. We call for global solidarity among Black Africans to assume leadership and entrepeneurship towards the implementation of the great African Commomwealth, centered in Africa and with the diaspora playing an integreated role of embassators for Acquisition and Transfer of Knowledgle and Culture. A World where we all belong.</p>
+            </div>
+            <div id="about-pirigrino" class="col-lg-6 pt-5">
+                <div class="subtitle"><i class="fas fa-user-ninja pr-3"></i>About me:</div>
+                <p>As an african living in Europe, that's what I believe: that we cannot fight racism nor the racist, by the simple fact that it is not your intrinsic problem. It's a sociopathic institutional problem that can be solved by the racist self only. We cannot impose an evolution of the racist mindset by exposing it; we are the proof of it. What we can do is to concentrate our focus to rebuild our well-acknowledge creative, productive, prosperous and conscious human civilization.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="content" id="impressum-container">
+        <p id="impressum-owner" class="pt-4">
+            <span>tastXplorer</span><br/> Alexandre Zua Caldeira<br/> Lehrter Str. 8<br/> 10557 Berlin<br/> Germany
+        </p>
+    </div>
+    <div class="content" id="contact-container">
         <div class="row">
             <div id="contact-ngutu" class="col-lg-6 pt-5">
                 <div class="subtitle">
@@ -137,36 +170,30 @@
     </div>
 </section>
 
-<section id="about-us">
-    <h2 class="title">About Us</h2>
-    <div class="content container p-3" id="about-us-container">
-        <div class="row">
-            <div id="about-ngutu" class="col-lg-6 pt-5">
-                <div class="subtitle"><i class="fab fa-connectdevelop pr-3"></i>About Ngutu.org:</div>
-                <p>Ngutu.org is an idea with the goal to stablish a strong identity, social and economic for the re-connection of the African diasporas with each other and Mother Africa. We call for global solidarity among Black Africans to assume leadership and entrepeneurship towards the implementation of the great African Commomwealth, centered in Africa and with the diaspora playing an integreated role of embassators for Acquisition and Transfer of Knowledgle and Culture. A World where we all belong.</p>
-            </div>
-            <div id="about-pirigrino" class="col-lg-6 pt-5">
-                <div class="subtitle"><i class="fas fa-user-ninja pr-3"></i>About me:</div>
-                <p>As an african living in Europe, that's what I believe: that we cannot fight racism nor the racist, by the simple fact that it is not your intrinsic problem. It's a sociopathic institutional problem that can be solved by the racist self only. We cannot impose an evolution of the racist mindset by exposing it; we are the proof of it. What we can do is to concentrate our focus to rebuild our well-acknowledge creative, productive, prosperous and conscious human civilization.
-                </p>
-            </div>
-        </div>
+<section id="citation">
+    <div class="frontpage">
+       <div class="title-wrapper">
+            <h2 class="h2 title">Voices of Wisdom</h2>
+       </div>
+    </div>
+    <div class="articles content">
+
     </div>
 </section>
-
-<section id="impressum">
-    <h2 class="title">Impressum</h2>
-    <div class="content container p-3" id="impressum-container">
-        <p id="impressum-owner" class="pt-4">
-            <span>tastXplorer</span><br/> Alexandre Zua Caldeira<br/> Lehrter Str. 8<br/> 10557 Berlin<br/> Germany
-        </p>
-    </div>
-</section>
-
 
 <section id="articles">
-    <h2 class="title">Free Thoughts</h2>
-    <div id="latest-articles" class="container articles"></div>
+    <div class="frontpage">
+       <div class="title-wrapper">
+            <h2 class="title">Free Thoughts</h2>
+       </div>
+    </div>
+    <div id="latest-articles" class="articles"></div>
 </section>
 
-<section id="contribute"></section>
+<section id="contribute">
+    <div class="frontpage">
+       <div class="title-wrapper">
+            <h2 class="title">Help us Improve and Progress</h2>
+       </div>
+    </div>
+</section>

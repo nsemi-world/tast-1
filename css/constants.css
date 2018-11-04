@@ -28,6 +28,6 @@
 
     --header-height: 6vh;
     --footer-height: 6vh;
-    --main-height: calc(100vh - var(--header-height));
+    --main-height: 100vh;
     
 }

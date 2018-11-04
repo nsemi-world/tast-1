@@ -59,7 +59,8 @@ var started = {
     database: false,
     charts: false,
     articles: false,
-    contribute: false
+    contribute: false,
+    aboutUs: false
 }
 var currentSection = null;
 
@@ -72,16 +73,11 @@ function initializeApp() {
     initHome();
     initCitation();
     initParticipation();
-    //initVoyages();
+    initVoyages();
     initTabs();
     initArticles();
+    initAboutUs();
     initContribute();
-
-
-
-    $(document).on('click', 'article', function (event) {
-        $(this).toggleClass('active');
-    });
 
 
     $('#toggle_home').click();
@@ -136,19 +132,12 @@ function initMenu() {
         enter('#database');
         activate($(this));
     });
-    $('#toggle_contact').on('click', function (event) {
-        event.preventDefault();
-        enter('#contacts');
-        activate($(this));
-    });
     $('#toggle_about_us').on('click', function (event) {
         event.preventDefault();
+        if(!started.aboutUs) {
+            initAboutUs();
+        }
         enter('#about-us');
-        activate($(this));
-    });
-    $('#toggle_impressum').on('click', function (event) {
-        event.preventDefault();
-        enter('#impressum');
         activate($(this));
     });
 
@@ -183,46 +172,23 @@ function enter(selector) {
             initParticipationMap();
             break;
         case '#voyages':
+            centerVoyages();
             if (status_tast.voyages.storymap != null) {
                 status_tast.voyages.storymap.updateDisplay();
             }
             break;
-        case '#contacts':
-            //centerContacts();
-            break;
         case '#about-us':
-            //centerAboutUs();
+            centerAboutUs();
             break;
-        case '#impressum':
-            //centerImpressum();
+        case '#articles':
+            centerArticles();
             break;
+        case '#contribute':
+            centerContribute();
     }
 }
 
 
-function centerContacts() {
-    $('#contacts .container .row').position({
-        my: 'center',
-        at: 'center',
-        of: '#contacts'
-    });
-}
-
-function centerAboutUs() {
-    $('#about-us .container .row').position({
-        my: 'center',
-        at: 'center',
-        of: '#about-us'
-    });
-}
-
-function centerImpressum() {
-    $('#impressum-container').position({
-        my: 'center',
-        at: 'center',
-        of: '#impressum'
-    });
-}
 
 function goTo(selector) {
     hideAllSectionsExcept(selector);
@@ -244,36 +210,91 @@ function activate(link) {
 
 
 function initHome() {
-    centerHome();
     started.home = true;
-
-    $(window).on('resize', function () {
-        centerHome();
+    centerTitle('#home .frontpage');    
+    $(window).on('resize', function() {
+        centerTitle('#home .frontpage');
     });
 }
 
 function centerHome() {
-    $('#message .title').position({
+    $('#home .title-wrapper .title').position({
         my: 'center',
         at: 'center',
-        of: '#message'
-    });
-}
-
-
-function initCitation() {
-    getCitation();
-    started.citation = true;
-    $(window).on('resize', function () {
-        centerCitation();
+        of: '#home .title-wrapper'
     });
 }
 
 function centerCitation() {
-    $('.citation').position({
+    $('#citation .title-wrapper .title').position({
         my: 'center',
-        at: 'center center',
-        of: '#citation'
+        at: 'center',
+        of: '#citation .title-wrapper'
+    });
+}
+
+function centerVoyages() {
+    $('#voyages .title-wrapper .title').position({
+        my: 'center',
+        at: 'center',
+        of: '#voyages .title-wrapper'
+    });
+}
+
+function centerParticipation() {
+    $('#participation .title-wrapper .title').position({
+        my: 'center',
+        at: 'center',
+        of: '#participation .title-wrapper'
+    });
+}
+
+function centerDatabase() {
+    $('#database .title-wrapper .title').position({
+        my: 'center',
+        at: 'center',
+        of: '#database .title-wrapper'
+    });
+}
+
+function centerCharts() {
+    $('#charts .title-wrapper .title').position({
+        my: 'center',
+        at: 'center',
+        of: '#charts .title-wrapper'
+    });
+}
+
+function centerAboutUs() {
+    $('#about-us .title-wrapper .title').position({
+        my: 'center',
+        at: 'center',
+        of: '#about-us .title-wrapper'
+    });
+}
+
+function centerArticles() {
+    $('#articles .title-wrapper .title').position({
+        my: 'center',
+        at: 'center',
+        of: '#articles .title-wrapper'
+    });
+}
+
+function centerContribute() {
+    $('#contribute .title-wrapper .title').position({
+        my: 'center',
+        at: 'center',
+        of: '#contribute .title-wrapper'
+    });
+}
+
+function initCitation() {
+    getCitation();
+    started.citation = true;
+    centerTitle('#citation .frontpage');    
+    $(window).on('resize', function() {
+        centerTitle('#citation .frontpage');
     });
 }
 
@@ -290,8 +311,7 @@ function getCitation() {
 }
 
 function addAffiliateLinks(links) {
-    var $articles = $('<div class="articles container"></div>');
-    $articles.appendTo($('#citation'));
+    var $articles = $('#citation .articles');
     
     $.each(links, function (author, data) {
         var $article = null;
@@ -342,6 +362,13 @@ function initVoyages() {
     configureVoyagesPlayer();
     loadVoyageIds();
     started.voyages = true;
+    centerTitle('#voyages .frontpage');
+    $(window).on('resize', function() {
+        centerTitle('#voyages .frontpage');
+        if(status_tast.voyages.storymap != null) {
+            status_tast.voyages.storymap.updateDisplay(); // this isn't automatic
+        }
+    });
 
     $('#voyages').on('_ids_loaded', function (event) {
         loadVoyageData(0);
@@ -365,10 +392,6 @@ function initVoyages() {
         loadFilteredVoyageIds(filter, value);
         status_tast.voyages.context = filter + ' is ' + value;
     });
-
-    window.onresize = function (event) {
-        status_tast.voyages.storymap.updateDisplay(); // this isn't automatic
-    }
 
 }
 
@@ -870,6 +893,10 @@ function initParticipation() {
     configureParticipationPlayer();
     configureParticipationAppearence();
     getCountriesSeries(0);
+    centerTitle('#participation .frontpage');
+    $(window).on('resize', function() {
+        centerTitle('#participation .frontpage');
+    });
 
     started.participation = true;
 
@@ -882,7 +909,15 @@ function initParticipation() {
     });
 
     $(window).on('resize', function () {
-        //status_tast.participation.datamap
+        centerTitle('#participation .frontpage');
+    });
+}
+
+function centerTitle(parentSelector) {
+    $(parentSelector + ' .title').position({
+        my: 'center',
+        at: 'center',
+        of: parentSelector
     });
 }
 
@@ -1330,6 +1365,12 @@ function contractStoryMap() {
 
 
 function initCharts() {
+    centerTitle('#charts .frontpage');
+    
+    $(window).on('resize', function() {
+        centerTitle('#charts .frontpage');
+    });
+    
     $.ajax({
         url: 'php/allByYear.php',
         dataType: 'json',
@@ -1538,18 +1579,27 @@ function initTabs() {
     getOwnersDataTable();
     getCaptainsDataTable();
     started.database = true;
+    centerTitle('#database .frontpage');    
+    $(window).on('resize', function() {
+        centerTitle('#database .frontpage');
+    });
 }
 
 
 function initArticles() {
     loadLatestArticles();
     started.articles = true;
+    centerTitle('#articles .frontpage');
 
     var params = getSearchParameters();
 
     if (params.articleid != null) {
         loadArticle(params.articleid);
     }
+    
+    $(window).on('resize', function() {
+        centerTitle('#articles .frontpage');
+    });
 
 }
 
@@ -1643,6 +1693,11 @@ function updateMetaTags(url, title, author, description, imageUrl) {
     console.log('og:description - ' + $('meta[property="og:description"]').attr('content'));
     console.log('og:image - ' + $('meta[property="og:image"]').attr('content'));
 
+}
+    
+    
+function initAboutUs() {
+    
 }
 
 function initContribute() {
