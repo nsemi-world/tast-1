@@ -98,6 +98,13 @@
     background-position: center;
 }
 
+#contribute .frontpage {
+    background: url('../img/heart-700141_1920.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
 .frontpage .title-wrapper {
     background: linear-gradient(to right, black, transparent);
     height: var(--main-height);
