@@ -179,7 +179,7 @@ function enter(selector) {
             }
             break;
         case '#charts':
-            centerChrts();
+            centerCharts();
             break;
         case '#database':
             centerDatabase();
