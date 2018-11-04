@@ -172,7 +172,9 @@
 }
 
 #world-map {
-    min-height: var(--main-height);    
+    height: var(--main-height);
+    width: 100%;
+    position: relative;
 }
 
 #countries-data {

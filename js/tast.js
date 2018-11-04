@@ -997,9 +997,14 @@ function initParticipationMap() {
     // render map
     datamap = new Datamap({
         element: document.getElementById('world-map'),
-        projection: 'equirectangular',
-        projectConfig: {
-            center: [0, 0],
+        setProjection: function(element, options) {
+            var projection, path;
+            projection = d3.geo.mercator()
+                .center([0, 30])
+                .scale(element.offsetWidth/4)
+                .translate([element.offsetWidth/2, element.offsetHeight/2]);
+            path = d3.geo.path().projection(projection);
+            return {path: path, projection: projection};
         },
         responsive: true,
         fills: fills,
