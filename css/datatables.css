@@ -7,6 +7,10 @@ table thead {
     background: var(--sec-color);
 }
 
+.dataTables_wrapper {
+    font-size: 80%;
+}
+
 .dataTables_length, .dataTables_filter {
     background: transparent;
     padding: 2em;
