@@ -178,6 +178,12 @@ function enter(selector) {
                 status_tast.voyages.storymap.updateDisplay();
             }
             break;
+        case '#charts':
+            centerChrts();
+            break;
+        case '#database':
+            centerDatabase();
+            break;
         case '#about-us':
             centerAboutUs();
             break;
