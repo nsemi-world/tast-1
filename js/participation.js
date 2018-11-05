@@ -6,17 +6,18 @@ var status_tast = {
         interval: null,
         datamap: null,
         datatable: null
-    };
-}
+    }
+};
 
 var started = {
     participation: false
-}
+};
 
 
 $(document).ready(function () {
     initParticipation();
     centerParticipation();
+    activate($('#toggle_participation'));
 });
 
 function centerParticipation() {

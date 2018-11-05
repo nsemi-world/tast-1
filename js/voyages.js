@@ -1,13 +1,23 @@
+var voyages = {
+    storymap: null,
+    ids: []
+}
+
+$(document).ready(function() {
+    initVoyages();
+    activate($('#toggle_voyages'));
+});
+
+
 
 function initVoyages() {
     configureVoyagesPlayer();
     loadVoyageIds();
-    started.voyages = true;
-    centerTitle('#voyages .frontpage');
+    centerVoyages();
     $(window).on('resize', function() {
-        centerTitle('#voyages .frontpage');
-        if(status_tast.voyages.storymap != null) {
-            status_tast.voyages.storymap.updateDisplay(); // this isn't automatic
+        centerVoyages();
+        if(voyages.storymap != null) {
+            voyages.storymap.updateDisplay(); // this isn't automatic
         }
     });
 
@@ -20,9 +30,9 @@ function initVoyages() {
     });
 
     $('#voyages').on('_voyage_loaded', function (event, data, index) {
-        createStoryMap(data, status_tast.voyages.ids[index]);
+        createStoryMap(data, voyages.ids[index]);
         initData(data, index);
-        status_tast.voyages.storymap.updateDisplay();
+        voyages.storymap.updateDisplay();
         updateVPlayer(index);
     });
 
@@ -31,7 +41,7 @@ function initVoyages() {
         var filter = $(this).attr('href');
         var value = getFilterValue($(this));
         loadFilteredVoyageIds(filter, value);
-        status_tast.voyages.context = filter + ' is ' + value;
+        voyages.context = filter + ' is ' + value;
     });
 
 }
@@ -40,16 +50,16 @@ function configureVoyagesPlayer() {
     $('#vprev, #vpause').hide();
     $('#vnext').on('click', function (event) {
         event.preventDefault();
-        status_tast.voyages.index++;
-        var ids = status_tast.voyages.ids;
-        var index = status_tast.voyages.index;
+        voyages.index++;
+        var ids = voyages.ids;
+        var index = voyages.index;
         $('#voyages').trigger('_request_voyage_data', [index]);
     });
     $('#vprev').on('click', function (event) {
         event.preventDefault();
-        status_tast.voyages.index--;
-        var ids = status_tast.voyages.ids;
-        var index = status_tast.voyages.index;
+        voyages.index--;
+        var ids = voyages.ids;
+        var index = voyages.index;
         $('#voyages').trigger('_request_voyage_data', [index]);
     });
     $('#vplay').on('click', function (event) {
@@ -75,8 +85,8 @@ function loadVoyageIds() {
         },
         success: function (result) {
             if (result.ids) {
-                status_tast.voyages.ids = result.ids;
-                status_tast.voyages.index = 0;
+                voyages.ids = result.ids;
+                voyages.index = 0;
                 $('#voyages').trigger('_ids_loaded', [result.ids]);
             }
         },
@@ -95,8 +105,8 @@ function loadFilteredVoyageIds(filter, filter_value) {
         },
         success: function (result) {
             if (result.ids.length > 0) {
-                status_tast.voyages.ids = result.ids;
-                status_tast.voyages.index = 0;
+                voyages.ids = result.ids;
+                voyages.index = 0;
                 $('#voyages').trigger('_ids_loaded', [result.ids]);
             } else {
                 alert('Voyages not found!')
@@ -113,7 +123,7 @@ function loadVoyageData(index) {
     $.ajax({
         url: url,
         data: {
-            voyageid: status_tast.voyages.ids[index]
+            voyageid: voyages.ids[index]
         },
         dataType: 'json',
         success: function (result) {
@@ -139,7 +149,7 @@ function createStoryMap(data, id) {
     var storymap_options = {};
 
     $('#storymap').empty();
-    status_tast.voyages.storymap = new VCO.StoryMap(
+    voyages.storymap = new VCO.StoryMap(
         'storymap', storymap_data, storymap_options);
 
     $(document).trigger('_map_loaded');
@@ -229,12 +239,12 @@ function initInfo(data, index) {
     var $voyage_context = createElement(
         'info-context',
         "Filter: ",
-        status_tast.voyages.context);
+        voyages.context);
 
     var $voyage_order = createElement(
         'info-index',
         "Index: ",
-        (index + 1) + " out of " + status_tast.voyages.ids.length);
+        (index + 1) + " out of " + voyages.ids.length);
 
     var $voyageid = createElement(
         'info-voyageid',
@@ -490,7 +500,7 @@ function getFilterValue(element) {
 }
 
 function updateVPlayer(index) {
-    var nVoyages = status_tast.voyages.ids.length;
+    var nVoyages = voyages.ids.length;
     if (index == 0) {
         $('#vprev').hide();
         $('#vnext').show();
@@ -504,18 +514,18 @@ function updateVPlayer(index) {
 }
 
 function animateSlides() {
-    status_tast.voyages.intervalSlide =
+    voyages.intervalSlide =
         setInterval(clickNextSlide, 5000);
 }
 
 function stopSlides() {
-    clearInterval(status_tast.voyages.intervalSlide);
+    clearInterval(voyages.intervalSlide);
 }
 
 function clickNextSlide() {
     var style = $('.vco-slidenav-next').attr('style');
-    var index = status_tast.voyages.index;
-    var last = status_tast.voyages.ids.length - 1;
+    var index = voyages.index;
+    var last = voyages.ids.length - 1;
 
     if (!style.includes('display: none')) {
         $('.vco-slidenav-next').click();
