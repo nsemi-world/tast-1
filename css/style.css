@@ -90,6 +90,16 @@ section {
     background-size: cover;
     background-position: center;
 }
+#contacts .frontpage {
+    background: url('../img/ground-1225041_1920.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#impressum .frontpage {
+    background: black;
+}
 
 #contribute .frontpage {
     background: url('../img/heart-700141_1920.jpg');
@@ -302,7 +312,7 @@ div.itinerary a {
 /*****************************
  About Us
 ******************************/
-#about-ngutu, #about-pirigrino {
+#about-ngutu, #about-pirigrino, #contact-ngutu, #contact-social, #impressum-container {
     padding: 2em;
     margin: 0;
 }

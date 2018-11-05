@@ -1,8 +1,11 @@
+$(document).ready(function() {
+    initArticles();
+    activate($('#toggle_articles'));
+});
 
 function initArticles() {
     loadLatestArticles();
-    started.articles = true;
-    centerTitle('#articles .frontpage');
+    centerArticles();
 
     var params = getSearchParameters();
 
@@ -11,7 +14,7 @@ function initArticles() {
     }
     
     $(window).on('resize', function() {
-        centerTitle('#articles .frontpage');
+        centerArticles();
     });
 
 }
