@@ -61,6 +61,19 @@ TODO: Write a README file
 -------------------------------------
 GO MULTI-PAGE for reacher sections
 -------------------------------------
-TODO: Create participation.php, participation.js, participation.css inside folder participation
-TODO: Redirect click on participation menu link to call and load participation.php
+DONE: Create participation.php, participation.js, participation.css inside folder participation
+DONE: Redirect click on participation menu link to call and load participation.php
+DONE: Proceed likewise for other parts of th program
 
+
+-------------------------------------
+HOME
+-------------------------------------
+TODO: Expand HOME to include a small introduction and link for each section. 
+      When applicable, it would be a nice idea to have links to videos showing how to use the tools.
+TODO: Introduction: tastXplorer as an analysis tool 
+        to understand the european-based slave trade, 
+        to understande the trends that took us into slavery, 
+        and as a start point for a renewed effort 
+            to reconnect us with our story and 
+            to the developement of a safe and economically sustainable future. 

@@ -18,3 +18,4 @@ function centerHome() {
         of: '#home .title-wrapper'
     });
 }
+

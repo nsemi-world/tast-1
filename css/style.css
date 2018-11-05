@@ -21,6 +21,15 @@ section {
     text-align: center; 
 }
 
+.logo {
+    font-family: var(--brand-font);
+    color: var(--main-color);
+}
+
+#abstract {
+    margin: 3em auto;
+}
+
 /**********************************
  Articles 
 ***********************************/
@@ -109,7 +118,7 @@ section {
 }
 
 .frontpage .title-wrapper {
-    background: linear-gradient(to right, black, transparent);
+    background: rgba(0,0,0,.75);
     height: var(--main-height);
 }
 
