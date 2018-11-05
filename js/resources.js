@@ -1,14 +1,19 @@
 
-function initCitation() {
-    getCitation();
-    started.citation = true;
-    centerTitle('#citation .frontpage');    
+$(document).ready(function () {
+    initResources();
+    activate($('#toggle_resources'));
+});
+
+
+function initResources() {
+    getBooks();
+    centerResources();    
     $(window).on('resize', function() {
-        centerTitle('#citation .frontpage');
+        centerResources();
     });
 }
 
-function getCitation() {
+function getBooks() {
     $.ajax({
         url: 'php/getAffiliatedBooks.php',
         success: function (data) {
@@ -21,7 +26,7 @@ function getCitation() {
 }
 
 function addAffiliateLinks(links) {
-    var $articles = $('#citation .articles');
+    var $articles = $('#resources .articles');
     
     $.each(links, function (author, data) {
         var $article = null;
@@ -68,11 +73,11 @@ function createAuthorArticle(author, citation, books) {
 }
 
 
-function centerCitation() {
-    $('#citation .title-wrapper .title').position({
+function centerResources() {
+    $('#resources .title-wrapper .title').position({
         my: 'center',
         at: 'center',
-        of: '#citation .title-wrapper'
+        of: '#resources .title-wrapper'
     });
 }
 

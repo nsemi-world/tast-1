@@ -70,7 +70,7 @@ section {
     background-position: center;
 }
 
-#citation .frontpage {
+#resources .frontpage {
     background: url('../img/giant-tortoise-3782239_1920.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -116,35 +116,35 @@ section {
 /**********************************
  articles 
 ***********************************/
-#citation .quote {
+#resources .quote {
     text-align: center;
 }
 
-#citation .author {
+#resources .author {
     text-align: center;
     font-style: italic;
 }
 
-#citation .author a {
+#resources .author a {
     font-family: var(--headline-font);
     font-weight: bold;
     color: var(--link-color);
 }
 
-#citation .source {
+#resources .source {
     font-family: var(--headline-font);
 }
 
-#citation .books {
+#resources .books {
 }
 
 
-#citation .books img {
+#resources .books img {
     height: 128px;
     border-radius: 4px;
 }
 
-#citation .book-title {
+#resources .book-title {
 }
 
 
