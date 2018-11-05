@@ -11,6 +11,10 @@ section {
     font-size: 150%;
 }
 
+.logo {
+    font-family: var(--brand-font);
+    color: var(--main-color);
+}
 
 /**********************************
  Home 
@@ -21,14 +25,11 @@ section {
     text-align: center; 
 }
 
-.logo {
-    font-family: var(--brand-font);
-    color: var(--main-color);
-}
 
 #abstract {
-    margin: 3em auto;
+    margin: 0 auto;
 }
+
 
 /**********************************
  Articles 
@@ -327,7 +328,9 @@ div.itinerary a {
 }
 
 .subtitle {
+    font-variant: normal;
     font-weight: bold;
+    font-size: 50%;
 }
 
 #about-us p {

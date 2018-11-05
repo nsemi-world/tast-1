@@ -14,8 +14,8 @@
     top: 0;
     left: 0;
     z-index: 5000;
-    background: linear-gradient(to right, var(--main-color), var(--sec-color));
-    border-bottom: 1px solid var(--sec-color);
+    background: linear-gradient(to bottom, var(--main-color), var(--sec-color), white);
+    /*background: white;*/
     text-align: center;
     padding: 1em 0;
 }
@@ -25,6 +25,9 @@
     font-weight: bold;
 }
 
+.article-info {
+    font-size: 75%;
+}
 .article-author {
     font-style: italic;
 }
