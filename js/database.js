@@ -1,4 +1,10 @@
-function initTabs() {
+$(document).ready(function() {
+    initDatabase();
+    activate($('#toggle_database'));
+});
+
+
+function initDatabase() {
     $('#nav-tab a').on('click', function (e) {
         e.preventDefault();
         $(this).tab('show');
@@ -12,10 +18,9 @@ function initTabs() {
     getShipsDataTable();
     getOwnersDataTable();
     getCaptainsDataTable();
-    started.database = true;
-    centerTitle('#database .frontpage');    
+    centerDatabase();    
     $(window).on('resize', function() {
-        centerTitle('#database .frontpage');
+        centerDatabase();
     });
 }
 

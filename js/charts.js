@@ -1,9 +1,13 @@
+$(document).ready(function() {
+    initCharts();
+    activate($('#toggle_charts'));
+});
 
 function initCharts() {
-    centerTitle('#charts .frontpage');
+    centerCharts();
     
     $(window).on('resize', function() {
-        centerTitle('#charts .frontpage');
+        centerCharts();
     });
     
     $.ajax({
