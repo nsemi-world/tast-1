@@ -41,7 +41,7 @@ function loadLatestArticles() {
         url: 'php/getLatestArticles.php',
         success: function (data) {
             $.each(data, function (key, value) {
-                var $article = createArticle(data[0]);
+                var $article = createArticle(value);
                 $('#latest-articles').append($article);
             });
         },

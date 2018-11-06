@@ -5,6 +5,7 @@ ob_start("ob_gzhandler");
 require_once('./utils.php');
 $pdo = getPDO();
 
+$MAX_ARTICLES = 100;
 $articles = [];
 $articleid = null;
 
@@ -14,8 +15,9 @@ if(isset($_GET['articleid'])) {
 }
 
 else {
-    $articles = getLatestArticles($pdo, 1);
+    $articles = getLatestArticles($pdo, $MAX_ARTICLES);
 }
+
 header('Content-type:application/json;charset=utf-8');
 
 echo json_encode($articles);
@@ -24,8 +26,7 @@ ob_end_flush();
 
 
 function getLatestArticles($pdo, $quantity) {
-    $sql = "SELECT * FROM article ORDER BY date LIMIT $quantity";
-    //var_dump($sql);
+    $sql = "SELECT * FROM article ORDER BY date DESC LIMIT $quantity";
     $erg = $pdo->query($sql);
     return $erg->fetchAll(PDO::FETCH_OBJ);
 }
