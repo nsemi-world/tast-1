@@ -78,7 +78,7 @@ function createArticleCard(article) {
     var $cardTitle = $('<div class="card-title h5 mb-0 pb-0"></div>').html(article.title);
     var $cardInfo = $('<p class="card-info mb-2 text-muted"></p>').text(article.author + " | " + article.location + " | " + article.date);
     var $cardBody = $('<div class="card-text ml-3 mr-3"></div>').html(article.description);
-    var $cardReadMore = $('<a class="btn btn-primary"></a>').attr('href', 'article.php?articleid=' + article.articleid).text('Read more...');
+    var $cardReadMore = $('<a class="btn btn-primary"></a>').attr('href', 'articles.php?articleid=' + article.articleid).text('Read more...');
     
     $card
         .append($cardImage)
