@@ -46,7 +46,7 @@ WEDNESDAY - FRIDAY
 ------------------
 DONE: Make website responsible
 TODO: Rewrite Charts Legend/Content
-TODO: Merge calls to getCitation and getAffiliatedLinks together
+DONE: Merge calls to getCitation and getAffiliatedLinks together
 
 
 DONE: Add pagination for eficciency to Captains/Ships/Owners/Places Tab content
@@ -69,11 +69,23 @@ DONE: Proceed likewise for other parts of th program
 -------------------------------------
 HOME
 -------------------------------------
-TODO: Expand HOME to include a small introduction and link for each section. 
+DOING: Expand HOME to include a small introduction and link for each section. 
       When applicable, it would be a nice idea to have links to videos showing how to use the tools.
-TODO: Introduction: tastXplorer as an analysis tool 
+DONE: Introduction: tastXplorer as an analysis tool 
         to understand the european-based slave trade, 
         to understande the trends that took us into slavery, 
         and as a start point for a renewed effort 
             to reconnect us with our story and 
             to the developement of a safe and economically sustainable future. 
+TODO: Retrieve Amazon AWS account password and details
+
+TODO: Add welcome article to the database#
+TODO: Add welcome-article table in the database to hold a foreign key to an entry in the articles table
+TODO: Change index.php to load welcome article
+TODO: Change article.php to add meta data in head for requests where articleid is passed down in the request
+
+
+
+
+TODO: Integrate with facebook share
+
