@@ -53,3 +53,30 @@
     background: var(--sec-color);
 }
 
+
+#latest-articles {
+    margin: 0 auto;
+    background: white;
+}
+
+.card img {
+    width: 100%;
+}
+
+.card-title {
+    color: black;
+    font-weight: bold;
+    text-align: center;
+}
+
+.card-info {
+    font-size: 80%;
+    font-style: italic;
+    text-align: center;
+}
+
+.card-text {
+    color: var(--text-color);
+    font-size: 85%;
+    text-align: left;
+}

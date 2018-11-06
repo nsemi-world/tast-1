@@ -36,13 +36,13 @@ function transformToAssocArray(prmstr) {
 
 
 function loadLatestArticles() {
-    $('#latest-articles').empty();
+    $('#latest-articles .articles').empty();
     $.ajax({
         url: 'php/getLatestArticles.php',
         success: function (data) {
             $.each(data, function (key, value) {
-                var $article = createArticle(value);
-                $('#latest-articles').append($article);
+                var $article = createArticleCard(value);
+                $('#latest-articles .articles').append($article);
             });
         },
         error: function () {
@@ -72,6 +72,22 @@ function loadArticle(id) {
     });
 }
 
+function createArticleCard(article) {
+    var $card = $('<div class="card m-1 p-1"></div>');
+    var $cardImage = $('<img class="card-image-top mb-2" alt="Article image at top"></img>').attr('src', 'img/African_woman_slave_trade.jpg');
+    var $cardTitle = $('<div class="card-title h5 mb-0 pb-0"></div>').html(article.title);
+    var $cardInfo = $('<p class="card-info mb-2 text-muted"></p>').text(article.author + " | " + article.location + " | " + article.date);
+    var $cardBody = $('<div class="card-text ml-3 mr-3"></div>').html(article.description);
+    var $cardReadMore = $('<a class="btn btn-primary"></a>').attr('href', 'article.php?articleid=' + article.articleid).text('Read more...');
+    
+    $card
+        .append($cardImage)
+        .append($cardTitle)
+        .append($cardInfo)
+        .append($cardBody)
+        .append($cardReadMore);
+    return $card;
+}
 function createArticle(data) {
     var $article = $('<article class="article shadow"></article>');
     var $header = $('<div class="article-header"></div>');
