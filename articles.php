@@ -49,6 +49,7 @@ function getDetailsView($pdo, $article) {
     $footer         = file_get_contents('./templates/footer.html');
 
     $my_metas = "
+        <meta property=\"og:type\"        content=\"article\">
         <meta property=\"og:title\"       content=\"$article->title\">
         <meta property=\"og:description\" content='$article->description'>
         <meta property=\"og:image\"       content=\"$article->imageUrl\">
