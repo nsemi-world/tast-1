@@ -86,7 +86,8 @@ function getDetailsView($pdo, $article) {
     $content = str_replace('###ARTICLE_LOCATION###', $article->location, $content);
     $content = str_replace('###ARTICLE_CONTENT###',  $article->content,  $content);
     $content = str_replace('###LATEST###',           $latest,            $content);
-    
+    $content = str_replace('tastXplorer', '<span class="logo"><span>tast</span><span class="loading">X</span><span>plorer</span></span>', $content);
+
     $template = str_replace('###HEAD###', $head, $template);
     $template = str_replace('###HEADER###', $header, $template);
     $template = str_replace('###CONTENT###', $content, $template);
