@@ -12,3 +12,5 @@ participation: {
 	spain:         {first_year: FY, last_year: LY, statsSP}
 	...
 }
+
+NEXT: BATTLESHIP + GUNS + MOVEMENT

@@ -45,6 +45,10 @@ section {
     font-weight: bold;
 }
 
+.frontpage.small {
+    height: calc(var(--main-height) * 8 / 10);
+}
+
 #home .frontpage {
     background: url('../img/African_woman_slave_trade.jpg');
     background-repeat: no-repeat;
@@ -120,7 +124,11 @@ section {
 
 .frontpage .title-wrapper {
     background: rgba(0,0,0,.75);
-    height: var(--main-height);
+    height: 100%;
+}
+
+.frontpage.small .title-wrapper {
+    background: transparent;
 }
 
 .title-wrapper .title {
@@ -131,8 +139,9 @@ section {
     text-align: center;
 }
 
-
-
+.title .article-title {
+    color: #111;
+}
 /**********************************
  articles 
 ***********************************/

@@ -6,17 +6,10 @@ $(document).ready(function() {
 function initArticles() {
     loadLatestArticles();
     centerArticles();
-
-    var params = getSearchParameters();
-
-    if (params.articleid != null) {
-        loadArticle(params.articleid);
-    }
     
     $(window).on('resize', function() {
         centerArticles();
     });
-
 }
 
 function getSearchParameters() {
@@ -73,21 +66,22 @@ function loadArticle(id) {
 }
 
 function createArticleCard(article) {
-    var $card = $('<div class="card m-1 p-1"></div>');
-    var $cardImage = $('<img class="card-image-top mb-2" alt="Article image at top"></img>').attr('src', 'img/African_woman_slave_trade.jpg');
-    var $cardTitle = $('<div class="card-title h5 mb-0 pb-0"></div>').html(article.title);
+    var $card = $('<div class="card"></div>');
+    var $cardImage = $('<img class="card-image-top" alt="Article image at top"></img>').attr('src', 'img/African_woman_slave_trade.jpg');
+    var $cardTitle = $('<div class="card-title h5"></div>').html(article.title);
     var $cardInfo = $('<p class="card-info mb-2 text-muted"></p>').text(article.author + " | " + article.location + " | " + article.date);
-    var $cardBody = $('<div class="card-text ml-3 mr-3"></div>').html(article.description);
+    var $cardText = $('<div class="card-text"></div>').html(article.description);
     var $cardReadMore = $('<a class="btn btn-primary"></a>').attr('href', 'articles.php?articleid=' + article.articleid).text('Read more...');
+
+    var $cardBody = $('<div class="card-body">').append($cardTitle).append($cardInfo).append($cardText).append($cardReadMore);
     
     $card
         .append($cardImage)
-        .append($cardTitle)
-        .append($cardInfo)
-        .append($cardBody)
-        .append($cardReadMore);
+        .append($cardBody);
+    
     return $card;
 }
+
 function createArticle(data) {
     var $article = $('<article class="article shadow"></article>');
     var $header = $('<div class="article-header"></div>');
@@ -111,27 +105,16 @@ function activateArticle($article) {
     $article.addClass('active');
 }
 
-function updateMetaTags(url, title, author, description, imageUrl) {
-    var $head = $('head');
-
-    $('meta[property="og:url"]').attr('content', url);
-    $('meta[property="og:title"]').attr('content', title);
-    $('meta[property="og:description"]').attr('content', description);
-    $('meta[property="og:image"]').attr('content', imageUrl);
-    $('meta[property="article:author"]').attr('content', author);
-
-    console.log('og:url - ' + $('meta[property="og:url"]').attr('content'));
-    console.log('og:title - ' + $('meta[property="og:title"]').attr('content'));
-    console.log('og:description - ' + $('meta[property="og:description"]').attr('content'));
-    console.log('og:image - ' + $('meta[property="og:image"]').attr('content'));
-
-}
-    
 function centerArticles() {
-    $('#articles .title-wrapper .title').position({
+    $('.title-wrapper').position({
         my: 'center',
         at: 'center',
-        of: '#articles .title-wrapper'
+        of: '.frontpage'
+    });
+    $('.title-wrapper .title').position({
+        my: 'center',
+        at: 'center',
+        of: '.title-wrapper'
     });
 }
 

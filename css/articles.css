@@ -14,13 +14,13 @@
     top: 0;
     left: 0;
     z-index: 5000;
-    background: linear-gradient(to bottom, var(--main-color), var(--sec-color), white);
-    /*background: white;*/
+    background: white;
     text-align: center;
     padding: 1em 0;
 }
 
-.article-title {
+
+article .article-title {
     font-size: 150%;
     font-weight: bold;
 }
