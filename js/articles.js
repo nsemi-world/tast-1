@@ -10,6 +10,19 @@ function initArticles() {
     $(window).on('resize', function() {
         centerArticles();
     });
+    
+    var metaImage = $('meta[property="og:image"]');
+    var src = metaImage.attr('content');
+    
+    if(src) {
+        $('#articles .frontpage').css({
+            backgroundImage: 'url(' + src + ')',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+        });
+    }
+    //$('.frontpage ')
 }
 
 function getSearchParameters() {
