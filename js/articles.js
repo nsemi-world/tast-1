@@ -15,6 +15,7 @@ function initArticles() {
     var src = metaImage.attr('content');
     
     if(src) {
+        //alert(src);
         $('#articles .frontpage').css({
             backgroundImage: 'url(' + src + ')',
             backgroundRepeat: 'no-repeat',
