@@ -42,7 +42,7 @@ function loadLatestArticles() {
 }
 
 function createArticleCard(article) {
-    var $card = $('<div class="card shadow"></div>');
+    var $card = $('<div class="card shadow p-0 m-0"></div>');
     var $cardImage = $('<div class="card-image"></div>').css({
             backgroundImage: 'url(' + article.imageUrl + ')',
             backgroundRepeat: 'no-repeat',
