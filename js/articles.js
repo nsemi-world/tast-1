@@ -5,7 +5,7 @@ $(document).ready(function() {
     $(document).on('_login_successfull', function(event, response){
         console.log(response);
         
-        $('#toggle_login').css({
+        $('#toggle_login i').css({
             background: '#4267b2'
         });
         
