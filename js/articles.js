@@ -118,8 +118,8 @@ function createArticleCardForm() {
     var $cardBody = $('<div class="card-body">').append($cardTitle).append($cardInfo).append($cardText).append($cardReadMore);
     $card.append($cardImage).append($cardBody);
     
-    var left = $('<div class="left  col-md-6"></div>').append($articleForm);
-    var right = $('<div class="right col-md-6"></div>').append($card);
+    var $left = $('<div class="left  col-md-6"></div>').append($articleForm);
+    var $right = $('<div class="right col-md-6"></div>').append($card);
     return $('<div class="formPreview row"></div>').append($left).append($right);
 }
 
