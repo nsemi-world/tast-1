@@ -4,34 +4,37 @@ $(document).ready(function() {
     initArticles();
     activate($('#toggle_articles'));
 
-    var $button = $('<button id="createArticle" class="btn shadow"><i class="fas fa-plus"></i></button>');
-        
+    $button = $('<button id="createArticle" class="btn shadow"><i class="fas fa-plus"></i></button>');
+    
     $(document).on('_login_successfull', function(event, response){
-        console.log('_LOGIN_SUCCSS');
-        
-        $('#toggle_login i').toggleClass('loggedin').attr('title', 'Logout');
-        
-        $button.css({
-            position: 'fixed',
-            right: '1.5em',
-            bottom: '1.5em',
-            background: 'yellow',
-            borderRadius: '50%'
-        });
-
-        $('#latest-articles').append($button);
-        
-        $button.on('click', function() {
-            alert('TODO: Create New Article Form');
-        });
+        console.log('_LOGIN_SUCCESS');
+        onLogin(response);
     });
     
     $(document).on('_logout_successfull', function(event, response) {
         console.log('_LOGOUT_SUCCESS');
-        $('#toggle_login i').toggleClass('loggedin').attr('title', 'Login');
-        $('#latest-articles button').remove();
+        onLogout(response);
     });
 });
+
+function onLogin(response) {
+    $('#toggle_login i').toggleClass('loggedin').attr('title', 'Logout');
+    $button.css({
+        position: 'fixed',
+        right: '1.5em',
+        bottom: '1.5em',
+        background: 'yellow',
+        borderRadius: '50%'
+    }).on('click', function() {
+        alert('TODO: Create New Article Form');
+    });
+    $('#latest-articles').append($button);
+}
+
+function onLogout(response) {
+    $('#toggle_login i').toggleClass('loggedin').attr('title', 'Login');
+    $button.remove();
+}
 
 function initArticles() {
     loadLatestArticles();

@@ -24,32 +24,19 @@
         }
         function statusChangeCallback(response) {
             if(response.status == 'connected') {
-                loggedIn = true;
+                FB.logout(function(response) {
+                    $(document).trigger('_logout_successfull', [response]);
+                });
             }
             else {
-                loggedIn = false;
+                FB.login(function(response) {
+                    if(response.status == 'connected') {
+                        $(document).trigger('_login_successfull', [response]);
+                    }
+                }, {scope: 'public_profile,email'});
             }
         }
         
-        function isLoggedIn() {
-            return loggedIn;
-        }
-        
-        function login() {
-            checkLoginState();
-            FB.login(function(response) {
-                if(response.status == 'connected') {
-                    $(document).trigger('_login_successfull', [response]);
-                }
-            }, {scope: 'public_profile,email'});
-        }
-        
-        function logout() {
-            checkLoginState();
-            FB.logout(function(response) {
-                $(document).trigger('_logout_successfull', [response]);
-            });
-        }
         
         (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
