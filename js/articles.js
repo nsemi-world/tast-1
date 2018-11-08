@@ -15,7 +15,7 @@ function createNewArticleButton() {
         
     });
     
-    $('#articles').append($button);
+    $('#latest-articles').append($button);
     $button.on('click', function() {
         checkLoginState();
         if(!isLoggedIn()) {
