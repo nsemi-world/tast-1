@@ -21,6 +21,12 @@
 
         function statusChangeCallback(response) {
             console.log(response);
+            if(response.status == 'not_authorized') {
+                FB.login();
+            }
+            else if(response.status == 'connected') {
+                alert('CONNECTED!!!')
+            }
         }
         
         (function(d, s, id) {
