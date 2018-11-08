@@ -14,3 +14,6 @@ participation: {
 }
 
 NEXT: BATTLESHIP + GUNS + MOVEMENT
+
+PRIVACY GENERATOR
+https://www.freeprivacypolicy.com/builder/download/retrieve?token=a13a0162cb672003276cd49310c67fd9

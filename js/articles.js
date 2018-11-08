@@ -1,31 +1,25 @@
 $(document).ready(function() {
     initArticles();
     activate($('#toggle_articles'));
-    createNewArticleButton();
-});
 
-function createNewArticleButton() {
-    var $button = $('<button id="createArticle" class="btn shadow"><i class="fas fa-plus"></i></button>');
-    $button.css({
-        position: 'fixed',
-        right: '1.5em',
-        bottom: '1.5em',
-        background: 'yellow',
-        borderRadius: '50%'
+    if(isLoggedIn()) {
+        var $button = $('<button id="createArticle" class="btn shadow"><i class="fas fa-plus"></i></button>');
         
-    });
-    
-    $('#latest-articles').append($button);
-    $button.on('click', function() {
-        checkLoginState();
-        if(!isLoggedIn()) {
-            login();
-        }
-        else {
-            alert("Logged IN");
-        }
-    });
-}
+        $button.css({
+            position: 'fixed',
+            right: '1.5em',
+            bottom: '1.5em',
+            background: 'yellow',
+            borderRadius: '50%'
+        });
+
+        $('#latest- articles').append($button);
+        
+        $button.on('click', function() {
+            alert('TODO: Create New Article Form');
+        });
+    }
+});
 
 function initArticles() {
     loadLatestArticles();
