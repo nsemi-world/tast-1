@@ -2,7 +2,10 @@ $(document).ready(function() {
     initArticles();
     activate($('#toggle_articles'));
 
-    if(isLoggedIn()) {
+    $(document).on('_login_successfull', function(event, response){
+        console.log(response);
+        
+        $('#toggle_login').css({background: '#4267b2'});
         var $button = $('<button id="createArticle" class="btn shadow"><i class="fas fa-plus"></i></button>');
         
         $button.css({
@@ -18,7 +21,7 @@ $(document).ready(function() {
         $button.on('click', function() {
             alert('TODO: Create New Article Form');
         });
-    }
+    });
 });
 
 function initArticles() {
