@@ -17,7 +17,7 @@ function createNewArticleButton() {
     
     $('#articles').append($button);
     $button.on('click', function() {
-        checkLoginStatus();
+        checkLoginState();
     });
 }
 
