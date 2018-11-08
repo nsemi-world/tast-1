@@ -7,7 +7,8 @@ $(document).ready(function() {
     $(document).on('_login_successfull', function(event, response){
         console.log(response);
         
-        $('#toggle_login i').toggleClass('loggedin').text('Logout');
+        $('#toggle_login').text('Logout');
+        $('#toggle_login i').toggleClass('loggedin');;
         
         $button.css({
             position: 'fixed',
@@ -25,7 +26,8 @@ $(document).ready(function() {
     });
     
     $(document).on('_logout_successfull', function(event, response) {
-        $('#toggle_login i').toggleClass('loggedin').text('Login');
+        $('#toggle_login').text('Login');
+        $('#toggle_login i').toggleClass('loggedin');
         $('#latest-articles').remove($button);
     });
 });

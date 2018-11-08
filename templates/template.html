@@ -33,20 +33,17 @@
         }
         
         function login() {
-            if(!loggedIn) {
-                FB.login(function(response) {
-                    if(response.status == 'connected') {
-                        $(document).trigger('_login_successfull', [response]);
-                    }
-                }, {scope: 'public_profile,email'});
-            }
+            FB.login(function(response) {
+                if(response.status == 'connected') {
+                    $(document).trigger('_login_successfull', [response]);
+                }
+            }, {scope: 'public_profile,email'});
         }
+        
         function logout() {
-            if(loggedIn) {
-                FB.logout(function(response) {
-                    $(document).trigger('_logout_successfull', [response]);
-                });
-            }
+            FB.logout(function(response) {
+                $(document).trigger('_logout_successfull', [response]);
+            });
         }
         
         (function(d, s, id) {
