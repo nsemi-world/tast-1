@@ -14,9 +14,6 @@
                 version: 'v3.2'
             });
             FB.AppEvents.logPageView();
-            FB.getLoginStatus(function(response) {
-                statusChangeCallback(response);
-            });
         };
 
         function statusChangeCallback(response) {
@@ -27,6 +24,12 @@
             else {
                 FB.login();
             }
+        }
+        
+        function checkLoginState() {
+          FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+          });
         }
         
         (function(d, s, id) {

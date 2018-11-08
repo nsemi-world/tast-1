@@ -1,7 +1,25 @@
 $(document).ready(function() {
     initArticles();
     activate($('#toggle_articles'));
+    createNewArticleButton();
 });
+
+function createNewArticleButton() {
+    var $button = $('<button id="createArticle" class="btn shadow"><i class="fas fa-plus"></i></button>');
+    $button.css({
+        position: 'fixed',
+        right: '1.5em',
+        bottom: '1.5em',
+        background: 'yellow',
+        borderRadius: '50%'
+        
+    });
+    
+    $('#articles').append($button);
+    $button.on('click', function() {
+        checkLoginStatus();
+    });
+}
 
 function initArticles() {
     loadLatestArticles();
