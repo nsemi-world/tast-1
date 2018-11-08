@@ -17,7 +17,13 @@ function createNewArticleButton() {
     
     $('#articles').append($button);
     $button.on('click', function() {
-        checkLoginState();
+        var loggedIn = checkLoginState();
+        if(!loggedIn) {
+            login();
+        }
+        else {
+            alert("Logged IN");
+        }
     });
 }
 

@@ -20,17 +20,21 @@
         function statusChangeCallback(response) {
             console.log(response);
             if(response.status == 'connected') {
-                alert('CONNECTED!!!')
+                return true;
             }
             else {
-                FB.login();
+                return false;
             }
         }
         
         function checkLoginState() {
           FB.getLoginStatus(function(response) {
-            statusChangeCallback(response);
+            return statusChangeCallback(response);
           });
+        }
+        
+        function login() {
+            FB.login();
         }
         
         (function(d, s, id) {
