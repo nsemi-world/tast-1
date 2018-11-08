@@ -1,20 +1,22 @@
 var $button = null;
 
-$(document).ready(function() {
+$(document).ready(function () {
     initArticles();
     activate($('#toggle_articles'));
-    
+
     $button = $('<button id="createArticle" class="btn shadow"><i class="fas fa-plus"></i></button>');
-    
-    $(document).on('_login_successfull', function(event, response){
+
+    $(document).on('_login_successfull', function (event, response) {
         console.log('_LOGIN_SUCCESS');
         onLogin(response);
     });
-    
-    $(document).on('_logout_successfull', function(event, response) {
+
+    $(document).on('_logout_successfull', function (event, response) {
         console.log('_LOGOUT_SUCCESS');
         onLogout(response);
     });
+
+
 });
 
 function onLogin(response) {
@@ -25,12 +27,20 @@ function onLogin(response) {
         bottom: '1.5em',
         background: 'yellow',
         borderRadius: '50%'
-    }).on('click', function() {
+    }).on('click', function () {
         alert('TODO: Create New Article Form');
         var $formPreview = createArticleCardForm();
         $('body').append($formPreview);
-        
         $formPreview.dialog();
+        
+        $('#fileupload').fileupload({
+            dataType: 'json',
+            done: function (e, data) {
+                $.each(data.result.files, function (index, file) {
+                    $('<p/>').text(file.name).appendTo(document.body);
+                });
+            }
+        });
     });
     $('#latest-articles').append($button);
 }
@@ -43,15 +53,15 @@ function onLogout(response) {
 function initArticles() {
     loadLatestArticles();
     centerArticles();
-    
-    $(window).on('resize', function() {
+
+    $(window).on('resize', function () {
         centerArticles();
     });
-    
+
     var metaImage = $('meta[property="og:image"]');
     var src = metaImage.attr('content');
-    
-    if(src) {
+
+    if (src) {
         //alert(src);
         $('#articles .frontpage').css({
             backgroundImage: 'url(' + src + ')',
@@ -81,10 +91,10 @@ function loadLatestArticles() {
 function createArticleCard(article) {
     var $card = $('<div class="card shadow p-0 m-0"></div>');
     var $cardImage = $('<div class="card-image"></div>').css({
-            backgroundImage: 'url(' + article.imageUrl + ')',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
+        backgroundImage: 'url(' + article.imageUrl + ')',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
     });
     var $cardTitle = $('<div class="card-title h5"></div>').html(article.title);
     var $cardInfo = $('<p class="card-info mb-2 text-muted"></p>').text(article.author + " | " + article.location + " | " + article.date);
@@ -93,23 +103,23 @@ function createArticleCard(article) {
     var $cardReadMore = $('<a class="btn btn-secondary"></a>').attr('href', 'articles.php?articleid=' + article.articleid).text('Read more...');
 
     var $cardBody = $('<div class="card-body">').append($cardTitle).append($cardInfo).append($cardText).append($cardReadMore);
-    
+
     $card
         .append($cardImage)
         .append($cardBody);
-    
+
     return $card;
 }
 
 function createArticleCardForm() {
     var $articleForm = $('<form></form>').append($('<input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>'));
-    
+
     var $card = $('<div class="card shadow p-0 m-0"></div>');
     var $cardImage = $('<div class="card-image"></div>').css({
-            backgroundColor: '#ddd',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
+        backgroundColor: '#ddd',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
     });
     var $cardTitle = $('<div class="card-title h5"></div>').html('<p>Title</p>');
     var $cardInfo = $('<p class="card-info mb-2 text-muted"></p>').text('article.author' + " | " + 'article.location' + " | " + 'article.date');
@@ -117,7 +127,7 @@ function createArticleCardForm() {
     var $cardReadMore = $('<a class="btn btn-secondary"></a>').attr('href', 'articles.php?articleid=' + 'article.articleid').text('Read more...');
     var $cardBody = $('<div class="card-body">').append($cardTitle).append($cardInfo).append($cardText).append($cardReadMore);
     $card.append($cardImage).append($cardBody);
-    
+
     var $left = $('<div class="left  col-md-6"></div>').append($articleForm);
     var $right = $('<div class="right col-md-6"></div>').append($card);
     return $('<div class="formPreview row"></div>').append($left).append($right);
@@ -140,4 +150,3 @@ function centerArticles() {
         of: '.title-wrapper'
     });
 }
-
