@@ -1,3 +1,5 @@
+var $button = null;
+
 $(document).ready(function() {
     initArticles();
     activate($('#toggle_articles'));
@@ -7,7 +9,7 @@ $(document).ready(function() {
     $(document).on('_login_successfull', function(event, response){
         console.log('_LOGIN_SUCCSS');
         
-        $('#toggle_login i').toggleClass('loggedin').text().replace('Login', 'Logout');
+        $('#toggle_login i').toggleClass('loggedin').attr('title', 'Logout');
         
         $button.css({
             position: 'fixed',
@@ -25,9 +27,9 @@ $(document).ready(function() {
     });
     
     $(document).on('_logout_successfull', function(event, response) {
-        console.log('_LOOUT_SUCCSS');
-        $('#toggle_login i').toggleClass('loggedin').text().replace('Logout', 'Login');
-        $('#latest-articles').remove('#createArticle');
+        console.log('_LOGOUT_SUCCESS');
+        $('#toggle_login i').toggleClass('loggedin').attr('title', 'Login');
+        $('#latest-articles button').remove();
     });
 });
 
