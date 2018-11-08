@@ -53,7 +53,7 @@ function getDetailsView($pdo, $article) {
         <meta property=\"og:title\"       content=\"$article->title\">
         <meta property=\"og:description\" content='$article->description'>
         <meta property=\"og:image\"       content=\"$article->imageUrl\">
-        <meta property=\"og:url\"         content=\"http://tast.ngutu.org/articles.php?articleid=$article->articleid\">
+        <meta property=\"og:url\"         content=\"https://tast.ngutu.org/articles.php?articleid=$article->articleid\">
         <meta property=\"og:site_name\"   content=\"tastXplorer, The Trans-atlantic Slave Trade Explorer\">
         <meta property=\"fb:app_id\"      content=\"716533442049508\" />
     ";
