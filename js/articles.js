@@ -5,7 +5,10 @@ $(document).ready(function() {
     $(document).on('_login_successfull', function(event, response){
         console.log(response);
         
-        $('#toggle_login').css({background: '#4267b2'});
+        $('#toggle_login').css({
+            background: '#4267b2'
+        });
+        
         var $button = $('<button id="createArticle" class="btn shadow"><i class="fas fa-plus"></i></button>');
         
         $button.css({
@@ -16,7 +19,7 @@ $(document).ready(function() {
             borderRadius: '50%'
         });
 
-        $('#latest- articles').append($button);
+        $('#latest-articles').append($button);
         
         $button.on('click', function() {
             alert('TODO: Create New Article Form');
