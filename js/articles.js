@@ -5,10 +5,9 @@ $(document).ready(function() {
     var $button = $('<button id="createArticle" class="btn shadow"><i class="fas fa-plus"></i></button>');
         
     $(document).on('_login_successfull', function(event, response){
-        console.log(response);
+        console.log('_LOGIN_SUCCSS');
         
-        $('#toggle_login').text('Logout');
-        $('#toggle_login i').toggleClass('loggedin');;
+        $('#toggle_login i').toggleClass('loggedin').text().replace('Login', 'Logout');
         
         $button.css({
             position: 'fixed',
@@ -26,9 +25,9 @@ $(document).ready(function() {
     });
     
     $(document).on('_logout_successfull', function(event, response) {
-        $('#toggle_login').text('Login');
-        $('#toggle_login i').toggleClass('loggedin');
-        $('#latest-articles').remove($button);
+        console.log('_LOOUT_SUCCSS');
+        $('#toggle_login i').toggleClass('loggedin').text().replace('Logout', 'Login');
+        $('#latest-articles').remove('#createArticle');
     });
 });
 
