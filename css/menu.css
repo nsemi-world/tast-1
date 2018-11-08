@@ -8,7 +8,6 @@ header {
     width: 100%;
 }
 header .navbar-brand {
-    width: 20%;
     font-family: var(--brand-font);
     color: var(--link-color);
 }
@@ -37,4 +36,8 @@ a i, button i {
 
 #toggle_contribute i {
     color: red;
+}
+
+.pluginLoginButton.pluginLoginButtonmedium {
+    width: 100%;
 }
