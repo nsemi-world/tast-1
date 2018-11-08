@@ -27,6 +27,8 @@ function onLogin(response) {
         borderRadius: '50%'
     }).on('click', function() {
         alert('TODO: Create New Article Form');
+        var $form = createArticleCardForm();
+        $('#latest-articles').append($form);    
     });
     $('#latest-articles').append($button);
 }
@@ -87,6 +89,29 @@ function createArticleCard(article) {
     var $cardText = $('<div class="card-text"></div>').html(article.description);
     var $cardReadMore = $('<a class="btn btn-secondary"></a>').attr('href', 'articles.php?articleid=' + article.articleid).text('Read more...');
     var $cardReadMore = $('<a class="btn btn-secondary"></a>').attr('href', 'articles.php?articleid=' + article.articleid).text('Read more...');
+
+    var $cardBody = $('<div class="card-body">').append($cardTitle).append($cardInfo).append($cardText).append($cardReadMore);
+    
+    $card
+        .append($cardImage)
+        .append($cardBody);
+    
+    return $card;
+}
+
+function createArticleCardForm() {
+    var $card = $('<div class="card shadow p-0 m-0"></div>');
+    var $cardImage = $('<div class="card-image"></div>').css({
+            backgroundColor: '#eee',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+    });
+    var $cardTitle = $('<div class="card-title h5"></div>').html('<p>Title</p>');
+    var $cardInfo = $('<p class="card-info mb-2 text-muted"></p>').text('article.author' + " | " + 'article.location' + " | " + 'article.date');
+    var $cardText = $('<div class="card-text"></div>').html('article.description');
+    var $cardReadMore = $('<a class="btn btn-secondary"></a>').attr('href', 'articles.php?articleid=' + 'article.articleid').text('Read more...');
+    var $cardReadMore = $('<a class="btn btn-secondary"></a>').attr('href', 'articles.php?articleid=' + 'article.articleid').text('Read more...');
 
     var $cardBody = $('<div class="card-body">').append($cardTitle).append($cardInfo).append($cardText).append($cardReadMore);
     
