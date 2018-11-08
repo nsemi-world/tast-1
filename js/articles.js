@@ -28,7 +28,7 @@ function onLogin(response) {
     }).on('click', function() {
         alert('TODO: Create New Article Form');
         var $form = createArticleCardForm();
-        $('#latest-articles').append($form);    
+        $('#latest-articles .articles').append($form);    
     });
     $('#latest-articles').append($button);
 }
