@@ -369,3 +369,9 @@ div.itinerary a {
     padding: 3em;
     color: var(--text-color);
 }
+
+
+.loggedin {
+    color: #4267b2;
+    background: white;
+}

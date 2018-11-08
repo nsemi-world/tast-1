@@ -2,14 +2,12 @@ $(document).ready(function() {
     initArticles();
     activate($('#toggle_articles'));
 
+    var $button = $('<button id="createArticle" class="btn shadow"><i class="fas fa-plus"></i></button>');
+        
     $(document).on('_login_successfull', function(event, response){
         console.log(response);
         
-        $('#toggle_login i').css({
-            color: '#4267b2'
-        });
-        
-        var $button = $('<button id="createArticle" class="btn shadow"><i class="fas fa-plus"></i></button>');
+        $('#toggle_login i').toggleClass('loggedin');
         
         $button.css({
             position: 'fixed',
@@ -24,6 +22,11 @@ $(document).ready(function() {
         $button.on('click', function() {
             alert('TODO: Create New Article Form');
         });
+    });
+    
+    $(document).on('_logout_successfull', function(event, response) {
+        $('#latest-articles').remove($button);
+        
     });
 });
 
