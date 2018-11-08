@@ -26,6 +26,9 @@ function getMasterView() {
 
     $my_scripts = '
         <script src="js/articles.js"></script>
+        <script src="plugins/fileupload/js/vendor/jquery.ui.widget.js"></script>
+        <script src="plugins/fileupload/js/jquery.iframe-transport.js"></script>
+        <script src="plugins/fileupload/js/jquery.fileupload.js"></script>
     ';
 
     $head = str_replace('###MY_SCRIPTS###', $my_scripts, $head);
