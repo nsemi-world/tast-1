@@ -7,7 +7,7 @@ $(document).ready(function() {
     $(document).on('_login_successfull', function(event, response){
         console.log(response);
         
-        $('#toggle_login i').toggleClass('loggedin');
+        $('#toggle_login i').toggleClass('loggedin').text('Logout');
         
         $button.css({
             position: 'fixed',
@@ -25,8 +25,8 @@ $(document).ready(function() {
     });
     
     $(document).on('_logout_successfull', function(event, response) {
+        $('#toggle_login i').toggleClass('loggedin').text('Login');
         $('#latest-articles').remove($button);
-        
     });
 });
 
