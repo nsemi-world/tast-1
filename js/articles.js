@@ -6,7 +6,7 @@ $(document).ready(function() {
         console.log(response);
         
         $('#toggle_login i').css({
-            background: '#4267b2'
+            color: '#4267b2'
         });
         
         var $button = $('<button id="createArticle" class="btn shadow"><i class="fas fa-plus"></i></button>');
