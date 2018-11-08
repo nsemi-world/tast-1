@@ -100,9 +100,14 @@ function createArticleCard(article) {
 }
 
 function createArticleCardForm() {
+    var articleForm = $('<div id="form-container"></div>');
+    $.get('templates/article-form.html', function(data) {
+        articleForm.html(data);
+    });
+    
     var $card = $('<div class="card shadow p-0 m-0"></div>');
     var $cardImage = $('<div class="card-image"></div>').css({
-            backgroundColor: '#eee',
+            backgroundColor: '#ddd',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             backgroundPosition: 'center'
