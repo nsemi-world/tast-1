@@ -360,3 +360,12 @@ div.itinerary a {
     color: var(--sec-color);
 }
 
+
+#privacy {
+    background: white;
+}
+
+#privacy .tab-content {
+    padding: 3em;
+    color: var(--text-color);
+}
