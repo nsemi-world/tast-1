@@ -36,6 +36,7 @@
         }
         
         function login() {
+            checkLoginState();
             FB.login(function(response) {
                 if(response.status == 'connected') {
                     $(document).trigger('_login_successfull', [response]);
@@ -44,6 +45,7 @@
         }
         
         function logout() {
+            checkLoginState();
             FB.logout(function(response) {
                 $(document).trigger('_logout_successfull', [response]);
             });
