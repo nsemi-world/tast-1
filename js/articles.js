@@ -17,9 +17,8 @@ function createNewArticleButton() {
     
     $('#articles').append($button);
     $button.on('click', function() {
-        var loggedIn = checkLoginState();
-        alert(loggedIn);
-        if(!loggedIn) {
+        checkLoginState();
+        if(!loggedIn()) {
             login();
         }
         else {
