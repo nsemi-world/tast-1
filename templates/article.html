@@ -8,15 +8,17 @@
     <div class="content row m-0 p-0">
         <!-- MAIN Column -->
         <article class="article detail">
-            <div class="article-header">
+            <div class="article-header shadow">
                 <div class="article-title">###ARTICLE_TITLE###</div>
-                <div class="article-author">
-                    by ###ARTICLE_AUTHOR###
-                </div>
                 <div class="article-info">
-                    <p>###ARTICLE_DATE### | ###ARTICLE_LOCATION###</p>
+                   <div class="row">
+                        <p class="col-md-4 text-center p-0 m-0">###ARTICLE_DATE### | ###ARTICLE_LOCATION###</p>
+                        <div class="article-author col-md-4">
+                            by ###ARTICLE_AUTHOR###
+                        </div>
+                        <div class="fb-like col-md-4 text-center" data-share="true" data-width="450" data-show-faces="true"></div>
+                   </div>
                 </div>
-                <div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
             </div>
             <div class="article-body">
                 ###ARTICLE_CONTENT###
