@@ -1,6 +1,9 @@
+var $button = null;
+
 $(document).ready(function () {
     initArticles();
     activate($('#toggle_articles'));
+    createNewArticleButton();
 
     $(document).on('_login_successfull', function (event, response) {
         console.log('_LOGIN_SUCCESS');
@@ -17,11 +20,10 @@ $(document).ready(function () {
 
 function onLogin(response) {
     $('#toggle_login i').toggleClass('loggedin').attr('title', 'Logout');
-    createNewArticleButton();
 }
 
 function createNewArticleButton(){
-    var $button = $('<button id="createArticle" class="btn shadow"><i class="fas fa-plus"></i></button>');
+    $button = $('<button id="createArticle" class="btn shadow"><i class="fas fa-plus"></i></button>');
     $button.css({
         position: 'fixed',
         right: '1.5em',
