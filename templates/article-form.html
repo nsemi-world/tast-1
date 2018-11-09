@@ -1,2 +1,20 @@
-<form>
-</form>
+<div class="card shadow p-0 m-0">
+    <div class="card-image">
+        <input id="fileupload" type="file" name="files[]" data-url="php/createArticleImage.php">
+    </div>
+    <div class="card-body">
+        <div class="card-title h5">
+            <input id="ftitle" type="text" , name="ftitle">
+        </div>
+        <p class="card-info mb-2 text-muted">
+            <span class="card-author"><input id="fauthor" type="text", name="fauthor"></span> |
+            <span class="card-location"><input id="flocation" type="text", name="flocation"></span> |
+            <span class="card-date"><input id="fdate" type="datetime", name="fdate"></span>
+        </p>
+        <div class="card-text">
+            <input id="fdescription" type="text" , name="fdescription">
+            <textarea id="fcontent" type="text" , name="fcontent" />
+        </div>;
+        <input class="btn btn-primary" type="submit" name="Submit">
+    </div>
+</div>

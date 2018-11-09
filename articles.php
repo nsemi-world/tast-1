@@ -51,11 +51,12 @@ function getDetailsView($pdo, $article) {
     $content        = file_get_contents('./templates/article.html');
     $footer         = file_get_contents('./templates/footer.html');
 
+    $imageUrl = ($article->imageUrl != null) ? $article->imageUrl : $article->image;
     $my_metas = "
         <meta property=\"og:type\"        content=\"article\">
         <meta property=\"og:title\"       content=\"$article->title\">
         <meta property=\"og:description\" content='$article->description'>
-        <meta property=\"og:image\"       content=\"$article->imageUrl\">
+        <meta property=\"og:image\"       content=\"$imageUrl\">
         <meta property=\"og:url\"         content=\"https://tast.ngutu.org/articles.php?articleid=$article->articleid\">
         <meta property=\"og:site_name\"   content=\"tastXplorer, The Trans-atlantic Slave Trade Explorer\">
         <meta property=\"fb:app_id\"      content=\"716533442049508\" />
@@ -70,13 +71,11 @@ function getDetailsView($pdo, $article) {
     $sameAuthor = getSameAuthorArticleListExcept($pdo, $article->author, $article->articleid);    
     $latest = getLatestArticlesExcept($pdo, $article->articleid);
     
-    $content = str_replace('###SAME_AUTHOR###',      $sameAuthor,        $content);
     $content = str_replace('###ARTICLE_TITLE###',    $article->title,    $content);
     $content = str_replace('###ARTICLE_AUTHOR###',   $article->author,   $content);
     $content = str_replace('###ARTICLE_DATE###',     $article->date,     $content);
     $content = str_replace('###ARTICLE_LOCATION###', $article->location, $content);
     $content = str_replace('###ARTICLE_CONTENT###',  $article->content,  $content);
-    $content = str_replace('###LATEST###',           $latest,            $content);
     $content = str_replace('tastXplorer', '<span class="logo"><span>tast</span><span class="loading">X</span><span>plorer</span></span>', $content);
 
     $template = str_replace('###HEAD###', $head, $template);

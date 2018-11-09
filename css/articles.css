@@ -4,6 +4,7 @@
 }
 
 .article {
+    width: 100%;
     font-family: var(--body-font);
     color: var(--text-color);
     background: white;
