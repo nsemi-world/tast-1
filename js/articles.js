@@ -1,10 +1,6 @@
-var $button = null;
-
 $(document).ready(function () {
     initArticles();
     activate($('#toggle_articles'));
-
-    $button = $('<button id="createArticle" class="btn shadow"><i class="fas fa-plus"></i></button>');
 
     $(document).on('_login_successfull', function (event, response) {
         console.log('_LOGIN_SUCCESS');
@@ -21,6 +17,11 @@ $(document).ready(function () {
 
 function onLogin(response) {
     $('#toggle_login i').toggleClass('loggedin').attr('title', 'Logout');
+    createNewArticleButton();
+}
+
+function createNewArticleButton(){
+    var $button = $('<button id="createArticle" class="btn shadow"><i class="fas fa-plus"></i></button>');
     $button.css({
         position: 'fixed',
         right: '1.5em',
@@ -28,10 +29,8 @@ function onLogin(response) {
         background: 'yellow',
         borderRadius: '50%'
     }).on('click', function () {
-        alert('TODO: Create New Article Form');
         var $formPreview = createArticleCardForm();
-        $('body').append($formPreview);
-        $formPreview.dialog();
+        $('#latest-articles').append($formPreview);
         
         $('#fileupload').fileupload({
             dataType: 'json',
@@ -42,7 +41,8 @@ function onLogin(response) {
             }
         });
     });
-    $('#latest-articles').append($button);
+    
+    $('#latest-articles .articles').append($button);    
 }
 
 function onLogout(response) {
@@ -112,10 +112,8 @@ function createArticleCard(article) {
 }
 
 function createArticleCardForm() {
-    var $articleForm = $('<form></form>').append($('<input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>'));
-
     var $card = $('<div class="card shadow p-0 m-0"></div>');
-    var $cardImage = $('<div class="card-image"></div>').css({
+    var $cardImage = $('<div class="card-image"><input id="fileupload" type="file" name="files[]" data-url="server/php/"></div>').css({
         backgroundColor: '#ddd',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
@@ -126,11 +124,10 @@ function createArticleCardForm() {
     var $cardText = $('<div class="card-text"></div>').html('article.description');
     var $cardReadMore = $('<a class="btn btn-secondary"></a>').attr('href', 'articles.php?articleid=' + 'article.articleid').text('Read more...');
     var $cardBody = $('<div class="card-body">').append($cardTitle).append($cardInfo).append($cardText).append($cardReadMore);
+
     $card.append($cardImage).append($cardBody);
 
-    var $left = $('<div class="left  col-md-6"></div>').append($articleForm);
-    var $right = $('<div class="right col-md-6"></div>').append($card);
-    return $('<div class="formPreview row"></div>').append($left).append($right);
+    return $card;
 }
 
 function activateArticle($article) {
