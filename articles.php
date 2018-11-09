@@ -64,7 +64,7 @@ function getDetailsView($pdo, $article) {
     }
     else {
         $imageUrl = str_replace('data:image/jpeg;base64,', '', $articleImage);
-        $imageUrl = "https://tast.ngutu.org/decoder.php?data=$imageUrl";
+        $imageUrl = "decoder.php?data=$imageUrl";
         $image = $articleImage;
     }
         
