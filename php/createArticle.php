@@ -1,7 +1,5 @@
 <?php
 
-ob_start("ob_gzhandler");
-
 require_once('./utils.php');
 require '../vendor/autoload.php';
 
@@ -67,5 +65,4 @@ function getParagraphs($text) {
     $parts = preg_split('/\r\n|\r|\n/', $text);
     return $parts;
 }
-ob_end_flush();
 ?>
