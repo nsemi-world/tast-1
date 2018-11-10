@@ -26,9 +26,6 @@ function getMasterView() {
 
     $my_scripts = '
         <script src="js/articles.js"></script>
-        <script src="plugins/fileupload/js/vendor/jquery.ui.widget.js"></script>
-        <script src="plugins/fileupload/js/jquery.iframe-transport.js"></script>
-        <script src="plugins/fileupload/js/jquery.fileupload.js"></script>
     ';
 
     $head = str_replace('###MY_SCRIPTS###', $my_scripts, $head);
@@ -51,29 +48,11 @@ function getDetailsView($pdo, $article) {
     $content        = file_get_contents('./templates/article.html');
     $footer         = file_get_contents('./templates/footer.html');
 
-    $articleImage = $article->image;
-    /*$articleImage = str_replace('data:image/jpeg;base64,', '', $articleImage);
-    $articleImage = base64_decode($articleImage);*/
-    
-    $image = null;
-    $imageUrl = null;
-
-    if($article->imageUrl != null) {
-        $imageUrl = $article->imageUrl;
-        $image = $article->imageUrl;
-    }
-    else {
-        $imageUrl = str_replace('data:image/jpeg;base64,', '', $articleImage);
-        $imageUrl = "decoder.php?data=$imageUrl";
-        $image = $articleImage;
-    }
-        
     $my_metas = "
         <meta property=\"og:type\"        content=\"article\">
         <meta property=\"og:title\"       content=\"$article->title\">
         <meta property=\"og:description\" content='$article->description'>
-        <meta property=\"og:image\"       content=\"$image\">
-        <meta property=\"og:image:url\"   content=\"$imageUrl\">
+        <meta property=\"og:image\"       content=\"$article->imageUrl\">
         <meta property=\"og:url\"         content=\"https://tast.ngutu.org/articles.php?articleid=$article->articleid\">
         <meta property=\"og:site_name\"   content=\"tastXplorer, The Trans-atlantic Slave Trade Explorer\">
         <meta property=\"fb:app_id\"      content=\"716533442049508\" />

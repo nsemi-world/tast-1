@@ -50,62 +50,62 @@ section {
 }
 
 #home .frontpage {
-    background: url('../img/African_woman_slave_trade.jpg');
+    background: url('https://s3.eu-central-1.amazonaws.com/tastxplorer/img/African_woman_slave_trade.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
 
 #participation .frontpage {
-    background: url('../img/bright-1866986_1920.jpg');
+    background: url('https://s3.eu-central-1.amazonaws.com/tastxplorer/img/bright-1866986_1920.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
 
 #voyages .frontpage {
-    background: url('../img/ship-1366926_1920.jpg');
+    background: url('https://s3.eu-central-1.amazonaws.com/tastxplorer/img/ship-1366926_1920.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
 
 #database .frontpage{
-    background: url('../img/bricks-459299_1920.jpg');
+    background: url('https://s3.eu-central-1.amazonaws.com/tastxplorer/img/bricks-459299_1920.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
 
 #charts .frontpage {
-    background: url('../img/business-2089534_1920.jpg');
+    background: url('https://s3.eu-central-1.amazonaws.com/tastxplorer/img/business-2089534_1920.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
 
 #resources .frontpage {
-    background: url('../img/giant-tortoise-3782239_1920.jpg');
+    background: url('https://s3.eu-central-1.amazonaws.com/tastxplorer/img/giant-tortoise-3782239_1920.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
 
 #articles .frontpage {
-    background: url('../img/color-3256055_1920.jpg');
+    background: url('https://s3.eu-central-1.amazonaws.com/tastxplorer/img/color-3256055_1920.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
 
 #about-us .frontpage {
-    background: url('../img/ground-1225041_1920.jpg');
+    background: url('https://s3.eu-central-1.amazonaws.com/tastxplorer/img/ground-1225041_1920.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
 #contacts .frontpage {
-    background: url('../img/ground-1225041_1920.jpg');
+    background: url('https://s3.eu-central-1.amazonaws.com/tastxplorer/img/ground-1225041_1920.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -116,7 +116,7 @@ section {
 }
 
 #contribute .frontpage {
-    background: url('../img/heart-700141_1920.jpg');
+    background: url('https://s3.eu-central-1.amazonaws.com/tastxplorer/img/heart-700141_1920.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

@@ -3,24 +3,53 @@
 ob_start("ob_gzhandler");
 
 require_once('./utils.php');
+require '../vendor/autoload.php';
+
+use Aws\Credentials\CredentialProvider;
+use Aws\S3\S3Client;
+
+
+//////////////////////////////////////////
+// TEST ZONE
+//echo json_encode(getenv());
+//saveImageToAWS("test-file.txt", "bla");
+//////////////////////////////////////////
+
+
+
+$AWS_IMG = 'https://s3.eu-central-1.amazonaws.com/tastxplorer/img/';
 $pdo = getPDO();
 
 
 $article = null;
 if(isset($_POST['article'])) {
     $article = $_POST['article'];
-    saveArticle($pdo, $article);
-}
-else {
     
+    $iUrl = $AWS_IMG . $article['imageName'];
+    
+    saveImageToAWS($iUrl, $article['image']);
+    saveArticle($pdo, $article, $iUrl);
 }
 
-header('Content-type:application/json;charset=utf-8');
-echo json_encode(['status' => true]);
 
 
-function saveArticle($pdo, $article) {
-    $image = $article['image'];
+function saveImageToAWS($filename, $image) {
+    $provider = CredentialProvider::env();
+    
+    $s3 = new S3Client([
+        'version' => 'latest',
+        'region'  => 'eu-central-1',
+        'provider' => $provider
+    ]);
+    
+    $result = $s3->putObject([
+        'Bucket' => 'tastxplorer',
+        'Key'    => $filename,
+        'Body'   => $image
+    ]);
+}
+
+function saveArticle($pdo, $article, $imageS3Url) {
     $title = $article['title'];
     $author = $article['author'];
     $location = $article['location'];
@@ -29,10 +58,9 @@ function saveArticle($pdo, $article) {
     $paragraphs = getParagraphs($content);
     $description = $paragraphs[0];
     
-    $sql = "INSERT INTO article (title, author, location, date, description, content, image) VALUES('$title', '$author', '$location', '$date', '$description', '$content', '$image')";
+    $sql = "INSERT INTO article (title, author, location, date, description, content, imageUrl) VALUES('$title', '$author', '$location', '$date', '$description', '$content', '$imageS3Url')";
     
     $erg = $pdo->query($sql);
-    //var_dump($erg);
     return true;
 }
 
