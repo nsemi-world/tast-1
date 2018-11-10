@@ -25,10 +25,9 @@ $article = null;
 if(isset($_POST['article'])) {
     $article = $_POST['article'];
     
-    $iUrl = $AWS_IMG . $article['imageName'];
-    
-    saveImageToAWS($iUrl, $article['image']);
-    saveArticle($pdo, $article, $iUrl);
+    $filename = $article['imageName'];
+    saveImageToAWS($filename, $article['image']);
+    saveArticle($pdo, $article, $AWS_IMG . $filename);
 }
 
 
