@@ -43,7 +43,7 @@ function saveImageToAWS($filename, $image) {
     
     $result = $s3->putObject([
         'Bucket' => 'tastxplorer',
-        'Key'    => $filename,
+        'Key'    => 'img/' . $filename,
         'Body'   => $image
     ]);
 }
