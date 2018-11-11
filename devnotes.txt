@@ -93,3 +93,5 @@ TODO: Should Only Store images not yet in S3.
     Contra: Distinct images with same name are undistinguishable - the wrong image will         be displayed.
     Contra: Images can be arbitrarily big. Use methods to compress and resize images.
     
+TODO: Change Heroku app region
+TODO: To add articles users must login witu facebook. Only to set ownership and article property.
