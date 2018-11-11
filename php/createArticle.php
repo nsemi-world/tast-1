@@ -1,4 +1,6 @@
 <?php
+ob_start("ob_gzhandler");
+
 
 require_once('./utils.php');
 require '../vendor/autoload.php';
@@ -23,9 +25,9 @@ $article = null;
 if(isset($_POST['article'])) {
     $article = $_POST['article'];
     
-    $filename = $article['imageName'];
-    saveImageToAWS($filename, $article['image']);
-    saveArticle($pdo, $article, $AWS_IMG . $filename);
+    $filename =  str_replace('.jpg', '_' . rand(1000, 9999) . '.jpg', $article['imageName']);
+    $filename = saveImageToAWS($filename, $article['image']);
+    saveArticle($pdo, $article, $filename);
 }
 
 
@@ -39,11 +41,31 @@ function saveImageToAWS($filename, $image) {
         'provider' => $provider
     ]);
     
-    $result = $s3->putObject([
-        'Bucket' => 'tastxplorer',
-        'Key'    => 'img/' . $filename,
-        'Body'   => $image
-    ]);
+    try {
+        // Upload data.
+        
+        $image_mod = base64_decode(getImageData($image));
+        $result = $s3->putObject([
+            'Bucket' => 'tastxplorer',
+            'Key'    => 'atricles-img/' . $filename,
+            //'ContentEncoding' => 'base64',
+            //'ContentType' => 'image/jpeg',
+            'Body'   => $image_mod,
+            'ACL'   => 'public-read'
+        ]);
+
+        // Print the URL to the object.
+        $b =  $result['ObjectURL'] . PHP_EOL;
+        return $b;
+    } catch (S3Exception $e) {
+        echo 'S3 Exception' . $e->getMessage() . PHP_EOL;
+    }        
+}
+
+
+function getImageData($image) {
+    $parts = explode('base64,', $image);
+    return $parts[1];
 }
 
 function saveArticle($pdo, $article, $imageS3Url) {
@@ -51,9 +73,8 @@ function saveArticle($pdo, $article, $imageS3Url) {
     $author = $article['author'];
     $location = $article['location'];
     $date = date_create('now')->format('Y-m-d H:i:s');
+    $description = $article['abstract'];
     $content = $article['content'];
-    $paragraphs = getParagraphs($content);
-    $description = $paragraphs[0];
     
     $sql = "INSERT INTO article (title, author, location, date, description, content, imageUrl) VALUES('$title', '$author', '$location', '$date', '$description', '$content', '$imageS3Url')";
     
@@ -61,8 +82,6 @@ function saveArticle($pdo, $article, $imageS3Url) {
     return true;
 }
 
-function getParagraphs($text) {
-    $parts = preg_split('/\r\n|\r|\n/', $text);
-    return $parts;
-}
+
+ob_end_flush();
 ?>

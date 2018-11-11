@@ -1,10 +1,7 @@
-var button = null;
+var $button = null;
 
 $(document).ready(function () {
-    initArticles();
-    activate($('#toggle_articles'));
-    createNewArticleButton();
-
+    init();
     $(document).on('_login_successfull', function (event, response) {
         console.log('_LOGIN_SUCCESS');
         onLogin(response);
@@ -14,9 +11,13 @@ $(document).ready(function () {
         console.log('_LOGOUT_SUCCESS');
         onLogout(response);
     });
-
-
 });
+
+function init() {
+    initArticles();
+    activate($('#toggle_articles'));
+    createNewArticleButton();
+}
 
 function onLogin(response) {
     $('#toggle_login i').toggleClass('loggedin').attr('title', 'Logout');
@@ -33,24 +34,13 @@ function createNewArticleButton(){
         borderRadius: '50%'
     }).on('click', function () {
         $button.attr('disabled', true);
-        var $formPreview = createArticleCardForm();
-        $('#latest-articles .articles').append($formPreview);
+        
+        var $card = createArticleCardForm();
+        $('#latest-articles .articles').prepend($card);
         $('input, textarea').css({width: '100%'});
+        $('#fcontent').richText();
         $("#input-image").change(function(){
             readURL(this);
-        });
-        $('#create').on('click', function(event){
-            event.preventDefault();
-            saveArticle();
-        });
-        
-        $('#fileupload').fileupload({
-            dataType: 'json',
-            done: function (e, data) {
-                $.each(data.result.files, function (index, file) {
-                    $('<p/>').text(file.name).appendTo(document.body);
-                });
-            }
         });
     });
     
@@ -65,6 +55,7 @@ function saveArticle() {
     var author = $('#fauthor').val();
     var location = $('#flocation').val();
     var date = new Date();
+    var aabstract = $('#fabstract').val();
     var content = $('#fcontent').val();
     
     console.log('Image: ' + imageName);
@@ -72,14 +63,15 @@ function saveArticle() {
     console.log('Author: ' + author);
     console.log('Location: ' + location);
     console.log('Date: ' + date);
+    console.log('Abstract: ' + aabstract);
     console.log('Content: ' + content);
     
     $.ajax({
         url: 'php/createArticle.php',
         type: 'POST',
-        data: {article: {image: image, imageName: imageName, title: title, author: author, location: location, date: date, content: content}},
+        data: {article: {image: image, imageName: imageName, title: title, author: author, location: location, date: date, abstract: aabstract, content: content}},
         success: function(data) {
-            alert(data);
+            init();
         },
         error: function() {
             alert('Error Ajax call to create article');
@@ -105,6 +97,7 @@ function onLogout(response) {
 }
 
 function initArticles() {
+    //$('#latest-articles .articles').empty();
     loadLatestArticles();
     centerArticles();
 
@@ -149,7 +142,6 @@ function createArticleCard(article) {
     var $cardInfo = $('<div class="card-info mb-2 text-muted"></div>').text(article.author + " | " + article.location + " | " + article.date);
     var $cardText = $('<div class="card-text"></div>').html(article.description);
     var $cardReadMore = $('<a class="btn btn-secondary"></a>').attr('href', 'articles.php?articleid=' + article.articleid).text('Read more...');
-    var $cardReadMore = $('<a class="btn btn-secondary"></a>').attr('href', 'articles.php?articleid=' + article.articleid).text('Read more...');
 
     var $cardBody = $('<div class="card-body">').append($cardTitle).append($cardInfo).append($cardText).append($cardReadMore);
 
@@ -161,32 +153,47 @@ function createArticleCard(article) {
 }
 
 function createArticleCardForm() {
-    var $card = $('<div class="card shadow p-0 m-0"></div>');
-    var $cardImage = $('<div class="card-image"><input id="input-image" type="file"><img id="new-image" src="#" alt="New article image"></div>').css({
+    var $card = $('<form action="javascript:saveArticle(this)" class="form card shadow p-0 m-0"></form>');
+    var $cardImage = 
+        $('<div class="card-image"><input id="input-image" type="file" required><img id="new-image" src="#" alt="New article image"></div>').css({
         backgroundColor: '#ddd',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center'
     });
-    var $cardTitle = $('<div class="card-title h5"></div>').html('<input type="text" id="ftitle" placeholder="Title">');
+    var $cardTitle = $('<div class="card-title h5"></div>').html('<input type="text" id="ftitle" placeholder="Title" required>');
     var $cardInfo = $('<div class="card-info mb-2 text-muted"></div>');
-    var $inputAuthor = $('<input id="fauthor" type="text" placeholder="Author name">');
-    var $inputLocation = $('<input id="flocation" type="text" placeholder="City, Country">');
+    var $inputAuthor = $('<input id="fauthor" type="text" placeholder="Author name" required>');
+    var $inputLocation = $('<input id="flocation" type="text" placeholder="City, Country" required>');
     
     $cardInfo.append($inputAuthor).append($inputLocation);
     
     var $cardText = $('<div class="card-text"></div>');
-    var $inputContent = $('<textarea id="fcontent" placeholder="Content">');
-    $cardText.append($inputContent);
+    var $inputAbstract = $('<textarea id="fabstract" placeholder="Abstract" required>');
+    var $inputContent = $('<textarea id="fcontent" placeholder="Content" required>');
     
-    var $cardReadMore = $('<input id="create" class="btn btn-success" type="submit" value="Create">');
-
-    var $cardBody = $('<div class="card-body">').append($cardTitle).append($cardInfo).append($cardText).append($cardReadMore);
-    $card.append($cardImage).append($cardBody);
-
+    $cardText.append($inputAbstract).append($inputContent);
     
+    var $cardFooter = $('<div class="card-footer"></div>');
+    var $cardSave = $('<input id="create" class="btn btn-success" type="submit" value="Create">');
+    
+    var $cardCancel = $('<input id="cancel" class="btn btn-secondary" type="cancel" value="Cancel">').on('click', function(event) {
+        event.preventDefault();
+        $card.remove();
+        $button.attr('disabled', false);
+    });
+    $cardFooter.append($cardSave).append($cardCancel);
+
+    var $cardBody = $('<div class="card-body">')
+        .append($cardTitle)
+        .append($cardInfo)
+        .append($cardText)
+
+    $card.append($cardImage).append($cardBody).append($cardFooter);
+
     return $card;
 }
+
 
 function activateArticle($article) {
     $('article.active').removeClass('active');

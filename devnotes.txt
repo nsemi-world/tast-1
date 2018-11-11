@@ -88,4 +88,8 @@ TODO: Change article.php to add meta data in head for requests where articleid i
 
 
 TODO: Integrate with facebook share
-
+TODO: Validate for content is missing: must validate the richtext content for non emptyness regardless html tags.
+TODO: Should Only Store images not yet in S3. 
+    Contra: Distinct images with same name are undistinguishable - the wrong image will         be displayed.
+    Contra: Images can be arbitrarily big. Use methods to compress and resize images.
+    
