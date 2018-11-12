@@ -29,6 +29,17 @@
             });
         }
         
+        function toggleLoginState() {
+            FB.getLoginStatus(function(response) {
+                if(response.status == 'connected') {
+                    $(document).trigger('_facebook_status_changed', [true]);
+                }
+                else {
+                    $(document).trigger('_facebook_status_changed', [false]);
+                }
+            });
+        }
+        
         function login() {
             FB.login(function(response) {
                 if(response.status == 'connected') {
