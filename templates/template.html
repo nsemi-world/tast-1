@@ -19,6 +19,8 @@
         };
 
         function checkLoginState() {
+            console.log('Checking Login Status...');
+            
             FB.getLoginStatus(function(response) {
                 if(response.status == 'connected') {
                     $(document).trigger('_facebook_status', [true]);
