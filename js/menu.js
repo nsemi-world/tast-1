@@ -6,11 +6,11 @@ $(document).ready(function() {
     
     $(document).on('_facebook_status', function(event, isLoggedIn){
         if(isLoggedIn) {
-            $('#toggle_login i').removeClass('loggedin');
+            $('#toggle_login i').addClass('loggedin');
             $('#toggle_login').attr('title', 'Logout');
         }
         else {
-            $('#toggle_login i').addClass('loggedin');
+            $('#toggle_login i').removeClass('loggedin');
             $('#toggle_login').attr('title', 'Login');
         }
     });
