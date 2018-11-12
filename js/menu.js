@@ -6,17 +6,23 @@ $(document).ready(function() {
     
     $(document).on('_facebook_status', function(event, isLoggedIn){
         if(isLoggedIn) {
-            $('#toggle_login i').removeClass('loggedin');
-            $('#toggle_login').text('Login');
             logout();
-            
         }
         else {
-            $('#toggle_login i').addClass('loggedin');
-            $('#toggle_login').text('Logout');
             login();
         }
     });
+    
+    $(document).on('_facebook_login', function (event, response) {
+        $('#toggle_login i').addClass('loggedin');
+        $('#toggle_login').text('Logout');
+    });
+
+    $(document).on('_facebook_logout', function (event, response) {
+        $('#toggle_login i').removeClass('loggedin');
+        $('#toggle_login').text('Login');
+    });
+    
 });
 
 function activate(link) {
