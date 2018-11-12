@@ -42,15 +42,16 @@ function saveImageToAWS($filename, $image) {
     ]);
     
     try {
-        // Upload data.
+        // Decode the image
+        $image_decoded = base64_decode(getImageData($image));
+        $im = optimazeImage($image_decoded);
         
-        $image_mod = base64_decode(getImageData($image));
         $result = $s3->putObject([
             'Bucket' => 'tastxplorer',
-            'Key'    => 'atricles-img/' . $filename,
+            'Key'    => 'atricles-img/min/' . $filename,
             //'ContentEncoding' => 'base64',
-            //'ContentType' => 'image/jpeg',
-            'Body'   => $image_mod,
+            'ContentType' => 'image/' . $image_optimized->getImageFormat(),
+            'Body'   => $image_optimized->getImageBlob(),
             'ACL'   => 'public-read'
         ]);
 
@@ -62,6 +63,19 @@ function saveImageToAWS($filename, $image) {
     }        
 }
 
+function optimizeImage($image_decoded) {
+    $im = new Imagick();
+    $im->readImageBlob($image_decoded);
+    // Optimize the image layers
+    $im->optimizeImageLayers();
+
+    // Compression and quality
+    $im->setImageCompression(Imagick::COMPRESSION_JPEG);
+    $im->setImageCompressionQuality($cquality);
+
+    $im->minifyImage();
+    return $im;
+}
 
 function getImageData($image) {
     $parts = explode('base64,', $image);

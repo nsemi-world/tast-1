@@ -100,4 +100,6 @@ TODO: Try several tools and methods for image optimization
     - Imagick / Tinypng
     - Resize / Quality
     
+TODO: Combine Imagick and S3
+
     
