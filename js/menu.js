@@ -6,14 +6,14 @@ $(document).ready(function() {
     
     $(document).on('_facebook_status', function(event, isLoggedIn){
         if(isLoggedIn) {
-            $('#toggle_login i').addClass('loggedin');
-            $('#toggle_login').text('Logout');
+            $('#toggle_login i').removeClass('loggedin');
+            $('#toggle_login').text('Login');
             logout();
             
         }
         else {
-            $('#toggle_login i').removeClass('loggedin');
-            $('#toggle_login').text('Login');
+            $('#toggle_login i').addClass('loggedin');
+            $('#toggle_login').text('Logout');
             login();
         }
     });
