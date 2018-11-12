@@ -60,6 +60,11 @@ article .article-title {
     background: linear-gradient(to right, var(--main-color), white);
 }
 
+#article .card-columns {
+    margin: 0 auto;
+    padding: 0;
+}
+
 .card {
     padding: 0;
     margin: 0;
