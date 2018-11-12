@@ -2,6 +2,7 @@ var $button = null;
 
 $(document).ready(function () {
     init();
+    
     $(document).on('_facebook_login', function (event, response) {
         console.log('_LOGIN_SUCCESS');
         onLogin(response);

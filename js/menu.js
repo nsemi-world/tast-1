@@ -8,13 +8,15 @@ $(document).ready(function() {
         if(isLoggedIn) {
             $('#toggle_login i').addClass('loggedin');
             $('#toggle_login').text('Logout');
+            logout();
             
         }
         else {
             $('#toggle_login i').removeClass('loggedin');
             $('#toggle_login').text('Login');
+            login();
         }
-    })
+    });
 });
 
 function activate(link) {
