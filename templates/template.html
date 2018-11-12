@@ -18,23 +18,28 @@
         };
 
         function checkLoginState() {
-          FB.getLoginStatus(function(response) {
-                statusChangeCallback(response);
-          });
+            FB.getLoginStatus(function(response) {
+                if(response.status == 'connected') {
+                    $(document).trigger('_facebook_status', [true]);
+                }
+                else {
+                    $(document).trigger('_facebook_status', [false]);
+                }
+            });
         }
-        function statusChangeCallback(response) {
-            if(response.status == 'connected') {
-                FB.logout(function(response) {
-                    $(document).trigger('_logout_successfull', [response]);
-                });
-            }
-            else {
-                FB.login(function(response) {
-                    if(response.status == 'connected') {
-                        $(document).trigger('_login_successfull', [response]);
-                    }
-                }, {scope: 'public_profile,email'});
-            }
+        
+        function login() {
+            FB.login(function(response) {
+                if(response.status == 'connected') {
+                    $(document).trigger('_facebook_login', [response]);
+                }
+            }, {scope: 'public_profile,email'});
+        }
+        
+        function logout() {
+            FB.logout(function(response) {
+                $(document).trigger('_facebook_logout', [response]);
+            });
         }
         
         

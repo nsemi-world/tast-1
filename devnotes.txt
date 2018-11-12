@@ -95,3 +95,4 @@ TODO: Should Only Store images not yet in S3.
     
 TODO: Change Heroku app region
 TODO: To add articles users must login witu facebook. Only to set ownership and article property.
+TODO: 

@@ -2,12 +2,12 @@ var $button = null;
 
 $(document).ready(function () {
     init();
-    $(document).on('_login_successfull', function (event, response) {
+    $(document).on('_facebook_login', function (event, response) {
         console.log('_LOGIN_SUCCESS');
         onLogin(response);
     });
 
-    $(document).on('_logout_successfull', function (event, response) {
+    $(document).on('_facebook_logout', function (event, response) {
         console.log('_LOGOUT_SUCCESS');
         onLogout(response);
     });
@@ -20,12 +20,17 @@ function init() {
 }
 
 function onLogin(response) {
-    $('#toggle_login i').toggleClass('loggedin').attr('title', 'Logout');
     createNewArticleButton();
+    $button.attr('disabled', false);
 }
 
+function onLogout(response) {
+    $button.attr('disabled', true);
+}
+
+
 function createNewArticleButton(){
-    $button = $('<button id="createArticle" class="btn shadow"><i class="fas fa-plus"></i></button>');
+    $button = $('<button id="createArticle" class="btn shadow" disabled><i class="fas fa-plus"></i></button>');
     $button.css({
         position: 'fixed',
         right: '1.5em',
@@ -91,10 +96,6 @@ function readURL(input) {
     }
 }
 
-function onLogout(response) {
-    $('#toggle_login i').toggleClass('loggedin').attr('title', 'Login');
-    $button.remove();
-}
 
 function initArticles() {
     //$('#latest-articles .articles').empty();
