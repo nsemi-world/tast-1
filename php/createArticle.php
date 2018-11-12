@@ -50,8 +50,8 @@ function saveImageToAWS($filename, $image) {
             'Bucket' => 'tastxplorer',
             'Key'    => 'atricles-img/min/' . $filename,
             //'ContentEncoding' => 'base64',
-            'ContentType' => 'image/' . $image_optimized->getImageFormat(),
-            'Body'   => $image_optimized->getImageBlob(),
+            'ContentType' => 'image/' . $im->getImageFormat(),
+            'Body'   => $im->getImageBlob(),
             'ACL'   => 'public-read'
         ]);
 
