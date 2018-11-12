@@ -1,5 +1,6 @@
 {
     "require": {
-        "aws/aws-sdk-php": "^3.71"
+        "aws/aws-sdk-php": "^3.71",
+        "imagick": "^3.4.3"
     }
 }
