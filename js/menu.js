@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    checkLoginState();
     $('#toggle_login').on('click', function(event) {
         event.preventDefault();
         checkLoginState();
