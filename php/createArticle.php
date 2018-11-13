@@ -44,7 +44,7 @@ function saveImageToAWS($filename, $image) {
     try {
         // Decode the image
         $image_decoded = base64_decode(getImageData($image));
-        $im = optimizeImage($image_decoded, 50, true);
+        $im = optimizeImage($image_decoded, 50, false);
         
         $result = $s3->putObject([
             'Bucket' => 'tastxplorer',
