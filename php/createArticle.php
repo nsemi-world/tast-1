@@ -44,7 +44,7 @@ function saveImageToAWS($filename, $image) {
     try {
         // Decode the image
         $image_decoded = base64_decode(getImageData($image));
-        $im = optimizeImage($image_decoded, 25, true);
+        $im = optimizeImage($image_decoded, 50, true);
         
         $result = $s3->putObject([
             'Bucket' => 'tastxplorer',
@@ -66,6 +66,7 @@ function saveImageToAWS($filename, $image) {
 function optimizeImage($image_decoded, $cquality, $minify) {
     $im = new Imagick();
     $im->readImageBlob($image_decoded);
+    
     // Optimize the image layers
     $im->optimizeImageLayers();
 
