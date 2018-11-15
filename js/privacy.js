@@ -1,6 +1,6 @@
 $(document).ready(function(){
     initPrivacy();
-    activate($('#toggle_Privacy'));
+    activate($('#toggle_privacy'));
 });
 
 function initPrivacy() {
