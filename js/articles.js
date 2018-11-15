@@ -23,11 +23,15 @@ $(document).ready(function () {
 });
 
 function init() {
-    loadSectionImage('#articles', 'articles.jpg');
+    if(getSearchParameters().length == 0) {
+        loadSectionImage('#articles', 'articles.jpg');
+    }
     centerArticles();
 
     $(window).on('resize', function () {
-        loadSectionImage('#articles', 'articles.jpg');
+        if(getSearchParameters().length == 0) {
+            loadSectionImage('#articles', 'articles.jpg');
+        }
         centerArticles();
     });
 
