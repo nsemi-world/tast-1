@@ -1,4 +1,4 @@
-
+// FUnction to load an image for a specific section
 function loadSectionImage(sectionName, filename) {
     
     var documentWidth = screen.width;
