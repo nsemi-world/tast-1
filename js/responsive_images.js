@@ -7,10 +7,9 @@ function loadSectionImage(sectionName, filename) {
     console.log(documentWidth + 'x' + documentHeight);
     
     $.ajax({
-        url: 'php/getSectionImage.php',
+        url: 'php/getSectionImageFromDatabase.php',
         data: {name: filename, width: documentWidth, height: documentHeight},
         success: function(data) {
-            //alert(data.url);
             $(sectionName + ' .frontpage').css({
                 backgroundImage: "url(" + data.url + ")",
                 backgroundRepeat: 'no-repeat',

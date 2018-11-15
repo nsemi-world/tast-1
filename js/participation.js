@@ -29,6 +29,10 @@ function centerParticipation() {
 }
 
 function initParticipation() {
+
+    loadSectionImage('#participation', 'participation.jpg');
+    centerParticipation();
+
     $('#world-container').on('_series_loaded', function (event) {
         initParticipationMap();
 
@@ -47,9 +51,6 @@ function initParticipation() {
     configureParticipationPlayer();
     configureParticipationAppearence();
     getCountriesSeries(0);
-
-    loadSectionImage('#participation', 'participation.jpg');
-    centerParticipation();
 }
 
 function configureParticipationPlayer() {

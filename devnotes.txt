@@ -108,3 +108,5 @@ https://cloudfour.com/thinks/responsive-images-part-10-conclusion/
 https://mediag.com/blog/popular-screen-resolutions-designing-for-all/
 http://www.javascriptkit.com/dhtmltutors/cssmediaqueries4.shtml
 https://stackoverflow.com/questions/21315406/php-echo-html-tag-so-it-is-viewable-not-interpreted-as-code
+http://www.mysqltutorial.org/php-mysql-blob/
+https://www.tutorialspoint.com/mysql/mysql-insert-query.htm 
