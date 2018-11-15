@@ -18,9 +18,13 @@ function initDatabase() {
     getShipsDataTable();
     getOwnersDataTable();
     getCaptainsDataTable();
+    
+
+    loadSectionImage('#database', 'database.jpg');
     centerDatabase();    
     $(window).on('resize', function() {
-        centerDatabase();
+        loadSectionImage('#database', 'database.jpg');
+        centerDatabase();    
     });
 }
 

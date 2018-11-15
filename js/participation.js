@@ -38,6 +38,7 @@ function initParticipation() {
     });
 
     $(window).on('resize', function () {
+        loadSectionImage('#participation', 'participation.jpg');
         centerParticipation();
     });
 
@@ -46,6 +47,8 @@ function initParticipation() {
     configureParticipationPlayer();
     configureParticipationAppearence();
     getCountriesSeries(0);
+
+    loadSectionImage('#participation', 'participation.jpg');
     centerParticipation();
 }
 

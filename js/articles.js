@@ -23,9 +23,19 @@ $(document).ready(function () {
 });
 
 function init() {
+    loadSectionImage('#articles', 'articles.jpg');
+    centerArticles();
+
+    $(window).on('resize', function () {
+        loadSectionImage('#articles', 'articles.jpg');
+        centerArticles();
+    });
+
+    
     initArticles();
     activate($('#toggle_articles'));
     createNewArticleButton();
+    
 }
 
 function onLogin(response) {
@@ -109,12 +119,6 @@ function readURL(input) {
 function initArticles() {
     //$('#latest-articles .articles').empty();
     loadLatestArticles();
-    centerArticles();
-
-    $(window).on('resize', function () {
-        centerArticles();
-    });
-
     var metaImage = $('meta[property="og:image"]');
     var src = metaImage.attr('content');
 

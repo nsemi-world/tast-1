@@ -4,8 +4,10 @@ $(document).ready(function(){
 });
 
 function initAboutUs() {
+    loadSectionImage('#about-us', 'about-us.jpg');
     centerAboutUs();
     $(window).on('resize', function() {
+        loadSectionImage('#about-us', 'about-us.jpg');
         centerAboutUs();
     });
 }

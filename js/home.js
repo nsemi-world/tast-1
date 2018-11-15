@@ -5,8 +5,11 @@ $(document).ready(function() {
 
 
 function initHome() {
-    centerHome();    
+    loadSectionImage('#home', 'home.jpg');
+    centerHome();
+    
     $(window).on('resize', function() {
+        loadSectionImage('#home', 'home.jpg');
         centerHome();
     });
 }

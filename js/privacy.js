@@ -4,8 +4,10 @@ $(document).ready(function(){
 });
 
 function initPrivacy() {
+    loadSectionImage('#privacy', 'privacy.jpg');
     centerPrivacy();
     $(window).on('resize', function() {
+        loadSectionImage('#privacy', 'privacy.jpg');
         centerPrivacy();
     });
 }

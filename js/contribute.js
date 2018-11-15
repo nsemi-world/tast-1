@@ -4,8 +4,10 @@ $(document).ready(function(){
 });
 
 function initContribute() {
+    loadSectionImage('#contribute', 'contribute.jpg');
     centerContribute();
     $(window).on('resize', function() {
+        loadSectionImage('#contribute', 'contribute.jpg');
         centerContribute();
     });
 }

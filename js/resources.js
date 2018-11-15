@@ -6,9 +6,11 @@ $(document).ready(function () {
 
 
 function initResources() {
+    loadSectionImage('#resources', 'resources.jpg');
     getBooks();
     centerResources();    
     $(window).on('resize', function() {
+        loadSectionImage('#resources', 'resources.jpg');
         centerResources();
     });
 }

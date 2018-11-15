@@ -4,8 +4,10 @@ $(document).ready(function(){
 });
 
 function initContacts() {
+    loadSectionImage('#contacts', 'contacts.jpg');
     centerContacts();
     $(window).on('resize', function() {
+        loadSectionImage('#contacts', 'contacts.jpg');
         centerContacts();
     });
 }

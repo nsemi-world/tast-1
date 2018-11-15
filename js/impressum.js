@@ -4,8 +4,10 @@ $(document).ready(function(){
 });
 
 function initImpressum() {
+    loadSectionImage('#impressum', 'impressum.jpg');
     centerImpressum();
     $(window).on('resize', function() {
+        loadSectionImage('#impressum', 'impressum.jpg');
         centerImpressum();
     });
 }
