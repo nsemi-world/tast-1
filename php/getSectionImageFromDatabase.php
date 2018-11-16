@@ -19,14 +19,14 @@ if($image) {
 else {
     $im = resizeImage($name, $width, $height);
     echo json_encode(['url' => toDataUrl($im->getImageBlob())]);
-    storeImageInDatabase(
+    /*storeImageInDatabase(
                 $pdo, 
                 $im->getImageBlob(), 
                 $im->getImageFormat(), 
                 $width, 
                 $height, 
                 $name
-    );
+    );*/
 }
 
 
