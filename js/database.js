@@ -31,7 +31,7 @@ function getShipsDataTable() {
         ajax: {
             url: 'php/getShips.php',
             cache: true
-        }
+        },
         columns: [
             {
                 title: 'Shipname'
@@ -69,7 +69,7 @@ function getOwnersDataTable() {
         ajax: {
             url: 'php/getOwners.php',
             cache: true
-        }
+        },
         columns: [
             {
                 title: 'Name'
@@ -106,7 +106,7 @@ function getCaptainsDataTable() {
         ajax: {
             url: 'php/getCaptains.php',
             cache: true
-        }
+        },
         columns: [
             {
                 title: 'Name'
@@ -143,7 +143,7 @@ function getPlacesDataTable() {
         ajax: {
             url: 'php/getPlaces.php',
             cache: true
-        }
+        },
         columns: [
             {
                 title: 'Place'
