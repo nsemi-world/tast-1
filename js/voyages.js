@@ -13,10 +13,10 @@ $(document).ready(function() {
 function initVoyages() {
     configureVoyagesPlayer();
     loadVoyageIds();
-    loadSectionImage('#voyages', 'voyages.jpg');
+    loadSectionImage('#voyages .frontpage', 'voyages.jpg');
     centerVoyages();
     $(window).on('resize', function() {
-        loadSectionImage('#voyages', 'voyages.jpg');
+        debounce('#voyages .frontpage', 'voyages.jpg');
         centerVoyages();
         if(voyages.storymap != null) {
             voyages.storymap.updateDisplay(); // this isn't automatic

@@ -4,10 +4,10 @@ $(document).ready(function(){
 });
 
 function initImpressum() {
-    loadSectionImage('#impressum', 'impressum.jpg');
+    loadSectionImage('#impressum .frontpage', 'impressum.jpg');
     centerImpressum();
     $(window).on('resize', function() {
-        loadSectionImage('#impressum', 'impressum.jpg');
+        debounce('#impressum .frontpage', 'impressum.jpg');
         centerImpressum();
     });
 }

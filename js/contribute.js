@@ -4,10 +4,10 @@ $(document).ready(function(){
 });
 
 function initContribute() {
-    loadSectionImage('#contribute', 'contribute.jpg');
+    loadSectionImage('#contribute .frontpage', 'contribute.jpg');
     centerContribute();
     $(window).on('resize', function() {
-        loadSectionImage('#contribute', 'contribute.jpg');
+        debounce('#contribute .frontpage', 'contribute.jpg');
         centerContribute();
     });
 }

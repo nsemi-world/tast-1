@@ -6,11 +6,11 @@ $(document).ready(function () {
 
 
 function initResources() {
-    loadSectionImage('#resources', 'resources.jpg');
+    loadSectionImage('#resources .frontpage', 'resources.jpg');
     getBooks();
     centerResources();    
     $(window).on('resize', function() {
-        loadSectionImage('#resources', 'resources.jpg');
+        debounce('#resources .frontpage', 'resources.jpg');
         centerResources();
     });
 }

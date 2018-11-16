@@ -4,12 +4,12 @@ $(document).ready(function() {
 });
 
 function initCharts() {
-    loadSectionImage('#charts', 'charts.jpg');
+    loadSectionImage('#charts .frontpage', 'charts.jpg');
     centerCharts();
     
     $(window).on('resize', function() {
-        loadSectionImage('#charts', 'charts.jpg');
         centerCharts();
+        debounce('#charts .frontpage', 'charts.jpg');
     });
     
     $.ajax({

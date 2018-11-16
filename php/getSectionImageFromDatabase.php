@@ -2,6 +2,7 @@
 ob_start("ob_gzhandler");
 
 require_once('./utils.php');
+header('Content-type:application/json;charset=utf-8');
 
 $name = getRequestParameter('name');
 $width = getRequestParameter('width');
@@ -9,14 +10,16 @@ $height = getRequestParameter('height');
 
 
 $pdo = getPDO();
-$image = getImage($pdo, $name, $width, $height);
+//$image = getImage($pdo, $name, $width, $height);
+$image = null;
 if($image) {
     // echo data url
-    $output = toDataUrl($image->data);
+    echo json_encode(['url' => toDataUrl($image->data)]);
 }
 else {
     $im = resizeImage($name, $width, $height);
-    $output = storeImageInDatabase(
+    echo json_encode(['url' => toDataUrl($im->getImageBlob())]);
+    storeImageInDatabase(
                 $pdo, 
                 $im->getImageBlob(), 
                 $im->getImageFormat(), 
@@ -27,8 +30,6 @@ else {
 }
 
 
-header('Content-type:application/json;charset=utf-8');
-echo json_encode(['url' => $output]);
 
 
 
@@ -58,7 +59,7 @@ function resizeImage($name, $width, $height) {
 
     // Compression and quality
     $im->setImageCompression(Imagick::COMPRESSION_JPEG);
-    $im->setImageCompressionQuality(85);
+    $im->setImageCompressionQuality(35);
     $im->cropThumbnailImage($width, $height);
     
     return $im;

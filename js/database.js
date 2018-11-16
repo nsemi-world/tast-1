@@ -14,18 +14,16 @@ function initDatabase() {
             .columns.adjust();
     });
 
+    $(window).on('resize', function() {
+        debounce('#database .frontpage', 'database.jpg');
+        centerDatabase();    
+    });
+    loadSectionImage('#database .frontpage', 'database.jpg');
+    centerDatabase();    
     getPlacesDataTable();
     getShipsDataTable();
     getOwnersDataTable();
     getCaptainsDataTable();
-    
-
-    loadSectionImage('#database', 'database.jpg');
-    centerDatabase();    
-    $(window).on('resize', function() {
-        loadSectionImage('#database', 'database.jpg');
-        centerDatabase();    
-    });
 }
 
 function getShipsDataTable() {

@@ -23,22 +23,19 @@ $(document).ready(function () {
 });
 
 function init() {
-    if(getSearchParameters().length == 0) {
-        loadSectionImage('#articles', 'articles.jpg');
-    }
+    activate($('#toggle_articles'));
+    loadSectionImage('#articles .frontpage', 'articles.jpg');
+    
     centerArticles();
+    
+    createNewArticleButton();
+    initArticles();
 
-    $(window).on('resize', function () {
-        if(getSearchParameters().length == 0) {
-            loadSectionImage('#articles', 'articles.jpg');
-        }
+    $(window).on('resize', function (event) {
         centerArticles();
+        debounce('#articles .frontpage', 'articles.jpg');
     });
 
-    
-    initArticles();
-    activate($('#toggle_articles'));
-    createNewArticleButton();
     
 }
 
@@ -50,7 +47,6 @@ function onLogin(response) {
 function onLogout(response) {
     $button.attr('disabled', true);
 }
-
 
 function createNewArticleButton(){
     $button = $('<button id="createArticle" class="btn shadow" disabled><i class="fas fa-plus"></i></button>');

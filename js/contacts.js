@@ -4,11 +4,11 @@ $(document).ready(function(){
 });
 
 function initContacts() {
-    loadSectionImage('#contacts', 'contacts.jpg');
+    loadSectionImage('#contacts .frontpage', 'contacts.jpg');
     centerContacts();
     $(window).on('resize', function() {
-        loadSectionImage('#contacts', 'contacts.jpg');
         centerContacts();
+        debounce('#contacts .frontpage', 'contacts.jpg');
     });
 }
 

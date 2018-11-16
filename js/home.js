@@ -5,11 +5,11 @@ $(document).ready(function() {
 
 
 function initHome() {
-    loadSectionImage('#home', 'home.jpg');
+    loadSectionImage('#home .frontpage', 'home.jpg');
     centerHome();
     
     $(window).on('resize', function() {
-        loadSectionImage('#home', 'home.jpg');
+        debounce('#home .frontpage', 'home.jpg');
         centerHome();
     });
 }

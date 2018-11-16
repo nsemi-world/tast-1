@@ -4,11 +4,12 @@ $(document).ready(function(){
 });
 
 function initAboutUs() {
-    loadSectionImage('#about-us', 'about-us.jpg');
     centerAboutUs();
+    loadSectionImage('#about-us .frontpage', 'about-us.jpg');
+    
     $(window).on('resize', function() {
-        loadSectionImage('#about-us', 'about-us.jpg');
         centerAboutUs();
+        debounce('#about-us .frontpage', 'about-us.jpg');
     });
 }
 

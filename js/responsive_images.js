@@ -1,28 +1,42 @@
+var resizeTimeout = false;
+
 // FUnction to load an image for a specific section
 function loadSectionImage(sectionName, filename) {
-    
-    var documentWidth = screen.width;
-    var documentHeight = screen.height;
-    
-    console.log(documentWidth + 'x' + documentHeight);
+    var $target = $(sectionName);
+    var width = $target.innerWidth();
+    var height = $target.innerHeight();
+
+    console.log(width + 'x' + height);
     
     $.ajax({
         url: 'php/getSectionImageFromDatabase.php',
-        data: {name: filename, width: documentWidth, height: documentHeight},
+        data: {name: filename, width: width, height: height},
         success: function(data) {
-            $(sectionName + ' .frontpage').css({
-                backgroundImage: "url(" + data.url + ")",
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center',
-                backgroundSize: 'cover'
-            });
+            if($target) {
+                $target.css({
+                    backgroundImage: "url(" + data.url + ")",
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover'
+                });
+            }
+            console.log("Got image from db!");
         },
         error: function() {
-            alert("Error!");
+            console.error("Error reading/saving image from db!");
         }
     });
     
 }
+
+function debounce(selector, filename) {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(function() {
+        console.log('After timeout ' + new Date());
+        loadSectionImage(selector, filename);
+    }, 2000);
+}
+
 
 
 function getSearchParameters() {

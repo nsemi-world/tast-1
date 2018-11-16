@@ -30,7 +30,7 @@ function centerParticipation() {
 
 function initParticipation() {
 
-    loadSectionImage('#participation', 'participation.jpg');
+    loadSectionImage('#participation .frontpage', 'participation.jpg');
     centerParticipation();
 
     $('#world-container').on('_series_loaded', function (event) {
@@ -42,7 +42,7 @@ function initParticipation() {
     });
 
     $(window).on('resize', function () {
-        loadSectionImage('#participation', 'participation.jpg');
+        debounce('#participation .frontpage', 'participation.jpg');
         centerParticipation();
     });
 

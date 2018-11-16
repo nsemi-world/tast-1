@@ -4,11 +4,11 @@ $(document).ready(function(){
 });
 
 function initPrivacy() {
-    loadSectionImage('#privacy', 'privacy.jpg');
+    loadSectionImage('#privacy .frontpage', 'privacy.jpg');
     centerPrivacy();
     $(window).on('resize', function() {
-        loadSectionImage('#privacy', 'privacy.jpg');
         centerPrivacy();
+        debounce('#privacy .frontpage', 'privacy.jpg');
     });
 }
 
