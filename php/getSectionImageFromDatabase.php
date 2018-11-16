@@ -59,7 +59,7 @@ function resizeImage($name, $width, $height) {
 
     // Compression and quality
     $im->setImageCompression(Imagick::COMPRESSION_JPEG);
-    $im->setImageCompressionQuality(35);
+    $im->setImageCompressionQuality(50);
     $im->cropThumbnailImage($width, $height);
     
     return $im;
