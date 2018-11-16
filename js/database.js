@@ -28,7 +28,10 @@ function initDatabase() {
 
 function getShipsDataTable() {
     return $('#example-ships').DataTable({
-        ajax: 'php/getShips.php',
+        ajax: {
+            url: 'php/getShips.php',
+            cache: true
+        }
         columns: [
             {
                 title: 'Shipname'
@@ -63,7 +66,10 @@ function getShipsDataTable() {
 
 function getOwnersDataTable() {
     return $('#example-owners').DataTable({
-        ajax: 'php/getOwners.php',
+        ajax: {
+            url: 'php/getOwners.php',
+            cache: true
+        }
         columns: [
             {
                 title: 'Name'
@@ -97,7 +103,10 @@ function getOwnersDataTable() {
 
 function getCaptainsDataTable() {
     return $('#example-captains').DataTable({
-        ajax: 'php/getCaptains.php',
+        ajax: {
+            url: 'php/getCaptains.php',
+            cache: true
+        }
         columns: [
             {
                 title: 'Name'
@@ -131,7 +140,10 @@ function getCaptainsDataTable() {
 
 function getPlacesDataTable() {
     return $('#example-places').DataTable({
-        ajax: 'php/getPlaces.php',
+        ajax: {
+            url: 'php/getPlaces.php',
+            cache: true
+        }
         columns: [
             {
                 title: 'Place'
