@@ -2,7 +2,6 @@
 ob_start("ob_gzhandler");
 
 require_once('./utils.php');
-header('Cache-Control: max-age=84600');
 header('Content-type:application/json;charset=utf-8');
 
 $name = getRequestParameter('name');

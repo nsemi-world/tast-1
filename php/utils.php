@@ -1,4 +1,5 @@
 <?php
+header('Cache-Control: max-age=84600');
 
 function getPDO() {
     $cleardb_url = getEnv("CLEARDB_DATABASE_URL");
