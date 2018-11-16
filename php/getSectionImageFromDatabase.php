@@ -7,37 +7,51 @@ header('Content-type:application/json;charset=utf-8');
 $name = getRequestParameter('name');
 $width = getRequestParameter('width');
 $height = getRequestParameter('height');
+$force_db = false;
 
-
-$pdo = getPDO();
-//$image = getImage($pdo, $name, $width, $height);
-$image = null;
-if($image) {
-    // echo data url
-    echo json_encode(['url' => toDataUrl($image->data)]);
+if($force_db) {
+    resizeAndStore($name, $width, $height);
 }
+
 else {
-    $im = resizeImage($name, $width, $height);
-    echo json_encode(['url' => toDataUrl($im->getImageBlob())]);
-    /*storeImageInDatabase(
-                $pdo, 
-                $im->getImageBlob(), 
-                $im->getImageFormat(), 
-                $width, 
-                $height, 
-                $name
-    );*/
+    resizeOnly($name, $width, $height);
 }
-
-
-
-
 
 
 function getRequestParameter($param) {
     if(isset($_REQUEST[$param])) {
         return $_REQUEST[$param];
     }
+}
+
+function resizeOnly($name, $width, $height) {
+    $im = resizeImage($name, $width, $height);
+        echo json_encode(['url' => toDataUrl($im->getImageBlob()), 'stored' => false]);
+}
+
+function resizeAndStore($name, $width, $height) {
+    $pdo = getPDO();
+    $image = getImage($pdo, $name, $width, $height);
+
+    if($image) {
+        echo json_encode(['url' => toDataUrl($image->data)]);
+    }
+    else {
+        $im = resizeImage($name, $width, $height);
+        echo json_encode(['url' => toDataUrl($im->getImageBlob()), 'stored' => true]);
+        storeImageInDatabase(
+                    $pdo, 
+                    $im->getImageBlob(), 
+                    $im->getImageFormat(), 
+                    $width, 
+                    $height, 
+                    $name
+        );
+}
+
+
+
+
 }
 
 function getImage($pdo, $name, $width, $height) {
