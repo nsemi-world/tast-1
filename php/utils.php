@@ -16,8 +16,6 @@ function getPDO() {
     $pdo = new PDO("mysql:host=".$host."; dbname=".$dbname.'; charset=utf8', $username, $password);
     return $pdo;
 }
-
-
 function getDatabaseUrlParts($url) {
     $p = explode("@", $url);
     
@@ -34,3 +32,9 @@ function getDatabaseUrlParts($url) {
             'username' => $username, 
             'password' => $password];
 }
+function getRequestParameter($param) {
+    if(isset($_REQUEST[$param])) {
+        return $_REQUEST[$param];
+    }
+}
+

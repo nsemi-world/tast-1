@@ -1,7 +1,7 @@
 section {
     position: relative;
     min-height: var(--main-height);
-    background: #111;
+    background: #fff;
     color: var(--main-color);
 }
 
@@ -51,7 +51,6 @@ section {
 
 
 .frontpage .title-wrapper {
-    background: rgba(0,0,0,.75);
     height: 100%;
 }
 
@@ -70,6 +69,15 @@ section {
 .title .article-title {
     color: #111;
 }
+
+
+#top3-menu {
+    width: 95%;
+}
+#top3-menu li {
+    padding: .1em;
+}
+
 /**********************************
  articles 
 ***********************************/

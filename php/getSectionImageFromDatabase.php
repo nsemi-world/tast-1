@@ -18,12 +18,6 @@ else {
 }
 
 
-function getRequestParameter($param) {
-    if(isset($_REQUEST[$param])) {
-        return $_REQUEST[$param];
-    }
-}
-
 function resizeOnly($name, $width, $height) {
     $im = resizeImage($name, $width, $height);
         echo json_encode(['url' => toDataUrl($im->getImageBlob()), 'stored' => false]);
