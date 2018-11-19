@@ -12,6 +12,7 @@ $(document).ready(function () {
     $('#top3-controls #number-of-tops').on('change', function (event) {
         $('#top3-options #top-value').text($(this).val());
         $('#ncorrect').text('0');
+        $('#ntries').text('0');
         updateQuizz();
     });
     
@@ -71,14 +72,20 @@ function updateQuizz() {
             if(evaluation == true) {
                 /* Thanks to: https://stackoverflow.com/questions/5581288/how-to-decide-whether-to-accept-or-reject-a-jquery-draggable-into-a-droppable
                 ui.draggable.animate(ui.draggable.data("origPosition"),"slow");*/
-                $currentDroppable.removeClass('border border-danger');
-                $currentDroppable.addClass('border border-success');
+                ui.draggable.animate({
+                    color: 'green'
+                }, 1000);
                 ui.draggable.draggable("option", 'revert', false);
                 ui.draggable.position({
                     my: 'left',
                     at: 'right+10',
                     of: $(this).find('span')
                 });
+                
+                var $ntries = ui.draggable.find('.ntries');
+                var ntriesValue = parseInt($ntries.text().replace(' (', '').replace(')', ''));
+                $ntries.text(" (" + (++ntriesValue) + ")");
+                
                 $(window).on('resize', function(event){
                     ui.draggable.position({
                         my: 'left',
@@ -88,13 +95,20 @@ function updateQuizz() {
                 });
 
                 $(this).droppable("disable");
+                ui.draggable.draggable("disable");
                 updateNotification(true);
             }
             else {
-                $(this).removeClass('border border-success');
-                $(this).addClass('border border-danger');
+                ui.draggable.animate({
+                    color: 'red'
+                }, 1000);
                 ui.draggable.draggable("option", "revert", true);
                 updateNotification(false);
+                
+                var $ntries = ui.draggable.find('.ntries');
+                var ntriesValue = parseInt($ntries.text().replace(' (', '').replace(')', ''));
+                $ntries.text(" (" + (++ntriesValue) + ")");
+                
             }
         }
     });
@@ -263,12 +277,15 @@ function getButtonFor(countryData) {
             .attr('title', countryData.name);
         
         var $name = $('<span></span>').text(countryData.name);
+        var $ntries = $('<span class="ntries"></span>').text(' (' + 0 + ')');
+        
         var $answer = $('<div></div>')
             .addClass('draggable')
             .addClass('m-0 p-0 text-left')
             .data('rank', countryData.rank)
             .append($flag)
-            .append($name);
+            .append($name)
+            .append($ntries);
         
         $('#possible-answers').append($answer);
         
