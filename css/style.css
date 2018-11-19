@@ -72,10 +72,7 @@ section {
 
 
 #top3-menu {
-    width: 95%;
-}
-#top3-menu li {
-    padding: .1em;
+    font-size: 80%;
 }
 
 /**********************************

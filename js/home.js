@@ -11,6 +11,7 @@ $(document).ready(function () {
 
     $('#top3-controls #number-of-tops').on('change', function (event) {
         $('#top3-options #top-value').text($(this).val());
+        $('#ncorrect').text('0');
         updateQuizz();
     });
     
@@ -53,24 +54,47 @@ function updateQuizz() {
     var question = getQuizzQuestion();
     var answers = getQuizzAnswers();
     $('#top3-quizz-title').html(question);
-    $('#top3-quizz-answers #user-answers').html(answers);
+    $('#user-answers').html(answers);
+    $('#user-results #ntotal').text($('#number-of-tops').val());
+
     // Make Answers droppables
     $('#user-answers p').droppable({
         accepts: '.draggable',
+        tolerance: "touch",        
         classes: {
             "ui-droppable-active": "ui-state-active",
             "ui-droppable-hover": "ui-state-hover"
         },
         drop: function( event, ui ) {
-            var evaluation = evaluate($(this).attr('data-rank'), ui.draggable.attr('data-rank'));
-            alert(evaluation);
+            var $currentDroppable = $(this);
+            var evaluation = evaluate($currentDroppable.data('rank'), ui.draggable.data('rank'));
             if(evaluation == true) {
                 /* Thanks to: https://stackoverflow.com/questions/5581288/how-to-decide-whether-to-accept-or-reject-a-jquery-draggable-into-a-droppable
                 ui.draggable.animate(ui.draggable.data("origPosition"),"slow");*/
-                $(this).addClass('border border-success');
+                $currentDroppable.removeClass('border border-danger');
+                $currentDroppable.addClass('border border-success');
+                ui.draggable.draggable("option", 'revert', false);
+                ui.draggable.position({
+                    my: 'left',
+                    at: 'right+10',
+                    of: $(this).find('span')
+                });
+                $(window).on('resize', function(event){
+                    ui.draggable.position({
+                        my: 'left',
+                        at: 'right+10',
+                        of: $currentDroppable.find('span')
+                    });
+                });
+
+                $(this).droppable("disable");
+                updateNotification(true);
             }
             else {
+                $(this).removeClass('border border-success');
                 $(this).addClass('border border-danger');
+                ui.draggable.draggable("option", "revert", true);
+                updateNotification(false);
             }
         }
     });
@@ -79,6 +103,22 @@ function updateQuizz() {
 
 function evaluate(rank1, rank2) {
     return rank1 === rank2;
+}
+
+function updateNotification(doit) {
+    var $ntries = $('#user-results #ntries');
+    var ntriesValue = parseInt($ntries.text());
+    $ntries.text(++ntriesValue);
+    if(doit) {
+        var $results = $('#user-results #ncorrect');
+        var value = parseInt($results.text());
+        $results.text(++value);
+        
+        var $total = $('#user-results #ntotal');
+        if($results.text() == $total.text() ) {
+           alert('You win!');
+        }
+    }
 }
 
 function getQuizzQuestion() {
@@ -192,7 +232,7 @@ function disableQuizz() {
 
 function configureAnswers(quizzData, min) {
     console.log(quizzData);
-    $.each(quizzData, function(key, value){
+    $.each(quizzData, function(key, value) {
         value['rank'] = (key + 1);
     });
     
@@ -224,18 +264,16 @@ function getButtonFor(countryData) {
         
         var $name = $('<span></span>').text(countryData.name);
         var $answer = $('<div></div>')
-            .addClass('.draggable')
-            .addClass('m-0 p-0')
-            .attr('data-rank', countryData.rank)
+            .addClass('draggable')
+            .addClass('m-0 p-0 text-left')
+            .data('rank', countryData.rank)
             .append($flag)
             .append($name);
         
         $('#possible-answers').append($answer);
+        
         $answer.draggable({
-            start: function(){
-                // Thanks to: https://stackoverflow.com/questions/5581288/how-to-decide-whether-to-accept-or-reject-a-jquery-draggable-into-a-droppable
-                $(this).data("origPosition", $(this).position());
-            }
+            revert: "invalid"
         });
     }
 }

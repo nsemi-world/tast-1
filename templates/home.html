@@ -14,54 +14,54 @@
 </section>
 
 <section id="explore" class="subsection">
-    <div class="container">
-        <div class="row pb-5 pt-5">
-            <aside id="top3-menu" class="col-md-3">
-                <ul class="list-unstyled bg-light  pt-3 pl-2 rounded shadow">
-                    <li id="top3-controls">
-                        <label>Number of Tops
+    <div id="top3-quizz" class="bg-light rounded pt-3 pl-5">
+        <h3 id="top3-quizz-title" class="h3 mb-4"></h3>
+        <div id="top3-quizz-body" class="container-fluid">
+            <div class="row m-0 p-0">
+                <aside id="top3-menu" class="col-md-4 shadow rounded">
+                    <ul class="list-unstyled bg-light pt-3 pl-2">
+                        <li id="top3-controls">
+                            <label>Number of Tops
                             <select id="number-of-tops" name="ntops">
                                 <option>1</option>
                                 <option>3</option>
                                 <option>5</option>
                                 <option>8</option>
                                 <option>10</option>
-                            </select></label>
+                            </select>
+                        </label>
+                            <label id="user-results" class="float-right">
+                            <span id="ncorrect">0</span> |
+                            <span id="ntotal">0</span> | 
+                            <span id="ntries">0</span>
+                        </label>
+
                             <hr/>
-                    </li>
-                    <li id="top3-options">
-                        <h3 class="h3">Top <span id="top-value"></span></h3>
-                        <label id="option-top-countries" class="btn btn-outline-secondary active">Top Countries</label>
-                        <label id="option-top-owners" class="btn btn-outline-secondary">Top Owners</label>
-                        <label id="option-top-captains" class="btn btn-outline-secondary">Top Captains</label>
-                        <label id="option-top-ships" class="btn btn-outline-secondary">Top Ships</label>
-                        <label id="option-top-purchasing" class="btn btn-outline-secondary">Top Purchasing Places</label>
-                        <label id="option-top-landing" class="btn btn-outline-secondary">Top Landing Places</label>
-                        <hr/>
-                    </li>
-                    <li id="top3-criteria">
-                        <h3 class="h3">Criteria</h3>
-                        <label id="criteria-embarked" class="btn btn-outline-secondary active"># People embarked</label>
-                        <label id="criteria-disembarked" class="btn btn-outline-secondary"># People disembarked</label>
-                        <label id="criteria-died" class="btn btn-outline-secondary"># People died in Middle Passage</label>
-                        <hr/>
-                    </li>
-                    <li id="top3-notification" class="border mt-3">
-                        <h3 class="h3">Notifications</h3>
-                        <div id="notifications">
-                            <p>>>>></p>
-                        </div>
-                    </li>
-                </ul>
-            </aside>
-            <div id="top3-quizz" class="col-md-9 quiz bg-light rounded pt-3 pl-5">
-                <h3 id="top3-quizz-title" class="h3"></h3>
-                <div id="top3-quizz-answers" class="mt-4">
-                   <div class="row">
-                    <div id="user-answers" class="col-md-8"></div>
-                    <div id="possible-answers" class="col-md-4"></div>
-                   </div>
-                </div>
+                        </li>
+                        <li id="top3-options">
+                            <h3 class="h3">Top <span id="top-value"></span></h3>
+                            <label id="option-top-countries" class="btn btn-outline-secondary active">Top Countries</label>
+                            <label id="option-top-owners" class="btn btn-outline-secondary">Top Owners</label>
+                            <label id="option-top-captains" class="btn btn-outline-secondary">Top Captains</label>
+                            <label id="option-top-ships" class="btn btn-outline-secondary">Top Ships</label>
+                            <label id="option-top-purchasing" class="btn btn-outline-secondary">Top Purchasing Places</label>
+                            <label id="option-top-landing" class="btn btn-outline-secondary">Top Landing Places</label>
+                            <hr/>
+                        </li>
+                        <li id="top3-criteria">
+                            <h3 class="h3">Criteria</h3>
+                            <label id="criteria-embarked" class="btn btn-outline-secondary active"># People embarked</label>
+                            <label id="criteria-disembarked" class="btn btn-outline-secondary"># People disembarked</label>
+                            <label id="criteria-died" class="btn btn-outline-secondary"># People died in Middle Passage</label>
+                            <hr/>
+                        </li>
+                        <li id="top3-notification" class="border mt-3">
+                            <h3 class="h3">Notifications</h3>
+                        </li>
+                    </ul>
+                </aside>
+                <div id="user-answers" class="col-md-5 shadow rounded pt-3 pl-4"></div>
+                <div id="possible-answers" class="col-md-3 shadow rounded"></div>
             </div>
         </div>
     </div>
