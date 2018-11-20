@@ -305,3 +305,10 @@ div.itinerary a {
     color: #4267b2;
     background: white;
 }
+
+#top3-quizz-body #central {
+    position: relative;
+}
+
+#top3-quizz-body #central #possible-answers {
+}

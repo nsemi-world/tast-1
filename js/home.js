@@ -141,6 +141,9 @@ function getActiveCriteria() {
     return $('#top3-criteria li.active');
 }
 
+function getQuizzBody() {
+    return $('#top3-quizz-body .row');
+}
 
 /** 
  * ---------------------------------------
@@ -172,11 +175,11 @@ function updateQuizz() {
 }
 
 function enableQuizzMenu() {
-    getQuizzMenu().slideDown(1000);
+    getMenuCollapseButton().click();
 }
 
 function disableQuizzMenu() {
-    getQuizzMenu().slideUp(1000);
+    getMenuCollapseButton().click();
 }
 
 function updateQuizzData() {
@@ -198,7 +201,7 @@ function createDroppables() {
     // Make Answers droppables
     $('#user-answers p').droppable({
         accepts: '.draggable',
-        tolerance: "touch",
+        //tolerance: "fit",
         classes: {
             "ui-droppable-active": "ui-state-active",
             "ui-droppable-hover": "ui-state-hover"
@@ -206,7 +209,6 @@ function createDroppables() {
         drop: function (event, ui) {
             if (!quizzStarted) {
                 disableQuizzMenu();
-                addUserRank();
                 quizzStarted = true;
             }
             onDrop($(this), ui.draggable)
@@ -256,6 +258,17 @@ function updateDraggableOnSuccess($droppable, $draggable) {
 
     disableDragAndDrop($droppable, $draggable);
     autoPosition($droppable, $draggable);
+    
+    var value = findValueWithRank($droppable.data('rank'));
+    value = numeral(value).format('0,0');
+    
+    $draggable
+        .append($('<span class="float-right badge badge-success mt-1"></span').text(value));
+    $draggable.find('.name').show();
+}
+
+function findValueWithRank(rank) {
+    return quizzData[rank-1].total;
 }
 
 function updateDraggableOnFail($droppable, $draggable) {
@@ -293,8 +306,10 @@ function updateScore(doit) {
         if ($correct.text() == $total.text()) {
             alert('You win!');
             quizzStarted = false;
-            removeUserRank();
             enableQuizzMenu();
+            $('.fb-page')
+                .attr('style', 'display:block')
+                .attr('title', 'Like us on Facebook');
         }
     }
 
@@ -384,7 +399,8 @@ function loadQuizzData(min, type, criteria) {
         },
         success: function (data) {
             quizzData = JSON.parse(data);
-            putUIElements(configureAnswers(quizzData, min));
+            var copyData = quizzData.slice(0);
+            putUIElements(configureAnswers(copyData, min));
         },
         error: function () {
             alert("Error loading tops");
@@ -448,12 +464,13 @@ function appendButtonFor(countryData) {
             .attr('alt', countryData.name + ' flag')
             .attr('title', countryData.name);
 
-        var $name = $('<span></span>')
+        var $name = $('<span class="name"></span>')
             .html('<small>' + countryData.name + '</small>');
 
         var $flagAndName = $('<span class="pr-1 pl-1"></span>')
             .append($flag)
             .append($name);
+        //$name.hide();
 
         var $ntriesHolder = $('<small class="border-left  pl-1  text-muted"></small>');
         var $ntries = $('<span class="ntries"></span>').text('0');
@@ -474,13 +491,4 @@ function appendButtonFor(countryData) {
             revert: "invalid"
         });
     }
-}
-
-
-function addUserRank() {
-    
-}
-
-function removeUserRank() {
-    
 }
