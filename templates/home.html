@@ -14,14 +14,29 @@
 </section>
 
 <section id="explore" class="subsection">
-    <div id="top3-quizz" class="bg-light rounded pt-3 pl-5">
-        <h3 id="top3-quizz-title" class="h3 mb-4"></h3>
-        <div id="top3-quizz-body" class="container-fluid">
+    <div id="top3-quizz" class="bg-light rounded pt-3 pb-3">
+        <div id="#top3-quizz-header" class="container border-bottom">
+            <div class="row">
+                <h3 id="top3-quizz-title" class="h3 display-5 col-md-9 text-left font-weight-bold">
+                </h3>
+                <h4 id="user-score" class="text-right col-md-3">
+                    <span class="badge">Score</span>
+                    <label id="score-badge" class="badge badge-info">
+                    <span class="ncorrect">0</span> | 
+                    <span class="ntotal">0</span> | 
+                    <span class="ntries">0</span> |
+                    <span class="percentage">100
+                    </span>%
+                    </label>
+                </h4>
+            </div>
+        </div>
+        <div id="top3-quizz-body" class="container mt-3 mb-5">
             <div class="row m-0 p-0">
-                <aside id="top3-menu" class="col-md-4 shadow rounded">
-                    <ul class="list-unstyled bg-light pt-3 pl-2">
-                        <li id="top3-controls">
-                            <label>Number of Tops
+                <aside id="top3-menu" class="col-md-3 rounded">
+                    <ul class="list-unstyled bg-light">
+                        <li id="top3-controls" class="p-1">
+                            <label>Top</label>
                             <select id="number-of-tops" name="ntops">
                                 <option>1</option>
                                 <option>3</option>
@@ -29,36 +44,32 @@
                                 <option>8</option>
                                 <option>10</option>
                             </select>
-                        </label>
-                            <label id="user-results" class="float-right badge badge-secondary">
-                            Results: <span id="ncorrect">0</span> |
-                            <span id="ntotal">0</span> | 
-                            <span id="ntries">0</span>
-                        </label>
-
-                            <hr/>
+                            
+                            <button id="collapse-menu-button" class="btn bg-transparent float-right"><i class="fas fa-bars"></i></button>
                         </li>
-                        <li id="top3-options">
-                            <h3 class="h3">Top <span id="top-value"></span></h3>
-                            <label id="option-top-countries" class="btn btn-outline-secondary active">Top Countries</label>
-                            <label id="option-top-owners" class="btn btn-outline-secondary">Top Owners</label>
-                            <label id="option-top-captains" class="btn btn-outline-secondary">Top Captains</label>
-                            <label id="option-top-ships" class="btn btn-outline-secondary">Top Ships</label>
-                            <label id="option-top-purchasing" class="btn btn-outline-secondary">Top Purchasing Places</label>
-                            <label id="option-top-landing" class="btn btn-outline-secondary">Top Landing Places</label>
-                            <hr/>
+                        <li id="top3-options" class="mt-3">
+                            <label class="">Choose category:</label>
+                            <ul class="list-group list-group-flush shadow">
+                                <li id="option-top-countries" class="list-group-item  p-1 active small">Top Countries</li>
+                                <li id="option-top-owners" class="list-group-item p-1 small">Top Owners</li>
+                                <li id="option-top-captains" class="list-group-item p-1 small">Top Captains</li>
+                                <li id="option-top-ships" class="list-group-item p-1 small">Top Ships</li>
+                                <li id="option-top-purchasing" class="list-group-item p-1 small">Top Purchasing Places</li>
+                                <li id="option-top-landing" class="list-group-item p-1 small">Top Landing Places</li>
+                            </ul>
                         </li>
-                        <li id="top3-criteria">
-                            <h3 class="h3">Criteria</h3>
-                            <label id="criteria-embarked" class="btn btn-outline-secondary active"># People embarked</label>
-                            <label id="criteria-disembarked" class="btn btn-outline-secondary"># People disembarked</label>
-                            <label id="criteria-died" class="btn btn-outline-secondary"># People died in Middle Passage</label>
-                            <hr/>
+                        <li id="top3-criteria" class="mt-3">
+                            <label class="">Choose a criteria:</label>
+                            <ul class="list-group list-group-flush shadow">
+                                <li id="criteria-embarked" class="list-group-item p-1 active small"># People embarked</li>
+                                <li id="criteria-disembarked" class="list-group-item p-1 small"># People disembarked</li>
+                                <li id="criteria-died" class="list-group-item p-1 small"># People died in Middle Passage</li>
+                            </ul>
                         </li>
                     </ul>
                 </aside>
                 <div id="user-answers" class="col-md-5 shadow rounded pt-3 pl-4"></div>
-                <div id="possible-answers" class="col-md-3 shadow rounded"></div>
+                <div id="possible-answers" class="col-md-4 shadow rounded container-fluid"></div>
             </div>
         </div>
     </div>
