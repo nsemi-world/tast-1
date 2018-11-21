@@ -312,3 +312,24 @@ div.itinerary a {
 
 #top3-quizz-body #central #possible-answers {
 }
+
+#central {
+    position: relative;
+}
+#user-notification-area {
+    position: absolute;
+    bottom: 1em;
+    left: 0;
+    width: 100%;
+}
+
+#percentage-indicator {
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+    display: block;
+}
+
+.list-group :not(.active),  {
+    background: transparent;
+}

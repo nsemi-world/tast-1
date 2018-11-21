@@ -7,6 +7,7 @@ $head           = file_get_contents('./templates/head.html');
 
 $my_scripts = '
     <script src="js/menu.js"></script>
+    <script src="js/quizz-tops.js"></script>
     <script src="js/home.js"></script>
 ';
 
