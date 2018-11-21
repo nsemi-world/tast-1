@@ -313,6 +313,10 @@ div.itinerary a {
 #top3-quizz-body #central #possible-answers {
 }
 
+#explore {
+    display: none;
+}
+
 #central {
     position: relative;
 }
