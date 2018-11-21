@@ -7,6 +7,7 @@ $(document).ready(function () {
     loadSectionImage('#home .frontpage', 'home.jpg');
     configureSubsections();
 
+
     $(window).on('resize', function () {
         centerHomeTitle();
         debounce('#home .frontpage', 'home.jpg');
@@ -169,9 +170,11 @@ function activateCriteria($criteria) {
  *  3 - Call the server to fetch the quizz data
  */
 function updateQuizz() {
-    //disableQuizz(); // 1 - Disable quizz   
-    updateQuizzData(); // 2 - Update quizz data
-    loadAnswersFromServer(); // 3 - Call server
+    getQuizzTitle().html(createQuizzQuestion());   getUserScoreTotalAnswers().text(getNumberOfTopsSelector().val());
+    getUserAnswers().html(getQuizzAnswers());
+    createDroppables();
+    
+    loadAnswersFromServer();
 }
 
 function enableQuizzMenu() {
@@ -180,13 +183,6 @@ function enableQuizzMenu() {
 
 function disableQuizzMenu() {
     getMenuCollapseButton().click();
-}
-
-function updateQuizzData() {
-    getQuizzTitle().html(createQuizzQuestion());
-    getUserScoreTotalAnswers().text(getNumberOfTopsSelector().val());
-    getUserAnswers().html(getQuizzAnswers());
-    createDroppables();
 }
 
 /**
@@ -262,7 +258,7 @@ function updateDraggableOnSuccess($droppable, $draggable) {
     var value = findValueWithRank($droppable.data('rank'));
     value = numeral(value).format('0,0');
     
-    $draggable
+    $droppable
         .append($('<span class="float-right badge badge-success mt-1"></span').text(value));
     $draggable.find('.name').show();
 }
@@ -304,12 +300,9 @@ function updateScore(doit) {
     if (doit) {
         $correct.text(++correctValue);
         if ($correct.text() == $total.text()) {
-            alert('You win!');
+            addWinActions();
             quizzStarted = false;
             enableQuizzMenu();
-            $('.fb-page')
-                .attr('style', 'display:block')
-                .attr('title', 'Like us on Facebook');
         }
     }
 
@@ -317,7 +310,19 @@ function updateScore(doit) {
 }
 
 
+function addWinActions() {
+    // Add Like button
+    var $message = $('<p class="display-3"></p>')
+        .text(getUserScorePercentage().text() + '%');
+    
 
+    $message.appendTo(getUserAnswers());
+    $message.css({
+        position: 'absolute',
+        bottom: '0em',
+        right: '.1em'
+    });
+}
 
 function createQuizzQuestion() {
     var $option = getActiveOption();
@@ -399,8 +404,7 @@ function loadQuizzData(min, type, criteria) {
         },
         success: function (data) {
             quizzData = JSON.parse(data);
-            var copyData = quizzData.slice(0);
-            putUIElements(configureAnswers(copyData, min));
+            createPossibleAnswers(quizzData, min);
         },
         error: function () {
             alert("Error loading tops");
@@ -408,6 +412,11 @@ function loadQuizzData(min, type, criteria) {
     });
 }
 
+
+function createPossibleAnswers(data, min) {
+    var copyData = data.slice(0);
+    putUIElements(configureAnswers(copyData, min));
+}
 
 function showQuizz() {
     $('#explore').show();
@@ -480,7 +489,8 @@ function appendButtonFor(countryData) {
 
         var $answer = $('<div></div>')
             .addClass('draggable')
-            .addClass('m-0 pl-2 text-left')
+            .addClass('container-fluid')
+            .addClass('w-100 m-0 pl-2 text-left')
             .data('rank', countryData.rank)
             .append($flagAndName)
             .append($ntriesHolder);

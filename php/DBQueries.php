@@ -104,6 +104,7 @@ function getQueryTopCountriesGroupByName($myvar) {
         FROM voyages as v
             JOIN (SELECT * FROM national UNION SELECT * FROM natinimp) as n 
                 ON (v.national=n.value OR v.natinimp=n.value)
+        WHERE n.label != 'Other'
         GROUP BY n.label
         ORDER BY total DESC
     ";
@@ -117,6 +118,7 @@ function getQueryTopCountriesGroupByCode($myvar) {
         FROM voyages as v
             JOIN (SELECT * FROM national UNION SELECT * FROM natinimp) as n 
                 ON (v.national=n.value OR v.natinimp=n.value)
+        WHERE n.label != 'Other'
         GROUP BY n.iso2
         ORDER BY total DESC
     ";

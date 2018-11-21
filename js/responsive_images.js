@@ -60,7 +60,7 @@ function transformToAssocArray(prmstr) {
 
 function configureSubsections() {
 
-    $('.subsection').hover(
+    $('.subsection').not('#explore').hover(
         function (event) {
             $(this).animate({
                 backgroundColor: 'linear-gradient(to bottom right, var(--main-color),' +  getRandomColor() + ')'
@@ -72,6 +72,8 @@ function configureSubsections() {
             }, 1000);
         }
     );
+    
+    $('#explore').animate({backgroundColor: 'rgba(180, 174, 68, .5)'}, 1000);
 
     $.each($('.frontpage .title-wrapper'),
         function () {
