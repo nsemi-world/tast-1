@@ -1,11 +1,5 @@
 
 $(document).ready(function () {
-    activate($('#toggle_home'));
-    centerHomeTitle();
-    loadSectionImage('#home .frontpage', 'home.jpg');
-    configureSubsections();
-    
-
     $(window).on('resize', function () {
         centerHomeTitle();
         debounce('#home .frontpage', 'home.jpg');
@@ -16,6 +10,12 @@ $(document).ready(function () {
         $('#explore').slideToggle(500);
         initQuizz();
     });
+
+    activate($('#toggle_home'));
+    centerHomeTitle();
+    loadSectionImage('#home .frontpage', 'home.jpg');
+    configureSubsections();
+    initQuizz();
 
     
 
