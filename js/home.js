@@ -13,7 +13,7 @@ $(document).ready(function () {
     
     $('#toggle-quizz').on('click', function(event) {
         event.preventDefault();
-        $('#explore').toggle(1000);
+        $('#explore').slideToggle(500);
         initQuizz();
     });
 
