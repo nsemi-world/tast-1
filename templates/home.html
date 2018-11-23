@@ -16,7 +16,7 @@
 <div class="container-fluid p-5">
     <h3 class="display-3 text-center">
         How much do you know about the trans-atlantic slave trade?
-        <br/> 
+        <br/>
         <small class="text-muted">Test yourself and take a quizz!</small>
         <br/>
         <button id="toggle-quizz" class="btn btn-success text-center">exquizz me!</button>
@@ -26,96 +26,105 @@
 </div>
 
 <section id="explore" class="subsection">
-    <div id="top3-quizz" class="container rounded pt-5 pb-5">
-        <div id="#top3-quizz-header" class="container-fluid pt-3 pb-3">
-                <h3 id="top3-quizz-title" class="h3 display-5 text-center font-weight-bold">
-                </h3>
+    <div id="top-quizz" class="container rounded pt-5 pb-5">
+        <!-- HEADER WITH TITLE -->
+        <div id="quizz-header" class="container-fluid pt-3 pb-3">
+            <h3 id="quizz-title" class="h3 display-5 text-center font-weight-bold">
+            </h3>
         </div>
-        <div id="top3-quizz-body" class="container-fluid mt-3 mb-5">
-            <div class="row m-0 p-0">
-                <aside id="top3-menu" class="col-md-3 rounded container bg-transparent">
-                    <ul class="list-unstyled">
-                        <li id="top3-controls" class="">
-                            <select id="number-of-tops" name="ntops" class="bg-transparent p-1 m-0 btn border float-right" style="heitgh: 26px;">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
-                                <option>11</option>
-                                <option>12</option>
-                                <option>13</option>
-                                <option>14</option>
-                                <option>15</option>
-                                <option>16</option>
+
+        <!-- BODY -->
+        <div id="quizz-body" class="container-fluid mt-3 mb-5">
+            <!-- SIDE MENU WITH FORM -->
+            <div class="row">
+                <aside id="quizz-menu" class="container rounded col-sm-12 col-md-8 col-lg-4 mx-auto shadow p-2 bg-light">
+                    <form id="quizz-form" class="needs-validation">
+                        <div class="form-group">
+                            <label for="number-of-tops">Top: </label>
+                            <input id="top-type" type="number" name="type" class="form-control bg-transparent p-1 m-0" style="heitgh: 26px;" placeholder="Top 1,2,3,..." required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Choose a number equal or greater than 1
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="form-group">
+                            <label for="type">Choose category:</label>
+                            <select id="top-category" name="category" class="form-control bg-transparent" placeholder="Top Category:" required>
+                                <option id="option-top-countries">Top Countries</option>
+                                <option id="option-top-owners">Top Owners</option>
+                                <option id="option-top-captains">Top Captains</option>
+                                <option  id="option-top-ships">Top Ships</option>
+                                <option id="option-top-purchasing">Top Purchasing Places</option>
+                                <option id="option-top-landing">Top Landing Places</option>
                             </select>
-                        </li>
-                        <li id="top3-options" class="mt-3">
-                            <label class="">Choose category:</label>
-                            <ul class="list-group list-group-flush shadow">
-                                <li id="option-top-countries" class="list-group-item  p-1 active small">Top Countries</li>
-                                <li id="option-top-owners" class="list-group-item p-1 small">Top Owners</li>
-                                <li id="option-top-captains" class="list-group-item p-1 small">Top Captains</li>
-                                <li id="option-top-ships" class="list-group-item p-1 small">Top Ships</li>
-                                <li id="option-top-purchasing" class="list-group-item p-1 small">Top Purchasing Places</li>
-                                <li id="option-top-landing" class="list-group-item p-1 small">Top Landing Places</li>
-                            </ul>
-                        </li>
-                        <li id="top3-criteria" class="mt-3">
-                            <label class="">Choose a criteria:</label>
-                            <ul class="list-group list-group-flush shadow">
-                                <li id="criteria-embarked" class="list-group-item p-1 active small"># People embarked</li>
-                                <li id="criteria-disembarked" class="list-group-item p-1 small"># People disembarked</li>
-                                <li id="criteria-died" class="list-group-item p-1 small"># People died in Middle Passage</li>
-                            </ul>
-                        </li>
-                    </ul>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="form-group">
+                            <label for="criteria">Choose criteria:</label>
+                            <select id="top-criteria" name="criteria" class="form-control bg-transparent" required>
+                                <option id="criteria-embarked"># People embarked</option>
+                                <option id="criteria-disembarked"># People disembarked</option>
+                                <option id="criteria-died"># People died in Middle Passage</option>
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <hr/>
+                        <button id="quizz-form-submit" type="submit" class="btn btn-success w-100">Start</button>
+                    </form>
                 </aside>
-                <div id="central" class="col-md-6 bg-light rounded p-3 shadow">
-                    <div id="user-answers" class="">
-                    </div>
-                    <div id="sum" class="badge badge-danger float-right mt-2 mb-2"></div>
-                    <div id="user-notification-area" class="container">
-                        <p id="percentage-indicator"><span class="percentage h1">0%</span></p>
-                        <div id="user-score" class="text-center">
-                            <span class="badge">Score</span>
-                            <label id="score-badge" class="badge badge-info" style="padding: .4125em">
-                            <span class="ncorrect">0</span> | 
-                            <span class="ntotal">0</span> | 
+                <!-- USER WORKING AREA -->
+                <div id="working-area" class="container col-sm-12 col-md-9 col-lg-6 mx-auto">
+                    <div id="score" class="my-1 rounded">
+                        <span class="badge">Score</span>
+                        <div id="score-badge" class="badge badge-info" style="padding: .4125em">
+                            <span class="ncorrect">0</span> |
+                            <span class="ntotal">0</span> |
                             <span class="ntries">0</span> |
                             <span class="percentage">0%
-                            </span>
-                            </label>
-                            <div class="fb-like" data-href="https://tast.ngutu.org/#explore" data-layout="button_count" data-action="recommend" data-size="large" data-show-faces="true" data-share="false"></div>
+                                    </span>
                         </div>
-                    </div>                    
+                        <div id="fb-like" class="fb-like float-right" data-href="https://tast.ngutu.org/#explore" data-layout="button_count" data-action="recommend" data-size="large" data-show-faces="true" data-share="false"></div>
+                    </div>
+                    <div id="user-area" class="w-auto rounded p-3 shadow  bg-light">
+                        <div id="user-answers" class="">
+                        </div>
+                        <div id="sum" class="badge w-100 text-right my-2"></div>
+                        <!-- POSSIBLE ANSWERS -->
+                        <div id="possible-answers" class="container rounded border border-top border-bottom my-5"></div>
+                        <div id="#user-actions" class="w-100 clearfix">
+                            <button id="gotomenu"class="btn btn-outline-secondary my-2 ml-2" inactive>Take another quizz</button>
+                            <button id="save-results"class="btn btn-outline-secondary  float-right my-2" inactive>Save My Results</button>
+                        </div>
+                    </div>
                 </div>
-                <div id="possible-answers" class="col-md-3 rounded bg-transparent"></div>
             </div>
         </div>
     </div>
 </section>
 
 <div class="container-fluid bg-dark p-5">
-   <div class="row">
+    <div class="row">
         <h3 class="display-3 text-right col-md-6">245 Variables at your disposal.
             <small class="text-muted">
                 Be sure you know their meaning and coverage.
             </small>
-            <button id="go-coverage" class="btn btn-outline-secondary text-center" disabled title="Comming soon..." >
+            <button id="go-coverage" class="btn btn-outline-secondary text-center" disabled title="Comming soon...">
                 Variable Meaning and Coverage
-            </button>        
-       </h3>
+            </button>
+        </h3>
         <div class="col-md-6 text-center my-auto">
             <a href="database.php" id="go-database" class="btn btn-outline-success text-center"><i class="fas fa-database"></i> Look Deep into the Database</a>
             <a href="charts.php" id="go-charts" class="btn btn-outline-success text-center"><i class="fas fa-chart-pie"></i> Put it on Charts</a>
         </div>
-   </div>
+    </div>
 </div>
 
 <section id="home-search" class="subsection d-none">
@@ -127,7 +136,9 @@
 
 
 <div id="home-contribute" class="container-fluid p-5">
-    <div class="display-1 text-center my-auto"><p>Thank You!</p></div>
+    <div class="display-1 text-center my-auto">
+        <p>Thank You!</p>
+    </div>
     <div class="my-auto text-center my-auto">
         <i class="fas fa-heart my-auto" style="color: red;"></i>
         <button id="buy-me-a-coffee" class="btn btn-outline-secondary text-center  my-auto" disabled title="Comming Soon..."><i class="fas fa-coffee"></i> Buy me a Coffe</button>
@@ -135,5 +146,3 @@
         <button id="join-us" class="btn btn-outline-secondary text-center  my-auto" disabled title="Comming Soon..."><i class="fab fa-facebook-square"></i> Follow us on Facebook</button>
     </div>
 </div>
-
-

@@ -1,52 +1,49 @@
 var quizzData = null;
 var quizzStarted = false;
+var stages = {
+    init: 0,
+    work: 1,
+    end: 2
+};
 
 function initQuizz() {
-    updateQuizz();
-    configureUserNotificationArea();
-    $('#top3-controls #number-of-tops').on('change', function (event) {
-        getUserScoreCorrectAnswers().text('0');
-        getUserScoreTotalAttempts().text('0');
-        updateQuizz();
-    });
+    
+    configureState(stages.init);
 
-    $('#top3-options li').on('click', function (event) {
+    getForm().on('submit', function(event){
+        //alert('ON SUMBIT');
         event.preventDefault();
-        activateOption($(this));
-        updateQuizz();
-    });
-    $('#top3-criteria li').on('click', function (event) {
-        event.preventDefault();
-        activateCriteria($(this));
-        updateQuizz();
-    });
-
-    getMenuCollapseButton().on('click', function (event) {
-        event.preventDefault();
-        getMenuOptions().slideToggle(1000);
-        getMenuCriteria().slideToggle(1000);
+        event.stopPropagation();
+        var validated = validateForm();
+        if(validated) {
+            startQuizz(getTypeValue(), 
+                       getCategoryValue(), 
+                       getCriteriaValue());
+        }
     });
     
-}
-
-function configureUserNotificationArea() {
-    centerPercentage();
-    $(window).on('resize', function(event){
-        centerPercentage();
+    getType().on('change', function(event) {
+        event.preventDefault();
+        updateTitle(getTypeValue(), getCategoryValue(), getCriteriaValue());
+    })
+    getCategory().on('change', function(event) {
+        event.preventDefault();
+        updateTitle(getTypeValue(), getCategoryValue(), getCriteriaValue());
+    })
+    getCriteria().on('change', function(event) {
+        event.preventDefault();
+        updateTitle(getTypeValue(), getCategoryValue(), getCriteriaValue());
+    })
+    
+    $('#gotomenu').on('click', function(event){
+        event.preventDefault();
+        saveUserResults();
+        resetQuizz();
+        configureState(stages.end);
     });
-}
-
-function centerPercentage() {
-    $('#percentage-indicator .percentage').position({
-        my: 'center',
-        at: 'center',
-        of: '#percentage-indicator'
-    });
-    $('#percentage-indicator').position({
-        my: 'center',
-        at: 'center',
-        of: '#user-notification-area'
-    });
+    
+    updateTitle(getTypeValue(), getCategoryValue(), getCriteriaValue());
+    validateForm();
 }
 
 /** 
@@ -54,127 +51,222 @@ function centerPercentage() {
  * Accessors to Quizz dom elements
  * ------------------------------------------ 
  */
+// Quizz
 function getQuizz() {
-    return $('#top3-quizz');
+    return $('#top-quizz');
 }
-
-function getQuizzTitle() {
-    return $('#top3-quizz-title');
+// Header
+function getHeader() {
+    return $('#quizz-header');
 }
-
-function getQuizzMenu() {
-    return $('#top3-quizz #top3-menu');
+// Title
+function getTitle() {
+    return $('#quizz-title');
 }
-
-function getMenuCollapseButton() {
-    return $('#top3-controls #collapse-menu-button');
+// Score
+function getScore() {
+    return $('#score');
 }
-
-function getUserScore() {
-    return $('#user-score');
-}
-
-function getUserBadge() {
+// Score badge
+function getScoreBadge() {
     return $('#score-badge');
 }
-
-function getUserScoreCorrectAnswers() {
-    return $('#score-badge .ncorrect');
+// Correct Answers
+function getCorrectAnswers() {
+    return $('.ncorrect');
+}
+function getCorrectAnswersValue() {
+    return parseInt(getCorrectAnswers().text());
+}
+function setCorrectAnswers(number) {
+    getCorrectAnswers().text(number);
 }
 
-function getUserScoreTotalAnswers() {
+// Total answers
+function getTotalAnswers() {
     return $('#score-badge .ntotal');
 }
-
-function getUserScoreTotalAttempts() {
+function getTotalAnswersValue() {
+    return parseInt(getTotalAnswers().text());
+}
+function setTotalAnswers(number) {
+    getTotalAnswers().text(number);
+}
+// Total attempts
+function getTotalAttempts() {
     return $('#score-badge .ntries');
 }
-
-function getUserScorePercentage() {
-    return $('#score-badge .percentage, #user-notification-area .percentage');
+function getTotalAttemptsValue() {
+    return parseInt(getTotalAttempts().text());
+}
+function setTotalAttempts(number) {
+    getTotalAttempts().text(number);
 }
 
-function getMenuControls() {
-    return $('#top3-menu #top3-controls ');
+// Percentage
+function getPercentage() {
+    return $('.percentage');
+}
+function getPercentageValue() {
+    return parseInt(getPercentage().text());
+}
+function setPercentage(number) {
+    getPercentage().text(number);
 }
 
-function getMenuTopValue() {
-    return $('#top3-options #top-value');
+// Facebook Recommend button
+function getFacebookRecommendButton() {
+    return $('#fb-like span');
+}
+// Body
+function getBody() {
+    return $('#quizz-body');
+}
+// Menu
+function getMenu() {
+    return $('#quizz-menu');
+}
+// Form
+function getForm() {
+    return $('#quizz-form');
+}
+// Type
+function getType() {
+    return $('#top-type');
+}
+// Type value
+function getTypeValue() {
+    return parseInt(getType().val());
+}
+// Category
+function getCategory() {
+    return $('#top-category');
+}
+// Selected Category
+function getCategorySelected() {
+    return $('#top-category option:selected');
+}
+// Category Value
+function getCategoryValue() {
+    return parseInt(getCategorySelected().val());
+}
+// Criteria
+function getCriteria() {
+    return $('#top-criteria');
+}
+// Selected Criteria
+function getCriteriaSelected() {
+    return $('#top-criteria option:selected');
+}
+// Criteria Value
+function getCriteriaValue() {
+    return parseInt(getCriteriaSelected().val());
+}
+// Form Submit Button 
+function getSubmitButton() {
+    return $('#quizz-form-submit');
+}
+// Disable Form Submit Buttton
+function disableSubmitButton() {
+    getSubmitButton().prop('disabled', true);
+}
+// Enable Form Submit Button
+function enableSubmitButton() {
+    getSubmitButton().prop('disabled', false);
 }
 
-function getNumberOfTopsSelector() {
-    return $('#top3-controls #number-of-tops option:selected');
-}
 
-function getMenuOptions() {
-    return $('#top3-menu #top3-options ');
+// Working Area
+function getWorkingArea() {
+    return $('#working-area');
 }
-
-function getMenuCriteria() {
-    return $('#top3-menu #top3-criteria ');
+// Answers
+function getUserArea() {
+    return $('#user-area');
 }
-
-function getCriteriaEmbarked() {
-    return $('#top3-criteria #criteria-embarked');
-}
-
-function getCriteriaDisembarked() {
-    return $('#top3-criteria #criteria-disembarked');
-}
-
-function getCriteriaDied() {
-    return $('#top3-criteria #criteria-died');
-}
-
+// User Answers
 function getUserAnswers() {
     return $('#user-answers');
 }
-
+// Sum
+function getSum() {
+    return $('#sum');
+}
+// Possible Answers
 function getPossibleAnswers() {
     return $('#possible-answers');
 }
 
-function getActiveOption() {
-    return $('#top3-options li.active');
+
+/******************************************
+Form Validation
+*******************************************/
+function validateForm() {
+    var $type = getType();
+    if(parseInt($type.val()) <= 0){
+        $type.addClass('invalid');
+        return false;
+    }
+    else {
+        $type.removeClass('invalid');
+        return true;
+    }
 }
 
-function getActiveCriteria() {
-    return $('#top3-criteria li.active');
+/********************************************
+ * Quizz States
+ ********************************************/
+function configureState(stage) {
+    if(stage == stages.init) {
+        getWorkingArea().hide();
+        getMenu().show();
+    }
+
+    else if(stage == stages.work) {
+        getMenu().hide();
+        getWorkingArea().show();
+    }
+    
+    else if(stage == stages.end) {
+        getWorkingArea().hide();
+        getMenu().show();
+    }
 }
 
-function getQuizzBody() {
-    return $('#top3-quizz-body .row');
-}
-
-/** 
- * ---------------------------------------
- * Activate Options and Criteria
- * ------------------------------------------ 
- */
-function activateOption($option) {
-    getActiveOption().removeClass('active');
-    $option.addClass('active');
-}
-
-function activateCriteria($criteria) {
-    getActiveCriteria().removeClass('active');
-    $criteria.addClass('active');
+function resetQuizz() {
+    setTotalAttempts(0);
+    setTotalAnswers(0);
+    setCorrectAnswers(0);
+    setPercentage(0);
+    getUserAnswers().empty();
+    getPossibleAnswers().empty();
+    $('#gotomenu').addClass('btn-outline-secondary');
+    getUserArea().removeClass('bg-transparent').addClass('bg-light');
 }
 
 
-/**
- * Update quizz consists by restart the quizz configuration according 
- * to user input. This consists of the following steps:
- *  1 - Disable the quizz to disable more user inputs
- *  2 - Update the quizz question, and prepare user answers area
- *  3 - Call the server to fetch the quizz data
- */
-function updateQuizz() {
-    getQuizzTitle().html(createQuizzQuestion());   getUserScoreTotalAnswers().text(getNumberOfTopsSelector().val());
-    getUserAnswers().html(getQuizzAnswers());
+function startQuizz(type, category, criteria) {
+    // Show user answers and call server for responses
+    configureState(stages.work);
+    updateTitle(type, category, criteria);
+    updateWorkingArea(type, category, criteria);
+    loadAnswerFromServer(type, category, criteria);
+}
+
+// TODO: Better depend on value or element id?
+function updateTitle(type, category, criteria) {
+    var categoryId = getCategorySelected().attr('id');
+    var criteriaId = getCriteriaSelected().attr('id');
+    var question = createQuestion(categoryId, criteriaId);
+    getTitle().text(question);
+}
+
+function updateWorkingArea(type, category, criteria) {
+    var answerList = createUserAnswers(type, category, criteria);
+    getUserAnswers().html(answerList);
+    getTotalAnswers().text(type);
     createDroppables();
     cleanSum();
-    loadAnswersFromServer();
 }
 
 function cleanSum() {
@@ -182,13 +274,6 @@ function cleanSum() {
     $('#sum').data('sum', 0);
 }
 
-function enableQuizzMenu() {
-    getMenuCollapseButton().click();
-}
-
-function disableQuizzMenu() {
-    getMenuCollapseButton().click();
-}
 
 /**
  * Create droppables from users answers placeholders 
@@ -208,10 +293,6 @@ function createDroppables() {
             "ui-droppable-hover": "ui-state-hover"
         },
         drop: function (event, ui) {
-            if (!quizzStarted) {
-                disableQuizzMenu();
-                quizzStarted = true;
-            }
             onDrop($(this), ui.draggable)
         }
     });
@@ -256,7 +337,7 @@ function updateDraggableOnSuccess($droppable, $draggable) {
             at: 'right+10',
             of: $droppable.find('span')
         });
-
+    
     disableDragAndDrop($droppable, $draggable);
     autoPosition($droppable, $draggable);
     
@@ -288,98 +369,86 @@ function evaluateAnswer(rank1, rank2) {
 }
 
 function updateAttempts($draggable) {
-    var $ntries = $draggable.find('.ntries');
-    var ntriesValue = parseInt($ntries.text());
-    $ntries.text(++ntriesValue);
+    var $attempts = $draggable.find('.ntries');
+    var value = parseInt($attempts.text());
+    $attempts.text(value + 1);
 }
 
 function updateScore(doit, rank) {
-    var $attempts = getUserScoreTotalAttempts();
-    var $correct = getUserScoreCorrectAnswers();
-    var $total = getUserScoreTotalAnswers();
-    var $percentage = getUserScorePercentage();
+    var correctValue = parseInt(getCorrectAnswersValue());
+    var totalValue = parseInt(getTotalAnswersValue());
+    var attemptsValue = parseInt(getTotalAttemptsValue());
 
-    var attemptsValue = parseInt($attempts.text());
-    var correctValue = parseInt($correct.text());
-    var totalValue = parseInt($total.text());
-
-
-    $attempts.text(++attemptsValue);
+    getTotalAttempts().text(++attemptsValue);
 
     if (doit) {
-        $correct.text(++correctValue);
+        getCorrectAnswers().text(++correctValue);
         
         var sum = parseInt(getSum().data('sum'));
         sum += parseInt(findValueWithRank(rank));
         getSum().text(toNumeral(sum)).data('sum', sum);
         
-        if ($correct.text() == $total.text()) {
+        if (correctValue == totalValue) {
             addWinActions();
             quizzStarted = false;
-            enableQuizzMenu();
         }
     }
 
-    $percentage.text(Math.round(100 * correctValue / attemptsValue) + "%");
+    getPercentage()
+        .text(Math.round(100 * correctValue / attemptsValue) + "%");
 }
 
 
 function addWinActions() {
     // Add Like button
-    $('#central').removeClass('bg-light').addClass('bg-transparent');
-    getUserNotificationArea().removeClass('bg-transparent').addClass('bg-light');
+    getUserArea().removeClass('bg-light').addClass('bg-transparent');
+    $('#gotomenu').removeClass('btn-outline-secondary');
+    $('#gotomenu').addClass('btn-success');
 }
 
 function getUserNotificationArea() {
     return $('#user-notification-area');
 }
 
-function createQuizzQuestion() {
-    var $option = getActiveOption();
-    var $criteria = getActiveCriteria();
-    var question = createQuestion($option.attr('id'), $criteria.attr('id'));
-    return question;
-}
-
-function createQuestion(option, criteria) {
-    if (option == 'option-top-countries') {
-        if (criteria == 'criteria-embarked') {
+function createQuestion(optionId, criteriaId) {
+    if (optionId == 'option-top-countries') {
+        if (criteriaId == 'criteria-embarked') {
             return 'Which country had more people embarked from Afrika?';
-        } else if (criteria == 'criteria-disembarked') {
+        } else if (criteriaId == 'criteria-disembarked') {
             return 'Which country had more people disembarked in Europe or in the Americas?';
-        } else if (criteria == 'criteria-died') {
+        } else if (criteriaId == 'criteria-died') {
             return 'Which country had more people dying during the Middle Passage?';
         }
-    } else if (option == 'option-top-owners') {
+    } else if (optionId == 'option-top-owners') {
         if (criteria == 'criteria-embarked') {
             return 'Which ship owners had more people embarked from Afrika?';
-        } else if (criteria == 'criteria-disembarked') {
+        } else if (criteriaId == 'criteria-disembarked') {
             return 'Which ship owners had more people disembarked in Europe or in the Americas?';
-        } else if (criteria == 'criteria-died') {
+        } else if (criteriaId == 'criteria-died') {
             return 'Which ship owners had more people dead during the Middle Passage?';
         }
-    } else if (option == 'option-top-captains') {
-        if (criteria == 'criteria-embarked') {
+    } else if (optionId == 'option-top-captains') {
+        if (criteriaId == 'criteria-embarked') {
             return 'Which ship captains had more people embarked from Afrika?';
-        } else if (criteria == 'criteria-disembarked') {
+        } else if (criteriaId == 'criteria-disembarked') {
             return 'Which ship captains had more people disembarked in Europe or in the Americas?';
-        } else if (criteria == 'criteria-died') {
+        } else if (criteriaId == 'criteria-died') {
             return 'Which ship captains had more people dead during the Middle Passage?';
         }
-    } else if (option == 'option-top-ships') {
-        if (criteria == 'criteria-embarked') {
+    } else if (optionId == 'option-top-ships') {
+        if (criteriaId == 'criteria-embarked') {
             return 'Which ships had more people embarked from Afrika?';
-        } else if (criteria == 'criteria-disembarked') {
+        } else if (criteriaId == 'criteria-disembarked') {
             return 'Which ship had more people disembarked in Europe or in the Americas?';
-        } else if (criteria == 'criteria-died') {
+        } else if (criteriaId == 'criteria-died') {
             return 'Which ship had more people dead during the Middle Passage?';
         }
     }
 
 }
 
-function getQuizzAnswers(option, criteria) {
-    var numberOfTops = parseInt($('#number-of-tops option:selected').text());
+function createUserAnswers(type, option, criteria) {
+    var numberOfTops = parseInt(type);
     var html = '';
     for (var i = 1; i <= numberOfTops; i++) {
         html += '<div class="border-bottom" data-rank="' + i + '">' + i + '.' + ' ';
@@ -391,17 +460,7 @@ function getQuizzAnswers(option, criteria) {
 }
 
 
-
-
-
-function loadAnswersFromServer() {
-    var min = parseInt(getNumberOfTopsSelector().val());
-    var type = getActiveOption().text();
-    var criteria = getActiveCriteria().text();
-    loadQuizzData(min, type, criteria);
-}
-
-function loadQuizzData(min, type, criteria) {
+function loadAnswerFromServer(min, type, criteria) {
     $.ajax({
         url: 'php/getTops.php',
         data: {
@@ -502,7 +561,7 @@ function appendButtonFor(countryData) {
         var $answer = $('<div></div>')
             .addClass('draggable badge')
             .addClass('container-fluid')
-            .addClass('w-100 m-0 pl-2 text-left')
+            .addClass('w-50 m-0 text-left d-inline-block')
             .data('rank', countryData.rank)
             .append($flagAndName)
             .append($ntriesHolder);
@@ -513,4 +572,8 @@ function appendButtonFor(countryData) {
             revert: "invalid"
         });
     }
+}
+
+function saveUserResults() {
+    
 }

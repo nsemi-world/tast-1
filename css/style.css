@@ -306,25 +306,20 @@ div.itinerary a {
     background: white;
 }
 
-#top3-quizz-body #central {
+#top-quizz-body #user-area {
     position: relative;
 }
 
-#top3-quizz-body #central #possible-answers {
+#top-quizz-body #user-area #possible-answers {
 }
 
 #explore {
 }
 
-#central {
+#user-area {
     position: relative;
 }
-#user-notification-area {
-    position: absolute;
-    bottom: 1em;
-    left: 0;
-    width: 100%;
-}
+
 
 #percentage-indicator {
     width: 5em;
@@ -333,6 +328,6 @@ div.itinerary a {
     display: block;
 }
 
-.list-group :not(.active),  {
-    background: transparent;
+form .invalid {
+    border: 1px solid red;
 }

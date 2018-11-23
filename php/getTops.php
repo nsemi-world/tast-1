@@ -15,7 +15,7 @@ $criteria = getRequestParameter('criteria');
 $pdo = getPDO();
 $summaries = null;
 
-$summaries = findTopCountriesBy($pdo, 'slaximp');
+$summaries = findTopCountriesBy($pdo, 'slaximp', $min);
 
 echo json_encode($summaries);
 

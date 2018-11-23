@@ -93,12 +93,12 @@ function findCountriesSummariesForYear($pdo, $year) {
 }
 
 
-function findTopCountriesBy($pdo, $myvar) {
-    $erg = $pdo->query(getQueryTopCountriesGroupByCode($myvar));
+function findTopCountriesBy($pdo, $myvar, $limit) {
+    $erg = $pdo->query(getQueryTopCountriesGroupByCode($myvar, $limit));
     return $erg->fetchAll(PDO::FETCH_OBJ);
 }
 
-function getQueryTopCountriesGroupByName($myvar) {
+function getQueryTopCountriesGroupByName($myvar, $limit) {
     $sql = "
         SELECT n.label as name, n.iso2 as iso2, SUM($myvar) as total 
         FROM voyages as v
@@ -112,7 +112,7 @@ function getQueryTopCountriesGroupByName($myvar) {
     return $sql;
 }
 
-function getQueryTopCountriesGroupByCode($myvar) {
+function getQueryTopCountriesGroupByCode($myvar, $limit) {
     $sql = "
         SELECT n.label as name, n.iso2 as iso2, SUM($myvar) as total 
         FROM voyages as v
