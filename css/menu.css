@@ -20,7 +20,8 @@ header .navbar-brand {
 #menu a, #menu button, footer a {
     color: var(--link-color);
     background: transparent;
-    font-family: var(--link-font);
+    font-family: var(--main-font);
+    font-weight: bold;
 }
 
 #menu a.active, 
@@ -37,3 +38,4 @@ a i, button i {
 #toggle_contribute i {
     color: red;
 }
+

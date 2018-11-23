@@ -1,24 +1,92 @@
-<nav class="navbar">
+<nav class="container-fluid clearfix p-2">
     <a class="navbar-brand" href="index.php">
         <span>tast</span>
         <span class="loading">X</span>
         <span>plorer</span>
     </a>
-    <div id="menu" class="navbar-nav">
-        <div class="links">
+    <div id="menu" class="d-inline-block float-right">
             <a id="toggle_home" href="index.php" class="btn bg-transparent active" title="Home"><i class="fas fa-home"></i></a>
-            <a id="toggle_participation" href="participation.php" class="btn bg-transparent" title="Participation"><i class="fas fa-crown"></i></a>
-            <a id="toggle_voyages" href="voyages.php" class="btn bg-transparent"><i class="fas fa-atlas" title="Voyages"></i></a>
-            <a id="toggle_database" href="database.php" class="btn bg-transparent" title="Database"><i class="fas fa-database"></i></a>
-            <a id="toggle_charts" href="charts.php" class="btn bg-transparent" title="Charts"><i class="fas fa-chart-pie"></i></a>
-            <a id="toggle_articles" href="articles.php" class="btn bg-transparent" title="Articles"><i class="fas fa-book-open"></i></a>
-            <a id="toggle_resources" href="resources.php" class="btn bg-transparent" title="Resources"><i class="fas fa-quote-right"></i></a>
-            <a id="toggle_contribute" href="contribute.php" class="btn bg-transparent" title="Contribute"><i class="fas fa-heart"></i></a>
-            <a id="toggle_about_us" href="about-us.php" class="btn bg-transparent" title="About Us">X</a>
-            <a id="toggle_contacts" href="contacts.php" class="btn bg-transparent" title="Contact Us"><i class="fas fa-envelope"></i></a>
-            <a id="toggle_impressum" href="impressum.php" class="btn bg-transparent" title="Impressum"><i class="fas fa-certificate"></i></a>
-            <a id="toggle_privacy" href="privacy.php" class="btn bg-transparent" title="Privacy Policy"><i class="fas fa-user-secret"></i></a>
+
+            <div class="dropdown d-inline-block">
+                <button class="dropdown-toggle btn btn-transparent" type="button" id="explore-dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore</button>
+                <div class="dropdown-menu bg-dark" aria-labelledby="explore-dropdown-button">
+                    <a class="dropdown-item" id="toggle_participation" href="participation.php" title="Participation">
+                        <i class="fas fa-crown"></i>
+                        World Participation
+                    </a>
+                    <a class="dropdown-item" id="toggle_voyages" href="voyages.php">
+                        <i class="fas fa-atlas" title="Voyages"></i>
+                        Voyage Itineraries
+                    </a>
+                    <a class="dropdown-item" id="toggle_quizz" href="index.php#explore">
+                        <i class="fas fa-brain" title="Voyages"></i>
+                        exQUIZZme!
+                    </a>
+                </div>
+            </div>
+            <div class="dropdown d-inline-block">
+                <button class="dropdown-toggle btn btn-transparent" type="button" id="search-dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</button>
+                <div class="dropdown-menu bg-dark" aria-labelledby="search-dropdown-button">
+                    <a  class="dropdown-item" id="toggle_database" href="database.php"title="Database">
+                        <i class="fas fa-database"></i>
+                        Database
+                    </a>
+                    <a class="dropdown-item" id="toggle_charts" href="charts.php" title="Charts">
+                        <i class="fas fa-chart-pie"></i>
+                        Charts
+                    </a>
+                </div>
+            </div>
+            <div class="dropdown d-inline-block">
+                <button class="dropdown-toggle btn btn-transparent" type="button" id="resources-dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Resources</button>
+                <div class="dropdown-menu bg-dark" aria-labelledby="resources-dropdown-button">
+                    <a class="dropdown-item" id="toggle_articles" href="articles.php" title="Articles">
+                        <i class="fas fa-book-open"></i>
+                        Articles
+                    </a>
+                    <a class="dropdown-item" id="toggle_resources" href="resources.php" title="Resources">
+                        <i class="fas fa-quote-right"></i>
+                        Books
+                    </a>
+                    <a class="dropdown-item" id="toggle_external" href="external-links.php" title="External links">
+                        <i class="fas fa-globe"></i>
+                        External Links
+                    </a>
+                </div>
+            </div>
+            <div class="dropdown d-inline-block">
+                <button class="dropdown-toggle btn btn-transparent" type="button" id="contribute-dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contribute</button>
+                <div class="dropdown-menu bg-dark" aria-labelledby="contribute-dropdown-button">
+                    <a class="dropdown-item" id="toggle_contribute" href="contribute.php" title="Contribute">
+                        <i class="fas fa-heart"></i>
+                        Donate
+                    </a>
+                </div>
+            </div>
+            <div class="dropdown d-inline-block">
+                <button class="dropdown-toggle btn btn-transparent" type="button" id="about-us-dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About Us</button>
+                <div class="dropdown-menu bg-dark" aria-labelledby="about-us-dropdown-button">
+                    <a class="dropdown-item" id="toggle_contacts" href="contacts.php" title="Contact Us">
+                        <i class="fas fa-envelope"></i>
+                        Contacts
+                    </a>
+                    <a class="dropdown-item" id="toggle_about_us" href="about-us.php" title="About Us"><span style="font-family: var(--link-font);">X </span> About Us</a>
+                </div>
+            </div>
+            <div class="dropdown d-inline-block">
+                <button class="dropdown-toggle btn btn-transparent" type="button" id="legal-dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Legal</button>
+                <div class="dropdown-menu bg-dark" aria-labelledby="legal-dropdown-button">
+                    <a class="dropdown-item" id="toggle_impressum" href="impressum.php" title="Impressum">
+                        <i class="fas fa-certificate"></i>
+                        Impressum
+                    </a>
+                    <a class="dropdown-item" id="toggle_privacy" href="privacy.php" title="Privacy Policy">
+                        <i class="fas fa-user-secret"></i>
+                        Privacy
+                    </a>
+                </div>
+            </div>
+            
             <a id="toggle_login" href="#" class="btn bg-transparent" title="Login with Facebook"><i class="fab fa-facebook"></i></a>
         </div>
-    </div>
 </nav>
