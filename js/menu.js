@@ -25,7 +25,7 @@ $(document).ready(function() {
         $('#toggle_login i').removeClass('loggedin');
         $('#toggle_login').attr('title', 'Login');
         switchUserIcon();
-        updateSessionUser(null, null, null);
+        updateSessionUser(null, null);
     });
     
     loadUserIfAny();
@@ -54,7 +54,7 @@ function updateSessionUser(userid, userimage) {
     // User Id
     // Username
     // Image
-    sessionStorage.setItem('userid', userid + '');
+    sessionStorage.setItem('userid', userid);
     sessionStorage.setItem('userimage', userimage);
 }
 
