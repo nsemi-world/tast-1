@@ -36,15 +36,17 @@ $(document).ready(function() {
         switchUserIcon();
     });
     
+    switchUserIcon();
+    
 });
 
 function switchUserImage(imageUrl) {
-    $('#toggle_login i').addClass('d-none');
-    $('#toggle_login img').attr('src', imageUrl).addClass('d-block');        
+    $('#toggle_login i').hide();
+    $('#toggle_login img').attr('src', imageUrl).show();        
 }
 function switchUserIcon() {
-    $('#toggle_login img').addClass('d-none');
-    $('#toggle_login i').addClass('d-block');        
+    $('#toggle_login img').hide();
+    $('#toggle_login i').show();        
 }
 
 function activate(link) {
