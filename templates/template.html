@@ -44,8 +44,8 @@
         function login() {
             FB.login(function(response) {
                 if (response.status == 'connected') {
-                    $(document).trigger('_facebook_login', [response]);
                     updateUserPicture(response);
+                    $(document).trigger('_facebook_login', [response]);
                 }
             }, {
                 scope: 'public_profile,email'
@@ -58,11 +58,11 @@
             });
         }
 
-        function updateUserPicture(loginResponse) {
-            var userid = loginResponse.authResponse.userID;
-            console.log(userid);
+        function updateUserPicture(resp) {
+            var userid = resp.authResponse.userID;
+            console.log(">>> " + userid);
             FB.api(
-                '/'+ userid + '/picture',
+                '/' + userid + '/picture',
                 'GET', 
                 {},
                 function(response) {
