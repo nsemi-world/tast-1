@@ -35,8 +35,6 @@
                 if (response.status == 'connected') {
                     requestUserPicture(response);
                 }
-            }, {
-                scope: 'public_profile,email'
             });
         }
 
@@ -69,7 +67,7 @@
             }
             js = d.createElement(s);
             js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=716533442049508&autoLogAppEvents=1";
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
