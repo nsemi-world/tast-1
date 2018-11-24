@@ -28,7 +28,6 @@ $(document).ready(function() {
         updateSessionUser(null, null, null);
     });
     
-    switchUserIcon();
     loadUserIfAny();
     
 });
