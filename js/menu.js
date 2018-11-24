@@ -49,8 +49,17 @@ function updateSessionUser(userid, userimage) {
     // User Id
     // Username
     // Image
-    sessionStorage.setItem('userid', userid);
-    sessionStorage.setItem('userimage', userimage);
+    if(userid != null) {
+        sessionStorage.setItem('userid', userid);
+    } else {
+        sessionStorage.removeItem('userid');
+    }
+    
+    if(userimage != null) {
+        sessionStorage.setItem('userimage', userimage);
+    } else {
+        sessionStorage.removeItem('userimage');
+    }
 }
 
 function loadUserIfAny() {
