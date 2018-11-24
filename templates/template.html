@@ -59,12 +59,14 @@
         }
 
         function updateUserPicture(response) {
-            console.log(response);
+            var userid = response.authResponse.userID;
+            console.log(userid);
             FB.api(
-                '/{user-id}/picture',
-                'GET', {},
+                '/'+ userid + '/picture',
+                'GET', 
+                {},
                 function(response) {
-                    // Insert your code here } );        
+                    alert('Got response... ');        
                 }
             );
         }
