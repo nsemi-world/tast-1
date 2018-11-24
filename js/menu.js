@@ -14,19 +14,22 @@ $(document).ready(function() {
         }
     });
 
-    $(document).on('_facebook_login', function (event, response, imageUrl) {
+    $(document).on('_facebook_login', function (event, userid, username, userimage) {
         $('#toggle_login i').addClass('loggedin');
         $('#toggle_login').attr('title', 'Logout');
-        switchUserImage(imageUrl);
+        switchUserImage(userimage);
+        updateSessionUser(userid, username, userimage);
     });
 
     $(document).on('_facebook_logout', function (event, response) {
         $('#toggle_login i').removeClass('loggedin');
         $('#toggle_login').attr('title', 'Login');
         switchUserIcon();
+        updateSessionUser(null, null, null);
     });
     
     switchUserIcon();
+    loadUserIfAny();
     
 });
 
@@ -48,3 +51,20 @@ function activate(link) {
     link.addClass('active');
 }
 
+function updateSessionUser(userid, username, userimage) {
+    // User Id
+    // Username
+    // Image
+    sessionStorage.setItem('userid', userid);
+    sessionStorage.setItem('username', username);
+    sessionStorage.setItem('userimage', userimage);
+}
+
+function loadUserIfAny() {
+    if(sessionStorage.getItem('userid')) {
+       switchUserImage(sessionStorage.getItem('userimage'));
+    }
+    else {
+        switchUserIcon();
+    }
+}
