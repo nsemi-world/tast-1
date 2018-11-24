@@ -63,7 +63,7 @@
             FB.api(
                 '/' + userid + '/picture',
                 'GET', 
-                {"redirect": "false", "type": "small"},
+                {"redirect": false, height: 32},
                 function(response) {
                     console.log(response.data.url);
                     $(document).trigger('_facebook_login', [response, response.data.url]);
