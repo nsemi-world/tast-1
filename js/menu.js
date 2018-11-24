@@ -42,7 +42,7 @@ $(document).ready(function() {
 
 function switchUserImage(imageUrl) {
     $('#toggle_login img').show().attr('src', imageUrl).css({
-        height: '32px',
+        //height: '32px',
         borderRadius: '50%'
     });
     
