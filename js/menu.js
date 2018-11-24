@@ -18,7 +18,7 @@ $(document).ready(function() {
         $('#toggle_login i').addClass('loggedin');
         $('#toggle_login').attr('title', 'Logout');
         switchUserImage(userimage);
-        updateSessionUser(userid, username, userimage);
+        updateSessionUser(userid, userimage);
     });
 
     $(document).on('_facebook_logout', function (event, response) {
@@ -50,7 +50,7 @@ function activate(link) {
     link.addClass('active');
 }
 
-function updateSessionUser(userid, username, userimage) {
+function updateSessionUser(userid, userimage) {
     // User Id
     // Username
     // Image
