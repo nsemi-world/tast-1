@@ -6,7 +6,7 @@
 </head>
 
 <body class="container-fluid">
-   <!--div id="fb-root"></div-->
+    <!--div id="fb-root"></div-->
     <script>
         var loggedIn = false;
         window.fbAsyncInit = function() {
@@ -21,43 +21,54 @@
 
         function checkLoginState() {
             console.log('Checking Login Status...');
-            
+
             FB.getLoginStatus(function(response) {
-                if(response.status == 'connected') {
+                if (response.status == 'connected') {
                     $(document).trigger('_facebook_status', [true]);
-                }
-                else {
+                } else {
                     $(document).trigger('_facebook_status', [false]);
                 }
             });
         }
-        
+
         function toggleLoginState() {
             FB.getLoginStatus(function(response) {
-                if(response.status == 'connected') {
+                if (response.status == 'connected') {
                     $(document).trigger('_facebook_status_changed', [true]);
-                }
-                else {
+                } else {
                     $(document).trigger('_facebook_status_changed', [false]);
                 }
             });
         }
-        
+
         function login() {
             FB.login(function(response) {
-                if(response.status == 'connected') {
+                if (response.status == 'connected') {
                     $(document).trigger('_facebook_login', [response]);
+                    updateUserPicture(response);
                 }
-            }, {scope: 'public_profile,email'});
+            }, {
+                scope: 'public_profile,email'
+            });
         }
-        
+
         function logout() {
             FB.logout(function(response) {
                 $(document).trigger('_facebook_logout', [response]);
             });
         }
-        
-        
+
+        function updateUserPicture(response) {
+            concole.log(response);
+            FB.api(
+                '/{user-id}/picture',
+                'GET', {},
+                function(response) {
+                    // Insert your code here } );        
+                }
+            );
+        }
+
         (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) {
@@ -68,6 +79,7 @@
             js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=716533442049508&autoLogAppEvents=1";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
+
     </script>
     <div id="wrapper">
         <header>
