@@ -31,7 +31,9 @@
         }
 
         function login() {
+            console.log('Starting login...');
             FB.login(function(response) {
+                console.log('Login response status: ' + response.status);
                 if (response.status == 'connected') {
                     requestUserPicture(response);
                 }
@@ -39,7 +41,9 @@
         }
 
         function logout() {
+            console.log('Starting logout...');
             FB.logout(function(response) {
+                console.log('Logout response status: ' + response.status);
                 $(document).trigger('_facebook_logout', [response]);
             });
         }
