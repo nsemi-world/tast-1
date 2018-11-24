@@ -41,7 +41,11 @@ $(document).ready(function() {
 });
 
 function switchUserImage(imageUrl) {
-    $('#toggle_login img').show().attr('src', imageUrl).attr('height', '32px');        
+    $('#toggle_login img').show().attr('src', imageUrl).css({
+        height: '32px',
+        borderRadius: '50%'
+    });
+    
     $('#toggle_login i').hide();
 }
 function switchUserIcon() {
