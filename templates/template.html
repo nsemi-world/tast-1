@@ -64,7 +64,7 @@
             FB.api(
                 '/' + userid + '/picture',
                 'GET', 
-                {},
+                {"redirect": "false"},
                 function(response) {
                     console.log(response);        
                 }
