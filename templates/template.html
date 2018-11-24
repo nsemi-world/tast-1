@@ -44,8 +44,7 @@
         function login() {
             FB.login(function(response) {
                 if (response.status == 'connected') {
-                    updateUserPicture(response);
-                    $(document).trigger('_facebook_login', [response]);
+                    requestUserPicture(response);
                 }
             }, {
                 scope: 'public_profile,email'
@@ -58,7 +57,7 @@
             });
         }
 
-        function updateUserPicture(resp) {
+        function requestUserPicture(resp) {
             var userid = resp.authResponse.userID;
             console.log(">>> " + userid);
             FB.api(
@@ -66,7 +65,9 @@
                 'GET', 
                 {"redirect": "false"},
                 function(response) {
-                    console.log(response.data.url);        
+                    console.log(response.data.url);
+                    $(document).trigger('_facebook_login', [response, response.data.url]);
+                    
                 }
             );
         }
