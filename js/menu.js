@@ -1,21 +1,10 @@
 $(document).ready(function() {
     $('#toggle_login').on('click', function(event) {
         event.preventDefault();
-        toggleLoginState();
+        checkLoginState();
     });
     
     $(document).on('_facebook_status', function(event, isLoggedIn){
-        if(isLoggedIn) {
-            $('#toggle_login i').addClass('loggedin');
-            $('#toggle_login').attr('title', 'Logout');
-        }
-        else {
-            $('#toggle_login i').removeClass('loggedin');
-            $('#toggle_login').attr('title', 'Login');
-        }
-    });
-    
-    $(document).on('_facebook_status_changed', function(event, isLoggedIn){
         if(isLoggedIn) {
             logout();
         }
@@ -25,6 +14,7 @@ $(document).ready(function() {
     });
 
     $(document).on('_facebook_login', function (event, response, imageUrl) {
+        
         $('#toggle_login i').addClass('loggedin');
         $('#toggle_login').attr('title', 'Logout');
         switchUserImage(imageUrl);

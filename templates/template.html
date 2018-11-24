@@ -16,7 +16,6 @@
                 version: 'v3.2'
             });
             FB.AppEvents.logPageView();
-            //checkLoginState();
         };
 
         function checkLoginState() {
@@ -27,16 +26,6 @@
                     $(document).trigger('_facebook_status', [true]);
                 } else {
                     $(document).trigger('_facebook_status', [false]);
-                }
-            });
-        }
-
-        function toggleLoginState() {
-            FB.getLoginStatus(function(response) {
-                if (response.status == 'connected') {
-                    $(document).trigger('_facebook_status_changed', [true]);
-                } else {
-                    $(document).trigger('_facebook_status_changed', [false]);
                 }
             });
         }
