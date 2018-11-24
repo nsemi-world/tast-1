@@ -59,7 +59,7 @@ function updateSessionUser(userid, username, userimage) {
 }
 
 function loadUserIfAny() {
-    if(sessionStorage.getItem('userid')) {
+    if(sessionStorage.getItem('userid') != null) {
        switchUserImage(sessionStorage.getItem('userimage'));
     }
     else {
