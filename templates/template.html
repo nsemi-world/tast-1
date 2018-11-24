@@ -16,7 +16,7 @@
                 version: 'v3.2'
             });
             FB.AppEvents.logPageView();
-            checkLoginState();
+            //checkLoginState();
         };
 
         function checkLoginState() {
@@ -58,18 +58,19 @@
         }
 
         function requestUserPicture(resp) {
-            var userid = resp.authResponse.userID;
-            console.log(">>> " + userid);
-            FB.api(
-                '/' + userid + '/picture',
-                'GET', 
-                {"redirect": false, height: 24},
-                function(response) {
-                    console.log(response.data.url);
-                    $(document).trigger('_facebook_login', [response, response.data.url]);
-                    
-                }
-            );
+            if(resp.authResponse != null) {
+                var userid = resp.authResponse.userID;
+                console.log(">>> " + userid);
+                FB.api(
+                    '/' + userid + '/picture',
+                    'GET', 
+                    {"redirect": false, height: 24},
+                    function(response) {
+                        console.log(response.data.url);
+                        $(document).trigger('_facebook_login', [response, response.data.url]);
+                    }
+                );
+            }
         }
 
         (function(d, s, id) {
