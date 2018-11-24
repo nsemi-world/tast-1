@@ -49,21 +49,20 @@ function updateSessionUser(userid, userimage) {
     // User Id
     // Username
     // Image
-    if(userid != null) {
+    if(userid != null && userimage != null) {
         sessionStorage.setItem('userid', userid);
-    } else {
-        sessionStorage.removeItem('userid');
-    }
-    
-    if(userimage != null) {
         sessionStorage.setItem('userimage', userimage);
     } else {
+        sessionStorage.removeItem('userid');
         sessionStorage.removeItem('userimage');
     }
+    
+    loadUserIfAny();
+    
 }
 
 function loadUserIfAny() {
-    if(sessionStorage.getItem('userid') != null) {
+    if(sessionStorage.getItem('userid')) {
        switchUserImage(sessionStorage.getItem('userimage'));
     }
     else {
