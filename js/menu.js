@@ -55,8 +55,7 @@ function updateSessionUser(userid, username, userimage) {
     // User Id
     // Username
     // Image
-    sessionStorage.setItem('userid', userid);
-    sessionStorage.setItem('username', username);
+    sessionStorage.setItem('userid', userid + '');
     sessionStorage.setItem('userimage', userimage);
 }
 
