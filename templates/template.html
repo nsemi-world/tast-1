@@ -58,7 +58,7 @@
                     {"redirect": false, height: 24},
                     function(response) {
                         console.log(response.data);
-                        $(document).trigger('_facebook_login', [response, response.data.url]);
+                        $(document).trigger('_facebook_login', [response, userid, response.data.url]);
                     }
                 );
             }
