@@ -51,13 +51,13 @@
         function requestUserPicture(resp) {
             if(resp.authResponse != null) {
                 var userid = resp.authResponse.userID;
-                console.log(">>> " + resp.authResponse);
+                console.log(resp.authResponse);
                 FB.api(
                     '/' + userid + '/picture',
                     'GET', 
                     {"redirect": false, height: 24},
                     function(response) {
-                        console.log(response.data.url);
+                        console.log(response.data);
                         $(document).trigger('_facebook_login', [response, response.data.url]);
                     }
                 );
