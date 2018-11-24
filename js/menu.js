@@ -4,7 +4,7 @@ $(document).ready(function() {
         checkLoginState();
     });
     
-    $(document).on('_facebook_status', function(event, isLoggedIn){
+    $(document).on('_facebook_status', function(event, isLoggedIn) {
         if(isLoggedIn) {
             logout();
         }
