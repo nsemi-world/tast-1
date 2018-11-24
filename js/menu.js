@@ -6,7 +6,6 @@ $(document).ready(function() {
     });
     
     $(document).on('_facebook_status', function(event, isLoggedIn){
-        event.preventDefault();
         if(isLoggedIn) {
             logout();
         }
@@ -16,14 +15,12 @@ $(document).ready(function() {
     });
 
     $(document).on('_facebook_login', function (event, response, imageUrl) {
-        event.preventDefault();
         $('#toggle_login i').addClass('loggedin');
         $('#toggle_login').attr('title', 'Logout');
         switchUserImage(imageUrl);
     });
 
     $(document).on('_facebook_logout', function (event, response) {
-        event.preventDefault();
         $('#toggle_login i').removeClass('loggedin');
         $('#toggle_login').attr('title', 'Login');
         switchUserIcon();
