@@ -47,7 +47,7 @@
         function requestUserPicture(resp) {
             if(resp.authResponse != null) {
                 var userid = resp.authResponse.userID;
-                console.log(">>> " + userid);
+                console.log(">>> " + resp.authResponse);
                 FB.api(
                     '/' + userid + '/picture',
                     'GET', 
