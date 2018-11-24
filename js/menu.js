@@ -1,6 +1,7 @@
 $(document).ready(function() {
     $('#toggle_login').on('click', function(event) {
         event.preventDefault();
+        event.stopImmediatePropagation();
         checkLoginState();
     });
     
