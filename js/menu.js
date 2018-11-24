@@ -14,7 +14,7 @@ $(document).ready(function() {
         }
     });
 
-    $(document).on('_facebook_login', function (event, userid, username, userimage) {
+    $(document).on('_facebook_login', function (event, userid, userimage) {
         $('#toggle_login i').addClass('loggedin');
         $('#toggle_login').attr('title', 'Logout');
         switchUserImage(userimage);
