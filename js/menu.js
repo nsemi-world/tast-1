@@ -41,12 +41,12 @@ $(document).ready(function() {
 });
 
 function switchUserImage(imageUrl) {
+    $('#toggle_login img').show().attr('src', imageUrl);        
     $('#toggle_login i').hide();
-    $('#toggle_login img').attr('src', imageUrl).show();        
 }
 function switchUserIcon() {
-    $('#toggle_login img').hide();
     $('#toggle_login i').show();        
+    $('#toggle_login img').hide();
 }
 
 function activate(link) {
