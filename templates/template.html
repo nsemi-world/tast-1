@@ -58,15 +58,15 @@
             });
         }
 
-        function updateUserPicture(response) {
-            var userid = response.authResponse.userID;
+        function updateUserPicture(loginResponse) {
+            var userid = loginResponse.authResponse.userID;
             console.log(userid);
             FB.api(
                 '/'+ userid + '/picture',
                 'GET', 
                 {},
                 function(response) {
-                    console.log('Got response... ' + userid);        
+                    console.log('Got response... ' + response);        
                 }
             );
         }
