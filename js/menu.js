@@ -1,7 +1,6 @@
 $(document).ready(function() {
     $('#toggle_login').on('click', function(event) {
         event.preventDefault();
-        event.stopImmediatePropagation();
         checkLoginState();
     });
     
@@ -15,20 +14,12 @@ $(document).ready(function() {
     });
 
     $(document).on('_facebook_login', function (event, userid, userimage) {
-        $('#toggle_login i').addClass('loggedin');
-        $('#toggle_login').attr('title', 'Logout');
-        
         console.log('>>> userid = ' + userid);
         console.log('>>> userimage = ' + userimage);
-
-        switchUserImage(userimage);
         updateSessionUser(userid, userimage);
     });
 
     $(document).on('_facebook_logout', function (event, response) {
-        $('#toggle_login i').removeClass('loggedin');
-        $('#toggle_login').attr('title', 'Login');
-        switchUserIcon();
         updateSessionUser(null, null);
     });
     
