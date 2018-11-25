@@ -10,7 +10,7 @@
                 <div class="page-actions">
                     <a class="btn btn-outline-light text-center" href="#explore">Explore</a>
                     <a class="btn btn-outline-light text-center" href="#understand">Understand</a>
-                    <a class="btn btn-outline-light text-center" href="#contribute">Contribute</a>
+                    <a class="btn btn-outline-light text-center d-none" href="#contribute">Contribute</a>
                 </div>
             </h1>
     </div>
@@ -52,11 +52,11 @@
                             <label for="type">Choose category:</label>
                             <select id="top-category" name="category" class="form-control bg-transparent" placeholder="Top Category:" required>
                                 <option id="option-top-countries">Top Countries</option>
-                                <option id="option-top-owners">Top Owners</option>
-                                <option id="option-top-captains">Top Captains</option>
-                                <option  id="option-top-ships">Top Ships</option>
-                                <option id="option-top-purchasing">Top Purchasing Places</option>
-                                <option id="option-top-landing">Top Landing Places</option>
+                                <option id="option-top-owners" class="d-none">Top Owners</option>
+                                <option id="option-top-captains" class="d-none">Top Captains</option>
+                                <option  id="option-top-ships" class="d-none">Top Ships</option>
+                                <option id="option-top-purchasing" class="d-none">Top Purchasing Places</option>
+                                <option id="option-top-landing" class="d-none">Top Landing Places</option>
                             </select>
                             <div class="valid-feedback">
                                 Looks good!
@@ -67,8 +67,8 @@
                             <label for="criteria">Choose criteria:</label>
                             <select id="top-criteria" name="criteria" class="form-control bg-transparent" required>
                                 <option id="criteria-embarked"># People embarked</option>
-                                <option id="criteria-disembarked"># People disembarked</option>
-                                <option id="criteria-died"># People died in Middle Passage</option>
+                                <option id="criteria-disembarked" class="d-none"># People disembarked</option>
+                                <option id="criteria-died" class="d-none"># People died in Middle Passage</option>
                             </select>
                             <div class="valid-feedback">
                                 Looks good!
@@ -115,7 +115,7 @@
             <small class="text-muted">
                 Be sure you know their meaning and coverage.
             </small>
-            <button id="go-coverage" class="btn btn-outline-secondary text-center" disabled title="Comming soon...">
+            <button id="go-coverage" class="btn btn-outline-secondary text-center d-none" disabled title="Comming soon...">
                 Variable Meaning and Coverage
             </button>
         </h3>
@@ -134,7 +134,7 @@
 </section-->
 
 
-<section id="contribute" class="container-fluid p-5">
+<section id="contribute" class="container-fluid p-5 d-none">
     <div class="display-1 text-center my-auto">
         <p>Thank You!</p>
     </div>
