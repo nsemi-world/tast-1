@@ -59,29 +59,11 @@ function transformToAssocArray(prmstr) {
 }
 
 function configureSubsections() {
-
-    $('.subsection').not('#explore').hover(
-        function (event) {
-            $(this).animate({
-                backgroundColor: 'linear-gradient(to bottom right, var(--main-color),' +  getRandomColor() + ')'
-            }, 1000);
-        },
-        function (event) {
-            $(this).animate({
-                backgroundColor: '#eee'
-            }, 1000);
-        }
-    );
-    
-    $('#explore').animate({backgroundColor: 'rgba(180, 174, 68, .5)'}, 1000);
-
-    $.each($('.frontpage .title-wrapper'),
-        function () {
-            $(this).animate({
-                backgroundColor: getRandomColor()
-            }, 1000);
-        }
-    );
+    $('.frontpage .title-wrapper').css({
+                //backgroundColor: getRandomColor()
+                backgroundColor: 'rgba(0,0,0,.75)'
+    });
+    $('#explore #top-quizz').animate({backgroundColor: 'rgba(180, 174, 68, .5)'}, 1000);
 }
 
 function getRandomColor() {

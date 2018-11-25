@@ -1,20 +1,24 @@
 <section id="home">
     <div class="frontpage" id="message">
-        <div class="title-wrapper">
-            <h1 class="h1 title">
+        <div class="title-wrapper my-auto">
+            <h1 class="h1 title display-3">
                 <div class="logo">
                     <span>tast</span>
                     <span class="loading">X</span>
                     <span>plorer</span>
                 </div>
-                <div class="">Explore, Search, Contribute</div>
+                <div class="page-actions">
+                    <a class="btn btn-outline-success text-center" href="#explore">Explore</a>
+                    <a class="btn btn-outline-success text-center" href="#understand">Understand</a>
+                    <a class="btn btn-outline-success text-center" href="#contribute">Contribute</a>
+                </div>
             </h1>
-        </div>
+    </div>
     </div>
 </section>
 
-<div class="container-fluid py-5">
-    <h3 class="display-3 text-center">
+<section id="explore" class="container rounded p-5">
+    <h3 class="display-3 text-center text-dark">
         How much do you know about the trans-atlantic slave trade?
         <br/>
         <small class="text-muted">Test yourself and take a quizz!</small>
@@ -23,34 +27,30 @@
         <a href="participation.php" id="go-participation" class="btn btn-outline-success text-center"><i class="fas fa-crown"></i> See World's Participation Map</a>
         <a href="voyages.php" id="go-voyages" class="btn btn-outline-success text-center"><i class="fas fa-atlas"></i> Explore Voyage Dates and Itineraries</a>
     </h3>
-    <section id="explore" class="subsection container rounded shadow">
-        <div id="top-quizz" class="container rounded pt-5 pb-5">
-            <!-- HEADER WITH TITLE -->
-            <div id="quizz-header" class="container-fluid pt-3 pb-3">
-                <h3 id="quizz-title" class="h3 display-5 text-center font-weight-bold">
-                </h3>
-            </div>
+    <div id="top-quizz" class="container rounded m-5 p-5 shadow">
+        <!-- HEADER WITH TITLE -->
+        <h3 id="quizz-title" class="h3 display-5 text-center font-weight-bold"></h3>
 
-            <!-- BODY -->
-            <div id="quizz-body" class="container-fluid mt-3 mb-5">
-                <!-- SIDE MENU WITH FORM -->
-                <div class="row">
-                    <aside id="quizz-menu" class="container rounded col-sm-12 col-md-8 col-lg-4 mx-auto shadow p-2 bg-light">
-                        <form id="quizz-form" class="needs-validation">
-                            <div class="form-group">
-                                <label for="number-of-tops">Top: </label>
-                                <input id="top-type" type="number" name="type" class="form-control bg-transparent p-1 m-0" style="heitgh: 26px;" placeholder="Top 1,2,3,..." required>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                                <div class="invalid-feedback">
-                                    Choose a number equal or greater than 1
-                                </div>
+        <!-- BODY -->
+        <div id="quizz-body" class="container-fluid mt-3 mb-5">
+            <!-- SIDE MENU WITH FORM -->
+            <div class="row">
+                <aside id="quizz-menu" class="container rounded col-sm-12 col-md-8 col-lg-4 mx-auto shadow p-2 bg-light">
+                    <form id="quizz-form" class="needs-validation">
+                        <div class="form-group">
+                            <label for="number-of-tops">Top: </label>
+                            <input id="top-type" type="number" name="type" class="form-control bg-transparent p-1 m-0" style="heitgh: 26px;" placeholder="Top 1,2,3,..." required>
+                            <div class="valid-feedback">
+                                Looks good!
                             </div>
-                            <hr/>
-                            <div class="form-group">
-                                <label for="type">Choose category:</label>
-                                <select id="top-category" name="category" class="form-control bg-transparent" placeholder="Top Category:" required>
+                            <div class="invalid-feedback">
+                                Choose a number equal or greater than 1
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="form-group">
+                            <label for="type">Choose category:</label>
+                            <select id="top-category" name="category" class="form-control bg-transparent" placeholder="Top Category:" required>
                                 <option id="option-top-countries">Top Countries</option>
                                 <option id="option-top-owners">Top Owners</option>
                                 <option id="option-top-captains">Top Captains</option>
@@ -58,56 +58,55 @@
                                 <option id="option-top-purchasing">Top Purchasing Places</option>
                                 <option id="option-top-landing">Top Landing Places</option>
                             </select>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
+                            <div class="valid-feedback">
+                                Looks good!
                             </div>
-                            <hr/>
-                            <div class="form-group">
-                                <label for="criteria">Choose criteria:</label>
-                                <select id="top-criteria" name="criteria" class="form-control bg-transparent" required>
+                        </div>
+                        <hr/>
+                        <div class="form-group">
+                            <label for="criteria">Choose criteria:</label>
+                            <select id="top-criteria" name="criteria" class="form-control bg-transparent" required>
                                 <option id="criteria-embarked"># People embarked</option>
                                 <option id="criteria-disembarked"># People disembarked</option>
                                 <option id="criteria-died"># People died in Middle Passage</option>
                             </select>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
+                            <div class="valid-feedback">
+                                Looks good!
                             </div>
-                            <hr/>
-                            <button id="quizz-form-submit" type="submit" class="btn btn-success w-100">Start</button>
-                        </form>
-                    </aside>
-                    <!-- USER WORKING AREA -->
-                    <div id="working-area" class="container col-sm-12 col-md-9 col-lg-6 mx-auto">
-                        <div id="score" class="my-1 rounded">
-                            <span class="badge">Score</span>
-                            <div id="score-badge" class="badge badge-info" style="padding: .4125em">
-                                <span class="ncorrect">0</span> |
-                                <span class="ntotal">0</span> |
-                                <span class="ntries">0</span> |
-                                <span class="percentage">0%
-                                    </span>
-                            </div>
-                            <div id="fb-like" class="fb-like float-right" data-href="https://tast.ngutu.org/#explore" data-layout="button_count" data-action="recommend" data-size="large" data-show-faces="true" data-share="false"></div>
                         </div>
-                        <div id="user-area" class="w-auto rounded p-3 shadow  bg-light">
-                            <div id="user-answers" class="">
-                            </div>
-                            <div id="sum" class="badge w-100 text-right my-2"></div>
-                            <!-- POSSIBLE ANSWERS -->
-                            <div id="possible-answers" class="container rounded border border-top border-bottom my-5"></div>
-                            <div id="#user-actions" class="w-100 clearfix">
-                                <button id="gotomenu" class="btn btn-outline-secondary my-2 ml-2" inactive>Take another quizz</button>
-                                <button id="save-results" class="btn btn-outline-secondary  float-right my-2" inactive>Save My Results</button>
-                            </div>
+                        <hr/>
+                        <button id="quizz-form-submit" type="submit" class="btn btn-success w-100">Start</button>
+                    </form>
+                </aside>
+                <!-- USER WORKING AREA -->
+                <div id="working-area" class="container col-sm-12 col-md-9 col-lg-6 mx-auto">
+                    <div id="score" class="my-1 rounded">
+                        <span class="badge">Score</span>
+                        <div id="score-badge" class="badge badge-info" style="padding: .4125em">
+                            <span class="ncorrect">0</span> |
+                            <span class="ntotal">0</span> |
+                            <span class="ntries">0</span> |
+                            <span class="percentage">0%
+                                    </span>
+                        </div>
+                        <div id="fb-like" class="fb-like float-right" data-href="https://tast.ngutu.org/#explore" data-layout="button_count" data-action="recommend" data-size="large" data-show-faces="true" data-share="false"></div>
+                    </div>
+                    <div id="user-area" class="w-auto rounded p-3 shadow  bg-light">
+                        <div id="user-answers" class="">
+                        </div>
+                        <div id="sum" class="badge w-100 text-right my-2"></div>
+                        <!-- POSSIBLE ANSWERS -->
+                        <div id="possible-answers" class="container rounded border border-top border-bottom my-5"></div>
+                        <div id="#user-actions" class="w-100 clearfix">
+                            <button id="gotomenu" class="btn btn-outline-secondary my-2 ml-2" inactive>Take another quizz</button>
+                            <button id="save-results" class="btn btn-outline-secondary  float-right my-2" inactive>Save My Results</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-</div>
+    </div>
+</section>
 
 
 <div class="container-fluid bg-dark p-5">

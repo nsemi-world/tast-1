@@ -7,7 +7,7 @@ header('Content-type:application/json;charset=utf-8');
 $name = getRequestParameter('name');
 $width = getRequestParameter('width');
 $height = getRequestParameter('height');
-$force_db = false;
+$force_db = true;
 
 if($force_db) {
     resizeAndStore($name, $width, $height);
@@ -20,7 +20,7 @@ else {
 
 function resizeOnly($name, $width, $height) {
     $im = resizeImage($name, $width, $height);
-        echo json_encode(['url' => toDataUrl($im->getImageBlob()), 'stored' => false]);
+    echo json_encode(['url' => toDataUrl($im->getImageBlob()), 'stored' => false]);
 }
 
 function resizeAndStore($name, $width, $height) {
@@ -41,11 +41,8 @@ function resizeAndStore($name, $width, $height) {
                     $height, 
                     $name
         );
-}
-
-
-
-
+    }
+    $pdo = null;
 }
 
 function getImage($pdo, $name, $width, $height) {
@@ -67,7 +64,7 @@ function resizeImage($name, $width, $height) {
 
     // Compression and quality
     $im->setImageCompression(Imagick::COMPRESSION_JPEG);
-    $im->setImageCompressionQuality(50);
+    $im->setImageCompressionQuality(75);
     $im->cropThumbnailImage($width, $height);
     
     return $im;

@@ -1,6 +1,6 @@
 section {
     position: relative;
-    min-height: var(--main-height);
+    /*min-height: var(--main-height);*/
     background: #fff;
     color: var(--main-color);
 }
@@ -21,7 +21,6 @@ section {
 ***********************************/
 #home {
     position: relative;
-    height: var(--main-height);
     text-align: center; 
 }
 
@@ -40,9 +39,10 @@ section {
  Frontpages
 ***********************************/
 .frontpage {
-    height: calc(var(--main-height) * 10 / 10);
-    color: var(--sec-color);
+    height: calc(var(--main-height) * 11 / 10);
+    color: var(--main-color);
     font-weight: bold;
+    position: relative;
 }
 
 .frontpage.small {
@@ -60,7 +60,6 @@ section {
 
 .title-wrapper .title {
     font-family: var(--main-font);
-    font-size: 250%;
     font-weight: bold;
     font-variant: small-caps;
     text-align: center;
@@ -310,7 +309,8 @@ div.itinerary a {
     position: relative;
 }
 
-#top-quizz-body #user-area #possible-answers {
+#top-quizz {
+    display: none;
 }
 
 #explore {

@@ -7,7 +7,7 @@ $(document).ready(function () {
     
     $('#toggle-quizz').on('click', function(event) {
         event.preventDefault();
-        $('#explore').slideToggle(500);
+        $('#explore #top-quizz').slideToggle(500);
         initQuizz();
     });
 
@@ -16,9 +16,6 @@ $(document).ready(function () {
     loadSectionImage('#home .frontpage', 'home.jpg');
     configureSubsections();
     initQuizz();
-
-    
-
 });
 
 // Positioning
