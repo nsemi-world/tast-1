@@ -284,7 +284,6 @@ function cleanSum() {
  *  4 - On drop: evaluates draggable rank against droppable rank
  */
 function createDroppables() {
-    alert('Will create Droppables');
     // Make Answers droppables
     $('#user-answers .droppable').droppable({
         accepts: '.draggable',
