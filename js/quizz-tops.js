@@ -73,7 +73,7 @@ function getScoreBadge() {
 }
 // Correct Answers
 function getCorrectAnswers() {
-    return $('.ncorrect');
+    return $('#score-badge .ncorrect');
 }
 function getCorrectAnswersValue() {
     return parseInt(getCorrectAnswers().text());
@@ -284,8 +284,9 @@ function cleanSum() {
  *  4 - On drop: evaluates draggable rank against droppable rank
  */
 function createDroppables() {
+    alert('Will create Droppables');
     // Make Answers droppables
-    $('#user-answers div').droppable({
+    $('#user-answers .droppable').droppable({
         accepts: '.draggable',
         //tolerance: "fit",
         classes: {
@@ -451,7 +452,7 @@ function createUserAnswers(type, option, criteria) {
     var numberOfTops = parseInt(type);
     var html = '';
     for (var i = 1; i <= numberOfTops; i++) {
-        html += '<div class="border-bottom" data-rank="' + i + '">' + i + '.' + ' ';
+        html += '<div class="border-bottom droppable" data-rank="' + i + '">' + i + '.' + ' ';
         html += '<span>' + '</span>'
         html += '</div>';
     }
@@ -547,12 +548,12 @@ function appendButtonFor(countryData) {
         var $name = $('<span class="name"></span>')
             .html('<b>' + countryData.name + '</b>');
 
-        var $flagAndName = $('<span class="pr-1 pl-1"></span>')
+        var $flagAndName = $('<span class="text-secondary"></span>')
             .append($flag)
             .append($name);
         //$name.hide();
 
-        var $ntriesHolder = $('<small class="border-left  pl-1  text-muted"></small>');
+        var $ntriesHolder = $('<small class="pl-1  text-muted"></small>');
         var $ntries = $('<span class="ntries"></span>').text('0');
         var $x = $('<span>x</span>');
 
@@ -561,7 +562,7 @@ function appendButtonFor(countryData) {
         var $answer = $('<div></div>')
             .addClass('draggable badge')
             .addClass('container-fluid')
-            .addClass('w-50 m-0 text-left d-inline-block')
+            .addClass('w-50 m-0 text-left text-truncate d-inline-block')
             .data('rank', countryData.rank)
             .append($flagAndName)
             .append($ntriesHolder);

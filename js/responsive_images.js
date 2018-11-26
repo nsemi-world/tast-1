@@ -58,20 +58,6 @@ function transformToAssocArray(prmstr) {
     return params;
 }
 
-function configureSubsections() {
-    $('.frontpage .title-wrapper').css({
-                //backgroundColor: getRandomColor()
-                backgroundColor: 'rgba(0,0,0,.75)'
-    });
-    $('#explore #top-quizz').animate({backgroundColor: 'rgba(180, 174, 68, .5)'}, 1000);
-}
 
-function getRandomColor() {
-    var r = Math.round(Math.random() * 255);
-    var g = Math.round(Math.random() * 255);
-    var b = Math.round(Math.random() * 255);
-    var a = .5;
-    var rgba = 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
-    console.log(rgba);
-    return rgba;
-}
+
+

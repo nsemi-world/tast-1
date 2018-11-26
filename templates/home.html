@@ -1,7 +1,7 @@
-<section id="home">
-    <div class="frontpage" id="message">
-        <div class="title-wrapper my-auto">
-            <h1 class="h1 title display-3">
+<article id="home" class="container-fluid">
+    <section class="frontpage" id="message">
+        <div class="title-wrapper">
+            <h2 class="h2 title h-auto w-auto my-auto text-light">
                 <div class="logo">
                     <span>tast</span>
                     <span class="loading">X</span>
@@ -12,45 +12,56 @@
                     <a class="btn btn-outline-light text-center" href="#understand">Understand</a>
                     <a class="btn btn-outline-light text-center d-none" href="#contribute">Contribute</a>
                 </div>
-            </h1>
-    </div>
-    </div>
-</section>
-
-<section id="explore" class="container rounded p-5">
-    <h3 class="display-3 text-center text-dark">
-        How much do you know about the trans-atlantic slave trade?
-        <br/>
-        <small class="text-muted">Test yourself and take a quizz!</small>
-        <br/>
-        <button id="toggle-quizz" class="btn btn-success text-center">exquizz me!</button>
-        <a href="participation.php" id="go-participation" class="btn btn-outline-success text-center"><i class="fas fa-crown"></i> See World's Participation Map</a>
-        <a href="voyages.php" id="go-voyages" class="btn btn-outline-success text-center"><i class="fas fa-atlas"></i> Explore Voyage Dates and Itineraries</a>
-    </h3>
-    <div id="top-quizz" class="container rounded m-5 p-5 shadow">
+            </h2>
+        </div>
+    </section>
+    <section id="explore" class="container-fluid rounded shadow p-5">
+        <h3 class="display-5 text-center text-dark">
+            How much do you know about the trans-atlantic slave trade?
+            <br/>
+            <small class="text-muted">Test yourself and take a quizz!</small>
+            <br/>
+            <div class="row">
+                <div class="col w-100 pt-1">
+                    <button id="toggle-quizz" class="btn btn-success text-center w-100">exquizz me!</button>
+                </div>
+                <div class="col w-100 pt-1">
+                    <a href="participation.php" id="go-participation" class="btn btn-outline-success w-100"><i class="fas fa-crown"></i> World's Participation Map</a>
+                </div>
+                <div class="col w-100 pt-1">
+                    <a href="voyages.php" id="go-voyages" class="btn btn-outline-success w-100"><i class="fas fa-atlas"></i> Voyage Dates and Itineraries</a>
+                </div>
+            </div>
+        </h3>
+    </section>
+    <section id="top-quizz" class="container-fluid py-5 bg-dark">
         <!-- HEADER WITH TITLE -->
-        <h3 id="quizz-title" class="h3 display-5 text-center font-weight-bold"></h3>
+        <div id="quizz-header" class="">
+            <h3 id="quizz-title" class="h3 display-5 text-center font-weight-bold text-light"></h3>
+            <div id="fb-like" class="fb-like text-center" data-href="https://tast.ngutu.org/#explore" data-layout="button_count" data-action="recommend" data-size="large" data-show-faces="true" data-share="false"></div>
+        </div>
+
 
         <!-- BODY -->
-        <div id="quizz-body" class="container-fluid mt-3 mb-5">
+        <div id="quizz-body" class="container p-3">
             <!-- SIDE MENU WITH FORM -->
             <div class="row">
-                <aside id="quizz-menu" class="container rounded col-sm-12 col-md-8 col-lg-4 mx-auto shadow p-2 bg-light">
-                    <form id="quizz-form" class="needs-validation">
-                        <div class="form-group">
-                            <label for="number-of-tops">Top: </label>
-                            <input id="top-type" type="number" name="type" class="form-control bg-transparent p-1 m-0" style="heitgh: 26px;" placeholder="Top 1,2,3,..." required>
-                            <div class="valid-feedback">
-                                Looks good!
+                <aside id="quizz-menu" class="col rounded m-2">
+                    <form id="quizz-form" class="needs-validation rounded border border-secondary shadow p-2 clearfix  text-secondary">
+                        <div class="row">
+                            <div class="form-group col-md-4 text-left">
+                                <label for="number-of-tops" class="">Top: </label>
+                                <input id="top-type" type="number" name="type" class="form-control p-1 m-0" style="heitgh: 26px;" placeholder="Top 1,2,3,..." required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Choose a number equal or greater than 1
+                                </div>
                             </div>
-                            <div class="invalid-feedback">
-                                Choose a number equal or greater than 1
-                            </div>
-                        </div>
-                        <hr/>
-                        <div class="form-group">
-                            <label for="type">Choose category:</label>
-                            <select id="top-category" name="category" class="form-control bg-transparent" placeholder="Top Category:" required>
+                            <div class="form-group col-md-4  text-left">
+                                <label for="type">Category:</label>
+                                <select id="top-category" name="category" class="form-control" placeholder="Top Category:" required>
                                 <option id="option-top-countries">Top Countries</option>
                                 <option id="option-top-owners" class="d-none">Top Owners</option>
                                 <option id="option-top-captains" class="d-none">Top Captains</option>
@@ -58,29 +69,28 @@
                                 <option id="option-top-purchasing" class="d-none">Top Purchasing Places</option>
                                 <option id="option-top-landing" class="d-none">Top Landing Places</option>
                             </select>
-                            <div class="valid-feedback">
-                                Looks good!
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                             </div>
-                        </div>
-                        <hr/>
-                        <div class="form-group">
-                            <label for="criteria">Choose criteria:</label>
-                            <select id="top-criteria" name="criteria" class="form-control bg-transparent" required>
+                            <div class="form-group col-md-4  text-left">
+                                <label for="criteria">Criteria:</label>
+                                <select id="top-criteria" name="criteria" class="form-control" required>
                                 <option id="criteria-embarked"># People embarked</option>
                                 <option id="criteria-disembarked" class="d-none"># People disembarked</option>
                                 <option id="criteria-died" class="d-none"># People died in Middle Passage</option>
                             </select>
-                            <div class="valid-feedback">
-                                Looks good!
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                             </div>
                         </div>
-                        <hr/>
-                        <button id="quizz-form-submit" type="submit" class="btn btn-success w-100">Start</button>
+                        <button id="quizz-form-submit" type="submit" class="btn btn-outline-secondary float-right">Start</button>
                     </form>
                 </aside>
                 <!-- USER WORKING AREA -->
-                <div id="working-area" class="container col-sm-12 col-md-9 col-lg-6 mx-auto">
-                    <div id="score" class="my-1 rounded">
+                <div id="working-area" class="col">
+                    <div id="score" class="my-1 rounded  text-right">
                         <span class="badge">Score</span>
                         <div id="score-badge" class="badge badge-info" style="padding: .4125em">
                             <span class="ncorrect">0</span> |
@@ -89,59 +99,59 @@
                             <span class="percentage">0%
                                     </span>
                         </div>
-                        <div id="fb-like" class="fb-like float-right" data-href="https://tast.ngutu.org/#explore" data-layout="button_count" data-action="recommend" data-size="large" data-show-faces="true" data-share="false"></div>
                     </div>
-                    <div id="user-area" class="w-auto rounded p-3 shadow  bg-light">
-                        <div id="user-answers" class="">
+                    <div id="user-area" class="w-auto rounded p-3 shadow border border-secondary">
+                        <div id="user-answers" class="text-left text-secondary">
                         </div>
                         <div id="sum" class="badge w-100 text-right my-2"></div>
                         <!-- POSSIBLE ANSWERS -->
-                        <div id="possible-answers" class="container rounded border border-top border-bottom my-5"></div>
-                        <div id="#user-actions" class="w-100 clearfix">
-                            <button id="gotomenu" class="btn btn-outline-secondary my-2 ml-2" inactive>Take another quizz</button>
-                            <button id="save-results" class="btn btn-outline-secondary  float-right my-2" inactive>Save My Results</button>
+                        <div id="possible-answers" class="container-fluid rounded my-5"></div>
+                        <div id="#user-actions" class="clearfix text-primary">
+                            <button id="gotomenu" class="btn btn-outline-secondary" inactive>Take another quizz</button>
+                            <button id="save-results" class="btn btn-outline-secondary" inactive>Save My Results</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-
-<section id="understand" class="container-fluid bg-dark p-5">
-    <div class="row">
-        <h3 class="display-3 text-right col-md-6">245 Variables at your disposal.
-            <small class="text-muted">
+    </section>
+    <section id="understand" class="container-fluid bg-success p-5">
+        <div class="row">
+            <h3 class="display-5 text-right col-md-6 text-light">245 Variables at your disposal.
+                <small class="text-dark">
                 Be sure you know their meaning and coverage.
             </small>
-            <button id="go-coverage" class="btn btn-outline-secondary text-center d-none" disabled title="Comming soon...">
+                <button id="go-coverage" class="btn btn-outline-secondary text-center d-none" disabled title="Comming soon...">
                 Variable Meaning and Coverage
             </button>
-        </h3>
-        <div class="col-md-6 text-center my-auto">
-            <a href="database.php" id="go-database" class="btn btn-outline-success text-center"><i class="fas fa-database"></i> Look Deep into the Database</a>
-            <a href="charts.php" id="go-charts" class="btn btn-outline-success text-center"><i class="fas fa-chart-pie"></i> Put it on Charts</a>
+            </h3>
+            <div class="col-md-6 text-center my-auto">
+                <div class="row">
+                    <div class="col w-100 pt-1">
+                        <a href="database.php" id="go-database" class="btn btn-outline-light text-center w-100"><i class="fas fa-database"></i> Look Deep into the Database</a>
+                    </div>
+                    <div class="col w-100 pt-1">
+                        <a href="charts.php" id="go-charts" class="btn btn-outline-light text-center w-100"><i class="fas fa-chart-pie"></i> Put it on Charts</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
-
-<!--section id="home-search" class="subsection d-none">
+    </section>
+    <!--section id="home-search" class="subsection d-none">
     <div class="container" class="subsection">
         <h3 class="h3 text-center pt-5">Variable Meaning and Coverage Table</h3>
         <table id="table-meaning-coverage" class="display" style="width: 100%"></table>
     </div>
-</section-->
-
-
-<section id="contribute" class="container-fluid p-5 d-none">
-    <div class="display-1 text-center my-auto">
-        <p>Thank You!</p>
-    </div>
-    <div class="my-auto text-center my-auto">
-        <i class="fas fa-heart my-auto" style="color: red;"></i>
-        <button id="buy-me-a-coffee" class="btn btn-outline-secondary text-center  my-auto" disabled title="Comming Soon..."><i class="fas fa-coffee"></i> Buy me a Coffe</button>
-        <button id="hire-me" class="btn btn-outline-secondary text-center  my-auto" disabled title="Comming Soon..."><i class="fas fa-coffee"></i> Hire Me!</button>
-        <button id="join-us" class="btn btn-outline-secondary text-center  my-auto" disabled title="Comming Soon..."><i class="fab fa-facebook-square"></i> Follow us on Facebook</button>
-    </div>
-</section>
+    </section-->
+    <section id="contribute" class="container-fluid p-5 d-none">
+        <div class="display-1 text-center my-auto">
+            <p>Thank You!</p>
+        </div>
+        <div class="my-auto text-center my-auto">
+            <i class="fas fa-heart my-auto" style="color: red;"></i>
+            <button id="buy-me-a-coffee" class="btn btn-outline-secondary text-center  my-auto" disabled title="Comming Soon..."><i class="fas fa-coffee"></i> Buy me a Coffe</button>
+            <button id="hire-me" class="btn btn-outline-secondary text-center  my-auto" disabled title="Comming Soon..."><i class="fas fa-coffee"></i> Hire Me!</button>
+            <button id="join-us" class="btn btn-outline-secondary text-center  my-auto" disabled title="Comming Soon..."><i class="fab fa-facebook-square"></i> Follow us on Facebook</button>
+        </div>
+    </section>
+</article>

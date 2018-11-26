@@ -1,10 +1,6 @@
 header {
     /*border-bottom: 1px solid var(--sec-color);*/
     background: rgba(0,0,0,.75);
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1000;
     width: 100%;
 }
 header .navbar-brand {

@@ -1,8 +1,6 @@
 section {
     position: relative;
-    /*min-height: var(--main-height);*/
     background: #fff;
-    color: var(--main-color);
 }
 
 
@@ -39,10 +37,10 @@ section {
  Frontpages
 ***********************************/
 .frontpage {
-    height: calc(var(--main-height) * 11 / 10);
-    color: var(--main-color);
+    height: calc(var(--main-height) * 5 / 10);
     font-weight: bold;
     position: relative;
+    background: rgba(255,0,0,.75);
 }
 
 .frontpage.small {
@@ -64,11 +62,6 @@ section {
     font-variant: small-caps;
     text-align: center;
 }
-
-.title .article-title {
-    color: #111;
-}
-
 
 
 /**********************************
@@ -128,7 +121,6 @@ section {
 }
 
 #countries-data {
-    color: var(--main-color);
     min-height: var(--main-height);
 }
 
@@ -152,7 +144,6 @@ section {
 
 #details-container {
     min-height: var(--main-height);
-    color: var(--main-color);
     padding: 5%;
     background: #111;
     
@@ -165,13 +156,11 @@ section {
 }
 
 #details .key {
-    color: var(--main-color);
     text-align: left;
     font-weight: bold;
 }
 
 #details .value {
-    color: var(--main-color);
     text-align: right;
 }
 
@@ -182,24 +171,20 @@ section {
 }
 
 .headline {
-    color: var(--key-color);
     font-family: var(--brand-font);
     font-weight: bold;
     text-align: center;
 }
 
 div.itinerary {
-    color: var(--key-color);
     text-align: center;    
     font-weight: bold;
 }
 div.itinerary a {
-    color: var(--key-color);
     text-decoration: underline;
 }
 
 .resistance {
-    color: red;
     font-size: 500%;
     border-radius: 50%;
     overflow: hidden;
@@ -215,12 +200,10 @@ div.itinerary a {
 
 #database a {
     background: transparent;
-    color: var(--main-color);
 }
 
 #database a.active {
     background: var(--main-background-color);
-    color: white;
 }
 
 #database .content {
@@ -229,7 +212,6 @@ div.itinerary a {
 
 #database .tab-content {
     background: white;
-    color: var(--main-color);
     font-family: var(--headline-font);
     padding: 2%;
 }
@@ -249,7 +231,6 @@ div.itinerary a {
 
 #charts .chart-legend p {
     font-family: var(--body-font);
-    color: #333;
     font-weight: bold;
     line-height: 1.25em;
     text-align: justify;
@@ -296,7 +277,6 @@ div.itinerary a {
 
 #privacy .tab-content {
     padding: 3em;
-    color: var(--text-color);
 }
 
 
