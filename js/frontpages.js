@@ -4,7 +4,8 @@ $(document).ready(function() {
 
 function configureSubsections() {
     $('.frontpage .title-wrapper').css({
-        backgroundColor: 'rgba(10,0,0,.85)',
+        backgroundColor: 'rgba(10,0,0,.65)',
+        color: 'white'
     });
 
     centerFrontpageTitle();

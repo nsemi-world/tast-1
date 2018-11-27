@@ -40,7 +40,6 @@ section {
     height: calc(var(--main-height) * 5 / 10);
     font-weight: bold;
     position: relative;
-    background: rgba(255,0,0,.75);
 }
 
 .frontpage.small {
