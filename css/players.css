@@ -1,7 +1,6 @@
 #pplayer, #vplayer {
     min-height: var(--header-height);
     font-size: 2em;
-    background: linear-gradient(to right, var(--main-color), var(--sec-color));
     position: sticky;
     top: 0;
     left: 0;

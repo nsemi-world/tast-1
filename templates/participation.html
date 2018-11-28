@@ -1,24 +1,65 @@
-<section id="participation">
-    <div class="frontpage">
+<article id="participation">
+    <section class="frontpage">
         <div class="title-wrapper display-3">
             <h2 class="h2 title">Participation in the Trans-atlantic Slave Trade</h2>
         </div>
-    </div>
-    <div class="content">
-        <div id="pplayer" class="text-center">
-            <button id="prefresh" class="btn fas fa-undo p-0 m-0"></button>
-            <button id="pplay" class="btn fas fa-play p-0 m-0"></button>
-            <button id="ppause" class="btn fas fa-pause p-0 m-0"></button>
-            <span id="year">1866</span>
+    </section>
+    <section id="abstract" class="container p-3  py-5 text-justify">
+        <div class="container">
+            <p>The <i>Voyages Database</i> reports a total of <span id="TOTAL_VOYAGES"></span> voyages, between <span id="FIRST_VOYAGE_DATE"></span> and <span id="LAST_VOYAGE_DATE"></span>. Not all voyages have dates assigned therefore these dates should not be taken as absolute, but only in the context of the database.</p>
+            <p>In the aftermath of the <i>Reconsquita</i>, christian Portugal and Spain established themselves as natural heirs, by culture and conquest, of millenia of Iberian civilization, a long-lasting afro-european center of science, culture, religion and race tolerance by which ancient Iberians, Phoenicians, Jews, Greeks, Romans, Goths and Moors contributed to one of the most intellectually and econommically vibrating civilization the old continent has ever experienced. Techonological advancements in naval instrumentation, sea navigation as much as the vicious of war, fuelled imperialist ambitions of expansion and further conquest.</p>
+            <p>As soon as the slave trade became recognizagble as the most profitable of all activities, many other countries followed them, pushing the slave trade from an Iberian to an European activity. This page explores which countries, when and in wich measure participated in the trans-atlantic slave trade.</p>
         </div>
-        <div id="world-container" class="shadow">
-            <h3 class="subtitle m-3">Top Slave Trade Countries - Map Visualization</h3>
-            <div id="world-map">
+        <!--div id="participation-subsections" class="container">
+            <div class="row text-center">
+                <a class="col btn btn-outline-success m-1" id="who" href="#countries"><i class="fas fa-globe-africa"></i> Listing: Countries Involved</a>
+                <a class="col btn btn-outline-success m-1" id="first" href="#when"><i class="fas fa-stopwatch"></i> Timeline: Date of First Voyage</a>
+                <a class="col btn btn-outline-success m-1" id="last" href="#when"><i class="fas fa-stopwatch"></i> Timeline: Date of Last Voyage</a>
+            </div>
+        </div-->
+    </section>
+    <section id="countries-list" class="container-fluid p-3 py-5 bg-success text-light">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md my-auto">
+                    <h3 class="h3">List of Countries and City States that participated in the Transatlantic Slave Trade</h3>
+                </div>
+                <div id="LIST_OF_COUNTRIES" class="col-md my-auto">
+                </div>
             </div>
         </div>
-        <div id="countries-data" class=" shadow">
-            <h3 class="subtitle m-3">Top Slave Trade Countries - The Numbers</h3>
-            <table id="example-participation" class="display" style="width: 100%"></table>
+        <section class="container p-3 text-secondary rounded">
+            <div id="participation-timeline" class="container-fluid h-100">
+                <div class="my-2">
+                    <h4 class="m-auto p-3 text-left">Timeline: First reported slave trading voyage</h4>
+                    <div id="FIRST_VOYAGE_TIMELINE" class="p-3 text-center"></div>
+                </div>
+                <div class="my-2">
+                    <h4 class="m-auto p-3 text-left">Timeline: Last reported slave trading voyage</h4>
+                    <div id="LAST_VOYAGE_TIMELINE" class="p-3 text-center"></div>
+                </div>
+            </div>
+        </section>
+    </section>
+    <section class="container-fluid py-5">
+        <div class="container">
+            <h3 class="h3 display-5 py-3 text-center">Checkout how the involvement of each country evolved year by year
+            </h3>
+            <div id="pplayer" class="w-100 small text-muted text-center border-bottom border-top bg-light">
+                <button id="prefresh" class="btn fas fa-undo p-0 m-0"></button>
+                <button id="pplay" class="btn fas fa-play p-0 m-0"></button>
+                <button id="ppause" class="btn fas fa-pause p-0 m-0"></button>
+                <span id="year">1866</span>
+            </div>
+            <div class="row py-5">
+                <div id="world-container" class="col-md">
+                    <div id="world-map" class=" shadow">
+                    </div>
+                </div>
+                <div id="countries-data" class="col-md">
+                    <table id="example-participation" class="display  shadow rounded" style="width: 100%"></table>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</article>

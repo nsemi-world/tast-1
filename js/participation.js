@@ -16,23 +16,30 @@ var started = {
 
 $(document).ready(function () {
     initParticipation();
-    centerParticipation();
     activate($('#toggle_participation'));
 });
 
-function centerParticipation() {
+/*function centerParticipation() {
     $('#participation .title-wrapper .title').position({
         my: 'center',
         at: 'center',
         of: '#participation .title-wrapper'
     });
-}
+}*/
 
 function initParticipation() {
 
     loadSectionImage('#participation .frontpage', 'participation.jpg');
-    centerParticipation();
+    loadTimelinesData();
 
+    $(document).on('_data_loaded', function(event, data) {
+        updateTotalVoyages(data);
+        updateFirstVoyageDate(data);
+        updateLastVoyageDate(data);
+        updateCountriesList(data);
+        updateTimelines(data);
+    });
+    
     $('#world-container').on('_series_loaded', function (event) {
         initParticipationMap();
 
@@ -43,7 +50,6 @@ function initParticipation() {
 
     $(window).on('resize', function () {
         debounce('#participation .frontpage', 'participation.jpg');
-        centerParticipation();
     });
 
     started.participation = true;
@@ -353,3 +359,140 @@ function cleanSeries() {
 }
 
 
+function getFirstTimeline() {
+    return $('#first-voyage-timeline');
+}
+
+function getLastTimeline() {
+    return $('#last-voyage-timeline');
+}
+
+function loadTimelinesData() {
+    $.ajax({
+        url: 'php/participation.json',
+        success: function(data) {
+            console.log(data);
+            $(document).trigger('_data_loaded', [data]);
+        },
+        error: function() {
+            alert('Error while fetching timelines data. Sorry for the inconvenience. An issue is being created. Please come back later.');
+        }
+    });
+}
+
+function updateTotalVoyages(data) {
+    $('#TOTAL_VOYAGES').text(data.total_voyages);
+}
+
+function updateFirstVoyageDate(data) {
+    $('#FIRST_VOYAGE_DATE').text(data.first_voyage_date);
+}
+
+function updateLastVoyageDate(data) {
+    $('#LAST_VOYAGE_DATE').text(data.last_voyage_date);
+}
+
+function updateCountriesList(data) {
+    $('#LIST_OF_COUNTRIES').html(countriesToHtmlList(data.countries));
+}
+
+function getCountriesNames(data) {
+    $.each(data.countries, function(){
+        
+    });
+}
+
+function updateTimelines(data) {
+    //$('#participation-timeline').accordion();
+    updateFirstTimeline(data.countries);
+    updateLastTimeline(data.countries);
+}
+
+function updateFirstTimeline(countriesData) {
+    var sorted = countriesData.sort(compareFirst);
+    
+    var $timeline = $('#FIRST_VOYAGE_TIMELINE');
+    
+    var $line = $('<div class="position-relative rounded"></div>')
+        .css({
+            height:'4px', 
+            width:'100%', 
+            background:'white'
+        });
+    
+    $timeline.append($line);
+    
+    $.each(sorted, function(key, value){
+        addNodeToLine($line, value.first_voyage, value.label, value.iso2);
+    });
+}
+
+function updateLastTimeline(countriesData) {
+    var sorted = countriesData.sort(compareFirst);
+    
+    var $timeline = $('#LAST_VOYAGE_TIMELINE');
+    
+    var $line = $('<div class="position-relative rounded"></div>')
+        .css({
+            height:'4px', 
+            width:'100%', 
+            background:'white'
+        });
+    
+    $timeline.append($line);
+    
+    $.each(sorted, function(key, value){
+        addNodeToLine($line, value.last_voyage, value.label, value.iso2);
+    });
+}
+
+function compareFirst(a,b) {
+  if (a.first_voyage< b.first_voyage)
+    return -1;
+  if (a.first_voyage > b.first_voyage)
+    return 1;
+  return 0;
+}
+
+function compareLast(a,b) {
+  if (a.last_voyage< b.last_voyage)
+    return -1;
+  if (a.last_voyage > b.last_voyage)
+    return 1;
+  return 0;
+}
+
+function countriesToHtmlList(countries) {
+    var ul = '<div class="card-columns">';
+    $.each(countries, function(){
+        var country = $(this);
+        var li = '<div class="text-truncate">' + country[0].label + '</div>';
+        ul += li;
+    });
+    
+    ul += '</div>';
+    return ul;
+}
+
+
+
+function addNodeToLine($line, date, name, iso2) {
+    var min = 1510;
+    var max = 1870;
+    var node = $('<span class="circle"></span>')
+        .addClass('flag flag-' + iso2.toLowerCase())
+        .attr('title', date + ': ' + name)
+        .css({
+            position: 'absolute',
+            left: '' + getLeftForDate($line.width(), min, max, date) + 'px',
+            top: '-=15px',
+            zIndex: '1000'
+        })
+        .toggle({effect: 'scale', percent: 50});
+
+    $line.append(node);
+}
+
+function getLeftForDate(maxWidth, min, max, date) {
+    return (maxWidth * ((date-min)/(max-min)))-16;    
+}
