@@ -413,11 +413,10 @@ function updateFirstTimeline(countriesData) {
     
     var $timeline = $('#FIRST_VOYAGE_TIMELINE');
     
-    var $line = $('<div class="position-relative rounded"></div>')
+    var $line = $('<div class="position-relative rounded bg-secondary"></div>')
         .css({
-            height:'4px', 
-            width:'100%', 
-            background:'white'
+            height:'2px', 
+            width:'100%'
         });
     
     $timeline.append($line);
@@ -432,11 +431,10 @@ function updateLastTimeline(countriesData) {
     
     var $timeline = $('#LAST_VOYAGE_TIMELINE');
     
-    var $line = $('<div class="position-relative rounded"></div>')
+    var $line = $('<div class="position-relative rounded bg-secondary"></div>')
         .css({
-            height:'4px', 
+            height:'2px', 
             width:'100%', 
-            background:'white'
         });
     
     $timeline.append($line);
