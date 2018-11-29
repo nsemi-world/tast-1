@@ -18,42 +18,35 @@
             </div>
         </div-->
     </section>
-    <section id="countries-list" class="container-fluid p-3 py-5 bg-dark text-light">
-        <div class="container py-5">
-            <h3 class="h3 display-5 text-center">List of Countries and City States that participated in the Transatlantic Slave Trade</h3>
-            <div id="LIST_OF_COUNTRIES" class="mx-auto p-5 text-center"></div>
-        </div>
-        <section class="container-fluid p-3 text-secondary  bg-dark rounded">
-            <div id="participation-timeline" class="container">
-                <div class="my-2">
-                    <h4 class="m-auto p-3 text-left">Timeline: First reported slave trading voyage</h4>
-                    <div id="FIRST_VOYAGE_TIMELINE" class="p-3 text-center"></div>
-                </div>
-                <div class="my-2">
-                    <h4 class="m-auto p-3 text-left">Timeline: Last reported slave trading voyage</h4>
-                    <div id="LAST_VOYAGE_TIMELINE" class="p-3 text-center"></div>
-                </div>
+    <section id="countries-list" class="container-fluid p-3 py-5 bg-secondary text-secondary">
+        <h3 class="h3 display-5 text-center text-light">List of Countries and City States that participated in the Transatlantic Slave Trade</h3>
+        <div id="LIST_OF_COUNTRIES" class="container bg-dark text-center shadow my-5 py-3"></div>
+        <div id="participation-timeline" class="container  bg-dark shadow my-5 py-3 text-secondary">
+            <div class="my-2">
+                <h4 class="p-3 text-left">Timeline: First reported slave trading voyage</h4>
+                <div id="FIRST_VOYAGE_TIMELINE" class="p-3 text-center"></div>
             </div>
-        </section>
+            <div class="my-2">
+                <h4 class="p-3 text-left">Timeline: Last reported slave trading voyage</h4>
+                <div id="LAST_VOYAGE_TIMELINE" class="p-3 text-center"></div>
+            </div>
+        </div>
     </section>
-    <section class="container-fluid py-5">
+    <section class="container-fluid bg-dark py-5">
+        <h3 class="h3 display-5 py-3 text-center text-light">Checkout how the involvement of each country evolved year by year</h3>
         <div class="container">
-            <h3 class="h3 display-5 py-3 text-center">Checkout how the involvement of each country evolved year by year
-            </h3>
-            <div id="pplayer" class="w-100 small text-muted text-center border-bottom border-top bg-light">
+            <div id="pplayer" class="w-auto shadow rounded text-dark text-right bg-secondary">
                 <button id="prefresh" class="btn fas fa-undo p-0 m-0"></button>
                 <button id="pplay" class="btn fas fa-play p-0 m-0"></button>
                 <button id="ppause" class="btn fas fa-pause p-0 m-0"></button>
                 <span id="year">1866</span>
             </div>
-            <div class="row py-5">
-                <div id="world-container" class="col-md h-auto">
-                    <div id="world-map" class=" shadow">
-                    </div>
+            <div id="world-container" class="my-3">
+                <div id="world-map" class="shadow">
                 </div>
-                <div id="countries-data" class="col-md h-auto">
-                    <table id="example-participation" class="display shadow rounded" style="width: 100%"></table>
-                </div>
+            </div>
+            <div id="countries-data" class="my-3">
+                <table id="example-participation" class="display shadow rounded" style="width: 100%"></table>
             </div>
         </div>
     </section>

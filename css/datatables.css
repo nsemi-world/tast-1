@@ -1,10 +1,9 @@
 
 table {
-    font-family: var(--headline-font);
+    background: transparent;
 }
 
 table thead {
-    background: var(--sec-color);
 }
 
 .dataTables_wrapper {
