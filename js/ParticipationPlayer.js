@@ -1,5 +1,6 @@
 var FIRST_YEAR = 1514;
 var LAST_YEAR = 1866;
+var CURRENT_YEAR = 1514;
 
 var started = false;
 var interval = null;
@@ -90,11 +91,12 @@ function refresh() {
 
 function startParticipationAnimation() {
     interval = setInterval(function () {
-    var year = getPlayerYearValue();
+    var year = getPlayerYearValue() + 1;
         if (year >= 1866) {
             stopParticipationAnimation();
             $('#pplay, #ppause, #prefresh').toggle();
         } else {
+            updatePlayerYear(year);
             getCountriesSeries(year);
         }
     }, 500);

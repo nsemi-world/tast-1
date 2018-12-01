@@ -63,7 +63,6 @@ function getCountriesSeries(y) {
     //console.log('Needs data for year: ' + y);
     var data = participationData.year[y-1514];
     $(document).trigger('_series_loaded', [data]);
-    updatePlayerYear(y+1);
 }
 
 function getCountriesSeriesFromServer(y) {
