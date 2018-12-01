@@ -7,7 +7,7 @@
     z-index: 5000;    
 }
 
-span#year, span#filter {
+span#filter {
     color: var(--main-color);
     font-size: 1em;
 }

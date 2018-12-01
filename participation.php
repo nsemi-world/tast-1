@@ -16,6 +16,9 @@ $my_scripts = '
     <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
     <script src="js/datamaps.world.min.js"></script>
+    <script src="js/ParticipationPlayer.js"></script>
+    <script src="js/ParticipationMap.js"></script>
+    <script src="js/ParticipationViewer.js"></script>
     <script src="js/participation.js"></script>
 ';
 

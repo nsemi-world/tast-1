@@ -126,4 +126,294 @@ function getQueryTopCountriesGroupByCode($myvar, $limit) {
     return $sql;
 }
 
+
+function getData($pdo) {
+    $sql = "
+        SELECT 
+            MIN(fdate) as fdate,
+            MAX(ldate) as ldate,
+            name,
+            iso2,
+            iso3,
+            SUM(nvoyages) as nvoyages,
+            SUM(embarked) as embarked,
+            SUM(disembarked) as disembarked,
+            SUM(died) as died
+        FROM (
+            SELECT 
+                MIN(v.yeardep) as fdate,
+                MAX(v.yeardep) as ldate,
+                n.label as name,
+                n.iso2 as iso2,
+                n.iso3 as iso3,
+                COUNT(voyageid) as nvoyages,
+                SUM(slaximp) as embarked,
+                SUM(slamimp) as disembarked,
+                (SUM(slaximp)-SUM(slamimp)) as died
+            FROM voyages v
+                LEFT JOIN national as n 
+                ON (n.value = v.national)
+            WHERE (v.national != '' AND v.natinimp = '')
+            GROUP BY n.iso2
+
+            UNION
+
+            SELECT 
+                MIN(v.yeardep) as fdate,
+                MAX(v.yeardep) as ldate,
+                n.label as name,
+                n.iso2 as iso2,
+                n.iso3 as iso3,
+                COUNT(voyageid) as nvoyages,
+                SUM(slaximp) as embarked,
+                SUM(slamimp) as disembarked,
+                (SUM(slaximp)-SUM(slamimp)) as died
+            FROM voyages v
+                LEFT JOIN natinimp as n 
+                ON (n.value = v.natinimp)
+            WHERE (v.national = '' AND v.natinimp != '')
+            GROUP BY n.iso2
+
+            UNION
+
+            SELECT 
+                MIN(v.yeardep) as fdate,
+                MAX(v.yeardep) as ldate,
+                n.label as name,
+                n.iso2 as iso2,
+                n.iso3 as iso3,
+                COUNT(voyageid) as nvoyages,
+                SUM(slaximp) as embarked,
+                SUM(slamimp) as disembarked,
+                (SUM(slaximp)-SUM(slamimp)) as died
+            FROM voyages v
+                LEFT JOIN national as n 
+                ON (n.value = v.national)
+            WHERE (v.national != '' AND v.natinimp != '')
+            GROUP BY n.iso2
+
+            UNION
+
+            SELECT 
+                MIN(v.yeardep) as fdate, 
+                MAX(v.yeardep) as ldate, 
+                '' as name, 
+                '' as iso2, 
+                '' as iso3,
+                COUNT(voyageid) as nvoyages, 
+                SUM(slaximp) as embarked, 
+                SUM(slamimp) as disembarked, 
+                (SUM(slaximp)-SUM(slamimp)) as died 
+            FROM voyages v 
+            WHERE (v.national = '' AND v.natinimp = '')
+            ) as all_data
+        GROUP BY iso2
+    ";
+    $erg = $pdo->query($sql);
+    return $erg->fetchAll(PDO::FETCH_ASSOC);    
+}
+
+function getTotalVoyages($pdo) {
+    $sql = "SELECT COUNT(*) FROM voyages";
+    $erg = $pdo->query($sql);
+    return $erg->fetch(PDO::FETCH_NUM)[0];
+}
+
+function getFirstVoyageDate($pdo) {
+    $sql = "SELECT MIN(yeardep) FROM `voyages`";
+    $erg = $pdo->query($sql);
+    return $erg->fetch(PDO::FETCH_NUM)[0];
+}
+
+function getLastVoyageDate($pdo) {
+    $sql = "SELECT MAX(yeardep) FROM `voyages`";
+    $erg = $pdo->query($sql);
+    return $erg->fetch(PDO::FETCH_NUM)[0];
+}
+
+function getDataForYear($pdo, $year) {
+    $sql = "
+        SELECT 
+            MIN(fdate) as fdate,
+            MAX(ldate) as ldate,
+            name,
+            iso2,
+            iso3,
+            SUM(nvoyages) as nvoyages,
+            SUM(embarked) as embarked,
+            SUM(disembarked) as disembarked,
+            SUM(died) as died
+        FROM (
+            SELECT 
+                MIN(v.yeardep) as fdate,
+                MAX(v.yeardep) as ldate,
+                n.label as name,
+                n.iso2 as iso2,
+                n.iso3 as iso3,
+                COUNT(voyageid) as nvoyages,
+                SUM(slaximp) as embarked,
+                SUM(slamimp) as disembarked,
+                (SUM(slaximp)-SUM(slamimp)) as died
+            FROM voyages v
+                LEFT JOIN national as n 
+                ON (n.value = v.national)
+            WHERE (v.national != '' AND v.natinimp = '' AND v.yeardep =$year)
+            GROUP BY n.iso2
+
+            UNION
+
+            SELECT 
+                MIN(v.yeardep) as fdate,
+                MAX(v.yeardep) as ldate,
+                n.label as name,
+                n.iso2 as iso2,
+                n.iso3 as iso3,
+                COUNT(voyageid) as nvoyages,
+                SUM(slaximp) as embarked,
+                SUM(slamimp) as disembarked,
+                (SUM(slaximp)-SUM(slamimp)) as died
+            FROM voyages v
+                LEFT JOIN natinimp as n 
+                ON (n.value = v.natinimp)
+            WHERE (v.national = '' AND v.natinimp != '' AND v.yeardep =$year)
+            GROUP BY n.iso2
+
+            UNION
+
+            SELECT 
+                MIN(v.yeardep) as fdate,
+                MAX(v.yeardep) as ldate,
+                n.label as name,
+                n.iso2 as iso2,
+                n.iso3 as iso3,
+                COUNT(voyageid) as nvoyages,
+                SUM(slaximp) as embarked,
+                SUM(slamimp) as disembarked,
+                (SUM(slaximp)-SUM(slamimp)) as died
+            FROM voyages v
+                LEFT JOIN national as n 
+                ON (n.value = v.national)
+            WHERE (v.national != '' AND v.natinimp != '' AND v.yeardep =$year)
+            GROUP BY n.iso2
+
+            UNION
+
+            SELECT 
+                MIN(v.yeardep) as fdate, 
+                MAX(v.yeardep) as ldate, 
+                '' as name, 
+                '' as iso2, 
+                '' as iso3,
+                COUNT(voyageid) as nvoyages, 
+                SUM(slaximp) as embarked, 
+                SUM(slamimp) as disembarked, 
+                (SUM(slaximp)-SUM(slamimp)) as died 
+            FROM voyages v 
+            WHERE (v.national = '' AND v.natinimp = '' AND v.yeardep=$year)
+            ) as all_data
+            WHERE iso2 != ''
+        GROUP BY iso2
+    ";
+    $erg = $pdo->query($sql);
+    return $erg->fetchAll(PDO::FETCH_ASSOC);    
+}
+
+function getTotalVoyagesForYear($pdo, $year) {
+    $sql = "SELECT COUNT(*) FROM voyages WHERE yeardep=$year";
+    $erg = $pdo->query($sql);
+    return $erg->fetch(PDO::FETCH_NUM)[0];
+}
+
+function getDataFromToYear($pdo, $begin, $year) {
+    $sql = "
+        SELECT 
+            MIN(fdate) as fdate,
+            MAX(ldate) as ldate,
+            name,
+            iso2,
+            iso3,
+            SUM(nvoyages) as nvoyages,
+            SUM(embarked) as embarked,
+            SUM(disembarked) as disembarked,
+            SUM(died) as died
+        FROM (
+            SELECT 
+                MIN(v.yeardep) as fdate,
+                MAX(v.yeardep) as ldate,
+                n.label as name,
+                n.iso2 as iso2,
+                n.iso3 as iso3,
+                COUNT(voyageid) as nvoyages,
+                SUM(slaximp) as embarked,
+                SUM(slamimp) as disembarked,
+                (SUM(slaximp)-SUM(slamimp)) as died
+            FROM voyages v
+                LEFT JOIN national as n 
+                ON (n.value = v.national)
+            WHERE (v.national != '' AND v.natinimp = '' AND yeardep>=$begin AND yeardep<=$year)
+            GROUP BY n.iso2
+
+            UNION
+
+            SELECT 
+                MIN(v.yeardep) as fdate,
+                MAX(v.yeardep) as ldate,
+                n.label as name,
+                n.iso2 as iso2,
+                n.iso3 as iso3,
+                COUNT(voyageid) as nvoyages,
+                SUM(slaximp) as embarked,
+                SUM(slamimp) as disembarked,
+                (SUM(slaximp)-SUM(slamimp)) as died
+            FROM voyages v
+                LEFT JOIN natinimp as n 
+                ON (n.value = v.natinimp)
+            WHERE (v.national = '' AND v.natinimp != '' AND yeardep>=$begin AND yeardep<=$year)
+            GROUP BY n.iso2
+
+            UNION
+
+            SELECT 
+                MIN(v.yeardep) as fdate,
+                MAX(v.yeardep) as ldate,
+                n.label as name,
+                n.iso2 as iso2,
+                n.iso3 as iso3,
+                COUNT(voyageid) as nvoyages,
+                SUM(slaximp) as embarked,
+                SUM(slamimp) as disembarked,
+                (SUM(slaximp)-SUM(slamimp)) as died
+            FROM voyages v
+                LEFT JOIN national as n 
+                ON (n.value = v.national)
+            WHERE (v.national != '' AND v.natinimp != '' AND yeardep>=$begin AND yeardep<=$year)
+            GROUP BY n.iso2
+
+            UNION
+
+            SELECT 
+                MIN(v.yeardep) as fdate, 
+                MAX(v.yeardep) as ldate, 
+                '' as name, 
+                '' as iso2, 
+                '' as iso3,
+                COUNT(voyageid) as nvoyages, 
+                SUM(slaximp) as embarked, 
+                SUM(slamimp) as disembarked, 
+                (SUM(slaximp)-SUM(slamimp)) as died 
+            FROM voyages v 
+            WHERE (v.national = '' AND v.natinimp = '' AND yeardep>=$begin AND yeardep<=$year)
+            ) as all_data
+        GROUP BY iso2
+    ";
+    $erg = $pdo->query($sql);
+    return $erg->fetchAll(PDO::FETCH_ASSOC);    
+}
+
+function getTotalVoyagesFromToYear($pdo, $begin, $year) {
+    $sql = "SELECT COUNT(*) FROM voyages WHERE yeardep>=$begin AND yeardep<=$year";
+    $erg = $pdo->query($sql);
+    return $erg->fetch(PDO::FETCH_NUM)[0];
+}
+
 ?>
