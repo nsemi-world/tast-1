@@ -42,21 +42,23 @@
             <button id="ppause" class="btn fas fa-pause"></button>
             <div class="progress shadow">
                 <div class="progress-bar bg-danger clearfix my-auto">
-                 <p><span class="begin float-left">1514</span> - <span class="end float-right">1866</span></p>
+                    <p><span class="begin float-left">1514</span> - <span class="end float-right">1866</span></p>
                 </div>
             </div>
         </div>
         <div class="container">
             <!--div id="year-map"></div-->
             <div id="period-map" class="shadow"></div>
-            <div class="row bg-transparent m-1 rounded">
-                <table id="period-table" class="col shadow rounded p-1 compact bg-danger row-border">
-                <thead  class="text-light"></thead>
-                <tbody></tbody>
-                </table>
-                <div id="period-chart" class="col"></div>
+            <div class="my-4 shadow">
+                <canvas id="period-chart">
+                    
+                </canvas>
             </div>
-            <!--div id="all-map" class="bg-dark"></div-->
+            <table id="period-table" class="shadow rounded py-1 my-1 compact bg-danger row-border">
+                <thead class="text-light"></thead>
+                <tbody></tbody>
+            </table>
         </div>
+        <!--div id="all-map" class="bg-dark"></div-->
     </section>
 </article>

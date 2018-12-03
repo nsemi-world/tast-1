@@ -1,10 +1,12 @@
+var periodChart = null;
+
 function createParticipationViewer(parent, title, data) {
     createTitle(title);
     createPlayer();
     //createMap('all-map', data['all'].countries);
     createMap('period-map', data['period'][1866 - 1514].countries);
     periodTable = createTable('period-table', data['period'][1866 - 1514].countries);
-    //createChart('period-chart', data['period'][0].countries);
+    createChart('period-chart', data['period'][1866 - 1514].countries);
 
     //createMap('year-map', data['year'][0].countries);
 }
@@ -13,6 +15,7 @@ function updateParticipationViewer(mapid, d) {
     updatePlayerYear(d.last_voyage_date);
     replaceMap('period-map', d.countries);
     replaceTable('period-table', d.countries);
+    updateChart('period-chart', d.countries);
 }
 
 function createTitle(title) {
@@ -89,4 +92,111 @@ function replaceTable(selector, data) {
     periodTable.clear();
     periodTable.rows.add(mdata);
     periodTable.draw();
+}
+
+
+function createChart(selector, data) {
+
+    data = data.sort(compareDesc);
+
+    var chart = $('#period-chart');
+    periodChart = new Chart(chart, {
+        type: 'bar',
+        data: {
+            labels: data.map(function (obj) {
+                return obj.name;
+            }),
+            datasets: [
+                {
+                    label: '# Embarked',
+                    data: data.map(function (obj) {
+                        return obj.embarked;
+                    }),
+                    backgroundColor: 'red'
+                },
+                {
+                    label: '# Disembarked',
+                    data: data.map(function (obj) {
+                        return obj.disembarked;
+                    }),
+                    backgroundColor: 'yellow'
+                },
+                {
+                    label: '# Died',
+                    data: data.map(function (obj) {
+                        return obj.died;
+                    }),
+                    backgroundColor: 'purple'
+                }
+
+            ]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        autoSkip: false,
+                        labels: data.map(function (obj) {
+                            return obj.name;
+                        })
+                    }
+            }]
+            }
+        }
+    });
+}
+
+function updateChart(selector, data) {
+    data = data.sort(compareDesc);
+    periodChart.data = {
+        labels: data.map(function (obj) {
+            return obj.name;
+        }),
+        datasets: [
+            {
+                label: '# Embarked',
+                data: data.map(function (obj) {
+                    return obj.embarked;
+                }),
+                backgroundColor: 'red'
+            },
+            {
+                label: '# Disembarked',
+                data: data.map(function (obj) {
+                    return obj.disembarked;
+                }),
+                backgroundColor: 'yellow'
+            },
+            {
+                label: '# Died',
+                data: data.map(function (obj) {
+                    return obj.died;
+                }),
+                backgroundColor: 'purple'
+            }
+            ]
+    };
+
+    periodChart.update(0);
+
+}
+
+function compareDesc2(a, b) {
+    if (a.name > b.name) {
+        return 1;
+    } else if (a.name < b.name) {
+        return -1;
+    } else {
+        return 0;
+    }
+}
+
+function compareDesc(a, b) {
+    if (parseInt(a.embarked) < parseInt(b.embarked)) {
+        return 1;
+    } else if (parseInt(a.embarked) > parseInt(b.embarked)) {
+        return -1;
+    } else {
+        return 0;
+    }
 }
