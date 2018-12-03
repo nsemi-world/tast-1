@@ -23,7 +23,6 @@ function getIntroduction() {
     return $('#introduction');
 }
 
-
 function onParticipation() {
     $(document).on('_data_loaded', function(event, pdata) {
         var data = pdata['all'];
@@ -32,11 +31,12 @@ function onParticipation() {
         updateLastVoyageDate(data);
         updateCountriesList(data);
         updateTimelines(data);
-        createParticipationViewer('#participation-viewer', "Evolution of World's Prticipation in the Trans-atlantic Slave Trade", data);
+        createParticipationViewer('#participation-viewer', "Evolution of World's Prticipation in the Trans-atlantic Slave Trade", pdata);
     });
     
-    $(document).on('_series_loaded', function (event, data) {
-        updateParticipationViewer(data);
+    $(document).on('_series_loaded', function (event, ydata, pdata) {
+        updateParticipationViewer('period-map', pdata);
+        //updateParticipationViewer('year-map', ydata);
     });
 
         
@@ -61,8 +61,9 @@ function loadParticipationData() {
 
 function getCountriesSeries(y) {
     //console.log('Needs data for year: ' + y);
-    var data = participationData.year[y-1514];
-    $(document).trigger('_series_loaded', [data]);
+    //var data = participationData.year[y-1514];
+    updatePlayerYear(y);
+    $(document).trigger('_series_loaded', [participationData['year'][y-1514], participationData['period'][y-1514]]);
 }
 
 function getCountriesSeriesFromServer(y) {

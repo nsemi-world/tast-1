@@ -1,26 +1,20 @@
-var datamap = null;
-
-function createMap(selector, series) {
-    startMapView(selector);
+function createMap(id, series) {
+    var mapViewId = id;
     var dataset = getDataset(series);
     var fills = getFills();
     var template = getTemplate();
     var bubbles = getBubbles(series);
     var bubblesTemplate = getBubblesTemplate();
-    getDataMap(getMapView().attr('id'), dataset, fills, template, bubbles, bubblesTemplate);
+    getDataMap(mapViewId, dataset, fills, template, bubbles, bubblesTemplate);
 }
 
-function replaceMap(selector, series) {
-    getMapView().empty();
-    createMap(selector, series);
+function replaceMap(id, series) {
+    getMapView(id).empty();
+    createMap(id, series);
 }
 
-function startMapView(selector) {
-    $('<div id="world-map" class="container shadow"></div>').appendTo($(selector));
-}
-
-function getMapView() {
-    return $('#world-map');
+function getMapView(id) {
+    return $('#' + id);
 }
 
 function getDataset(series) {
@@ -38,8 +32,9 @@ function getDataset(series) {
     // create color palette function
     // color can be whatever you wish
     var paletteScale = d3.scale.linear()
-        .domain([1, maxValue])
-        .range(["pink", "red"]); // blue color
+        .domain([0, maxValue])
+        .range(["rgba(255,0,0,.1)", "rgba(255,0,0,1)"]); // blue color
+        //.interpolator(d3.interpolateRainbow);
 
     // fill dataset in appropriate format
     series.forEach(function (item) { //
@@ -65,7 +60,7 @@ function getFills() {
         DNK: 'white',
         USA: 'cadetblue',
         BRA: 'yellowgreen',
-        defaultFill: 'rgba(0,0,0,.1)'
+        defaultFill: 'transparent'
     }
 };
 
@@ -110,6 +105,13 @@ function getBubbles(series) {
     return bubbles;
 };
 
+function getBubblesTemplate() {
+    return (
+        function (geo, data) {
+            return '<div class="hoverinfo">Country:' + data.country + '<hr>Embarked: ' + data.embarked + '</br>Disembarked: ' + data.disembarked + '</br>Died: ' + data.died + '';
+        });
+}
+
 function updateDatamapBubbles(series) {
     $.each(series, function (key, value) {
         if (value.iso3 != '') {
@@ -128,13 +130,6 @@ function updateCircle(value) {
     });
 }
 
-function getBubblesTemplate() {
-    return (
-        function (geo, data) {
-            return '<div class="hoverinfo">Country:' + data.country + '<hr>Embarked: ' + data.embarked + '</br>Disembarked: ' + data.disembarked + '</br>Died: ' + data.died + '';
-        });
-};
-
 function getCountriesSeriesMax(series) {
     var max = 0;
     for (var i = 0; i < series.length; i++) {
@@ -152,15 +147,25 @@ function height(value, series) {
 };
 
 function getDataMap(mapViewId, dataset, fills, template, bubbles, bubblesTemplate) {
-    datamap = new Datamap({
+    var options = getOptions(mapViewId, dataset, fills, template);
+    var datamap = new Datamap(options);
+    
+    /*datamap.bubbles(bubbles, {
+        popupTemplate: bubblesTemplate
+    });*/
+    datamap.graticule();
+}
+
+function getOptions(mapViewId, dataset, fills, template) {
+    var options = {
+        width: 200,
+        height: 200,
         element: document.getElementById(mapViewId),
         setProjection: function (element, options) {
             var projection, path;
-            projection = d3.geo.mercator()
-                .center([0, 60])
-                .scale(element.offsetWidth / 6)
-            /*.translate([element.offsetWidth / 2, element.offsetHeight / 2])*/
-            ;
+            projection = d3.geo.equirectangular()
+                .center([-60, 30])
+                .scale(element.offsetWidth/5);
             path = d3.geo.path().projection(projection);
             return {
                 path: path,
@@ -171,7 +176,7 @@ function getDataMap(mapViewId, dataset, fills, template, bubbles, bubblesTemplat
         fills: fills,
         data: dataset,
         geographyConfig: {
-            borderColor: 'pink',
+            borderColor: 'gray',
             background: 'black',
             highlightBorderWidth: 2,
             // don't change color on mouse hover
@@ -183,13 +188,10 @@ function getDataMap(mapViewId, dataset, fills, template, bubbles, bubblesTemplat
             // show desired information in tooltip
             popupTemplate: template
         }
-    });
+    };
 
-    datamap.bubbles(bubbles, {
-        popupTemplate: bubblesTemplate
-    });
-    datamap.graticule();
-};
+    return options;
+}
 
 
 

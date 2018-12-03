@@ -33,21 +33,30 @@
         </div>
     </section>
     <section id="participation-viewer" class="container-fluid bg-dark py-5">
-        <!--h3 id="participation-titile" class=>Checkout how the involvement of each country evolved year by year</h3>
-        <div class="container">
-            <div id="pplayer" class="w-auto shadow rounded text-dark text-right bg-secondary">
-                
-                
-                
-                
-            </div>
-            <div id="world-container" class="my-3">
-                <div id="world-map" class="shadow">
+        <div id="ptitle"></div>
+        <div id="pplayer" class="container clearfix shadow rounded text-right bg-secondary m-auto">
+            <span id="year" class="text-light float-left">1866</span>
+            <button id="psettings" class="btn fas fa-cog"></button>
+            <button id="prefresh" class="btn fas fa-undo"></button>
+            <button id="pplay" class="btn fas fa-play"></button>
+            <button id="ppause" class="btn fas fa-pause"></button>
+            <div class="progress shadow">
+                <div class="progress-bar bg-danger clearfix my-auto">
+                 <p><span class="begin float-left">1514</span> - <span class="end float-right">1866</span></p>
                 </div>
             </div>
-            <div id="countries-data" class="my-3">
-                <table id="example-participation" class="display shadow rounded" style="width: 100%"></table>
+        </div>
+        <div class="container">
+            <!--div id="year-map"></div-->
+            <div id="period-map" class="shadow"></div>
+            <div class="row bg-transparent m-1 rounded">
+                <table id="period-table" class="col shadow rounded p-1 compact bg-danger row-border">
+                <thead  class="text-light"></thead>
+                <tbody></tbody>
+                </table>
+                <div id="period-chart" class="col"></div>
             </div>
-        </div-->
+            <!--div id="all-map" class="bg-dark"></div-->
+        </div>
     </section>
 </article>

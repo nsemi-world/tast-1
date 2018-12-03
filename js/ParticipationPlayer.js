@@ -7,44 +7,7 @@ var interval = null;
 
 
 // Execution
-function createPlayer(parent) {
-    var $timeframe = $('<span id="year" class="text-light float-left">1866</span>');
-    var $settings = $('<button id="psettings" class="btn fas fa-cog"></button>');
-    var $refresh = $('<button id="prefresh" class="btn fas fa-undo"></button>');
-    var $play = $('<button id="pplay" class="btn fas fa-play"></button>');
-    var $pause = $('<button id="ppause" class="btn fas fa-pause"></button>');
 
-    var $player = $('<div></div>')
-        .attr('id', 'pplayer')
-        .addClass('container clearfix shadow rounded text-right bg-secondary m-auto')
-        .append($refresh)
-        .append($timeframe)
-        .append($play)
-        .append($pause)
-        .append($settings)
-        .appendTo($(parent));
-    
-    configurePlayer();
-}
-
-function configurePlayer() {
-    $('#ppause').hide();
-
-    $('#pplay').on('click', function (event) {
-        event.preventDefault();
-        $('#pplay, #ppause, #prefresh').toggle();
-        play();
-    });
-    $('#ppause').on('click', function (event) {
-        event.preventDefault();
-        $('#pplay, #prefresh, #ppause').toggle();
-        pause();
-    });
-    $('#prefresh').on('click', function (event) {
-        event.preventDefault();
-        refresh();
-    });
-}
 
 function getPlayer() {
     return $('pplayer');
@@ -78,27 +41,54 @@ function getPlayerPause() {
 }
         
 function play() {
+    //frameRequest = requestAnimationFrame(startParticipationAnimation2);
     startParticipationAnimation();
 };
 
 function pause() {
     stopParticipationAnimation();
+    //cancelAnimationFrame(frameRequest);
 };
 
 function refresh() {
     getCountriesSeries(1514);
+    updateProgress(1514);
+    //updatePlayerYear(1514);
+}
+
+
+function startParticipationAnimation2(timestamp) {
+    var year = getPlayerYearValue() + 1;
+    if (year >= 1866) {
+        cancelAnimationFrame(frameRequest);
+        $('#pplay, #ppause, #prefresh').toggle();
+    } else {
+        getCountriesSeries(year);
+        frameRequest = requestAnimationFrame(startParticipationAnimation2)
+    }
+    updateProgress(year);
+    updatePlayerYear(year);
+}
+
+function updateProgress(year) {
+    $('.progress-bar').css({
+        width: 100 * (year-1514)/(1866-1514) + '%'
+    });
+    
+    $('.progress-bar .end').text(year);
 }
 
 function startParticipationAnimation() {
     interval = setInterval(function () {
-    var year = getPlayerYearValue() + 1;
+        var year = getPlayerYearValue() + 1;
         if (year >= 1866) {
             stopParticipationAnimation();
             $('#pplay, #ppause, #prefresh').toggle();
         } else {
-            updatePlayerYear(year);
             getCountriesSeries(year);
         }
+        updateProgress(year);
+        updatePlayerYear(year);
     }, 500);
 };
 
