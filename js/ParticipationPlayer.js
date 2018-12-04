@@ -53,6 +53,7 @@ function pause() {
 function refresh() {
     getCountriesSeries(1514);
     updateProgress(1514);
+    //update
     //updatePlayerYear(1514);
 }
 

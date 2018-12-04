@@ -34,14 +34,13 @@ function onParticipation() {
         createParticipationViewer('#participation-viewer', "Evolution of World's Prticipation in the Trans-atlantic Slave Trade", pdata);
     });
     
-    $(document).on('_series_loaded', function (event, ydata, pdata) {
-        updateParticipationViewer('period-map', pdata);
-        //updateParticipationViewer('year-map', ydata);
+    $('select').on('change', function (event) {
+        updateParticipationViewer(participationData['period'][getPlayerYearValue()-1514]);
     });
-
         
     $(window).on('resize', function () {
         debounce('#participation .frontpage', 'participation.jpg');
+        periodMap.resize();
     });
 }
 
@@ -63,7 +62,7 @@ function getCountriesSeries(y) {
     //console.log('Needs data for year: ' + y);
     //var data = participationData.year[y-1514];
     updatePlayerYear(y);
-    $(document).trigger('_series_loaded', [participationData['year'][y-1514], participationData['period'][y-1514]]);
+    updateParticipationViewer(participationData['period'][y-1514]);
 }
 
 function getCountriesSeriesFromServer(y) {

@@ -18,12 +18,18 @@ function getMapView(id) {
 }
 
 function getDataset(series) {
+    var criteria = $('option:selected').val();
+    return getDatasetForCriteria(series, criteria);
+};
+
+function getDatasetForCriteria(series, criteria) {
     var dataset = {};
     // We need to colorize every country based on "numberOfWhatever"
     // colors should be uniq for every value.
     // For this purpose we create palette(using min/max series-value)
+    
     var onlyValues = series.map(function (obj) {
-        return obj.embarked;
+        return getObjectValueForCriteria(obj, criteria);
     });
 
     var minValue = Math.min.apply(null, onlyValues),
@@ -33,14 +39,14 @@ function getDataset(series) {
     // color can be whatever you wish
     var paletteScale = d3.scale.linear()
         .domain([0, maxValue])
-        .range(["rgba(255,0,0,.1)", "rgba(255,0,0,1)"]); // blue color
+        .range(getCriteriaRange(criteria)); // blue color
         //.interpolator(d3.interpolateRainbow);
 
     // fill dataset in appropriate format
     series.forEach(function (item) { //
         // item example value ["USA", 70]
         var iso = item.iso3;
-        var value = item.embarked;
+        var value = getObjectValueForCriteria(item, criteria);
         dataset[iso] = {
             numberOfThings: value,
             fillColor: paletteScale(value)
@@ -48,7 +54,34 @@ function getDataset(series) {
     });
     
     return dataset;
-};
+}
+
+function getCriteriaRange(criteria) {
+    
+    if(criteria=='#Embarked') {
+        return ["rgba(255,0,0,.1)", "rgba(255,0,0,1)"];
+    } else if(criteria == '#Disembarked') {
+        return ["rgba(255,255,0,.1)", "rgba(255,255,0,1)"];
+    } else if(criteria == '#Died') {
+        return ["rgba(255,0,255,.1)", "rgba(255,0,255,1)"];
+    } else if(criteria == '#Voyages') {
+        return ["rgba(0,255,255,.1)", "rgba(0,255,255,1)"];
+    }
+    else return undefined; 
+}
+
+function getObjectValueForCriteria(obj, criteria) {
+    if(criteria=='#Embarked') {
+        return obj.embarked;
+    } else if(criteria == '#Disembarked') {
+        return obj.disembarked;            
+    } else if(criteria == '#Died') {
+        return obj.died;            
+    } else if(criteria == '#Voyages') {
+        return obj.nvoyages;            
+    }
+    else return undefined; 
+}
 
 function getFills() {
     return {
@@ -148,30 +181,17 @@ function height(value, series) {
 
 function getDataMap(mapViewId, dataset, fills, template, bubbles, bubblesTemplate) {
     var options = getOptions(mapViewId, dataset, fills, template);
-    var datamap = new Datamap(options);
+    periodMap = new Datamap(options);
     
     /*datamap.bubbles(bubbles, {
         popupTemplate: bubblesTemplate
     });*/
-    datamap.graticule();
+    periodMap.graticule();
 }
 
 function getOptions(mapViewId, dataset, fills, template) {
     var options = {
-        width: 200,
-        height: 200,
         element: document.getElementById(mapViewId),
-        setProjection: function (element, options) {
-            var projection, path;
-            projection = d3.geo.equirectangular()
-                .center([-60, 30])
-                .scale(element.offsetWidth/5);
-            path = d3.geo.path().projection(projection);
-            return {
-                path: path,
-                projection: projection
-            };
-        },
         responsive: true,
         fills: fills,
         data: dataset,

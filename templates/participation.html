@@ -33,30 +33,49 @@
         </div>
     </section>
     <section id="participation-viewer" class="container-fluid bg-dark py-5">
-        <div id="ptitle"></div>
-        <div id="pplayer" class="container clearfix shadow rounded text-right bg-dark">
-            <span id="year" class="text-light float-left">1866</span>
-            <button id="psettings" class="btn fas fa-cog"></button>
-            <button id="prefresh" class="btn fas fa-undo"></button>
-            <button id="pplay" class="btn fas fa-play"></button>
-            <button id="ppause" class="btn fas fa-pause"></button>
-            <div class="progress shadow">
+        <div id="" class="container">
+            <h3 id="ptitle" class="pb-0 mb-0"></h3>
+        </div>
+        <div id="pplayer" class="container clearfix rounded bg-dark">
+            <div class="text-muted d-inline-block small float-left">
+                <span id="start-year" class="text-light text-center">1514</span> - 
+                <span id="year" class="text-light text-center">1866</span>
+            </div>
+            <div class="mx-auto small text-right">
+                <button id="psettings" class="btn fas fa-cog m-0 p-0"></button>
+                <button id="prefresh" class="btn fas fa-undo m-0 p-0"></button>
+                <button id="pplay" class="btn fas fa-play m-0 p-0"></button>
+                <button id="ppause" class="btn fas fa-pause m-0 p-0"></button>
+                <select class="d-inline-block shadow small border-0 bg-dark text-light">
+                    <option>#Voyages</option>
+                    <option>#Embarked</option>
+                    <option>#Disembarked</option>
+                    <option>#Died</option>
+                </select>
+            </div>
+            <div class="progress shadow w-100">
                 <div class="progress-bar bg-danger clearfix my-auto">
-                    <p><span class="begin float-left">1514</span> - <span class="end float-right">1866</span></p>
+                    <p>
+                        <span class="begin float-left">1514</span> -
+                        <span class="end float-right">1866</span>
+                    </p>
                 </div>
             </div>
         </div>
         <div class="container">
             <!--div id="year-map"></div-->
-            <div id="period-map" class="shadow"></div>
-            <div class="my-4 shadow w-75">
+            <div id="year-map" class="shadow w-100">
+            </div>
+            <div id="period-map" class="shadow w-100">
+            </div>
+            <div class="my-4 shadow w-100">
                 <canvas id="period-chart">
                     
                 </canvas>
             </div>
-            <table id="period-table" class="shadow rounded py-1 my-1 compact bg-danger row-border">
+            <table id="period-table" class="shadow rounded py-1 my-1 compact bg-danger row-border small w-100">
                 <thead class="text-light"></thead>
-                <tbody></tbody>
+                <tbody class="bg-transparent"></tbody>
             </table>
         </div>
         <!--div id="all-map" class="bg-dark"></div-->
