@@ -41,13 +41,13 @@ function getPlayerPause() {
 }
         
 function play() {
-    //frameRequest = requestAnimationFrame(startParticipationAnimation2);
-    startParticipationAnimation();
+    frameRequest = requestAnimationFrame(startParticipationAnimation2);
+    //startParticipationAnimation();
 };
 
 function pause() {
-    stopParticipationAnimation();
-    //cancelAnimationFrame(frameRequest);
+    //stopParticipationAnimation();
+    cancelAnimationFrame(frameRequest);
 };
 
 function refresh() {

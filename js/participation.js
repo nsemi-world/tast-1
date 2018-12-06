@@ -45,12 +45,10 @@ function onParticipation() {
     
     $('#earliest').on('click', function(event){
         event.preventDefault();
-        $(this).toggleClass('btn-outline-sucess');
         $('#start-timeline').toggleClass('d-none');
     });
     $('#latest').on('click', function(event){
         event.preventDefault();
-        $(this).toggleClass('btn-outline-sucess');
         $('#end-timeline').toggleClass('d-none');
     });
 }
@@ -205,19 +203,27 @@ function addNodeToDraggables($draggables, date, name, iso2) {
     var min = 1510;
     var max = 1870;
 
-    var $flag = $('<i></i>')
-        .addClass('m-0 p-0 flag flag-' + iso2.toLowerCase())
+    var $flag = $('<div><div>')
+        .addClass('flag flag-' + iso2.toLowerCase())
+        .css({
+            height: '32px'
+        });
 
-    var $name = $('<i></i>').text(name).addClass('small my-auto');
+
+    var $name = $('<div></div>')
+        .text(name)
+        .addClass('media-body text-truncate')
+        .css({
+            height: '32px'
+        });
 
     var $node = $('<div></div>')
-        .addClass('draggable w-100')
+        .addClass('draggable media mr-2')
         .attr('title', name)
         .data('country', name)
         .append($flag)
         .append($name)
         .css({
-            width: '150px',
             height: '32px',
             zIndex: '1000'
         });
@@ -226,13 +232,13 @@ function addNodeToDraggables($draggables, date, name, iso2) {
 
 
     $flag.position({
-        my: 'left',
-        at: 'left',
+        my: 'left center',
+        at: 'left center',
         of: $node
     });
     $name.position({
-        my: 'left',
-        at: 'right+8',
+        my: 'left center',
+        at: 'right+2 center',
         of: $flag
     });
 
@@ -253,13 +259,17 @@ function addLineToDroppables($droppables, date, name, iso2, i) {
 
     var $date = $('<span class="date"></span>')
         .text(date)
-        .addClass('rounded border-right border-dark shadow');
+        .addClass('pr-1');
+
+    var $timeline = $('<span class="line"></span>')
+        .addClass('rounded border-right border-danger shadow');
 
     var $line = $('<div></div>')
-        .addClass('droppable border-bottom border-secondary my-1 w-100')
+        .addClass('droppable border-bottom border-secondary mt-2 w-100')
         .attr('title', date)
         .data('country', name)
         .append($date)
+        .append($timeline)
         .css({
             height: '32px',
             position: 'relative'
@@ -269,11 +279,11 @@ function addLineToDroppables($droppables, date, name, iso2, i) {
     $droppables.addClass('position-relative').append($line);
     var dateWidth = getRelativePositionForDate($line.innerWidth(), min, max, date) + '%';
 
-    $date.css({
+    $timeline.css({
         position: 'absolute',
-        height: '32px',
+        height: '24px',
         top: '0',
-        left: '0',
+        left: '32px',
         width: dateWidth
     });
 
@@ -281,27 +291,30 @@ function addLineToDroppables($droppables, date, name, iso2, i) {
         accepts: timelineId + ' .draggable',
         tolerance: "pointer",
         classes: {
-            "ui-droppable-active": "bg-secondary",
-            "ui-droppable-hover": "bg-success"
+            "ui-droppable-active": "border border-secondary",
+            "ui-droppable-hover": "border border-primary"
         },
         drop: function (event, ui) {
             var $draggable = ui.draggable;
             var $droppable = $(this);
 
             if ($draggable.data('country') == $droppable.data('country')) {
-                $droppable.addClass('done');
                 $draggable.draggable("option", "revert", false);
                 $draggable.draggable("disable");
-                $droppable.droppable("disable");
                 $draggable.position({
                     my: 'left',
                     at: 'left+64',
-                    of: $droppable.find('span.date')
-                        .addClass('border border-success')
-                        .css({
-                            background: getColorForDate($droppable.attr('title'), timelineId)
-                        })
-                });
+                    of: $droppable.find('.line')
+                }).addClass('text-light');
+
+                $droppable.addClass('done');
+                $droppable.droppable("disable");
+                $droppable.find('.line').animate({
+                        backgroundColor: getColorForDate($droppable.attr('title'), timelineId),
+                }, 1000);
+                $droppable.find('.date').addClass('text-light');
+                
+                
                 $(document).on('resize', function () {
                     $draggable.position({
                         my: 'left',
@@ -312,7 +325,6 @@ function addLineToDroppables($droppables, date, name, iso2, i) {
 
                 if ($droppables.find('.done').length == 17) {
                     alert('Done');
-                    $draggable.parent().hide();
                 }
                 
             } else {

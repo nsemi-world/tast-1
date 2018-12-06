@@ -67,7 +67,7 @@ function getCriteriaRange(criteria) {
     } else if(criteria == '#Voyages') {
         return ["rgba(0,0,255,.1)", "rgba(0,0,255,1)"];
     } else if(criteria=='Duration') {
-        return ["rgba(0,100,0,.1)", "rgba(0,100,0,1)"];
+        return ["rgba(200,100,0,.1)", "rgba(200,100,0,1)"];
     }
     else return undefined; 
 }

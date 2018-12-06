@@ -125,7 +125,7 @@ function getTableDataForCriteria(data) {
     else if (criteria == 'Duration') {
         return {
             data: data.map(function (obj) {
-                return [obj.name, obj.ldate-obj.fdate+1];
+                return [obj.name, (getPlayerYearValue() - obj.fdate) + 1];
             }),
             columns: [{
                 title: 'name'
@@ -153,12 +153,19 @@ function createChart(selector, data) {
     data = data.sort(compareDesc);
     var datasets = getChartDataForCriteria(data);
 
-    var chart = $('#period-chart');
+    var onlyValues = data.map(function (obj) {
+        return getObjectValueForCriteria(obj, $('option:selected').val());
+    });
+
+    var minValue = Math.min.apply(null, onlyValues),
+        maxValue = Math.max.apply(null, onlyValues);
+    
+    var chart = $('#period-chart').empty();
     periodChart = new Chart(chart, {
         type: 'bar',
         data: {
             labels: data.map(function (obj) {
-                return obj.name;
+                return obj.iso2;
             }),
             datasets: datasets
         },
@@ -171,7 +178,13 @@ function createChart(selector, data) {
                             return obj.name;
                         })
                     }
-            }]
+                }],
+                yAxes: [{
+                    ticks: {
+                        suggestedMin: 0,
+                        suggestedMax: maxValue
+                    }
+                }]
             }
         }
     });
@@ -188,7 +201,7 @@ function getChartDataForCriteria(data) {
             data: data.map(function (obj) {
                 return obj.embarked;
             }),
-            backgroundColor: 'red'
+            backgroundColor: getCriteriaRange2(criteria)[1]
         }];
     } else if (criteria == '#Disembarked') {
         return [{
@@ -196,7 +209,7 @@ function getChartDataForCriteria(data) {
             data: data.map(function (obj) {
                 return obj.disembarked;
             }),
-            backgroundColor: 'yellow'
+            backgroundColor: getCriteriaRange2(criteria)[1]
         }];
     } else if (criteria == '#Died') {
         return [{
@@ -204,7 +217,7 @@ function getChartDataForCriteria(data) {
             data: data.map(function (obj) {
                 return obj.died;
             }),
-            backgroundColor: 'purple'
+            backgroundColor: getCriteriaRange2(criteria)[1]
         }];
     } else if (criteria == '#Voyages') {
         return [{
@@ -212,21 +225,72 @@ function getChartDataForCriteria(data) {
             data: data.map(function (obj) {
                 return obj.nvoyages;
             }),
-            backgroundColor: 'rgba(0,255,255,1)'
+            backgroundColor: getCriteriaRange2(criteria)[1]
         }];
-    } else return undefined;
+    } else if (criteria == 'Duration') {
+        return [{
+            label: 'Duration (years)',
+            data: data.map(function (obj) {
+                return getPlayerYearValue() - obj.fdate + 1;
+            }),
+            backgroundColor: getCriteriaRange2(criteria)[1]
+        }];
+    }
+    else return undefined;
 
 }
+
+function getCriteriaRange2(criteria) {
+    
+    if(criteria=='#Embarked') {
+        return ["rgba(255,0,0,.1)", "rgba(255,0,0,1)"];
+    } else if(criteria == '#Disembarked') {
+        return ["rgba(255,255,0,.1)", "rgba(255,255,0,1)"];
+    } else if(criteria == '#Died') {
+        return ["rgba(255,0,255,.1)", "rgba(255,0,255,1)"];
+    } else if(criteria == '#Voyages') {
+        return ["rgba(0,0,255,.1)", "rgba(0,0,255,1)"];
+    } else if(criteria=='Duration') {
+        return ["rgba(200,100,0,.1)", "rgba(200,100,0,1)"];
+    }
+    else return undefined; 
+}
+
 
 function updateChart(selector, data) {
     var cdata = data.sort(compareDesc);
     var datasets = getChartDataForCriteria(cdata);
     
+    var onlyValues = data.map(function (obj) {
+        return getObjectValueForCriteria(obj, $('option:selected').val());
+    });
+
+    var minValue = Math.min.apply(null, onlyValues),
+        maxValue = Math.max.apply(null, onlyValues);
+
     periodChart.data = {
         labels: cdata.map(function (obj) {
-            return obj.name;
+            return obj.iso2;
         }),
-        datasets: datasets
+        datasets: datasets,
+        options: {
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        autoSkip: false,
+                        labels: data.map(function (obj) {
+                            return obj.iso2;
+                        })
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        suggestedMin: 0,
+                        suggestedMax: maxValue
+                    }
+                }]
+            }
+        }
     };
 
     periodChart.update(0);
@@ -264,5 +328,8 @@ function compareDescForCriteria(a, b) {
         return compareDesc(a.died, b.died);
     } else if (criteria == '#Voyages') {
         return compareDesc(a.nvoyages, b.nvoyages);
-    } else return undefined;
+    } else if (criteria == 'Duration') {
+        return compareDesc(a.ldate-a.fdate+1, b.ldate-b.fdate+1);
+    }    
+    else return undefined;
 }
