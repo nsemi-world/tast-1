@@ -30,7 +30,6 @@ function getRandomColor() {
     var b = Math.round(Math.random() * 255);
     var a = .5;
     var rgba = 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
-    console.log(rgba);
     return rgba;
 }
 

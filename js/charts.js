@@ -19,7 +19,7 @@ function initCharts() {
             initChart(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log('Error: ' + textStatus);
+            alert('Error: ' + textStatus);
         }
     });
 }

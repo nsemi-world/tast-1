@@ -12,7 +12,6 @@ function createParticipationViewer(parent, title, data) {
 }
 
 function updateParticipationViewer(data) {
-    console.log(data);
     if(data.countries) {
         updatePlayerYear(data.last_voyage_date);
 
@@ -123,6 +122,18 @@ function getTableDataForCriteria(data) {
             }]
         };
     } 
+    else if (criteria == 'Duration') {
+        return {
+            data: data.map(function (obj) {
+                return [obj.name, obj.ldate-obj.fdate+1];
+            }),
+            columns: [{
+                title: 'name'
+            }, {
+                title: 'Value'
+            }]
+        };
+    } 
     else {
         alert('Unknown criteria: ' + criteria);
         return [];
@@ -132,8 +143,6 @@ function getTableDataForCriteria(data) {
 function replaceTable(selector, data) {
     var tableData = getTableDataForCriteria(data);
 
-    console.log(tableData);
-    
     periodTable.clear();
     periodTable.rows.add(tableData.data);
     periodTable.draw();

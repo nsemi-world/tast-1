@@ -6,8 +6,6 @@ function loadSectionImage(sectionName, filename) {
     var width = $target.innerWidth();
     var height = $target.innerHeight();
 
-    console.log(width + 'x' + height);
-
     $.ajax({
         url: 'php/getSectionImageFromDatabase.php',
         data: {
@@ -24,7 +22,6 @@ function loadSectionImage(sectionName, filename) {
                     backgroundSize: 'cover'
                 });
             }
-            console.log("Got image from db!");
         },
         error: function () {
             console.error("Error reading/saving image from db!");
@@ -36,7 +33,6 @@ function loadSectionImage(sectionName, filename) {
 function debounce(selector, filename) {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(function () {
-        console.log('After timeout ' + new Date());
         loadSectionImage(selector, filename);
     }, 2000);
 }

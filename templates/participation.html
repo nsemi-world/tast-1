@@ -4,33 +4,80 @@
             <h2 class="h2 title">Participation in the Trans-atlantic Slave Trade</h2>
         </div>
     </section>
-    <section id="introduction" class="container p-3  py-5 text-justify">
-        <div class="container">
+    <section id="pcontent" class="container py-5 text-justify">
+        <section id="introduction" class="my-5">
+            <h3 class="h3 border-bottom">Introduction</h3>
             <p>The <i>Voyages Database</i> reports a total of <span id="TOTAL_VOYAGES"></span> voyages, between <span id="FIRST_VOYAGE_DATE"></span> and <span id="LAST_VOYAGE_DATE"></span>. Not all voyages have dates assigned therefore these dates should not be taken as absolute, but only in the context of the database.</p>
             <p>In the aftermath of the <i>Reconsquita</i>, christian Portugal and Spain established themselves as natural heirs, by culture and conquest, of millenia of Iberian civilization, a long-lasting afro-european center of science, culture, religion and race tolerance by which ancient Iberians, Phoenicians, Jews, Greeks, Romans, Goths and Moors contributed to one of the most intellectually and econommically vibrating civilization the old continent has ever experienced. Techonological advancements in naval instrumentation, sea navigation as much as the vicious of war, fuelled imperialist ambitions of expansion and further conquest.</p>
-            <p>As soon as the slave trade became recognizagble as the most profitable of all activities, many other countries followed them, pushing the slave trade from an Iberian to an European activity. This page explores which countries, when and in wich measure participated in the trans-atlantic slave trade.</p>
-        </div>
-        <!--div id="participation-subsections" class="container">
-            <div class="row text-center">
-                <a class="col btn btn-outline-success m-1" id="who" href="#countries"><i class="fas fa-globe-africa"></i> Listing: Countries Involved</a>
-                <a class="col btn btn-outline-success m-1" id="first" href="#when"><i class="fas fa-stopwatch"></i> Timeline: Date of First Voyage</a>
-                <a class="col btn btn-outline-success m-1" id="last" href="#when"><i class="fas fa-stopwatch"></i> Timeline: Date of Last Voyage</a>
+
+            <p>As soon as the slave trade became recognizagble as a tremendously profitable activity, many other countries followed them, pushing the slave trade from an Iberian to a broader European, Atlantic and global economy. The information here presented is extracted from the records of the Voyages database as available for public use.</p>
+        </section>
+
+        <section id="when-how-long" class="my-5">
+            <h3 class="h3 border-bottom">When and How Long...</h3>
+
+            <p>Unlike other questions (How and Why) these two are easily answered in the relative context of the Voyages database that represents only a fraction of the actual data regarding the Trans-atlantic Slave Trade. The countries that took part in the slave trade are listed in table Table 1.</p>
+
+            <table id="participation-period-table" class="table small compact text-left my-5 shadow">
+                <caption><b>Table 1</b>: List of countries involved in the Trans-Atlantic Slave Trade and in which period of time. It introduces the following variables:
+                    <ul>
+                        <li><b>Country:</b> the name of a participant country</li>
+                        <li><b>Start:</b> the earlist date a voyage was registered</li>
+                        <li><b>End:</b> the latest date a voyage was registered</li>
+                        <li><b>Duration:</b> how many years a country conducted slave voyages</li>
+                    </ul>
+                </caption>
+                <thead>
+                    <th>Country</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Duration</th>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+            <p>Looking at variable/column <b>Start</b> it is possible to group the data according to their first voyage. We detected four main waves of participation each defining a phase:</p>
+
+            <ul>
+                <li>early 16th century, the Iberian phase</li>
+                <li>middle and late 16th century, the West European Phase</li>
+                <li>middle and late 17th century, the Pan-European Phase</li>
+                <li>early and middle 19th century, the Pan-Atlantic Phase</li>
+            </ul>
+
+            <p><b>The Iberian Phase.</b> Portugal (1514-1866) is the first reported participant followed by Spain (1519-1865). They were also the latest, in practice and according to the data, to ban slave trade voyages becoming the longest practicioners of that activity: Portugal (353 years) and Spain (347 years).</p>
+
+            <p><b>The West European Phase.</b> The United Kingdom (1562-1811), France (1571-1864) and The Netherlands (1596-1829), north along the atlantic coast, joined the early group of iberian countries. Together these countries appear to have dominated alone the first 150 years of the trans-atlantic slave trade. The United Kingdom and The Netherlands were among the first nations to ban slave voyages, nevertheless completing around 250 years of active participation each. France (294 years) seams to have been less prompt to stop the activity, being one of the latest to leave the slave economy.</p>
+
+            <p><b>The Pan-European Phase.</b> In the seconda half of the 17th century another group of countries developed the naval and military resources to participate in the slave trade: Denmark/Baltic (1641-1842, 202 years), USA (1644-1864, 221 years), Sweden (1646-1820, 175 years), Sardinia (1649-1851, 203 years) and the previleged german Hanseatic Cities together with the state of Brandenburg (1682-1847, 166 years).
+            </p>
+            <p><b>The Pan-Atlantic Phase.</b> Newly created countries in former colonies continued the practice of slave trading: Brazil (1802), Uruguay (1832), Argentina (1836) and Mexico(1849). Far north atlantic countries also had their fingerprint in the slave trade: Russia (1838) and Norway (1858)
+            </p>
+        </section>
+        <section id="timelines" class="my-5">
+            <h3 class="h3 border-bottom">Time for a Challenge?</h3>
+            <p>Let's take time to exercie a bit. The following presents two challenges. In the first challenge we have sort countries according to the earliest date they appear in the records of the Voyages Database. The second challange, the lastest date. Interaction is implemented as dragg and drop; so drag and drop countries flags into the correct position.</p>
+            <p>
+             <button id="earliest" class="btn btn-outline-success">Earliest Voyage</button> 
+             <button id="latest"  class="btn btn-outline-success">Latest Voyage</button>
+           </p>
+            <div id="timelines" class="container my-5">
+               <div id="start-timeline" class="row shadow my-5 d-none">
+                    <div id="start-draggables" class="col-auto draggables bg-secondary"></div>
+                    <div id="start-droppables" class="col droppables">
+                        <div class="lines">
+                        </div>
+                    </div>
+               </div>
+               <div id="end-timeline" class="row shadow my-5 d-none">
+                    <div id="end-draggables" class="col-auto draggables bg-secondary"></div>
+                    <div id="end-droppables" class="col droppables">
+                        <div class="lines">
+                        </div>
+                    </div>
+               </div>
             </div>
-        </div-->
-    </section>
-    <section id="countries-list" class="container-fluid p-3 py-5 bg-secondary text-secondary">
-        <h3 class="h3 display-5 text-center text-light">List of Countries and City States that participated in the Transatlantic Slave Trade</h3>
-        <div id="LIST_OF_COUNTRIES" class="container bg-dark text-center shadow my-5 py-3"></div>
-        <div id="participation-timeline" class="container  bg-dark shadow my-5 py-3 text-secondary">
-            <div class="my-2">
-                <h4 class="p-3 text-left">Timeline: First reported slave trading voyage</h4>
-                <div id="FIRST_VOYAGE_TIMELINE" class="p-3 text-center"></div>
-            </div>
-            <div class="my-2">
-                <h4 class="p-3 text-left">Timeline: Last reported slave trading voyage</h4>
-                <div id="LAST_VOYAGE_TIMELINE" class="p-3 text-center"></div>
-            </div>
-        </div>
+        </section>
     </section>
     <section id="participation-viewer" class="container-fluid bg-dark py-5">
         <div id="" class="container">
@@ -38,7 +85,7 @@
         </div>
         <div id="pplayer" class="container clearfix rounded bg-dark">
             <div class="text-muted d-inline-block small float-left">
-                <span id="start-year" class="text-light text-center">1514</span> - 
+                <span id="start-year" class="text-light text-center">1514</span> -
                 <span id="year" class="text-light text-center">1866</span>
             </div>
             <div class="mx-auto small text-right">
@@ -47,6 +94,7 @@
                 <button id="pplay" class="btn fas fa-play m-0 p-0"></button>
                 <button id="ppause" class="btn fas fa-pause m-0 p-0"></button>
                 <select class="d-inline-block shadow small border-0 bg-dark text-light">
+                    <option>Duration</option>
                     <option>#Voyages</option>
                     <option>#Embarked</option>
                     <option>#Disembarked</option>

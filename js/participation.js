@@ -2,9 +2,8 @@ var participationViewer = null;
 var participationData = null;
 
 $(document).ready(function () {
-    console.log('>>> Participation Page: Started');
     activate($('#toggle_participation'));
-    
+
     onParticipation();
 
     loadSectionImage('#participation .frontpage', 'participation.jpg');
@@ -24,45 +23,54 @@ function getIntroduction() {
 }
 
 function onParticipation() {
-    $(document).on('_data_loaded', function(event, pdata) {
+    $(document).on('_data_loaded', function (event, pdata) {
         var data = pdata['all'];
         updateTotalVoyages(data);
         updateFirstVoyageDate(data);
         updateLastVoyageDate(data);
-        updateCountriesList(data);
+        updateParticipationPeriod(data);
         updateTimelines(data);
+        updateCountriesList(data);
         createParticipationViewer('#participation-viewer', "Evolution of World's Prticipation in the Trans-atlantic Slave Trade", pdata);
     });
-    
+
     $('select').on('change', function (event) {
-        updateParticipationViewer(participationData['period'][getPlayerYearValue()-1514]);
+        updateParticipationViewer(participationData['period'][getPlayerYearValue() - 1514]);
     });
-        
+
     $(window).on('resize', function () {
         debounce('#participation .frontpage', 'participation.jpg');
         periodMap.resize();
+    });
+    
+    $('#earliest').on('click', function(event){
+        event.preventDefault();
+        $(this).toggleClass('btn-outline-sucess');
+        $('#start-timeline').toggleClass('d-none');
+    });
+    $('#latest').on('click', function(event){
+        event.preventDefault();
+        $(this).toggleClass('btn-outline-sucess');
+        $('#end-timeline').toggleClass('d-none');
     });
 }
 
 function loadParticipationData() {
     $.ajax({
         url: 'php/participation.json',
-        success: function(data) {
-            console.log(data);
+        success: function (data) {
             participationData = data;
             $(document).trigger('_data_loaded', [data]);
         },
-        error: function() {
+        error: function () {
             alert('Error while fetching timelines data. Sorry for the inconvenience. An issue is being created. Please come back later.');
         }
     });
 }
 
 function getCountriesSeries(y) {
-    //console.log('Needs data for year: ' + y);
-    //var data = participationData.year[y-1514];
     updatePlayerYear(y);
-    updateParticipationViewer(participationData['period'][y-1514]);
+    updateParticipationViewer(participationData['period'][y - 1514]);
 }
 
 function getCountriesSeriesFromServer(y) {
@@ -70,9 +78,10 @@ function getCountriesSeriesFromServer(y) {
 
     $.ajax({
         url: url,
-        data: {year: y},
+        data: {
+            year: y
+        },
         success: function (data) {
-            console.log(data);
             $(document).trigger('_series_loaded', [data[1]]);
         },
         error: function () {
@@ -100,142 +109,246 @@ function updateCountriesList(data) {
 
 
 function updateTimelines(data) {
-    //$('#participation-timeline').accordion();
-    updateFirstTimeline(data.countries);
-    updateLastTimeline(data.countries);
+    updateTimeline(data.countries, 0);
+    updateTimeline(data.countries, 1);
 }
 
-function updateFirstTimeline(countriesData) {
-    var sorted = countriesData.sort(compareFirst);
-    
-    var $timeline = $('#FIRST_VOYAGE_TIMELINE');
-    
-    var $line = $('<div class="position-relative rounded bg-secondary"></div>')
-        .css({
-            height:'2px', 
-            width:'100%'
+function updateTimeline(data, timelineId) {
+    if (timelineId == 0) {
+        var sorted = data.sort(compareFirst);
+
+        $.each(sorted, function (key, value) {
+            addLineToDroppables($('#start-droppables .lines'), value.fdate, value.name, value.iso2, key);
         });
-    
-    $timeline.append($line);
-    
-    $.each(sorted, function(key, value){
-        addNodeToLine($line, value.fdate, value.name, value.iso2);
-    });
-}
 
-function updateLastTimeline(countriesData) {
-    var sorted = countriesData.sort(compareFirst);
-    
-    var $timeline = $('#LAST_VOYAGE_TIMELINE');
-    
-    var $line = $('<div class="position-relative rounded bg-secondary"></div>')
-        .css({
-            height:'2px', 
-            width:'100%', 
+        var shuffled = shuffle(data);
+        $.each(shuffled, function (key, value) {
+            addNodeToDraggables($('#start-draggables'), value.fdate, value.name, value.iso2);
         });
-    
-    $timeline.append($line);
-    
-    $.each(sorted, function(key, value){
-        addNodeToLine($line, value.ldate, value.name, value.iso2);
-    });
+    } else {
+        var sorted = data.sort(compareLast);
+        $.each(data, function (key, value) {
+            addLineToDroppables($('#end-droppables .lines'), value.ldate, value.name, value.iso2, key);
+        });
+        var shuffled = shuffle(data);
+        $.each(shuffled, function (key, value) {
+            addNodeToDraggables($('#end-draggables'), value.fdate, value.name, value.iso2);
+        });
+    }
+
 }
 
-function compareFirst(a,b) {
-  if (a.first_voyage< b.first_voyage)
-    return -1;
-  if (a.first_voyage > b.first_voyage)
-    return 1;
-  return 0;
+function getPhase(fdate) {
+    if (fdate <= 1550) {
+        return '#iberian-timeline';
+    } else if (fdate <= 1600) {
+        return '#west-timeline';
+    } else if (fdate <= 1700) {
+        return '#european-timeline';
+    } else {
+        return '#atlantic-timeline';
+    }
 }
 
-function compareLast(a,b) {
-  if (a.last_voyage< b.last_voyage)
-    return -1;
-  if (a.last_voyage > b.last_voyage)
-    return 1;
-  return 0;
+function shuffle(array) {
+    var currentIndex = array.length,
+        temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+
+
+function compareFirst(a, b) {
+    if (a.fdate < b.fdate)
+        return -1;
+    if (a.fdate > b.fdate)
+        return 1;
+    return 0;
+}
+
+function compareLast(a, b) {
+    if (a.ldate < b.ldate)
+        return -1;
+    if (a.ldate > b.ldate)
+        return 1;
+    return 0;
 }
 
 function countriesToHtmlList(countries) {
     var ul = '<div class="card-columns">';
-    $.each(countries, function(){
+    $.each(countries, function () {
         var country = $(this);
         var li = '<div class="text-truncate">' + country[0].name + '</div>';
         ul += li;
     });
-    
+
     ul += '</div>';
     return ul;
 }
 
-function addNodeToLine($line, date, name, iso2) {
+/*
+ */
+function addNodeToDraggables($draggables, date, name, iso2) {
     var min = 1510;
     var max = 1870;
-    var node = $('<span class="circle"></span>')
-        .addClass('flag flag-' + iso2.toLowerCase())
-        .attr('title', date + ': ' + name)
+
+    var $flag = $('<i></i>')
+        .addClass('m-0 p-0 flag flag-' + iso2.toLowerCase())
+
+    var $name = $('<i></i>').text(name).addClass('small my-auto');
+
+    var $node = $('<div></div>')
+        .addClass('draggable w-100')
+        .attr('title', name)
+        .data('country', name)
+        .append($flag)
+        .append($name)
         .css({
-            position: 'absolute',
-            left: '' + getLeftForDate($line.width(), min, max, date) + 'px',
-            top: '-=15px',
+            width: '150px',
+            height: '32px',
             zIndex: '1000'
-        })
-        .toggle({effect: 'scale', percent: 50});
+        });
 
-    $line.append(node);
+    $draggables.append($node);
+
+
+    $flag.position({
+        my: 'left',
+        at: 'left',
+        of: $node
+    });
+    $name.position({
+        my: 'left',
+        at: 'right+8',
+        of: $flag
+    });
+
+
+
+    $node.draggable({
+        revert: 'invalid'
+    });
+
+
 }
 
-function getLeftForDate(maxWidth, min, max, date) {
-    return (maxWidth * ((date-min)/(max-min)))-16;    
-}
+function addLineToDroppables($droppables, date, name, iso2, i) {
+    var min = 1514;
+    var max = 1866;
 
-function initCountriesData() {
-    initParticipationTable();
-}
-function getParticipationDataTable() {
-    return $('#example-participation').DataTable({
-        columns: [
-            {
-                title: 'Country'
-            },
-            {
-                title: 'Id'
-            },
-            {
-                title: 'Code'
-            },
-            {
-                title: 'Embarked'
-            },
-            {
-                title: 'Disembarked'
-            },
-            {
-                title: 'Died'
-            }],
-        columnDefs: [
-            {
-                "targets": [1, 2],
-                "visible": false,
-                "searchable": false
+    var timelineId = $droppables.parent().attr('id');
+
+    var $date = $('<span class="date"></span>')
+        .text(date)
+        .addClass('rounded border-right border-dark shadow');
+
+    var $line = $('<div></div>')
+        .addClass('droppable border-bottom border-secondary my-1 w-100')
+        .attr('title', date)
+        .data('country', name)
+        .append($date)
+        .css({
+            height: '32px',
+            position: 'relative'
+        });
+
+
+    $droppables.addClass('position-relative').append($line);
+    var dateWidth = getRelativePositionForDate($line.innerWidth(), min, max, date) + '%';
+
+    $date.css({
+        position: 'absolute',
+        height: '32px',
+        top: '0',
+        left: '0',
+        width: dateWidth
+    });
+
+    $line.droppable({
+        accepts: timelineId + ' .draggable',
+        tolerance: "pointer",
+        classes: {
+            "ui-droppable-active": "bg-secondary",
+            "ui-droppable-hover": "bg-success"
+        },
+        drop: function (event, ui) {
+            var $draggable = ui.draggable;
+            var $droppable = $(this);
+
+            if ($draggable.data('country') == $droppable.data('country')) {
+                $droppable.addClass('done');
+                $draggable.draggable("option", "revert", false);
+                $draggable.draggable("disable");
+                $droppable.droppable("disable");
+                $draggable.position({
+                    my: 'left',
+                    at: 'left+64',
+                    of: $droppable.find('span.date')
+                        .addClass('border border-success')
+                        .css({
+                            background: getColorForDate($droppable.attr('title'), timelineId)
+                        })
+                });
+                $(document).on('resize', function () {
+                    $draggable.position({
+                        my: 'left',
+                        at: 'left+64',
+                        of: $droppable.find('span.date')
+                    });
+                });
+
+                if ($droppables.find('.done').length == 17) {
+                    alert('Done');
+                    $draggable.parent().hide();
+                }
+                
+            } else {
+                $draggable.draggable("option", "revert", true);
             }
-        ],
-        stateSave: true,
-        paging: false,
-        filter: false,
-        info: false
-    }).page.len(50);
+        }
+    });
 }
-function initParticipationTable() {
-    var series = status_tast.participation.series;
 
-    status_tast.participation.datatable.clear();
-    status_tast.participation.datatable.rows.add(series);
-    status_tast.participation.datatable.draw();
+function getRelativePositionForDate(maxWidth, min, max, date) {
+    var result = 100 * (date - min) / (max - min);
+    return result;
 }
-function cleanSeries() {
-    initCountriesData();
+
+function getColorForDate(date) {
+    return 'rgba(255, 0, 0,' + (1 - (date - 1514) / (1866 - 1514)) + ')';
 }
 
 
+function updateParticipationPeriod(data) {
+    $('#participation-period-table').DataTable({
+        data: data.countries.map(function (obj) {
+            return [obj.name, obj.fdate, obj.ldate, (parseInt(obj.ldate) - parseInt(obj.fdate) + 1)];
+        }),
+        "columnDefs": [{
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+        }],
+        "order": [[1, 'asc']],
+        "paging": false,
+        "ordering": true,
+        "info": false,
+        "searching": false,
+        responsive: false,
+        fixedColumns: true
+
+    });
+}

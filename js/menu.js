@@ -14,8 +14,6 @@ $(document).ready(function() {
     });
 
     $(document).on('_facebook_login', function (event, userid, userimage) {
-        console.log('>>> userid = ' + userid);
-        console.log('>>> userimage = ' + userimage);
         updateSessionUser(userid, userimage);
     });
 

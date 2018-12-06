@@ -70,7 +70,6 @@ function createAuthorArticle(author, citation, books) {
         .append($header)
         .append($books);
     
-    console.log($article);
     return $article;
 }
 

@@ -493,7 +493,6 @@ function hideQuizz() {
 }
 
 function configureAnswers(data, min) {
-    console.log(data);
     $.each(data, function (key, value) {
         value['rank'] = (key + 1);
     });

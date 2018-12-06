@@ -132,7 +132,7 @@ function loadVoyageData(index) {
             $('#voyages').trigger('_voyage_loaded', [result, index]);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log("Error: " + textStatus);
+            alert("Error: " + textStatus);
         }
     });
 }

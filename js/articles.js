@@ -82,14 +82,6 @@ function saveArticle() {
     var aabstract = $('#fabstract').val();
     var content = $('#fcontent').val();
     
-    console.log('Image: ' + imageName);
-    console.log('Title: ' + title);
-    console.log('Author: ' + author);
-    console.log('Location: ' + location);
-    console.log('Date: ' + date);
-    console.log('Abstract: ' + aabstract);
-    console.log('Content: ' + content);
-    
     $.ajax({
         url: 'php/createArticle.php',
         type: 'POST',

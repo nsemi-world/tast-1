@@ -65,7 +65,9 @@ function getCriteriaRange(criteria) {
     } else if(criteria == '#Died') {
         return ["rgba(255,0,255,.1)", "rgba(255,0,255,1)"];
     } else if(criteria == '#Voyages') {
-        return ["rgba(0,255,255,.1)", "rgba(0,255,255,1)"];
+        return ["rgba(0,0,255,.1)", "rgba(0,0,255,1)"];
+    } else if(criteria=='Duration') {
+        return ["rgba(0,100,0,.1)", "rgba(0,100,0,1)"];
     }
     else return undefined; 
 }
@@ -79,6 +81,8 @@ function getObjectValueForCriteria(obj, criteria) {
         return obj.died;            
     } else if(criteria == '#Voyages') {
         return obj.nvoyages;            
+    } else if(criteria == 'Duration') {
+        return obj.ldate - obj.fdate + 1;            
     }
     else return undefined; 
 }
@@ -95,7 +99,7 @@ function getFills() {
         BRA: 'yellowgreen',
         defaultFill: 'transparent'
     }
-};
+}
 
 function getTemplate() {
     return (
