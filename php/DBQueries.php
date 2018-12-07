@@ -126,7 +126,6 @@ function getQueryTopCountriesGroupByCode($myvar, $limit) {
     return $sql;
 }
 
-
 function getData($pdo) {
     $sql = "
         SELECT 
@@ -136,6 +135,7 @@ function getData($pdo) {
             iso2,
             iso3,
             SUM(nvoyages) as nvoyages,
+            SUM(nships) as nships,
             SUM(embarked) as embarked,
             SUM(disembarked) as disembarked,
             SUM(died) as died
@@ -147,6 +147,7 @@ function getData($pdo) {
                 n.iso2 as iso2,
                 n.iso3 as iso3,
                 COUNT(voyageid) as nvoyages,
+                COUNT(DISTINCT shipname) as nships,
                 SUM(slaximp) as embarked,
                 SUM(slamimp) as disembarked,
                 (SUM(slaximp)-SUM(slamimp)) as died
@@ -165,6 +166,7 @@ function getData($pdo) {
                 n.iso2 as iso2,
                 n.iso3 as iso3,
                 COUNT(voyageid) as nvoyages,
+                COUNT(DISTINCT shipname) as nships,
                 SUM(slaximp) as embarked,
                 SUM(slamimp) as disembarked,
                 (SUM(slaximp)-SUM(slamimp)) as died
@@ -183,6 +185,7 @@ function getData($pdo) {
                 n.iso2 as iso2,
                 n.iso3 as iso3,
                 COUNT(voyageid) as nvoyages,
+                COUNT(DISTINCT shipname) as nships,
                 SUM(slaximp) as embarked,
                 SUM(slamimp) as disembarked,
                 (SUM(slaximp)-SUM(slamimp)) as died
@@ -201,6 +204,7 @@ function getData($pdo) {
                 '' as iso2, 
                 '' as iso3,
                 COUNT(voyageid) as nvoyages, 
+                COUNT(DISTINCT shipname) as nships,
                 SUM(slaximp) as embarked, 
                 SUM(slamimp) as disembarked, 
                 (SUM(slaximp)-SUM(slamimp)) as died 
@@ -240,6 +244,7 @@ function getDataForYear($pdo, $year) {
             iso2,
             iso3,
             SUM(nvoyages) as nvoyages,
+            SUM(nships) as nships,
             SUM(embarked) as embarked,
             SUM(disembarked) as disembarked,
             SUM(died) as died
@@ -251,6 +256,7 @@ function getDataForYear($pdo, $year) {
                 n.iso2 as iso2,
                 n.iso3 as iso3,
                 COUNT(voyageid) as nvoyages,
+                COUNT(DISTINCT shipname) as nships,
                 SUM(slaximp) as embarked,
                 SUM(slamimp) as disembarked,
                 (SUM(slaximp)-SUM(slamimp)) as died
@@ -269,6 +275,7 @@ function getDataForYear($pdo, $year) {
                 n.iso2 as iso2,
                 n.iso3 as iso3,
                 COUNT(voyageid) as nvoyages,
+                COUNT(DISTINCT shipname) as nships,
                 SUM(slaximp) as embarked,
                 SUM(slamimp) as disembarked,
                 (SUM(slaximp)-SUM(slamimp)) as died
@@ -287,6 +294,7 @@ function getDataForYear($pdo, $year) {
                 n.iso2 as iso2,
                 n.iso3 as iso3,
                 COUNT(voyageid) as nvoyages,
+                COUNT(DISTINCT shipname) as nships,
                 SUM(slaximp) as embarked,
                 SUM(slamimp) as disembarked,
                 (SUM(slaximp)-SUM(slamimp)) as died
@@ -305,6 +313,7 @@ function getDataForYear($pdo, $year) {
                 '' as iso2, 
                 '' as iso3,
                 COUNT(voyageid) as nvoyages, 
+                COUNT(DISTINCT shipname) as nships,
                 SUM(slaximp) as embarked, 
                 SUM(slamimp) as disembarked, 
                 (SUM(slaximp)-SUM(slamimp)) as died 
@@ -333,6 +342,7 @@ function getDataFromToYear($pdo, $begin, $year) {
             iso2,
             iso3,
             SUM(nvoyages) as nvoyages,
+            SUM(nships) as nships,
             SUM(embarked) as embarked,
             SUM(disembarked) as disembarked,
             SUM(died) as died
@@ -344,6 +354,7 @@ function getDataFromToYear($pdo, $begin, $year) {
                 n.iso2 as iso2,
                 n.iso3 as iso3,
                 COUNT(voyageid) as nvoyages,
+                COUNT(DISTINCT shipname) as nships,
                 SUM(slaximp) as embarked,
                 SUM(slamimp) as disembarked,
                 (SUM(slaximp)-SUM(slamimp)) as died
@@ -362,6 +373,7 @@ function getDataFromToYear($pdo, $begin, $year) {
                 n.iso2 as iso2,
                 n.iso3 as iso3,
                 COUNT(voyageid) as nvoyages,
+                COUNT(DISTINCT shipname) as nships,
                 SUM(slaximp) as embarked,
                 SUM(slamimp) as disembarked,
                 (SUM(slaximp)-SUM(slamimp)) as died
@@ -380,6 +392,7 @@ function getDataFromToYear($pdo, $begin, $year) {
                 n.iso2 as iso2,
                 n.iso3 as iso3,
                 COUNT(voyageid) as nvoyages,
+                COUNT(DISTINCT shipname) as nships,
                 SUM(slaximp) as embarked,
                 SUM(slamimp) as disembarked,
                 (SUM(slaximp)-SUM(slamimp)) as died
@@ -398,6 +411,7 @@ function getDataFromToYear($pdo, $begin, $year) {
                 '' as iso2, 
                 '' as iso3,
                 COUNT(voyageid) as nvoyages, 
+                COUNT(DISTINCT shipname) as nships,
                 SUM(slaximp) as embarked, 
                 SUM(slamimp) as disembarked, 
                 (SUM(slaximp)-SUM(slamimp)) as died 

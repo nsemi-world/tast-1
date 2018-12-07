@@ -30,7 +30,7 @@ function onParticipation() {
         updateLastVoyageDate(data);
         updateParticipationPeriod(data);
         updateTimelines(data);
-        updateCountriesList(data);
+        updateNumbersTable(data);
         createParticipationViewer('#participation-viewer', "Evolution of World's Prticipation in the Trans-atlantic Slave Trade", pdata);
     });
 
@@ -364,3 +364,26 @@ function updateParticipationPeriod(data) {
 
     });
 }
+
+
+function updateNumbersTable(data) {
+    $('#numbers-table').DataTable({
+        data: data.countries.map(function (obj) {
+            return [obj.name, obj.nvoyages, obj.nships, obj.embarked, obj.disembarked, obj.died];
+        }),
+        "columnDefs": [{
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+        }],
+        "order": [[1, 'desc']],
+        "paging": false,
+        "ordering": true,
+        "info": false,
+        "searching": false,
+        responsive: false,
+        fixedColumns: true
+
+    });
+}
+
