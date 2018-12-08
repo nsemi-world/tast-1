@@ -7,6 +7,24 @@ var interval = null;
 
 
 // Execution
+function createPlayer() {
+    $('#ppause').hide();
+
+    $('#pplay').on('click', function (event) {
+        event.preventDefault();
+        $('#pplay, #ppause, #prefresh').toggle();
+        play();
+    });
+    $('#ppause').on('click', function (event) {
+        event.preventDefault();
+        $('#pplay, #prefresh, #ppause').toggle();
+        pause();
+    });
+    $('#prefresh').on('click', function (event) {
+        event.preventDefault();
+        refresh();
+    });
+}
 
 
 function getPlayer() {

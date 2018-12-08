@@ -29,18 +29,15 @@ function onParticipation() {
         updateFirstVoyageDate(data);
         updateLastVoyageDate(data);
         updateParticipationPeriod(data);
-        updateTimelines(data);
+        updateChallenge(data);
         updateNumbersTable(data);
-        createParticipationViewer('#participation-viewer', "Evolution of World's Prticipation in the Trans-atlantic Slave Trade", pdata);
-    });
-
-    $('select').on('change', function (event) {
-        updateParticipationViewer(participationData['period'][getPlayerYearValue() - 1514]);
+        createPlayer();
+        createParticipationDashboard(pdata, 1866);
     });
 
     $(window).on('resize', function () {
         debounce('#participation .frontpage', 'participation.jpg');
-        periodMap.resize();
+        resizeAll();
     });
     
     $('#earliest').on('click', function(event){
@@ -52,6 +49,8 @@ function onParticipation() {
         $('#end-timeline').toggleClass('d-none');
     });
 }
+
+function resizeAll() {}
 
 function loadParticipationData() {
     $.ajax({
@@ -68,7 +67,7 @@ function loadParticipationData() {
 
 function getCountriesSeries(y) {
     updatePlayerYear(y);
-    updateParticipationViewer(participationData['period'][y - 1514]);
+    updateParticipationDashboard(participationData['period'][y - 1514]);
 }
 
 function getCountriesSeriesFromServer(y) {
@@ -106,7 +105,7 @@ function updateCountriesList(data) {
 }
 
 
-function updateTimelines(data) {
+function updateChallenge(data) {
     updateTimeline(data.countries, 0);
     updateTimeline(data.countries, 1);
 }
@@ -385,5 +384,449 @@ function updateNumbersTable(data) {
         fixedColumns: true
 
     });
+}
+
+function createParticipationDashboard(data, year) {
+    createMaps(data, year);
+    createCharts(data, year);
+}
+function updateParticipationDashboard(data, year) {
+    updateMaps(data, year);
+    updateCharts(data, year);
+}
+
+function createMaps(data, year) {
+    durationMap = createMap('#duration-map', data['period'][year-1514].countries, 'Duration');
+    voyagesMap = createMap('#voyages-map', data['period'][year-1514].countries, '#Voyages');
+    shipsMap = createMap('#ships-map', data['period'][year-1514].countries, '#Ships');
+    embarkedMap = createMap('#embarked-map', data['period'][year-1514].countries, '#Embarked');
+    disembarkedMap = createMap('#disembarked-map', data['period'][year-1514].countries, '#Disembarked');
+    diedMap = createMap('#died-map', data['period'][year-1514].countries, '#Died');
+}
+
+function updateMaps(data, year) {
+    durationMap= updateMap('#duration-map', data.countries, 'Duration');
+    voyagesMap = updateMap('#voyages-map', data.countries, '#Voyages');
+    shipsMap = updateMap('#ships-map', data.countries, '#Ships');
+    embarkedMap = updateMap('#embarked-map', data.countries, '#Embarked');
+    disembarkedMap = updateMap('#disembarked-map', data.countries, '#Disembarked');
+    diedMap = updateMap('#died-map', data.countries, '#Died');
+}
+
+function createCharts(data, year) {
+    durationChart = createChart('#duration-chart', data['period'][year-1514].countries, 'Duration');
+    voyagesChart = createChart('#voyages-chart', data['period'][year-1514].countries, '#Voyages');
+    shipsChart = createChart('#ships-chart', data['period'][year-1514].countries, '#Ships');
+    embarkedChart = createChart('#embarked-chart', data['period'][year-1514].countries, '#Embarked');
+    disembarkedChart = createChart('#disembarked-chart', data['period'][year-1514].countries, '#Disembarked');
+    diedChart = createChart('#died-chart', data['period'][year-1514].countries, '#Died');
+}
+function updateCharts(data, year) {
+    updateChart(durationChart, data.countries, 'Duration');
+    updateChart(voyagesChart, data.countries, '#Voyages');
+    updateChart(shipsChart, data.countries, '#Ships');
+    updateChart(embarkedChart, data.countries, '#Embarked');
+    updateChart(disembarkedChart, data.countries, '#Disembarked');
+    updateChart(diedChart, data.countries, '#Died');
+}
+
+function createMap(selector, series, criteria) {
+    var dataset = getDataset(series, criteria);
+    var fills = getFills();
+    var template = getTemplate();
+    var bubbles = getBubbles(series);
+    var bubblesTemplate = getBubblesTemplate();
+    return getDataMap(selector, dataset, fills, template, bubbles, bubblesTemplate);
+}
+
+function updateMap(selector, series, criteria) {
+    $(selector).empty();
+    var dataset = getDataset(series, criteria);
+    var fills = getFills();
+    var template = getTemplate();
+    var bubbles = getBubbles(series);
+    var bubblesTemplate = getBubblesTemplate();
+    return getDataMap(selector, dataset, fills, template, bubbles, bubblesTemplate);
+}
+
+function getDataset(series, criteria) {
+    var dataset = {};
+    // We need to colorize every country based on "numberOfWhatever"
+    // colors should be uniq for every value.
+    // For this purpose we create palette(using min/max series-value)
+    
+    var onlyValues = series.map(function (obj) {
+        return getObjectValue(obj, criteria);
+    });
+
+    var minValue = Math.min.apply(null, onlyValues),
+        maxValue = Math.max.apply(null, onlyValues);
+
+    // create color palette function
+    // color can be whatever you wish
+    var paletteScale = d3.scale.linear()
+        .domain([0, maxValue])
+        .range(getCriteriaRange(criteria)); // blue color
+        //.interpolator(d3.interpolateRainbow);
+
+    // fill dataset in appropriate format
+    series.forEach(function (item) { //
+        // item example value ["USA", 70]
+        var iso = item.iso3;
+        var value = getObjectValue(item, criteria);
+        dataset[iso] = {
+            numberOfThings: value,
+            fillColor: paletteScale(value)
+        };
+    });
+    
+    return dataset;
+}
+
+function getCriteriaRange(criteria) {
+    
+    if(criteria=='#Embarked') {
+        return ["rgba(255,0,0,.1)", "rgba(255,0,0,1)"];
+    } else if(criteria == '#Disembarked') {
+        return ["rgba(255,255,0,.1)", "rgba(255,255,0,1)"];
+    } else if(criteria == '#Died') {
+        return ["rgba(255,0,255,.1)", "rgba(255,0,255,1)"];
+    } else if(criteria == '#Voyages') {
+        return ["rgba(0,0,255,.1)", "rgba(0,0,255,1)"];
+    } else if(criteria=='Duration') {
+        return ["rgba(200,100,0,.1)", "rgba(200,100,0,1)"];
+    } else if(criteria=='#Ships') {
+        return ["rgba(200,100,200,.1)", "rgba(200,100,200,1)"];
+    }
+    else return undefined; 
+}
+
+function getObjectValue(obj, criteria) {
+    if(criteria=='#Embarked') {
+        return obj.embarked;
+    } else if(criteria == '#Disembarked') {
+        return obj.disembarked;            
+    } else if(criteria == '#Died') {
+        return obj.died;            
+    } else if(criteria == '#Voyages') {
+        return obj.nvoyages;            
+    } else if(criteria == 'Duration') {
+        return obj.ldate - obj.fdate + 1;            
+    } else if(criteria == '#Ships') {
+        return obj.nships;            
+    }
+    else return undefined; 
+}
+
+function getFills() {
+    return {
+        GBR: 'blue',
+        PRT: 'green',
+        FRA: 'red',
+        ESP: 'yellow',
+        NLD: 'pink',
+        DNK: 'white',
+        USA: 'cadetblue',
+        BRA: 'yellowgreen',
+        defaultFill: 'transparent'
+    }
+}
+
+function getTemplate() {
+    return (
+        function (geo, data) {
+            // don't show tooltip if country don't present in dataset
+            if (!data || data.numberOfThings == 0) {
+                return;
+            }
+            // tooltip content
+            return ['<div class="hoverinfo">',
+                    '<strong>', geo.properties.name, '</strong>',
+                    '<br>Count: <strong>', data.numberOfThings.toLocaleString('en'), '</strong>',
+                    '</div>'].join('');
+        }
+    );
+};
+
+/*
+    A = PI * r^2
+    r = SQRT(A/PI)
+*/
+function getBubbles(series) {
+    var bubbles = [];
+    var i = 0;
+
+    $.each(series, function (key, value) {
+        if (value.iso3 != '') {
+            bubbles[i++] = {
+                centered: value.iso3,
+                country: value.name,
+                fillKey: value.iso3,
+                radius: Math.sqrt(value.embarked / Math.PI) / 10,
+                embarked: value.embarked,
+                disembarked: value.disembarked,
+                died: value.died,
+                borderColor: 'gray'
+            }
+        }
+    });
+    return bubbles;
+};
+
+function getBubblesTemplate() {
+    return (
+        function (geo, data) {
+            return '<div class="hoverinfo">Country:' + data.country + '<hr>Embarked: ' + data.embarked + '</br>Disembarked: ' + data.disembarked + '</br>Died: ' + data.died + '';
+        });
+}
+
+function updateDatamapBubbles(series) {
+    $.each(series, function (key, value) {
+        if (value.iso3 != '') {
+            updateCircle(value);
+        }
+    });
+};
+
+function updateCircle(value) {
+    var circles = document.getElementsByTagName('circle');
+    //alert(circles.length);
+    $.each(circles, function(key, circle) {
+        if(circle.getAttribute('data-info').centered == value.iso3) {
+           circle.setAttribute('r', Math.sqrt(value.embarked / Math.PI) / 10); 
+        }
+    });
+}
+
+function getCountriesSeriesMax(series) {
+    var max = 0;
+    for (var i = 0; i < series.length; i++) {
+        if (series[i][3] > max) {
+            max = series[i][3];
+        }
+    }
+    return max;
+};
+
+function height(value, series) {
+    var max = series[0][3];
+    var maxHeight = 500;
+    return value * maxHeight / max;
+};
+
+function getDataMap(selector, dataset, fills, template, bubbles, bubblesTemplate) {
+    var options = getOptions(selector, dataset, fills, template);
+    var map = new Datamap(options);
+    map.graticule();
+    return map;
+}
+
+function getOptions(selector, dataset, fills, template) {
+    var mapViewId = selector.replace('#', '');
+    var options = {
+        element: document.getElementById(mapViewId),
+        responsive: true,
+        fills: fills,
+        data: dataset,
+        geographyConfig: {
+            borderColor: 'gray',
+            background: 'black',
+            highlightBorderWidth: 2,
+            // don't change color on mouse hover
+            highlightFillColor: function (geo) {
+                return geo['fillColor'] || '#F5F5F5';
+            },
+            // only change border
+            highlightBorderColor: '#B7B7B7',
+            // show desired information in tooltip
+            popupTemplate: template
+        }
+    };
+
+    return options;
+}
+
+
+
+function createChart(selector, data, criteria) {
+    var datasets = getChartData(data, criteria);
+
+    var onlyValues = data.map(function (obj) {
+        return getObjectValue(obj, criteria);
+    });
+
+    var minValue = Math.min.apply(null, onlyValues),
+        maxValue = Math.max.apply(null, onlyValues);
+    
+    var chart = $(selector).empty();
+    var mychart = new Chart(chart, {
+        type: 'bar',
+        data: {
+            labels: data.map(function (obj) {
+                return obj.iso2;
+            }),
+            datasets: datasets
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        autoSkip: false,
+                        labels: data.map(function (obj) {
+                            return obj.name;
+                        })
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        suggestedMin: 0,
+                        suggestedMax: maxValue
+                    }
+                }]
+            }
+        }
+    });
+    
+    return mychart;
+}
+
+function getChartData(data, criteria) {
+    var data = data.sort(getCompareFunction(criteria));    
+
+    if (criteria == '#Embarked') {
+        return [{
+            label: '#Embarked',
+            data: data.map(function (obj) {
+                return obj.embarked;
+            }),
+            backgroundColor: getCriteriaRange(criteria)[1]
+        }];
+    } 
+    else if (criteria == '#Disembarked') {
+        return [{
+            label: '#Disembarked',
+            data: data.map(function (obj) {
+                return obj.disembarked;
+            }),
+            backgroundColor: getCriteriaRange(criteria)[1]
+        }];
+    } 
+    else if (criteria == '#Died') {
+        return [{
+            label: '#Died',
+            data: data.map(function (obj) {
+                return obj.died;
+            }),
+            backgroundColor: getCriteriaRange(criteria)[1]
+        }];
+    } 
+    else if (criteria == '#Voyages') {
+        return [{
+            label: '#Voyages',
+            data: data.map(function (obj) {
+                return obj.nvoyages;
+            }),
+            backgroundColor: getCriteriaRange(criteria)[1]
+        }];
+    } 
+    else if (criteria == 'Duration') {
+        return [{
+            label: 'Duration (years)',
+            data: data.map(function (obj) {
+                return getPlayerYearValue() - obj.fdate + 1;
+            }),
+            backgroundColor: getCriteriaRange(criteria)[1]
+        }];
+    }
+    else if (criteria == '#Ships') {
+        return [{
+            label: 'Number of Ships',
+            data: data.map(function (obj) {
+                return obj.nships;
+            }),
+            backgroundColor: getCriteriaRange(criteria)[1]
+        }];
+    }
+    else return undefined;
+
+}
+
+
+
+function updateChart(chart, data, criteria) {
+    var cdata = data.sort(compareDesc);
+    var datasets = getChartData(cdata, criteria);
+    
+    var onlyValues = data.map(function (obj) {
+        return getObjectValue(obj, criteria);
+    });
+
+    var minValue = Math.min.apply(null, onlyValues),
+        maxValue = Math.max.apply(null, onlyValues);
+
+    chart.data = {
+        labels: cdata.map(function (obj) {
+            return obj.iso2;
+        }),
+        datasets: datasets,
+        options: {
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        autoSkip: false,
+                        labels: data.map(function (obj) {
+                            return obj.iso2;
+                        })
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        suggestedMin: 0,
+                        suggestedMax: maxValue
+                    }
+                }]
+            }
+        }
+    };
+
+    chart.update(0);
+
+}
+
+function compareDesc2(a, b) {
+    if (a.name > b.name) {
+        return 1;
+    } else if (a.name < b.name) {
+        return -1;
+    } else {
+        return 0;
+    }
+}
+
+function compareDesc(a, b) {
+    if (parseInt(a) < parseInt(b)) {
+        return 1;
+    } else if (parseInt(a) > parseInt(b)) {
+        return -1;
+    } else {
+        return 0;
+    }
+}
+
+function getCompareFunction(criteria) {
+    if (criteria == '#Embarked') {
+        return function(a,b) {compareDesc(a.embarked, b.embarked)};
+    } else if (criteria == '#Disembarked') {
+        return function(a,b) {compareDesc(a.disembarked, b.disembarked)};
+    } else if (criteria == '#Died') {
+        return function(a,b) {compareDesc(a.died, b.died)};
+    } else if (criteria == '#Voyages') {
+        return function(a,b) {compareDesc(a.nvoyages, b.nvoyages)};
+    } else if (criteria == 'Duration') {
+        return function(a,b) {compareDesc(a.duration, b.duration)};
+    } else if (criteria == '#Ships') {
+        return function(a,b) {compareDesc(a.ships, b.ships)};
+    }
+    else return undefined;
 }
 
