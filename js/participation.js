@@ -30,7 +30,7 @@ function onParticipation() {
         updateLastVoyageDate(data);
         updateParticipationPeriod(data);
         updateChallenge(data);
-        updateNumbersTable(data);
+        updateNumbersTable(pdata['period'][1866-1514]);
         createPlayer();
         createParticipationDashboard(pdata, 1866);
     });
@@ -67,7 +67,7 @@ function loadParticipationData() {
 
 function getCountriesSeries(y) {
     updatePlayerYear(y);
-    updateParticipationDashboard(participationData['period'][y - 1514]);
+    updateParticipationDashboard(participationData, y);
 }
 
 function getCountriesSeriesFromServer(y) {
@@ -346,7 +346,7 @@ function getColorForDate(date) {
 function updateParticipationPeriod(data) {
     $('#participation-period-table').DataTable({
         data: data.countries.map(function (obj) {
-            return [obj.name, obj.fdate, obj.ldate, (parseInt(obj.ldate) - parseInt(obj.fdate) + 1)];
+            return [obj.name, obj.fdate, obj.ldate, obj.ldate-obj.fdate+1];
         }),
         "columnDefs": [{
             "searchable": false,
@@ -368,7 +368,7 @@ function updateParticipationPeriod(data) {
 function updateNumbersTable(data) {
     $('#numbers-table').DataTable({
         data: data.countries.map(function (obj) {
-            return [obj.name, obj.nvoyages, obj.nships, obj.embarked, obj.disembarked, obj.died];
+            return [obj.name, obj.duration, obj.nvoyages, obj.nships, obj.embarked, obj.disembarked, obj.died];
         }),
         "columnDefs": [{
             "searchable": false,
@@ -396,38 +396,42 @@ function updateParticipationDashboard(data, year) {
 }
 
 function createMaps(data, year) {
-    durationMap = createMap('#duration-map', data['period'][year-1514].countries, 'Duration');
-    voyagesMap = createMap('#voyages-map', data['period'][year-1514].countries, '#Voyages');
-    shipsMap = createMap('#ships-map', data['period'][year-1514].countries, '#Ships');
-    embarkedMap = createMap('#embarked-map', data['period'][year-1514].countries, '#Embarked');
-    disembarkedMap = createMap('#disembarked-map', data['period'][year-1514].countries, '#Disembarked');
-    diedMap = createMap('#died-map', data['period'][year-1514].countries, '#Died');
+    var new_data = data['period'][year-1514].countries;
+    durationMap = createMap('#duration-map', new_data, 'Duration');
+    voyagesMap = createMap('#voyages-map', new_data, '#Voyages');
+    shipsMap = createMap('#ships-map', new_data, '#Ships');
+    embarkedMap = createMap('#embarked-map', new_data, '#Embarked');
+    disembarkedMap = createMap('#disembarked-map', new_data, '#Disembarked');
+    diedMap = createMap('#died-map', new_data, '#Died');
 }
 
 function updateMaps(data, year) {
-    durationMap= updateMap('#duration-map', data.countries, 'Duration');
-    voyagesMap = updateMap('#voyages-map', data.countries, '#Voyages');
-    shipsMap = updateMap('#ships-map', data.countries, '#Ships');
-    embarkedMap = updateMap('#embarked-map', data.countries, '#Embarked');
-    disembarkedMap = updateMap('#disembarked-map', data.countries, '#Disembarked');
-    diedMap = updateMap('#died-map', data.countries, '#Died');
+    var new_data = data['period'][year-1514].countries;
+    durationMap= updateMap('#duration-map', new_data, 'Duration');
+    voyagesMap = updateMap('#voyages-map', new_data, '#Voyages');
+    shipsMap = updateMap('#ships-map', new_data, '#Ships');
+    embarkedMap = updateMap('#embarked-map', new_data, '#Embarked');
+    disembarkedMap = updateMap('#disembarked-map', new_data, '#Disembarked');
+    diedMap = updateMap('#died-map', new_data, '#Died');
 }
 
 function createCharts(data, year) {
-    durationChart = createChart('#duration-chart', data['period'][year-1514].countries, 'Duration');
-    voyagesChart = createChart('#voyages-chart', data['period'][year-1514].countries, '#Voyages');
-    shipsChart = createChart('#ships-chart', data['period'][year-1514].countries, '#Ships');
-    embarkedChart = createChart('#embarked-chart', data['period'][year-1514].countries, '#Embarked');
-    disembarkedChart = createChart('#disembarked-chart', data['period'][year-1514].countries, '#Disembarked');
-    diedChart = createChart('#died-chart', data['period'][year-1514].countries, '#Died');
+    var new_data = data['period'][year-1514].countries;
+    durationChart = createChart('#duration-chart', new_data, 'Duration');
+    voyagesChart = createChart('#voyages-chart', new_data, '#Voyages');
+    shipsChart = createChart('#ships-chart', new_data, '#Ships');
+    embarkedChart = createChart('#embarked-chart', new_data, '#Embarked');
+    disembarkedChart = createChart('#disembarked-chart', new_data, '#Disembarked');
+    diedChart = createChart('#died-chart', new_data, '#Died');
 }
 function updateCharts(data, year) {
-    updateChart(durationChart, data.countries, 'Duration');
-    updateChart(voyagesChart, data.countries, '#Voyages');
-    updateChart(shipsChart, data.countries, '#Ships');
-    updateChart(embarkedChart, data.countries, '#Embarked');
-    updateChart(disembarkedChart, data.countries, '#Disembarked');
-    updateChart(diedChart, data.countries, '#Died');
+    var new_data = data['period'][year-1514].countries;
+    updateChart(durationChart, new_data, 'Duration');
+    updateChart(voyagesChart, new_data, '#Voyages');
+    updateChart(shipsChart, new_data, '#Ships');
+    updateChart(embarkedChart, new_data, '#Embarked');
+    updateChart(disembarkedChart, new_data, '#Disembarked');
+    updateChart(diedChart, new_data, '#Died');    
 }
 
 function createMap(selector, series, criteria) {
@@ -640,6 +644,14 @@ function getOptions(selector, dataset, fills, template) {
             highlightBorderColor: '#B7B7B7',
             // show desired information in tooltip
             popupTemplate: template
+        },
+        setProjection: function (element) {
+            var projection = d3.geo.mercator()
+                .center([0, 20]) // always in [East Latitude, North Longitude]
+                .scale(100)
+                .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+            var path = d3.geo.path().projection(projection);
+            return { path: path, projection: projection };
         }
     };
 
@@ -649,21 +661,15 @@ function getOptions(selector, dataset, fills, template) {
 
 
 function createChart(selector, data, criteria) {
-    var datasets = getChartData(data, criteria);
-
-    var onlyValues = data.map(function (obj) {
-        return getObjectValue(obj, criteria);
-    });
-
-    var minValue = Math.min.apply(null, onlyValues),
-        maxValue = Math.max.apply(null, onlyValues);
+    var cdata = sortData(data, criteria);
+    var datasets = getChartData(cdata, criteria);
     
     var chart = $(selector).empty();
     var mychart = new Chart(chart, {
         type: 'bar',
         data: {
             labels: data.map(function (obj) {
-                return obj.iso2;
+                return obj.iso2 || 'ot';
             }),
             datasets: datasets
         },
@@ -671,16 +677,15 @@ function createChart(selector, data, criteria) {
             scales: {
                 xAxes: [{
                     ticks: {
-                        autoSkip: false,
-                        labels: data.map(function (obj) {
+                        autoSkip: false
+                        /*labels: data.map(function (obj) {
                             return obj.name;
-                        })
+                        })*/
                     }
                 }],
                 yAxes: [{
                     ticks: {
                         suggestedMin: 0,
-                        suggestedMax: maxValue
                     }
                 }]
             }
@@ -691,8 +696,6 @@ function createChart(selector, data, criteria) {
 }
 
 function getChartData(data, criteria) {
-    var data = data.sort(getCompareFunction(criteria));    
-
     if (criteria == '#Embarked') {
         return [{
             label: '#Embarked',
@@ -733,7 +736,7 @@ function getChartData(data, criteria) {
         return [{
             label: 'Duration (years)',
             data: data.map(function (obj) {
-                return getPlayerYearValue() - obj.fdate + 1;
+                return obj.duration;
             }),
             backgroundColor: getCriteriaRange(criteria)[1]
         }];
@@ -751,19 +754,36 @@ function getChartData(data, criteria) {
 
 }
 
+function getObjectDuration(obj) {
+    var absoluteFDate;
+    var absoluteLDate;
+    var inObjectFDate = obj.fdate;
+    var inObjectLDate = obj.ldate;
+    var year = getPlayerYearValue();
+    
+    $.each(participationData.all.countries, function(key, value) {
+        if(obj.name == value.name) {
+            absoluteFDate = value.fdate;
+            absoluteLDate = value.ldate;
+            if(year >= absoluteLDate) {
+                return (absoluteLDate - absoluteFDate + 1);
+            }
+            else {
+                return (year - absoluteFDate + 1);
+            }
+        }
+    });
+    //alert("Couldn't dtermine duration for country " + obj.name + " and year " + year);
+    return undefined;
+
+}
+
 
 
 function updateChart(chart, data, criteria) {
-    var cdata = data.sort(compareDesc);
+    var cdata = sortData(data, criteria);
     var datasets = getChartData(cdata, criteria);
     
-    var onlyValues = data.map(function (obj) {
-        return getObjectValue(obj, criteria);
-    });
-
-    var minValue = Math.min.apply(null, onlyValues),
-        maxValue = Math.max.apply(null, onlyValues);
-
     chart.data = {
         labels: cdata.map(function (obj) {
             return obj.iso2;
@@ -773,16 +793,15 @@ function updateChart(chart, data, criteria) {
             scales: {
                 xAxes: [{
                     ticks: {
-                        autoSkip: false,
-                        labels: data.map(function (obj) {
+                        autoSkip: false
+                        /*labels: data.map(function (obj) {
                             return obj.iso2;
-                        })
+                        })*/
                     }
                 }],
                 yAxes: [{
                     ticks: {
-                        suggestedMin: 0,
-                        suggestedMax: maxValue
+                        suggestedMin: 0
                     }
                 }]
             }
@@ -791,6 +810,23 @@ function updateChart(chart, data, criteria) {
 
     chart.update(0);
 
+}
+
+function sortData(data, criteria) {
+    if (criteria == '#Embarked') {
+        return data.sort(compareEmbarkedDesc);
+    } else if (criteria == '#Disembarked') {
+        return data.sort(compareDisembarkedDesc);
+    } else if (criteria == '#Died') {
+        return data.sort(compareDiedDesc);
+    } else if (criteria == '#Voyages') {
+        return data.sort(compareVoyagesDesc);
+    } else if (criteria == 'Duration') {
+        return data.sort(compareDurationDesc);
+    } else if (criteria == '#Ships') {
+        return data.sort(compareShipsDesc);
+    }
+    else return undefined;
 }
 
 function compareDesc2(a, b) {
@@ -812,21 +848,21 @@ function compareDesc(a, b) {
         return 0;
     }
 }
-
-function getCompareFunction(criteria) {
-    if (criteria == '#Embarked') {
-        return function(a,b) {compareDesc(a.embarked, b.embarked)};
-    } else if (criteria == '#Disembarked') {
-        return function(a,b) {compareDesc(a.disembarked, b.disembarked)};
-    } else if (criteria == '#Died') {
-        return function(a,b) {compareDesc(a.died, b.died)};
-    } else if (criteria == '#Voyages') {
-        return function(a,b) {compareDesc(a.nvoyages, b.nvoyages)};
-    } else if (criteria == 'Duration') {
-        return function(a,b) {compareDesc(a.duration, b.duration)};
-    } else if (criteria == '#Ships') {
-        return function(a,b) {compareDesc(a.ships, b.ships)};
-    }
-    else return undefined;
+function compareEmbarkedDesc(a, b) {
+    return compareDesc(a.embarked, b.embarked);
 }
-
+function compareDisembarkedDesc(a, b) {
+    return compareDesc(a.disembarked, b.disembarked);
+}
+function compareDiedDesc(a, b) {
+    return compareDesc(a.died, b.died);
+}
+function compareDurationDesc(a, b) {
+    return compareDesc(a.duration, b.duration);
+}
+function compareVoyagesDesc(a, b) {
+    return compareDesc(a.nvoyages, b.nvoyages);
+}
+function compareShipsDesc(a, b) {
+    return compareDesc(a.nships, b.nships);
+}

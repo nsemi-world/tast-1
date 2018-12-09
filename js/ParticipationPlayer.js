@@ -108,7 +108,7 @@ function startParticipationAnimation() {
         }
         updateProgress(year);
         updatePlayerYear(year);
-    }, 1000);
+    }, 500);
 };
 
 function stopParticipationAnimation() {

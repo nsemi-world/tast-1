@@ -131,6 +131,7 @@ function getData($pdo) {
         SELECT 
             MIN(fdate) as fdate,
             MAX(ldate) as ldate,
+            (MAX(ldate) - MIN(fdate) + 1) as duration,
             name,
             iso2,
             iso3,
@@ -200,9 +201,9 @@ function getData($pdo) {
             SELECT 
                 MIN(v.yeardep) as fdate, 
                 MAX(v.yeardep) as ldate, 
-                '' as name, 
-                '' as iso2, 
-                '' as iso3,
+                'Unknown' as name, 
+                '??' as iso2, 
+                '???' as iso3,
                 COUNT(voyageid) as nvoyages, 
                 COUNT(DISTINCT shipname) as nships,
                 SUM(slaximp) as embarked, 
@@ -240,6 +241,7 @@ function getDataForYear($pdo, $year) {
         SELECT 
             MIN(fdate) as fdate,
             MAX(ldate) as ldate,
+            (MAX(ldate) - MIN(fdate) + 1) as duration,
             name,
             iso2,
             iso3,
@@ -309,9 +311,9 @@ function getDataForYear($pdo, $year) {
             SELECT 
                 MIN(v.yeardep) as fdate, 
                 MAX(v.yeardep) as ldate, 
-                '' as name, 
-                '' as iso2, 
-                '' as iso3,
+                'Unknown' as name, 
+                '??' as iso2, 
+                '???' as iso3,
                 COUNT(voyageid) as nvoyages, 
                 COUNT(DISTINCT shipname) as nships,
                 SUM(slaximp) as embarked, 
@@ -338,6 +340,7 @@ function getDataFromToYear($pdo, $begin, $year) {
         SELECT 
             MIN(fdate) as fdate,
             MAX(ldate) as ldate,
+            (MAX(ldate) - MIN(fdate) + 1) as duration,
             name,
             iso2,
             iso3,
@@ -361,7 +364,7 @@ function getDataFromToYear($pdo, $begin, $year) {
             FROM voyages v
                 LEFT JOIN national as n 
                 ON (n.value = v.national)
-            WHERE (v.national != '' AND v.natinimp = '' AND yeardep>=$begin AND yeardep<=$year)
+            WHERE (v.national != '' AND v.natinimp = '' AND yeardep IS NOT NULL AND yeardep>=$begin AND yeardep<=$year)
             GROUP BY n.iso2
 
             UNION
@@ -380,7 +383,7 @@ function getDataFromToYear($pdo, $begin, $year) {
             FROM voyages v
                 LEFT JOIN natinimp as n 
                 ON (n.value = v.natinimp)
-            WHERE (v.national = '' AND v.natinimp != '' AND yeardep>=$begin AND yeardep<=$year)
+            WHERE (v.national = '' AND v.natinimp != '' AND yeardep IS NOT NULL AND yeardep>=$begin AND yeardep<=$year)
             GROUP BY n.iso2
 
             UNION
@@ -399,7 +402,7 @@ function getDataFromToYear($pdo, $begin, $year) {
             FROM voyages v
                 LEFT JOIN national as n 
                 ON (n.value = v.national)
-            WHERE (v.national != '' AND v.natinimp != '' AND yeardep>=$begin AND yeardep<=$year)
+            WHERE (v.national != '' AND v.natinimp != '' AND yeardep IS NOT NULL AND  yeardep>=$begin AND yeardep<=$year)
             GROUP BY n.iso2
 
             UNION
@@ -407,17 +410,18 @@ function getDataFromToYear($pdo, $begin, $year) {
             SELECT 
                 MIN(v.yeardep) as fdate, 
                 MAX(v.yeardep) as ldate, 
-                '' as name, 
-                '' as iso2, 
-                '' as iso3,
+                'Unknown' as name, 
+                '??' as iso2, 
+                '???' as iso3,
                 COUNT(voyageid) as nvoyages, 
                 COUNT(DISTINCT shipname) as nships,
                 SUM(slaximp) as embarked, 
                 SUM(slamimp) as disembarked, 
                 (SUM(slaximp)-SUM(slamimp)) as died 
             FROM voyages v 
-            WHERE (v.national = '' AND v.natinimp = '' AND yeardep>=$begin AND yeardep<=$year)
+            WHERE (v.national = '' AND v.natinimp = '' AND yeardep IS NOT NULL AND  yeardep>=$begin AND yeardep<=$year)
             ) as all_data
+        WHERE fdate IS NOT NULL
         GROUP BY iso2
     ";
     $erg = $pdo->query($sql);

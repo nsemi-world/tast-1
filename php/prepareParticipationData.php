@@ -23,25 +23,12 @@ if($preprocess) {
         "countries"             => $countries
     ];
 
-    $data['year'] = [];
-    for($i = $first_voyage_date; $i<= $last_voyage_date; $i++) {
-        $t = getTotalVoyagesForYear($pdo, $i);
-        $f = $i;
-        $l = $i;
-        $c = getDataForYear($pdo, $i);
-        $data['year'][] = 
-            ["total_voyages"         => $t,
-             "first_voyage_date"     => $f,
-             "last_voyage_date"      => $l,
-             "countries"             => $c];
-    }
-
     $data['period'] = [];
     for($i = $first_voyage_date; $i<= $last_voyage_date; $i++) {
         $t = getTotalVoyagesFromToYear($pdo, $first_voyage_date, $i);
         $f = $first_voyage_date;
         $l = $i;
-        $c = getDataFromToYear($pdo, $first_voyage_date, $i);
+        $c = getDataFromToYear($pdo, $first_voyage_date, $i);        
         $data['period'][] = 
             ["total_voyages"         => $t,
              "first_voyage_date"     => $f,
