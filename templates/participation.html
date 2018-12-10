@@ -56,6 +56,34 @@
             <p><b>The Pan-Atlantic Phase.</b> Newly created countries in former colonies continued the practice of slave trading: Brazil (1802), Uruguay (1832), Argentina (1836) and Mexico(1849). Far north atlantic countries also had their fingerprint in the slave trade: Russia (1838) and Norway (1858)
             </p>
         </div>
+        <section id="challenge" class="container my-5 p-5 shadow">
+            <h4 class="h4 border-bottom">Summary: A Challenge or Two?</h4>
+            <div class="card-body">
+                <div class="card-text">
+                    <p>Let's take time to exercie a bit. The following presents two challenges. In the first challenge we have sort countries according to the earliest date they appear in the records of the Voyages Database. The second challange, the lastest date. Interaction is implemented as dragg and drop; so drag and drop countries flags into the correct position.</p>
+                    <div class="text-center">
+                        <button id="earliest" class="btn btn-sm btn-outline-secondary">Earliest Voyage</button>
+                        <button id="latest" class="btn btn-sm btn-outline-secondary">Latest Voyage</button>
+                    </div>
+                    <div id="timelines" class="container my-5">
+                        <div id="start-timeline" class="row shadow my-5 py-2 d-none">
+                            <div id="start-draggables" class="col-4 draggables"></div>
+                            <div id="start-droppables" class="col-8 droppables  bg-dark text-light">
+                                <div class="lines">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="end-timeline" class="row shadow my-5 py-2 d-none">
+                            <div id="end-draggables" class="col-4 draggables"></div>
+                            <div id="end-droppables" class="col-8 droppables  bg-dark  text-light">
+                                <div class="lines">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </section>
     <section id="participation-measures" class="container my-5 p-5 shadow">
         <h3 id="ptitle" class="border-bottom">Measuring the Participation in the Trans-atlantic Slave Trade</h3>
@@ -101,35 +129,6 @@
             </p>
             <p>I leave to you the ranks for the other variables, <var>Embarked</var>, <var>Disembarked</var> and <var>Died</var>. But as a summary, the pattern we saw for the number of voyages and number of ships will repeat it self. Portugal will have the more people embarked and disembarked, while Great Britain will have more people dying during the Middle Passage. It seams that Great Britain had conducted more voyages with less ships but higher casualties than Portugal. Denmark/Baltic and the german Hanse Twons and Brandengurg show a small but relevant participation fingerprint. The remaing countries have a less proeminent presence, just enougth to leave their fingerprint in the Voyages database.</p>
         </div>
-    <section id="challenge" class="container my-5 p-5 shadow">
-        <h3 class="h3 border-bottom">Summary: A Challenge or Two?</h3>
-        <div class="card-body">
-            <div class="card-text">
-                <p>Let's take time to exercie a bit. The following presents two challenges. In the first challenge we have sort countries according to the earliest date they appear in the records of the Voyages Database. The second challange, the lastest date. Interaction is implemented as dragg and drop; so drag and drop countries flags into the correct position.</p>
-                <div class="text-center">
-                    <button id="earliest" class="btn btn-sm btn-outline-secondary">Earliest Voyage</button>
-                    <button id="latest" class="btn btn-sm btn-outline-secondary">Latest Voyage</button>
-                </div>
-                <div id="timelines" class="container my-5">
-                    <div id="start-timeline" class="row shadow my-5 py-2 d-none">
-                        <div id="start-draggables" class="col-4 draggables"></div>
-                        <div id="start-droppables" class="col-8 droppables  bg-dark text-light">
-                            <div class="lines">
-                            </div>
-                        </div>
-                    </div>
-                    <div id="end-timeline" class="row shadow my-5 py-2 d-none">
-                        <div id="end-draggables" class="col-4 draggables"></div>
-                        <div id="end-droppables" class="col-8 droppables  bg-dark  text-light">
-                            <div class="lines">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-        
     </section>
 
     <section id="participation-viewer" class="container my-5 p-5 shadow">
