@@ -122,13 +122,13 @@ function refresh() {
 
 function startParticipationAnimation2(timestamp) {
     var year = getPlayerYearValue() + 1;
-    if (year >= 1866) {
-        cancelAnimationFrame(frameRequest);
-        $('#pplay, #ppause, #prefresh').toggle();
-    } else {
-        getCountriesSeries(year);
-        frameRequest = requestAnimationFrame(startParticipationAnimation2)
-    }
+    if (year > 1866) {
+        year = 1514;
+        updateProgress(year);
+        updatePlayerYear(year);
+    } 
+    getCountriesSeries(year);
+    frameRequest = requestAnimationFrame(startParticipationAnimation2)
     updateProgress(year);
     updatePlayerYear(year);
 }
