@@ -115,7 +115,7 @@
                     <span id="start-year" class="text-center">1514</span> -
                     <span id="year" class="text-center">1866</span>
                     <div class="mx-auto float-right">
-                        <div class="btn-group small">
+                        <div class="btn-group small" role="group" aria-label="Criteria button group">
                             <button id="pduration" class="btn btn-sm btn-outline-primary border-0">Duration</button>
                             <button id="pvoyages" class="btn btn-sm btn-outline-primary border-0">Voyages</button>
                             <button id="pships" class="btn btn-sm btn-outline-primary border-0">Ships</button>
@@ -123,16 +123,19 @@
                             <button id="pdisembarked" class="btn btn-sm btn-outline-primary border-0">Disembarked</button>
                             <button id="pdied" class="btn btn-sm btn-outline-primary border-0">Died</button>
                         </div>
-                        <div class="btn-group">
+                        <div class="btn-group" role="group" aria-label="Mode button group">
                             <button id="pmaps" class="btn btn-sm btn-outline-success border-0"><i class="fas fa-globe p-1"></i>Maps</button>
                             <button id="pcharts" class="btn btn-sm btn-outline-success border-0"><i class="fas fa-chart-bar p-1"></i>Charts</button>
                             <button id="ptables" class="btn btn-sm btn-outline-success border-0"><i class="fas fa-table p-1"></i>Tables</button>
                         </div>
 
-                        <div class="btn-group">
+                        <div class="btn-group"  role="group" aria-label="Player command group">
                             <button id="prefresh" class="btn btn-sm btn-outline-warning border-0"><i class="fas fa-undo p-1"></i>Restart</button>
                             <button id="ppause" class="btn btn-sm btn-outline-warning border-0"><i class=" fas fa-pause p-1"></i>Pause</button>
                             <button id="pplay" class="btn btn-sm btn-outline-warning border-0"><i class=" fas fa-play p-1"></i>Play</button>
+                        </div>
+                        <div class="btn-group"  role="group" aria-label="Window mode group: normal or fullscreen">
+                            <button id="maximize" class="btn btn-sm btn-outline-primary border-0"><i class="far fa-window-maximize"></i></button>
                         </div>
                     </div>
                 </div>
@@ -147,70 +150,70 @@
             </div>
             <div id="maps-and-charts" class="container my-4 text-secondary small">
                 <div class="row card-deck my-2">
-                    <div class="col-4 card shadow">
+                    <div id="card-duration" class="col-4 card shadow">
                         <div class="card-header small bg-dark">
                             Duration Map by Country
                         </div>
                         <div class="card-body p-0 m-0 bg-dark">
-                            <div id="duration-map" class=""></div>
+                            <div id="duration-map" class="map"></div>
                             <hr/>
-                            <canvas id="duration-chart"></canvas>
+                            <canvas id="duration-chart" class="chart"></canvas>
                         </div>
                     </div>
 
-                    <div class="col-4 card shadow">
+                    <div id="card-voyages" class="col-4 card shadow">
                         <div class="card-header small bg-dark">
                             Voyages Map by Country
                         </div>
                         <div class="card-body p-0 m-0 bg-dark">
-                            <div id="voyages-map" class=""></div>
+                            <div id="voyages-map" class="map"></div>
                             <hr/>
-                            <canvas id="voyages-chart"></canvas>
+                            <canvas id="voyages-chart" class="chart"></canvas>
                         </div>
                     </div>
 
-                    <div class="col-4 card shadow">
+                    <div id="card-ships" class="col-4 card shadow">
                         <div class="card-header small bg-dark">
                             Ships Map by Country
                         </div>
                         <div class="card-body p-0 m-0 bg-dark">
-                            <div id="ships-map" class=""></div>
+                            <div id="ships-map"  class="map"></div>
                             <hr/>
-                            <canvas id="ships-chart"></canvas>
+                            <canvas id="ships-chart" class="chart"></canvas>
                         </div>
                     </div>
                 </div>
-                <div class="row card-deck my-2">
+                <div id="card-embarked" class="row card-deck my-2">
                     <div class="col-4 card shadow">
                         <div class="card-header small bg-dark">
                             Embarked Map by Country
                         </div>
                         <div class="card-body p-0 m-0 bg-dark">
-                            <div id="embarked-map" class=""></div>
+                            <div id="embarked-map" class="map"></div>
                             <hr/>
-                            <canvas id="embarked-chart"></canvas>
+                            <canvas id="embarked-chart" class="chart"></canvas>
                         </div>
                     </div>
 
-                    <div class="col-4 card shadow">
+                    <div id="card-disembarked" class="col-4 card shadow">
                         <div class="card-header small bg-dark">
                             Disembarked Map by Country
                         </div>
                         <div class="card-body p-0 m-0 bg-dark">
-                            <div id="disembarked-map" class=""></div>
+                            <div id="disembarked-map"  class="map"></div>
                             <hr/>
-                            <canvas id="disembarked-chart"></canvas>
+                            <canvas id="disembarked-chart" class="chart"></canvas>
                         </div>
                     </div>
 
-                    <div class="col-4 card shadow">
+                    <div id="card-died" class="col-4 card shadow">
                         <div class="card-header small bg-dark">
                             Died Map by Country
                         </div>
                         <div class="card-body p-0 m-0 bg-dark">
-                            <div id="died-map" class=""></div>
+                            <div id="died-map" class="map"></div>
                             <hr/>
-                            <canvas id="died-chart"></canvas>
+                            <canvas id="died-chart" class="chart"></canvas>
                         </div>
                     </div>
                 </div>

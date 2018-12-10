@@ -8,6 +8,12 @@ var interval = null;
 
 // Execution
 function createPlayer() {
+    configurePlayerCommands();
+    configureCriteria();
+    configureMode();
+}
+
+function configurePlayerCommands() {
     $('#ppause').hide();
 
     $('#pplay').on('click', function (event) {
@@ -26,6 +32,44 @@ function createPlayer() {
     });
 }
 
+function configureCriteria() {
+    $('#pduration, #pvoyages, #pships, #pembarked, #pdisembarked, #pdied').on('click', function(event){
+        $(this).toggleClass('hidden text-secondary');
+    });
+    $('#pduration').on('click', function(event) {
+        $('#card-duration').toggle();
+    });
+    $('#pvoyages').on('click', function(event) {
+        $('#card-voyages').toggle();
+    });
+    $('#pships').on('click', function(event) {
+        $('#card-ships').toggle();
+    });
+    $('#pembarked').on('click', function(event) {
+        $('#card-embarked').toggle();
+    });
+    $('#pdisembarked').on('click', function(event) {
+        $('#card-disembarked').toggle();
+    });
+    $('#pdied').on('click', function(event) {
+        $('#card-died').toggle();
+    });
+}
+
+function configureMode() {
+    $('#pmaps, #pcharts, #ptables').on('click', function(event) {
+        $(this).toggleClass('hidden text-secondary');
+    });
+    
+    $('#pmaps').on('click', function(event){
+        $('.card-body .map').toggle();
+    });
+    
+    $('#pcharts').on('click', function(event){
+        $('.card-body .chart').toggle();
+    });
+    
+}
 
 function getPlayer() {
     return $('pplayer');
