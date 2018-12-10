@@ -461,22 +461,22 @@ function createMaps(data, year) {
 function updateMaps(data, year) {
     var new_data = data['period'][year - 1514].countries;
     if(criteriaDurationOn()) {
-        durationMap = updateMap('#duration-map', new_data, 'Duration');
+        updateMap(durationMap, new_data, 'Duration');
     }
     if(criteriaVoyagesOn()) {
-        voyagesMap = updateMap('#voyages-map', new_data, '#Voyages');
+        updateMap(voyagesMap, new_data, '#Voyages');
     }
     if(criteriaShipsOn()) {
-        shipsMap = updateMap('#ships-map', new_data, '#Ships');
+        updateMap(shipsMap, new_data, '#Ships');
     }
     if(criteriaEmbarkedOn()) {
-        embarkedMap = updateMap('#embarked-map', new_data, '#Embarked');
+        updateMap(embarkedMap, new_data, '#Embarked');
     }
     if(criteriaDisembarkedOn()) {
-        disembarkedMap = updateMap('#disembarked-map', new_data, '#Disembarked');
+        updateMap(disembarkedMap, new_data, '#Disembarked');
     }
     if(criteriaDiedOn()) {
-        diedMap = updateMap('#died-map', new_data, '#Died');
+        updateMap(diedMap, new_data, '#Died');
     }
 }
 
@@ -509,14 +509,40 @@ function createMap(selector, series, criteria) {
     return getDataMap(selector, dataset, fills, template, bubbles, bubblesTemplate);
 }
 
-function updateMap(selector, series, criteria) {
-    $(selector).empty();
-    var dataset = getDataset(series, criteria);
-    var fills = getFills();
-    var template = getTemplate();
-    var bubbles = getBubbles(series);
-    var bubblesTemplate = getBubblesTemplate();
-    return getDataMap(selector, dataset, fills, template, bubbles, bubblesTemplate);
+function updateMap(map, series, criteria) {
+    map.updateChoropleth(getChoropleth(series, criteria), {reset: true});
+}
+
+function getChoropleth(series, criteria) {
+    var choropleths = [];
+    
+    var onlyValues = series.map(function (obj) {
+        return getObjectValue(obj, criteria);
+    });
+
+    var minValue = Math.min.apply(null, onlyValues),
+        maxValue = Math.max.apply(null, onlyValues);
+
+    // create color palette function
+    // color can be whatever you wish
+    var paletteScale = d3.scale.linear()
+        .domain([0, maxValue])
+        .range(getCriteriaRange(criteria)); // blue color
+
+    series.forEach(function (item) { //
+        // item example value ["USA", 70]
+        var iso = item.iso3;
+        if(iso != '???') {
+            var value = getObjectValue(item, criteria);
+            choropleths[iso] = {
+                numberOfThings: value,
+                fillColor: paletteScale(value)
+            };
+        }
+    });
+    
+    return choropleths;
+    
 }
 
 function getDataset(series, criteria) {
