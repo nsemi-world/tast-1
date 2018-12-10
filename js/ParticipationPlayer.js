@@ -135,7 +135,7 @@ function startParticipationAnimation2(timestamp) {
 
 function updateProgress(year) {
     $('.progress-bar').css({
-        width: 100 * (year-1514)/(1866-1514) + '%'
+        width: Math.round(100 * (year-1514)/(1866-1514)) + '%'
     });
     
     $('.progress-bar .end').text(year);

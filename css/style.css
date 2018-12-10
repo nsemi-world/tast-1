@@ -316,3 +316,7 @@ div.itinerary a {
 form .invalid {
     border: 1px solid red;
 }
+
+.progress-bar {
+    width: 100%;
+}
