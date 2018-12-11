@@ -1,10 +1,11 @@
-<nav class="container-fluid clearfix p-2 bg-dark">
-    <a class="navbar-brand" href="index.php">
+<nav class="container-fluid clearfix p-2 bg-dark text-center">
+   <div class="row">
+    <a class="navbar-brand col text-left" href="index.php">
         <span>tast</span>
         <span class="loading">X</span>
         <span>plorer</span>
     </a>
-    <div id="menu" class="d-inline-block float-right">
+    <div id="menu" class="col d-block mx-auto w-auto">
             <a id="toggle_home" href="index.php" class="btn bg-transparent active" title="Home"><i class="fas fa-home"></i></a>
 
             <div class="dropdown d-inline-block">
@@ -89,9 +90,19 @@
                     
                 </div>
             </div>
-            <a id="toggle_login" href="#" class="btn bg-transparent" title="Login with Facebook">
-                <i id="user-photo" class="fas fa-user-circle"></i>
-                <img src="#" class=""/>
-            </a>
+            <div class="dropdown d-inline-block">
+                <a id="toggle_login" href="#" class="btn bg-transparent dropdown-toggle" title="Login with Facebook" data-toggle="dropdown" aria-haspopup="true" aria-expanded=false>
+                    <i id="user-photo" class="fas fa-user-circle"></i>
+                    <img src="#" class=""/>
+                </a>
+                <div id="guest-login" class="dropdown-menu bg-dark">
+                    <a class="dropdown-item" id="login" href="#" title="login">Login with Facebook</a>
+                </div>
+                <div id="user-login" class="dropdown-menu bg-dark" style="display: none;">
+                    <a class="dropdown-item" id="profile" href="#" title="profile">Profile</a>
+                    <a class="dropdown-item" id="logout" href="#" title="logout">Logout</a>
+                </div>
+            </div>
         </div>
+   </div>
 </nav>
