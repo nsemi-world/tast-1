@@ -39,7 +39,7 @@ section {
 }
 
 .frontpage.small {
-    height: calc(var(--main-height) * 8 / 10);
+    height: calc(var(--main-height) * 5 / 10);
 }
 
 

@@ -4,8 +4,7 @@ $(document).ready(function() {
 
 function configureSubsections() {
     $('.frontpage .title-wrapper').css({
-        backgroundColor: 'rgba(10,0,0,.65)',
-        color: 'white'
+        backgroundColor: 'rgba(255,255,255,.5)',
     });
 
     centerFrontpageTitle();
@@ -18,8 +17,8 @@ function configureSubsections() {
 // Center Article title
 function centerFrontpageTitle() {
     $('.title-wrapper .title').position({
-        my: 'center',
-        at: 'center',
+        my: 'left',
+        at: 'left',
         of: '.title-wrapper'
     });
 }
