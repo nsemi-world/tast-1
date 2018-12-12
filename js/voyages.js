@@ -1,20 +1,15 @@
 var voyages = {
     storymap: null,
-    ids: []
+    ids: [],
+    index: 0
 }
 
 $(document).ready(function() {
-    initVoyages();
     activate($('#toggle_voyages'));
-});
-
-
-
-function initVoyages() {
+    loadSectionImage('#voyages .frontpage', 'voyages.jpg');
     configureVoyagesPlayer();
     loadVoyageIds();
-    loadSectionImage('#voyages .frontpage', 'voyages.jpg');
-    centerVoyages();
+
     $(window).on('resize', function() {
         debounce('#voyages .frontpage', 'voyages.jpg');
         centerVoyages();
@@ -45,8 +40,9 @@ function initVoyages() {
         loadFilteredVoyageIds(filter, value);
         voyages.context = filter + ' is ' + value;
     });
+    
+});
 
-}
 
 function configureVoyagesPlayer() {
     $('#vprev, #vpause').hide();
@@ -142,7 +138,7 @@ function createStoryMap(data, id) {
     var slides = this.createSlides(data, id);
     var storymap_data = {
         storymap: {
-            map_type: "osm:standard",
+            map_type: "stamen:watercolor",
             slides: slides,
             font_css: "stock:amatic-andika"
         }
@@ -164,14 +160,8 @@ function createSlides(voyage_data, id) {
     slides.push(overview);
 
     $.each(voyage_data.itinerary, function (key, value) {
-        var headline =
-            '<div class="h6 headline">' +
-            '<div class="key">' + value.stage + '</div></hr>' +
-            '<div class="value">' + value.place + '</div>' +
-            '<div class="value">' + value.date + '</div>' +
-            '</div>';
-        var text = '<div class="storymap-text">';
-        text += '</div>';
+        var headline = '<div class="small">' + value.stage + '</div> <a href="place" class="filter">' + value.place + '</a>' + ' <a href="date" class="filter">' + value.date + '</a>';
+        var text = '';
 
 
         if (value.place != null) {
@@ -186,9 +176,6 @@ function createSlides(voyage_data, id) {
                     "lat": value.geo.latitude,
                     "lon": value.geo.longitude,
                     "line": true
-                },
-                "options": {
-                    "background": 'url(img/Slavery.jpg)',
                 }
             }
             slides.push(slide);
@@ -206,34 +193,25 @@ function createOverview(voyage_data, id) {
         getLastDate(voyage_data) +
         ']';
 
-    var headline =
-        '<div class="h3 headline clearfix">' +
-        '<p class="key">Voyage ' +
-        '<span>' + id + '</span></p>' +
-        '</div>';
+    var headline = 'Voyage ' + id;
 
-    var text =
-        '<div class="itinerary value clearfix">' +
-        getVoyagePlaces(voyage_data) +
-        '</div>';
+    var text = getVoyagePlaces(voyage_data);
 
     return {
         "type": "overview",
         "date": getFirstDate(voyage_data),
         "text": {
             "headline": headline,
-            "text": text,
-            "location": {
-                zoom: 4
-            }
+            "text": text
         }
     };
 }
 
 function initData(data, index) {
-    $('#details').empty();
+    $('#d-info .card-text, #d-outcome .card-text, #d-ownership .card-text, #d-numbers .card-text').empty();
     initInfo(data, index);
     initOutcome(data);
+    initOwnership(data);
     initSlaveNumbers(data);
 }
 
@@ -268,42 +246,13 @@ function initInfo(data, index) {
         getVoyagePlaces(data)
     );
 
-    var $shipname = createElement(
-        'info-ship',
-        'Ship: ',
-        '<a class="filter" href="shipname">' + data.details.shipname + '</a>'
-    );
 
-    var $flag = createElement(
-        'info-country',
-        'Country: ',
-        '<a class="filter" href="country">' + data.details.flag + '</a>'
-    );
-
-    var $owners = createElement(
-        'info-owners',
-        'Owners: ',
-        getVoyageOwners(data)
-    );
-
-    var $captains = createElement(
-        'info-captains',
-        'Captains: ',
-        getVoyageCaptains(data)
-    );
-
-    var $info = $('<div class="info"></div>');
-    $info.appendTo('#details')
-        .append($voyage_context)
+    var $info = $('#d-info .card-text');
+    $info.append($voyage_context)
         .append($voyage_order)
         .append($voyageid)
         .append($period)
-        .append($places)
-        .append($('<hr/>'))
-        .append($shipname)
-        .append($flag)
-        .append($owners)
-        .append($captains);
+        .append($places);
 }
 
 function initOutcome(data) {
@@ -332,14 +281,46 @@ function initOutcome(data) {
         '<a href="fate" class="filter">' + data.details.fate4 + '</a>'
     );
 
-    var $outcome = $('<div class="outcome"></div>');
+    var $outcome = $('#d-outcome .card-text');
 
-    $outcome.appendTo('#details')
+    $outcome
         .append($fate_if_captured)
         .append($fate_voyage)
         .append($fate_slaves)
-        .append($fate_owners)
-        .append($('<hr/>'));
+        .append($fate_owners);
+}
+
+function initOwnership(data) {
+    var $shipname = createElement(
+        'info-ship',
+        'Ship: ',
+        '<a class="filter" href="shipname">' + data.details.shipname + '</a>'
+    );
+
+    var $flag = createElement(
+        'info-country',
+        'Country: ',
+        '<a class="filter" href="country">' + data.details.flag + '</a>'
+    );
+
+    var $owners = createElement(
+        'info-owners',
+        'Owners: ',
+        getVoyageOwners(data)
+    );
+
+    var $captains = createElement(
+        'info-captains',
+        'Captains: ',
+        getVoyageCaptains(data)
+    );
+
+    var $ownership = $('#d-ownership .card-text');
+    $ownership
+        .append($shipname)
+        .append($flag)
+        .append($owners)
+        .append($captains);
 }
 
 function initSlaveNumbers(data) {
@@ -367,10 +348,9 @@ function initSlaveNumbers(data) {
         addResistanceIcon();
     }
 
-    var $slaves = $('<div class="slaves"></div>');
+    var $slaves = $('#d-numbers .card-text');
 
-    $slaves.appendTo('#details')
-        .append($embarked)
+    $slaves.append($embarked)
         .append($disembarked)
         .append($died)
         .append($resistance);
@@ -492,7 +472,7 @@ function getFilterValue(element) {
         var title = element.attr('title');
         title = title.replace('Before ', '<');
         title = title.replace('After ', '>');
-        return title;
+        return title; // TODO: When is title undefined?
     } else if (element.attr('href') == 'embarked' || element.attr('href') == 'disembarked' || element.attr('href') == 'died') {
         var title = element.attr('title');
         return title;

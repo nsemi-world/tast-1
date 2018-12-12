@@ -6,6 +6,9 @@ function loadSectionImage(sectionName, filename) {
     var width = $target.innerWidth();
     var height = $target.innerHeight();
 
+    console.log("Target " + sectionName);
+    console.log("width " + width);
+    
     $.ajax({
         url: 'php/getSectionImageFromDatabase.php',
         data: {

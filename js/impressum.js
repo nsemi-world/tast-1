@@ -1,6 +1,7 @@
 $(document).ready(function(){
     initImpressum();
     activate($('#toggle_impressum'));
+    $('#last-section').hide();
 });
 
 function initImpressum() {
