@@ -310,3 +310,8 @@ form .invalid {
 .progress-bar {
     width: 100%;
 }
+
+.table-container a,
+.table-container a:active {
+    color: #777;
+}

@@ -1,9 +1,79 @@
-<section id="database">
-    <div class="frontpage">
+<article id="database" class="container-fluid text-justify">
+    <section class="frontpage">
         <div class="title-wrapper">
-            <h2 class="h2 title">Search the Database</h2>
+            <h2 class="h2 title">Understanding the <i>Voyages Database</i></h2>
         </div>
-    </div>
+    </section>
+    <section id="introduction" class="container shadow my-5 p-5">
+        <h3 class="h3 border-bottom">Introduction</h3>
+        <div>
+            <p>
+                The Voyages Database is constituted by <span class="OBSERVATIONS"></span> observations of <span class="VARIABLES"></span> variables, a total of <span class="CELLS"></span> data cells.
+            </p>
+            <p>
+                Our first step towards understanding the data is to know the variables meaning. It will then be clear that there are two type of varables: <i>regular</i> and <i>inputed</i>. As I understand it, inputed variables where infered from regular variables or other sources, by means of some statistical method. Regular variables, are those extracted directly from the sources. Finally we will assess how sparse the data is by calculating the coverage of the dataset and from individual variable and observations.
+            </p>
+        </div>
+    </section>
+    <section id="variables" class="container shadow my-5 p-5">
+        <h3 class="h3 border-bottom">Variables: Meaning and Coverage</h3>
+        <div>
+            <p>There are a total of <span class="VARIABLES"></span> distinct variables, some related with each other, others independent. They are summarized in Table 1.</p>
+            <p>
+                Table 1 give us in tabular form a relation of variable names, their meaning and coverage. Coverage of a variable is important when extracting information from the data. For instance, variables with greater coverage are good tools to make more informed analysis as they take more observations into account and will possibly be more accurate. You can use the search input box to filter the table when looking for a variable.
+            </p>
+            <p>It is unpracticable to show about 10 million data cells at once. To give you a confortable and flexible way to access the data in the database, you can specify which variables you want to observe. This way you can control the amount of horizontal scroll you find reasonable, and more important the time you are willing to wait for the data to load from the database. Optionally you can group the results by a criteria (variable) of you choice and see what the database shows you.</p>
+            <div class="table-container mx-auto small border border-secondary p-3 m-5 shadow w-auto">
+                <table id="variables-table" class="table small compact">
+                    <caption>
+                        Table 1: Name, meaning and coverage of variables from the <i>Voyages Database.</i>
+                    </caption>
+                    <thead>
+                        <th>Name</th>
+                        <th>Meaning</th>
+                        <th>Observations</th>
+                        <th>Coverage %</th>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-container mx-auto small border border-secondary p-3 m-5 shadow w-auto">
+                <div id="variables-checklist-badges"></div>
+                <button id="observe-button" class="btn btn-sm btn-outline-success my-2">Observe</button>
+                <table id="single-vo-table" class="table small compact w-100">
+                    <caption>
+                        Table 2: Observations of a single variable:<span class="observing"></span>
+                    </caption>
+                    <thead>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <section id="observations" class="container shadow my-5 p-5">
+        <h3 class="h3 border-bottom">Observations</h3>
+        <div>
+            <div class="mx-auto small p-3 m-5 shadow rounded">
+                <div id="dplayer" class="container-fluid bg-dark text-warning p-2">
+                    <label for="variables-checklist" class="sticky-top bg-dark w-100 p-2">Choose the variables you want to observe:</label>
+                    <form id="variables-checklist" class="form border-top border-bottom border-warning">
+                    </form>
+                </div>
+                <div class="table-container border border-secondary">
+                    <table id="observations-table" class="table small compact">
+                        <caption>
+                            Table 2: On demand access to the database, for a subset of database variables. You can group the result by a variable. Filtering and pagination can be used to navigate in the result set effeciently.
+                        </caption>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
     <div class="content">
         <nav class="nav nav-tabs nav-justified" id="nav-tab">
             <a class="nav-item nav-link active" id="places-tab" data-toggle="tab" href="#places" role="tab" aria-controls="places" aria-selected="false">Places</a>
@@ -32,5 +102,4 @@
             </div>
         </div>
     </div>
-</section>
-
+</article>
