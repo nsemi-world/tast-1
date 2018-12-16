@@ -434,4 +434,51 @@ function getTotalVoyagesFromToYear($pdo, $begin, $year) {
     return $erg->fetch(PDO::FETCH_NUM)[0];
 }
 
+function is_labelled($var) {
+    return in_array($var, ['fate', 'fate2', 'fate3', 'fate4', 'natinimp', 'national', 'resistance', 'rig', 'tontype']);
+}
+
+function is_place($var) {
+    return in_array($var, [
+         'placcons', 
+         'placreg', 
+         'portdep', 
+         'ptdepimp', 
+         'embport', 
+         'embport2', 
+         'plac1tra', 
+         'plac2tra', 
+         'plac3tra', 
+         'majbuypt', 
+         'mjbyptimp', 
+         'npafttra', 
+         'arrport', 
+         'arrport2', 
+         'sla1port', 
+         'adpsale1', 
+         'adpsale2', 
+         'majselpt', 
+         'mjslptimp', 
+         'constreg', 
+         'regisreg', 
+         'deptregimp',
+         'deptregimp1',
+         'embreg',
+         'embreg2',
+         'regem1',
+         'regem2',
+         'regem3',
+         'majbyimp',
+         'majbyimp1',
+         'regarr',
+         'regarr2',
+         'regdis1',
+         'regdis2',
+         'regdis3',
+         'mjselimp',
+         'mjselimp1',
+         'portret'
+    ]);
+}
+
 ?>

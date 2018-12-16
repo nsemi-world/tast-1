@@ -4,6 +4,7 @@ $(document).ready(function () {
     configureDatabasePage();
     activate($('#toggle_database'));
     initDatabase();
+    createDroppableTrash();
 });
 
 function configureDatabasePage() {
@@ -19,7 +20,6 @@ function configureDatabasePage() {
 
     $(window).on('resize', function () {
         debounce('#database .frontpage', 'database.jpg');
-        centerDatabase();
     });
 
     $(document).on('_initial_data_loaded', function (event, data) {
@@ -34,7 +34,15 @@ function configureDatabasePage() {
         event.preventDefault();
         loadObservations();
     });
-
+    
+    $('#rowdata').on('change', function(event) {
+        var isChecked = $(this).prop("checked");
+        if (isChecked) {
+            $(this).prop("checked", false);
+        } else {
+            $(this).prop("checked", true);
+        }
+    });
 }
 
 function loadInitialData() {
@@ -53,20 +61,12 @@ function loadInitialData() {
 function initDatabase() {
     loadSectionImage('#database .frontpage', 'database.jpg');
     loadVariablesList();
-    /*
-    centerDatabase();    
-    getPlacesDataTable();
-    getShipsDataTable();
-    getOwnersDataTable();
-    getCaptainsDataTable();
-    */
 }
 
 function loadVariablesList() {
     $.ajax({
         url: 'php/variables.json',
         success: function (response) {
-            console.log(response);
             updatePageTemplates(response.length, response[266].coverage);
             updateVariablesList(response);
             updateVariablesMeaningAndCoverage(response);
@@ -153,12 +153,47 @@ function updateVariablesForm(data) {
 }
 
 function addBadge(text, name) {
-    $('#variables-checklist-badges').append($('<span class="badge badge-primary mr-1 my-1"></span>').text(text).attr('id', 'badge-' + name));
+    var $badge = $('<span class="badge badge-primary mr-1 my-1 draggable"></span>')
+        .text(text)
+        .attr('id', 'badge-' + name)
+        .draggable({
+            revert: "invalid"
+        });
+    
+    $('#variables-checklist-badges').append($badge);
+}
+
+function createDroppableTrash() {
+    $('#droppable-trash').droppable({
+        accepts: '.draggable',
+        classes: {
+            "ui-droppable-hover": "border border-danger"
+        },
+        drop: function(event, ui) {
+            var $draggable = ui.draggable;
+            var $droppable = $(this);
+            removeBadgeSelector($draggable.attr('id'));
+        }
+    }).css("height", "40px");
 }
 
 function removeBadge(name) {
     var $badge = $('#badge-' + name);
     $badge.remove();
+}
+function removeBadgeSelector(id) {
+    var $badge = $('#' + id);
+    $badge.remove();
+    
+    $.each($('#variables-table tbody tr'), function(){
+        var $tr = $(this);
+        var name = id.replace('badge-', '');
+        var $first_td = $tr.find('td').first();
+        
+        if($first_td.text() == name) {
+            $tr.removeClass('bg-primary');
+        }
+    }); 
 }
 
 function loadObservations() {
@@ -173,16 +208,21 @@ function loadObservations() {
     $.ajax({
         url: 'php/getObservations.php',
         data: {
-            variables: variables
+            variables: variables,
+            join: shouldJoin()
         },
         success: function (response) {
-            console.log(response);
             updateObservationsTable(response, variables);
         },
         error: function () {
             alert('Error while feteching observations');
         }
     });
+}
+
+function shouldJoin() {
+    var join =  ! $('#rawdata').prop('checked');
+    return join;
 }
 
 function updateObservationsTable(data, variables) {
@@ -214,158 +254,3 @@ function objectToArray(obj) {
     return result;
 }
 
-function getShipsDataTable() {
-    return $('#example-ships').DataTable({
-        ajax: {
-            url: 'php/getShips.php',
-            cache: true
-        },
-        columns: [
-            {
-                title: 'Shipname'
-            },
-            {
-                title: 'Voyages'
-            },
-            {
-                title: 'Owner'
-            },
-            {
-                title: 'Rig'
-            },
-            {
-                title: 'Embarked'
-            },
-            {
-                title: 'Disembarked'
-            },
-            {
-                title: 'Died'
-            }],
-        info: false,
-        deferRender: true,
-        scrollY: 400,
-        scrollCollapse: false,
-        scroller: true,
-        stateSave: true,
-        autoWidth: false
-    }).page.len(50);
-}
-
-function getOwnersDataTable() {
-    return $('#example-owners').DataTable({
-        ajax: {
-            url: 'php/getOwners.php',
-            cache: true
-        },
-        columns: [
-            {
-                title: 'Name'
-            },
-            {
-                title: 'Ships'
-            },
-            {
-                title: 'Voyages'
-            },
-            {
-                title: 'Crew'
-            },
-            {
-                title: 'Embarked'
-            },
-            {
-                title: 'Disembarked'
-            },
-            {
-                title: 'Died'
-            }],
-        info: false,
-        deferRender: true,
-        scrollY: 400,
-        scrollCollapse: false,
-        scroller: true,
-        stateSave: true,
-    }).page.len(50);
-}
-
-function getCaptainsDataTable() {
-    return $('#example-captains').DataTable({
-        ajax: {
-            url: 'php/getCaptains.php',
-            cache: true
-        },
-        columns: [
-            {
-                title: 'Name'
-            },
-            {
-                title: 'Ships'
-            },
-            {
-                title: 'Voyages'
-            },
-            {
-                title: 'Crew'
-            },
-            {
-                title: 'Embarked'
-            },
-            {
-                title: 'Disembarked'
-            },
-            {
-                title: 'Died'
-            }],
-        info: false,
-        deferRender: true,
-        scrollY: 400,
-        scrollCollapse: false,
-        scroller: true,
-        stateSave: true
-    }).page.len(50);
-}
-
-function getPlacesDataTable() {
-    return $('#example-places').DataTable({
-        ajax: {
-            url: 'php/getPlaces.php',
-            cache: true
-        },
-        columns: [
-            {
-                title: 'Place'
-            },
-            {
-                title: 'Region'
-            },
-            {
-                title: 'Voyages'
-            },
-            {
-                title: 'Embarked'
-            },
-            {
-                title: 'Disembarked'
-            },
-            {
-                title: 'Died'
-            }],
-        info: false,
-        deferRender: true,
-        scrollY: 400,
-        scrollCollapse: false,
-        scroller: true,
-        stateSave: true
-    }).page.len(50);
-}
-
-
-
-function centerDatabase() {
-    $('#database .title-wrapper .title').position({
-        my: 'center',
-        at: 'center',
-        of: '#database .title-wrapper'
-    });
-}

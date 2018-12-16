@@ -27,7 +27,7 @@ function findVariableCoverage($pdo, $var) {
 }
 
 function queryVariableCoverage($var) {
-    return "SELECT COUNT($var) as coverage FROM voyages WHERE $var != ''";
+    return "SELECT COUNT($var) as coverage FROM voyages WHERE $var != '' AND $var IS NOT NULL";
 }
 
 
