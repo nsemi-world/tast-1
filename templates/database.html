@@ -22,8 +22,16 @@
             <p>
                 Table 1 give us in tabular form a relation of variable names, their meaning and coverage. Coverage of a variable is important when extracting information from the data. For instance, variables with greater coverage are good tools to make more informed analysis as they take more observations into account and will possibly be more accurate. You can use the search input box to filter the table when looking for a variable.
             </p>
-            <p>It is unpracticable to show about 10 million data cells at once. To give you a confortable and flexible way to access the data in the database, you can specify which variables you want to observe. This way you can control the amount of horizontal scroll you find reasonable, and more important the time you are willing to wait for the data to load from the database. Optionally you can group the results by a criteria (variable) of you choice and see what the database shows you.</p>
-            <div class="table-container mx-auto small border border-secondary p-3 m-5 shadow w-auto">
+            <p>It is unpracticable to show about 10 million data cells at once. To give you a confortable and flexible way to access the data in the database, you can specify which variables you want to observe. This way you can control the amount of data you are exposed and better focus your analysis. The workflow is:</p>
+            <ul>
+                <li>Select which variables you want to access, by clicking on their respective rows on Table 1. Clicks on selected rows will deselect them. <var>voyageid</var> is selected by default. The variables will be collected in a list.</li>
+                <li>You can remove variables from the desired list also by dragging them off the list into the trash bin. This is particularly if you clicked variables from distinct pages.</li>
+                <li>Choose if you want to see data from the original raw data or joined with related tables, by checking the checkbox on or off.</li>
+                <li>Click <i>Observe</i> and see the results.</li>
+            </ul>
+
+
+            <div class="table-container mx-auto small p-3 m-5 shadow">
                 <table id="variables-table" class="table small compact">
                     <caption>
                         Table 1: Name, meaning and coverage of variables from the <i>Voyages Database.</i>
@@ -39,37 +47,99 @@
                     </tbody>
                 </table>
             </div>
-            <div class="table-container mx-auto small border border-secondary m-5 shadow w-auto  clearfix">
-                <div class="p-1 m-0">
-                    <div id="variables-checklist-badges" class="border-bottom border-secondary">
-                        <span class="badge badge-secondary my-auto">voyageid</span>
-                    </div>
-                    <div class="row">
-                        <div id="droppable-trash" class="col">
-                            <span class="fas fa-trash text-danger my-auto"></span>
+
+            <div class="table-container mx-auto small m-5 shadow clearfix">
+                <div class="p-1 shadow border-bottom border-warning bg-dark text-warning sticky-top">
+                    <div class="row m-0 p-0">
+                        <div id="droppable-trash" class="col-auto pt-2">
+                            <span class="fas fa-trash text-danger"></span>
                         </div>
-                        <div class="col-auto form-group">
+                        <div id="variables-checklist-badges" class="col my-auto">
+                            <span class="badge badge-secondary my-auto">voyageid</span>
+                        </div>
+                        <div class="col-auto form-group my-auto">
+                            <div id="vsubsets" class="dropdown d-inline mr-2">
+                                <button type="button" class="dropdown-toggle btn btn-sm btn-outline-secondary" data-toggle="dropdown" aria-haspopup="true" id="vsubsets-dropdown-button">Pre-selected Varibales</button>
+                                <div class="dropdown-menu bg-dark" aria-labelledby="vsubsets-dropdown-button">
+                                    <a class="dropdown-item" href="#" title="voyageid, shipname, national, natinimp">
+                                        Sovereignity
+                                    </a>
+                                    <a class="dropdown-item" href="#" title="voyageid, shipname, rig, tonnage, placcons, yrcons">
+                                        Ship construction
+                                    </a>
+                                    <a class="dropdown-item" href="#" title="voyageid, shipname, placreg, regisreg, yrreg">
+                                        Ship registration
+                                    </a>
+                                    <a class="dropdown-item" href="#" title="voyageid, shipname, ownera, ownerb, ownerc, ownerd, ownere, ownerf, ownerg, ownerh, owneri, ownerj, ownerk, ownerl, ownerm, ownern, ownero">
+                                        Ship onwership 1 
+                                    </a>
+                                    <a class="dropdown-item" href="#" title="voyageid, shipname, captaina, captainb, captainc, crew, crew1, crewdied, ndesert, crew5">
+                                        Crew 
+                                    </a>
+                                    <a class="dropdown-item" href="#" title="voyageid, datedepa, datedepb, datedepc, datedep">
+                                        Departure dates
+                                    </a>
+                                    <a class="dropdown-item" href="#" title="voyageid, portdep, ptdepimp, deptregimp, deptregimp1">
+                                        Departure places
+                                    </a>
+                                    <a class="dropdown-item" href="#" title="voyageid, portdep, portdepimp, datedep">
+                                        Departure event: Event
+                                    </a>
+                                    <a class="dropdown-item" href="#" title="voyageid, majbuypt, mjbyptimp, majbyimp">
+                                        Principal Purchasing Event
+                                    </a>
+                                    <a class="dropdown-item" href="#" title="voyageid, embport, plac1tra, datebuy">
+                                        1st Purchasing Event
+                                    </a>
+                                    <a class="dropdown-item" href="#" title="voyageid, embport2, embreg2, plac2tra, regem2">
+                                        2nd Purchasing Event
+                                    </a>
+                                    <a class="dropdown-item" href="#" title="voyageid, plac3tra, regem3, datarr39, datarr40, datarr41">
+                                        3rd Purchasing Event
+                                    </a>
+                                    <a class="dropdown-item" href="#" title="voyageid, dlslatra, dlslatrb, dlslatrc, dateleftafr, tslavesd">
+                                        Out of Africa
+                                    </a>
+                                    <a class="dropdown-item" href="#" title="voyageid, majselpt, mjslptimp, mjselimp, yearam">
+                                        Principal Disembarkation Event
+                                    </a>
+                                    <a class="dropdown-item" href="#" title="voyageid, sla1port, regdis1, regarr, mjselimp1, ddepam, ddepamb, ddepamc, datarr32, datarr33, datarr34, yearam">
+                                        1st Landing Event
+                                    </a>
+                                    <a class="dropdown-item" href="#" title="voyageid, regarr2, datarr36, datarr37, datarr38, dateland2">
+                                        2nd Landing Event
+                                    </a>
+                                    <a class="dropdown-item" href="#" title="voyageid, adpsale2, regdis3, ddepam, ddepamb, ddepamc">
+                                        3rd Landing Event
+                                    </a>
+                                    <a class="dropdown-item" href="#" title="voyageid, datedepam, retrnreg, retrnreg1">
+                                        Return Event Return
+                                    </a>
+                                    <a class="dropdown-item" href="#" title="voyageid, portret, dateend">
+                                        End
+                                    </a>
+                                </div>
+                            </div>
                             <label for="rawdata" class="display-inline btn btn-sm btn-outline-secondary from-group my-1">
                                 <input id="rawdata" type="checkbox" class=""/>
                                 Raw Data
                             </label>
-                            <button id="observe-button" class="btn btn-sm btn-outline-success">Observe</button>
-                            <button id="clear-button" class="btn btn-sm btn-outline-danger">Clear</button>
+                            <button id="observe-button" class="btn btn-sm btn-success">Observe</button>
                         </div>
                     </div>
-               </div>
-               <div class="container p-3">
-                <table id="single-vo-table" class="table small compact">
-                    <caption>
-                        Table 2: Observations of a single variable:<span class="observing"></span>
-                    </caption>
-                    <thead>
-                    </thead>
-                    <tbody>
+                </div>
+                <div class="container p-3">
+                    <table id="single-vo-table" class="table small compact">
+                        <caption>
+                            Table 2: Observations of a single variable:<span class="observing"></span>
+                        </caption>
+                        <thead>
+                        </thead>
+                        <tbody>
 
-                    </tbody>
-                </table>
-               </div>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </section>

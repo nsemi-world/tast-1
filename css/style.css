@@ -315,3 +315,15 @@ form .invalid {
 .table-container a:active {
     color: #777;
 }
+
+li.paginate_button {
+    padding: 0 ! important;
+    margin: 0;
+}
+
+li.paginate_button.active {
+}
+
+li.paginate_button.active  a {
+    color: black ! important;
+}

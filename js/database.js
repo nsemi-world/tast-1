@@ -1,3 +1,7 @@
+var SERVER_DATA = {
+    variables: [],
+    observations: []
+}
 var observationsTable;
 
 $(document).ready(function () {
@@ -5,6 +9,9 @@ $(document).ready(function () {
     activate($('#toggle_database'));
     initDatabase();
     createDroppableTrash();
+    $('#rawdata').prop("checked", false);
+
+    
 });
 
 function configureDatabasePage() {
@@ -32,7 +39,8 @@ function configureDatabasePage() {
 
     $('#observe-button').on('click', function (event) {
         event.preventDefault();
-        loadObservations();
+        var variables = collectVariablesFromBadgeList();
+        loadObservations(variables);
     });
     
     $('#rowdata').on('change', function(event) {
@@ -43,6 +51,42 @@ function configureDatabasePage() {
             $(this).prop("checked", true);
         }
     });
+    
+    $('#vsubsets a').on('click', function(event) {
+        event.preventDefault();
+        var $a = $(this);
+        var vars = $a.attr('title');
+        var variables = vars.split(', ');
+        addBadgesFor(variables);
+        //loadObservations(variables);
+    })
+}
+
+function addBadgesFor(variables) {
+    
+    $.each($('#variables-checklist-badges span'), function(key, value) {
+        if($(this).text() != 'voyageid') {
+            $(this).remove();
+        }
+    });
+    $.each(variables, function(key, value){
+        if(value != 'voyageid') {
+            addBadge(value, value);
+        }
+    });
+    
+    
+}
+
+function collectVariablesFromBadgeList() {
+    var variables = ['voyageid'];
+    $.each($('#variables-checklist-badges .badge'), function () {
+        var name = $(this).text();
+        if(name != 'voyageid') {
+            variables.push(name);
+        }
+    });
+    return variables;
 }
 
 function loadInitialData() {
@@ -67,10 +111,10 @@ function loadVariablesList() {
     $.ajax({
         url: 'php/variables.json',
         success: function (response) {
+            SERVER_DATA.variables = response;
             updatePageTemplates(response.length, response[266].coverage);
             updateVariablesList(response);
             updateVariablesMeaningAndCoverage(response);
-            updateVariablesForm(response);
         },
         error: function () {
             alert('Error fetching variable list');
@@ -111,7 +155,7 @@ function updateVariablesMeaningAndCoverage(data) {
         } else {
             removeBadge(name);
         }
-        $(this).toggleClass('bg-primary text-light');
+        $(this).toggleClass('bg-primary');
     });
 }
 
@@ -129,33 +173,12 @@ function getCoveragePercentage(coverage) {
     return ((100 * coverage) / $('.OBSERVATIONS').text()).toFixed(2);
 }
 
-function updateVariablesForm(data) {
-    var $vList = $('#variables-checklist');
-    $.each(data, function (key, value) {
-        var $html = '';
-        $html += '<input type="checkbox" class="form-check-input" id="' + value.name + '">';
-        $html += '<label class="form-check-label text-truncated" for="' + value.name + '" title="' + value.description + ' | coverage = ' + getCoveragePercentage(value.coverage) + '"><b>' + value.name + '</b></label>';
-        $check = $('<div class="form-group form-check d-inline-block my-auto col-4 col-sm-4 col-md-3 col-lg-2"></div>');
-        $check.html($html);
-        $vList.append($check);
-
-        $check.on('change', function (event) {
-            var isChecked = $(this).prop("checked");
-            if (isChecked) {
-                $(this).prop("checked", false);
-                removeBadge(value.name);
-            } else {
-                $(this).prop("checked", true);
-                addBadge($(this).find('label').text(), value.name);
-            }
-        });
-    });
-}
-
 function addBadge(text, name) {
-    var $badge = $('<span class="badge badge-primary mr-1 my-1 draggable"></span>')
+    var $badge = $('<span class="badge badge-primary mr-1 my-1"></span>')
         .text(text)
         .attr('id', 'badge-' + name)
+        .data('name', name)
+        .addClass('badge badge-primary draggable')
         .draggable({
             revert: "invalid"
         });
@@ -172,7 +195,7 @@ function createDroppableTrash() {
         drop: function(event, ui) {
             var $draggable = ui.draggable;
             var $droppable = $(this);
-            removeBadgeSelector($draggable.attr('id'));
+            removeBadge($draggable.data('name'));
         }
     }).css("height", "40px");
 }
@@ -196,15 +219,7 @@ function removeBadgeSelector(id) {
     }); 
 }
 
-function loadObservations() {
-    var variables = ['voyageid'];
-    $.each($('#variables-checklist-badges .badge'), function () {
-        var name = $(this).text();
-        if(name != 'voyageid') {
-            variables.push(name);
-        }
-    });
-    
+function loadObservations(variables) {
     $.ajax({
         url: 'php/getObservations.php',
         data: {
@@ -212,6 +227,7 @@ function loadObservations() {
             join: shouldJoin()
         },
         success: function (response) {
+            SERVER_DATA.observations = response;
             updateObservationsTable(response, variables);
         },
         error: function () {
@@ -237,11 +253,12 @@ function updateObservationsTable(data, variables) {
         }),
         columns: variables.map(function (v) {
             return {
-                title: v
+                title: v + '<small>' + getVariableDescription(v) + '</small>'
             };
         }),
         deferRender: true
     });
+    
 }
 
 function objectToArray(obj) {
@@ -252,5 +269,17 @@ function objectToArray(obj) {
         result[i++] = value;
     });
     return result;
+}
+
+function getVariableDescription(v) {
+    
+    for(var i = 0; i < SERVER_DATA.variables.length; i++) {
+        var value = SERVER_DATA.variables[i];
+        if(value.name == v) {
+            return ' - ' + value.description;
+        }
+    }
+
+    return '';
 }
 
