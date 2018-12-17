@@ -33,7 +33,6 @@ function configureDatabasePage() {
         $('.OBSERVATIONS').text(data.nobservations);
         $('.VARIABLES').text(data.nvariables);
         $('.CELLS').text(data.nvariables * data.nobservations);
-
         $('.OBSERVATIONS, .VARIABLES, .CELLS').css("font-weight", "bold");
     });
 
@@ -127,6 +126,8 @@ function updatePageTemplates(variables, observations) {
     $('.VARIABLES').text(variables);
     $('.OBSERVATIONS').text(observations);
     $('.CELLS').text(variables * observations);
+    $('.SUBSETS').text(Math.pow(2, variables));
+    $('.PREDEFINED-SUBSETS').text($('#vsubsets a').length);
 }
 
 

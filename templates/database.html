@@ -29,8 +29,6 @@
                 <li>Choose if you want to see data from the original raw data or joined with related tables, by checking the checkbox on or off.</li>
                 <li>Click <i>Observe</i> and see the results.</li>
             </ul>
-
-
             <div class="table-container mx-auto small p-3 m-5 shadow">
                 <table id="variables-table" class="table small compact">
                     <caption>
@@ -59,8 +57,8 @@
                         </div>
                         <div class="col-auto form-group my-auto">
                             <div id="vsubsets" class="dropdown d-inline mr-2">
-                                <button type="button" class="dropdown-toggle btn btn-sm btn-outline-secondary" data-toggle="dropdown" aria-haspopup="true" id="vsubsets-dropdown-button">Pre-selected Varibales</button>
-                                <div class="dropdown-menu bg-dark" aria-labelledby="vsubsets-dropdown-button">
+                                <button type="button" class="dropdown-toggle dropdown-toggle-split btn btn-sm btn-outline-secondary" data-toggle="dropdown" aria-haspopup="true" id="vsubsets-dropdown-button">Pre-selected Varibales </button>
+                                <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="vsubsets-dropdown-button" role="menu">
                                     <a class="dropdown-item" href="#" title="voyageid, shipname, national, natinimp">
                                         Sovereignity
                                     </a>
@@ -131,7 +129,7 @@
                 <div class="container p-3">
                     <table id="single-vo-table" class="table small compact">
                         <caption>
-                            Table 2: Observations of a single variable:<span class="observing"></span>
+                            Table 2: Observations for custom variable subsets<span class="observing"></span>
                         </caption>
                         <thead>
                         </thead>
@@ -141,11 +139,14 @@
                     </table>
                 </div>
             </div>
-        </div>
-    </section>
-    <section id="observations" class="container shadow my-5 p-5">
-        <h3 class="h3 border-bottom">Notable Observations</h3>
-        <div>
+            
+            <div>
+            <p>
+                We have pre-selected <span class="PREDEFINED-SUBSETS"></span> variables subsets for rapid data access. Remember that with <span class="VARIABLES"></span> variables we can produce 2<sup><span class="VARIABLES"></span></sup> = <span class="SUBSETS"></span>, that is, plenty room to  play.
+            </p>
+
+                
+            </div>
         </div>
     </section>
 </article>
