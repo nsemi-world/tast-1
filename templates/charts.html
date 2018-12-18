@@ -1,39 +1,55 @@
-<section id="charts">
-    <div class="frontpage">
+<article id="charts" class="container-fluid">
+    <section class="frontpage">
         <div class="title-wrapper">
             <h2 class="h2 title">Charts</h2>
         </div>
-    </div>
-    <div class="content">
-        <div class="chart-wrapper">
-            <h4 class="subtitle h4">When we thought it couldn't get any worse...</h4>
-            <div class="chart"><canvas id="cvoyages"></canvas></div>
-            <div class="chart-legend">
-                <p>They came, over and over again. From Portugal, Spain, France, Great Britain, The Netherlands, Denmark, Baltic, Hanse Towns, Brandenburg, Sweden, Sardinia, Genoa, U.S.A., Mexico, Argentina, Russia and others. As with arabs, we thought they were of the Mankind, and that they're gods resembled our's. But they didn't recognized us nor God. They made at least <b>35938</b> reported voyages.
-                </p>
-            </div>
+    </section>
+    <section id="introduction" class="container my-5 p-5 shadow">
+        <h3 class="h3 border-bottom">Introduction</h3>
+        <div>
+            <p>Charts are helpful to represent data in a concise way and allow us to perceive data properties, and relationships between variables. For instance, charts showing the number of people embarked per voyage, per year, per country, per ship, per owner, per captain, etc..., can give us an important window into the data.</p>
+            <p>The main difference between these functions it's their domain. On the first case the domain is the set of distinct years of the trans-atlantic slave trade; on the second case, the set of distinct countries that made slave voyages. On both cases, we collect the number of slaves on each year or country, sum them and plot the totals. In theory, we could take any variable, calculte it's domain, collect and sum the number of people embarked for each distinct value of the domain, and plot it.</p>
+            <p>In this article we provide a charting tool for the Voyages Database. To start with, you will be able to choose which variables to plot, which function of those variables will be used and the chart type.</p>
         </div>
-        <div class="chart-wrapper">
-            <h4 class="subtitle h4">The investment that made Europe possible</h4>
-            <div class="chart"><canvas id="cships"></canvas></div>
-            <div class="chart-legend">
-                <p> You could tell it was Death comming personally. The Trojan Horse changed form but not the intentions. When they discovered our gold was good, our land blessed and our spirits fair, it was clear that they would do it. We counted 9213 distinct vessels, taking our riches, children, woman and men. Europe's first industrial revolution was on the way.</p>
-            </div>
+    </section>
+    <section id="voyage-charts" class="container my-5 p-5 shadow">
+        <h4 class="h4 border-bottom">Predefined Charts</h4>
+        <div id="cplayer" class="sticky-top shadow py-3 pl-2 d-block bg-dark border-bottom border-secondary">
+            <form class="form text-secondary">
+                <select id="select-charts-function" class="bg-dark btn btn-sm btn-outline-secondary">
+                    <option value="COUNT(voyageid)">Total Number of Voyages</option>
+                    <option value="SUM(slaximp)">Total Number of People Embarked</option>
+                    <option value="SUM(slamimp)">Total Number of People Disembarked</option>
+                    <option value="SUM(slaximp)-SUM(slamimp)">Total Number of People Died Middle Passage</option>
+                    <option value="COUNT(DISTINCT(shipname))">Total Number of Ships</option>
+                </select>
+                <select id="select-charts-groupby" class="bg-dark btn btn-sm btn-outline-secondary">
+                    <option value="voyageid">Per Voyage</option>
+                    <option value="yeardep">Per Year</option>
+                    <option value="national">Per Country</option>
+                    <option value="natinimp">Per Country Imputed</option>
+                    <option value="ownera">Per Owner</option>
+                    <!--option>Per Departure Place</option>
+                    <option>Per Departure Region</option>
+                    <option>Per Purchase/Embarkation Place</option>
+                    <option>Per Purchase/Embarkation Region</option>
+                    <option>Per Landing/Disembarkation Place</option>
+                    <option>Per Landing/Disembarkation Region</option>
+                    <option>Per Ship</option>
+                    <option>Per Rig</option>
+                    <option>Per Ship Construction Place</option-->
+                </select>
+                <select id="select-charts-type" class="bg-dark btn btn-sm btn-outline-secondary">
+                            <option value="bar">Bars</option>
+                            <option value="pie">Pie</option>
+                            <option value="doughnut">Doughnut</option>
+                            <option value="line">Line</option>
+                        </select>
+                <button type="button" class="btn btn-sm btn-outline-primary"><i class="fas fa-chart-bar"></i> Chart Me</button>
+            </form>
         </div>
-        <div class="chart-wrapper">
-            <h4 class="subtitle h4">Black Pearls and Diamonds</h4>
-            <div class="chart"><canvas id="cslaves"></canvas></div>
-            <div class="chart-legend">
-                <p>We we're the cargo! Because the are clean, strong, educated and beatiful. Because we have the rhythm to cultivate the land, to build cities, and to enjoy ourselves. Family after family, village after village, city after city, kingdom after kingdom, empire after empire, wrapped up and dispatched worldwide. They fed on us. 10645118 we're embarked and 9180918 made it to the Americas. In the end we we're decimated, and those who survived, here and there, we were bent on our knees.</p>
-            </div>
+        <div id="chart-wrapper " class="shadow">
+            <canvas id="chart" class="bg-dark w-100"></canvas>
         </div>
-        <div class="chart-wrapper">
-            <h4 class="subtitle h4">Learn to know your Enemies!</h4>
-            <div class="chart"><canvas id="cdied"></canvas></div>
-            <div class="chart-legend">
-                <p>Your enemy is that that feed the sharks with your flesh. Your enemy is that who rapes your children and wife. Your enemy is that who whip your elders.Your enemy is that who sits in the church just next to you. Over 1000000 african children, women and men were assassinated during the Middle Passage. Your enemy has a pleasure proportinal to your sufferings.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
+    </section>
+</article>
