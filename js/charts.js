@@ -73,20 +73,15 @@ function handleEvents() {
     $('#charts-dashboard select').on('click', 'option', function (event) {
         event.preventDefault();
         updateFormula(getSelectVariable(), getGroupByVariable());
+        loadChartData(getSelectVariable(), getGroupByVariable(), getChartTypeValue());
+        //$('#charts-dashboard form button').click();
+        
     });
     $('#charts-dashboard-improved select').on('click', 'option', function (event) {
         event.preventDefault();
         updateFormula1();
-    });
-    
-    
-
-    $('#cplayer form button').on('click', function (event) {
-        loadChartData(getSelectVariable(), getGroupByVariable(), getChartTypeValue());
-    });
-
-    $('#cplayer1 form button').on('click', function (event) {
         loadChartData1();
+        //$('#charts-dashboard-improved form button').click();
     });
 }
 
