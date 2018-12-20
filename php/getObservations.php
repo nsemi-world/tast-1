@@ -28,38 +28,6 @@ function getObservations($pdo, $variables, $must_join) {
 }
 
 
-function getQuery($variables) {
-    $columns = [];
-    $joins = [];
-
-    foreach($variables as $key => $value) {
-        if(is_labelled($value)) {
-            array_push($columns, "$value.label AS $value");
-            array_push($joins, "LEFT JOIN $value $value ON v.`$value`=$value.value");
-        }
-        else if(is_place($value)) {
-            array_push($columns, "$value.label AS $value");
-            array_push($joins, "LEFT JOIN places $value ON v.`$value`=$value.value");
-        }
-
-        else if($value == 'xmimpflag') {
-            array_push($columns, "CONCAT($value.flag, ' ', $value.period) as grouping");
-            array_push($joins, "JOIN $value $value ON v.`$value`=$value.value");
-        }
-        else {
-            array_push($columns, $value);
-        }
-    }
-
-    $select = "SELECT ";
-    $select .= implode(", ", $columns);
-    $select .= " FROM voyages v ";
-    $select .= implode(" ", $joins);
-
-    //var_dump($select);
-
-    return $select;
-}
 
 
 

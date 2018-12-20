@@ -2,6 +2,7 @@
 
 ob_start("ob_gzhandler");
 require_once 'utils.php';
+require_once 'DBQueries.php';
 
 $result = [];
 $pdo = getPDO();
@@ -17,8 +18,8 @@ echo json_encode($result);
 
 
 function getChartData($pdo, $select, $groupBy) {
-    $query = "SELECT $groupBy, $select as value FROM voyages GROUP BY $groupBy ORDER BY $groupBy";
-    
+    $query = getQuery([$groupBy, $select.' as value ']) ;
+    $query .= " GROUP BY $groupBy ORDER BY $groupBy DESC";
     $erg = $pdo->query($query);
     return $erg->fetchAll(PDO::FETCH_NUM);
 }
