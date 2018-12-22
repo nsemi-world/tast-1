@@ -29,13 +29,12 @@ function addAuthorsSection(authors) {
     var $container = $('#book-list-by-author');
     $.each(authors, function(key, author) {
         createAuthorElement(author, $container);
-        $container.append($('<hr/>'));
     });
     
 }
 
 function createAuthorElement(author, $container) {
-    var $element = $('<div class="author-entry small text-justify text-truncated my-4"/>');
+    var $element = $('<div class="author-entry card small text-justify text-truncated my-4"/>');
     var $author = $('<div class="author text-left h4"/>').html('<b>' + author['author'] + '</b>').appendTo($element);
     var $wiki = $('<div class="wiki"/>').appendTo($element);
     var $books = $('<div class="books my-3 mx-auto"/>').appendTo($element);
