@@ -61,7 +61,7 @@ function extractSectionIntro(wikidata) {
     var pages = wikidata.query.pages;
     var section = null;
     $.each(pages, function(key, page) {
-        if(page.extract.includes('slavery')) {
+        if(page.extract.includes('writer')) {
             section = page.extract;
         }
     });
