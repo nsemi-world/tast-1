@@ -29,27 +29,29 @@ function addAuthorsSection(authors) {
     var $container = $('#book-list-by-author');
     $.each(authors, function(key, author) {
         createAuthorElement(author, $container);
+        $container.append($('<hr/>'));
     });
+    
 }
 
 function createAuthorElement(author, $container) {
-    var $element = $('<div class="small text-justify text-truncated"/>');
-    var $author = $('<div class="author text-left"/>').html('<b>' + author['author'] + '</b>');
-    var $wiki = $('<div class="wiki"/>');
+    var $element = $('<div class="author-entry small text-justify text-truncated my-4"/>');
+    var $author = $('<div class="author text-left h4"/>').html('<b>' + author['author'] + '</b>').appendTo($element);
+    var $wiki = $('<div class="wiki"/>').appendTo($element);
+    var $books = $('<div class="books my-3 mx-auto"/>').appendTo($element);
     
-    $element.append($author).append($wiki);
     $container.append($element);
-    
     loadWikiInfo(author, $element);
 }
 
 function loadWikiInfo(author, $element) {
     $.ajax({
-        url: 'php/askWikipedia.php',
-        data: {search: author['author']},
-        success: function(wikidata) {
-            console.log(wikidata);
-            $element.find('.wiki').text(extractSectionIntro(wikidata));
+        url: 'php/getBooks.php',
+        data: {author: author['author']},
+        success: function(response) {
+            console.log(response);
+            $element.find('.wiki').html(extractSectionIntro(response.wikipedia));
+            addAffiliateLinks(response.books, $element.find('.books'));
         },
         error: function() {
             alert('Error asking wikipedia for data');
@@ -60,41 +62,32 @@ function loadWikiInfo(author, $element) {
 function extractSectionIntro(wikidata) {
     var pages = wikidata.query.pages;
     var section = null;
+    var wikiBadge = '<span class="badge badge-dark"><i class="fab fa-wikipedia-w"></i></span>';
+    
     $.each(pages, function(key, page) {
         if(page.extract.includes('writer')) {
-            section = page.extract;
+            section = '<span class="extract">' + page.extract + '</span>';
         }
     });
     
     if(section != null) {
-        return section;    
+        return wikiBadge + section;    
     }
     else {
-        return 'No wikipedia summary found.'
+        return wikiBadge + '<span class="extract">No wikipedia summary found.</span>';
     }
     
     
 }
 
-function loadBooksByAuthor() {
-    $.ajax({
-        url: 'php/getBooks.php',
-        data: {orderBy: 'author'},
-        success: function (books) {
-            addAffiliateLinks(books);
-        },
-        error: function (event) {
-            alert('Error loading books. Please Try again later.');
-        }
-    });
-}
 
 // Adds a simple link to be produced by quick links amazon widget
-function addAffiliateLinks(books) {
+function addAffiliateLinks(books, $parent) {
     $.each(books, function(key, book) {
-        var $link = $('<a/>').attr('type', 'amzn').attr('search', book.title).attr('category', 'books').text(book.title);
-        var div = $('<div/>').append($link);
-        $('#book-list-by-author').append(div);
+        if(book.link != null) {
+            var $div = $('<div class="book d-inline-block mr-2"/>').html(book.link);
+            $parent.append($div);
+        }
     });
     
 }

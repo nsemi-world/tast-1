@@ -5,29 +5,30 @@ require_once('./utils.php');
 
 $pdo = getPDO();
 
-$orderBy = getRequestParameter('orderBy');
-$books = findBooks($pdo, getInternalOrderBy($orderBy));
+$author = getRequestParameter('author');
+
+$extract = getWikipediaArticleIntro($author);
+$books   = findBooksFromAuthor($pdo, $author);
+
+$result = [];
+$result['author'] = $author;
+$result['wikipedia'] = $extract;
+$result['books'] = $books;
 
 header('Content-type:application/json;charset=utf-8');
-echo json_encode($books);
+echo json_encode($result);
 
 
-function findBooks($pdo, $orderBy) {
-    $query = "SELECT * FROM affiliate WHERE type='book' ORDER BY $orderBy";
+function getWikipediaArticleIntro($search) {
+    $url = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=".urlencode($search);
+    return json_decode(file_get_contents($url));
+}
+
+function findBooksFromAuthor($pdo, $author) {
+    $query = "SELECT * FROM affiliate WHERE type='book' AND author='$author'";
     $erg = $pdo->query($query);
     $result = $erg->fetchAll(PDO::FETCH_OBJ);
     return $result;
-}
-
-function getInternalOrderBy($orderBy) {
-    if($orderBy == null || $orderBy == '') {
-        return 'title';
-    }
-    
-    switch($orderBy) {
-        case 'author': return 'author';
-        default: return 'title';
-    }
 }
 
 ob_end_flush();
