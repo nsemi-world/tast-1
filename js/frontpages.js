@@ -27,7 +27,7 @@ function getRandomColor() {
     var r = Math.round(Math.random() * 255);
     var g = Math.round(Math.random() * 255);
     var b = Math.round(Math.random() * 255);
-    var a = .95;
+    var a = Math.random();
     var rgba = 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
     return rgba;
 }
