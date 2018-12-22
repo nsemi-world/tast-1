@@ -13,7 +13,7 @@ echo json_encode($authors);
 
 function findAuthors() {
     $pdo = getPDO();
-    $query = "SELECT DISTINCT(author) FROM affiliate WHERE type='book'";
+    $query = "SELECT DISTINCT(author) as author FROM affiliate WHERE type='book' ORDER BY author";
     $erg = $pdo->query($query);
     $result = $erg->fetchAll(PDO::FETCH_OBJ);
     return $result;
