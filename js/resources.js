@@ -46,8 +46,8 @@ function showAmazonLinksOnly() {
             
             var $details = $('<div class="details col small"/>')
                 .append($('<div class="btitle"/>').html('<b>' + book.title + '</b>'))
-                .append($('<div class="bauthor text-muted "/>').text('by ' + book.author))
-                .append($('<div class="bdescription text-secondary "/>').text(book.description))
+                .append($('<div class="bauthor text-muted border-bottom"/>').html('by <b><i>' + book.author) + '</i></b>')
+                .append($('<div class="bdescription"/>').text(book.description))
                 .appendTo($book);
             
             $parent.append($book);
