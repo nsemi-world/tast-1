@@ -18,14 +18,14 @@ function handleEvents() {
         event.preventDefault();
         $(this).parent().find('.active').toggleClass('active');
         $(this).toggleClass('active');
-        showAmazonLinksOnly();
+        hideBooksDetails();
     });
     
     $('#books-and-details').on('click', function(event) {
         event.preventDefault();
         $(this).parent().find('.active').toggleClass('active');
         $(this).toggleClass('active');
-        showAmazonLinksAndDetails();
+        showBooksDetails();
     });
     
     $(document).on('_books_loaded', function(event){
@@ -38,12 +38,35 @@ function showAmazonLinksOnly() {
     
     $.each(BOOKS, function(key, book) {
         if(book.link != null) {
-            var $div = $('<div class="book d-inline-block mr-1"/>').html(book.link).css({
-                transform: 'scaleY(.85)'
-            });
-            $parent.append($div);
+            var $book = $('<div class="book row"/>');
+            
+            var $link = $('<div class="link col-auto"/>')
+                .html(book.link)
+                .appendTo($book);
+            
+            var $details = $('<div class="details col small"/>')
+                .append($('<div class="btitle"/>').html('<b>' + book.title + '</b>'))
+                .append($('<div class="bauthor text-muted "/>').text('by ' + book.author))
+                .append($('<div class="bdescription text-secondary "/>').text(book.description))
+                .appendTo($book);
+            
+            $parent.append($book);
         }
     });
+}
+
+function showBooksDetails() {
+    $('.details').show();
+    $('.book').removeClass('d-inline-block').animate({
+        'width': '100%'
+    }, 500);
+}
+
+function hideBooksDetails() {
+    $('.details').hide();
+    $('.book').addClass('d-inline-block').animate({
+        'width': '160'
+    }, 500);
 }
 
 function loadBooks(){
