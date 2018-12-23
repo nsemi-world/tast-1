@@ -25,7 +25,7 @@ function getWikipediaArticleIntro($search) {
 }
 
 function findBooksFromAuthor($pdo, $author) {
-    $query = "SELECT * FROM affiliate WHERE type='book' AND author='$author'";
+    $query = "SELECT * FROM affiliate WHERE type='book' AND author LIKE '%{$author}%'";
     $erg = $pdo->query($query);
     $result = $erg->fetchAll(PDO::FETCH_OBJ);
     return $result;

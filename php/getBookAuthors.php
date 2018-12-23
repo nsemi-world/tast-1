@@ -7,6 +7,8 @@ require_once('./utils.php');
 header('Content-type:application/json;charset=utf-8');
 
 $authors = findAuthors();
+$authors = isolateSingleAuthors($authors);
+
 echo json_encode($authors);
 
 // end: MAIN
@@ -17,6 +19,17 @@ function findAuthors() {
     $erg = $pdo->query($query);
     $result = $erg->fetchAll(PDO::FETCH_OBJ);
     return $result;
+}
+
+function isolateSingleAuthors($authors) {
+    $result = [];
+    foreach($authors as $author) {
+        $parts = explode(", ", $author->author);        
+        foreach($parts as $part) {
+            $result[] = $part;
+        }
+    }    
+    return (array) array_unique($result);
 }
 
 ob_end_flush();

@@ -35,7 +35,7 @@ function addAuthorsSection(authors) {
 
 function createAuthorElement(author, $container) {
     var $element = $('<div class="author-entry shadow small text-justify text-truncated my-4 p-3"/>').css('background-color', getRandomColor());
-    var $author = $('<h4 class="author border-bottom"/>').html('<b>' + author['author'] + '</b>').appendTo($element);
+    var $author = $('<h4 class="author border-bottom"/>').html('<b>' + author + '</b>').appendTo($element);
     var $cardbody = $('<div class=""/>').appendTo($element);
     var $wiki = $('<div class="wiki"/>').appendTo($cardbody);
     var $books = $('<div class="books my-3 mx-auto"/>').appendTo($cardbody);
@@ -47,7 +47,7 @@ function createAuthorElement(author, $container) {
 function loadWikiInfo(author, $element) {
     $.ajax({
         url: 'php/getBooks.php',
-        data: {author: author['author']},
+        data: {author: author},
         success: function(response) {
             console.log(response);
             $element.find('.wiki').html(extractSectionIntro(response.wikipedia));
