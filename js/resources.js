@@ -34,7 +34,7 @@ function addAuthorsSection(authors) {
 }
 
 function createAuthorElement(author, $container) {
-    var $element = $('<div class="author-entry shadow small text-justify text-truncated my-4 p-3"/>').css('background-color', getRandomColor());
+    var $element = $('<div class="author-entry shadow small text-justify text-truncated p-2 mb-2"/>').css('background-color', getRandomColor());
     var $author = $('<h4 class="author border-bottom"/>').html('<b>' + author + '</b>').appendTo($element);
     var $cardbody = $('<div class=""/>').appendTo($element);
     var $wiki = $('<div class="wiki"/>').appendTo($cardbody);
@@ -85,7 +85,9 @@ function extractSectionIntro(wikidata) {
 function addAffiliateLinks(books, $parent) {
     $.each(books, function(key, book) {
         if(book.link != null) {
-            var $div = $('<div class="book d-inline-block mr-2"/>').html(book.link);
+            var $div = $('<div class="book d-inline-block mr-1"/>').html(book.link).css({
+                transform: 'scaleY(.85)'
+            });
             $parent.append($div);
         }
     });
