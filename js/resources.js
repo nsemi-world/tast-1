@@ -1,9 +1,11 @@
+var AUTHORS = null;
+var BOOKS = null;
 
 $(document).ready(function () {
     activate($('#toggle_resources'));
     handleEvents();
     loadSectionImage('#resources .frontpage', 'resources.jpg');
-    loadAuthors();
+    loadBooks();
 });
 
 
@@ -11,13 +13,45 @@ function handleEvents() {
     $(window).on('resize', function() {
         debounce('#resources .frontpage', 'resources.jpg');
     });
+    
+    $('#books-only').on('click', function(event) {
+        event.preventDefault();
+        $(this).parent().find('.active').toggleClass('active');
+        $(this).toggleClass('active');
+        showAmazonLinksOnly();
+    });
+    
+    $('#books-and-details').on('click', function(event) {
+        event.preventDefault();
+        $(this).parent().find('.active').toggleClass('active');
+        $(this).toggleClass('active');
+        showAmazonLinksAndDetails();
+    });
+    
+    $(document).on('_books_loaded', function(event){
+        showAmazonLinksOnly();
+    });
 }
 
-function loadAuthors(){
+function showAmazonLinksOnly() {
+    var $parent = $('#book-list-by-author').empty();
+    
+    $.each(BOOKS, function(key, book) {
+        if(book.link != null) {
+            var $div = $('<div class="book d-inline-block mr-1"/>').html(book.link).css({
+                transform: 'scaleY(.85)'
+            });
+            $parent.append($div);
+        }
+    });
+}
+
+function loadBooks(){
     $.ajax({
-        url: 'php/getBookAuthors.php',
-        success: function (authors) {
-            addAuthorsSection(authors);
+        url: 'php/getBooks.php',
+        success: function (response) {
+            BOOKS = response;
+            $(document).trigger('_books_loaded');
         },
         error: function (event) {
             alert('Error loading authors. Please Try again later.');
@@ -25,6 +59,7 @@ function loadAuthors(){
     });
 }
 
+/*
 function addAuthorsSection(authors) {
     var $container = $('#book-list-by-author');
     $.each(authors, function(key, author) {
@@ -43,15 +78,18 @@ function createAuthorElement(author, $container) {
     $container.append($element);
     loadWikiInfo(author, $element);
 }
+*/
 
 function loadWikiInfo(author, $element) {
+    
     $.ajax({
         url: 'php/getBooks.php',
         data: {author: author},
         success: function(response) {
-            console.log(response);
-            $element.find('.wiki').html(extractSectionIntro(response.wikipedia));
-            addAffiliateLinks(response.books, $element.find('.books'));
+            BOOKS = response;
+            $(document).trigger('_books_loaded');
+            /*$element.find('.wiki').html(extractSectionIntro(response.wikipedia));
+            addAffiliateLinks(response.books, $element.find('.books'));*/
         },
         error: function() {
             alert('Error asking wikipedia for data');
@@ -59,10 +97,11 @@ function loadWikiInfo(author, $element) {
     })
 }
 
+/*
 function extractSectionIntro(wikidata) {
     var pages = wikidata.query.pages;
     var section = null;
-    var wikiBadge = '<span class="badge badge-dark"><i class="fab fa-wikipedia-w"></i></span>';
+    var wikiBadge = '<span class="badge badge-dark"><i class="fab fa-wikipedia-w"></i></span> ';
     
     $.each(pages, function(key, page) {
         if(page.extract && page.extract.includes('writer')) {
@@ -79,7 +118,7 @@ function extractSectionIntro(wikidata) {
     
     
 }
-
+*/
 
 // Adds a simple link to be produced by quick links amazon widget
 function addAffiliateLinks(books, $parent) {
