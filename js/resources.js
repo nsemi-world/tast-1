@@ -65,7 +65,7 @@ function extractSectionIntro(wikidata) {
     var wikiBadge = '<span class="badge badge-dark"><i class="fab fa-wikipedia-w"></i></span>';
     
     $.each(pages, function(key, page) {
-        if(page.extract.includes('writer')) {
+        if(page.extract && page.extract.includes('writer')) {
             section = '<span class="extract">' + page.extract + '</span>';
         }
     });
