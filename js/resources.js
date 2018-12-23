@@ -34,8 +34,8 @@ function addAuthorsSection(authors) {
 }
 
 function createAuthorElement(author, $container) {
-    var $element = $('<div class="author-entry shadow small text-justify text-truncated my-4"/>').css('background-color', getRandomColor());
-    var $author = $('<div class="author"/>').html('<b>' + author['author'] + '</b>').appendTo($element);
+    var $element = $('<div class="author-entry shadow small text-justify text-truncated my-4 p-3"/>').css('background-color', getRandomColor());
+    var $author = $('<h4 class="author border-bottom"/>').html('<b>' + author['author'] + '</b>').appendTo($element);
     var $cardbody = $('<div class=""/>').appendTo($element);
     var $wiki = $('<div class="wiki"/>').appendTo($cardbody);
     var $books = $('<div class="books my-3 mx-auto"/>').appendTo($cardbody);
