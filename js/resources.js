@@ -50,7 +50,7 @@ function showAmazonLinksOnly() {
                 .append(
                     $('<div class="bdescription"/>')
                         .text(book.description)
-                        .prepend($('<i class="fab fa-amazon"/>')))
+                        .prepend($('<i class="fab fa-amazon"/>').text(' ')))
                 .appendTo($book);
             
             $parent.append($book);
