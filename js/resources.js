@@ -37,16 +37,6 @@ function handleEvents() {
         $('#authors-commands, #author-list').hide();
         $('#books-commands, #book-list').show();
     });
-
-    $('#image-only').on('click', function (event) {
-        event.preventDefault();
-        hideDetails();
-    });
-
-    $('#image-and-details').on('click', function (event) {
-        event.preventDefault();
-        showDetails();
-    });
     
     $('#by-title, #by-author, #order-asc, #order-desc').on('click', function(event){
        event.preventDefault();
@@ -171,6 +161,7 @@ function showAuthor(timestamp) {
     CURRENT_AUTHOR = CURRENT_AUTHOR + 1;
     showAuthorsAux();
 }
+
 function showAuthorForList() {
     var author = AUTHORS[CURRENT_AUTHOR];
     var $parent = $('#author-list');
@@ -290,6 +281,8 @@ function addAffiliateLinks(books, $parent) {
 function reorderBooks() {
     var order = $('#order-group .active').attr('id');
     var criteria = $('#criteria-group .active').attr('id');
+    alert(order);
+    alert(criteria);
     
     BOOKS = BOOKS.sort(function(a,b){
         var value = (criteria == 'by-title')
@@ -302,7 +295,7 @@ function reorderBooks() {
 
 function reorderAuthors() {
     var order = $('#order-group .active').attr('id');
-    
+    alert(order);
     AUTHORS = AUTHORS.sort(function(a,b){
         var value = a.name.localeCompare(b.name);
         return (order=='order-asc') ? value : -value;
