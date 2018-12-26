@@ -78,6 +78,9 @@ function handleEvents() {
 }
 
 function showBooks() {
+    if(FRAME_BOOKS != 0) {
+        cancelAnimationFrame(FRAME_BOOKS);
+    }
     var $parent = $('#book-list').empty();
     showBooksAux();
 }
@@ -102,6 +105,7 @@ function showBook(timestamp) {
     CURRENT_BOOK = CURRENT_BOOK + 1;
     showBooksAux();
 }
+
 function showBookForList() {
     var $parent = $('#book-list');
     var book = BOOKS[CURRENT_BOOK];
@@ -138,6 +142,9 @@ function showBookForGrid() {
 }
 
 function showAuthors() {
+    if(FRAME_AUTHORS != 0) {
+        cancelAnimationFrame(FRAME_AUTHORS);
+    }
     var $parent = $('#author-list').empty();
     showAuthorsAux();
 }
@@ -181,9 +188,9 @@ function showAuthorForList() {
 }
 function showAuthorForGrid() {
     var author = AUTHORS[CURRENT_AUTHOR];
-    var $parent = $('#author-list');
+    var $parent = $('#author-list').addClass('row');
     if (author.name != null) {
-        var $author = $('<div class="author d-inline-block small text-justify"/>')
+        var $author = $('<div class="author d-inline-block small text-justify col-auto mb-1" style="max-width: 50%; min-width: 25%;"/>')
             .appendTo($parent)
             .css({
                 backgroundColor: getRandomColor()
