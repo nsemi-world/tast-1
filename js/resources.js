@@ -1,6 +1,12 @@
 var AUTHORS = null;
 var BOOKS = null;
 
+var CURRENT_AUTHOR = 0;
+var CURRENT_BOOK = 0;
+
+var FRAME_AUTHORS = 0;
+var FRAME_BOOKS = 0;
+
 $(document).ready(function () {
     activate($('#toggle_resources'));
     handleEvents();
@@ -52,11 +58,6 @@ function handleEvents() {
         }
     });
 
-    $('#order-asc, #order-desc').on('click', function(event){
-       event.preventDefault();
-       reorderBooks();
-    });
-
     $('#as-table, #as-list, #as-grid').on('click', function(event){
        event.preventDefault();
         if($('#toggle-books').hasClass('active')) {
@@ -77,112 +78,127 @@ function handleEvents() {
 }
 
 function showBooks() {
-    var view = $('#view-group .active').attr('id');
-    switch(view) {
-        case 'as-table': 
-            showBooksTable(); break;
-        case 'as-list':
-            showBooksList(); break;
-        case 'as-grid':
-            showBooksGrid(); break;
-        default: 
-            showBooksList(); break;
+    var $parent = $('#book-list').empty();
+    showBooksAux();
+}
+
+function showBooksAux() {
+    if(CURRENT_BOOK < BOOKS.length) {
+        FRAME_BOOKS = requestAnimationFrame(showBook);
+    } 
+    else {
+        cancelAnimationFrame(FRAME_BOOKS);
+        CURRENT_BOOK = 0;
+    }
+    
+}
+function showBook(timestamp) {
+    if($('#as-list').hasClass('active')) {
+        showBookForList();
+    }
+    if($('#as-grid').hasClass('active')){
+        showBookForGrid();
+    }
+    CURRENT_BOOK = CURRENT_BOOK + 1;
+    showBooksAux();
+}
+function showBookForList() {
+    var $parent = $('#book-list');
+    var book = BOOKS[CURRENT_BOOK];
+    
+    if (book && book.link != null) {
+        var $book = $('<div class="book row"/>');
+
+        var $link = $('<div class="link col-auto"/>')
+            .html(book.link)
+            .appendTo($book);
+
+        var $details = $('<div class="details col small"/>')
+            .append($('<div class="btitle"/>').html('<b>' + book.title + '</b>'))
+            .append($('<div class="bauthor text-muted border-bottom"/>').html('by <b><i>' + book.author + '</i></b>'))
+            .append(
+                $('<div class="bdescription"/>')
+                .text(book.description)
+                .prepend($('<i class="fab fa-amazon"/>').text(' ')))
+            .appendTo($book);
+
+        $parent.append($book);
     }
 }
-
-function showBooksList() {
-    var $parent = $('#book-list').empty();
-    $.each(BOOKS, function (key, book) {
-        if (book.link != null) {
-            var $book = $('<div class="book row"/>');
-
-            var $link = $('<div class="link col-auto"/>')
-                .html(book.link)
-                .appendTo($book);
-
-            var $details = $('<div class="details col small"/>')
-                .append($('<div class="btitle"/>').html('<b>' + book.title + '</b>'))
-                .append($('<div class="bauthor text-muted border-bottom"/>').html('by <b><i>' + book.author + '</i></b>'))
-                .append(
-                    $('<div class="bdescription"/>')
-                    .text(book.description)
-                    .prepend($('<i class="fab fa-amazon"/>').text(' ')))
-                .appendTo($book);
-
-            $parent.append($book);
-        }
-    });
-}
-function showBooksGrid() {
-    var $parent = $('#book-list').empty();
-    $.each(BOOKS, function (key, book) {
-        if (book.link != null) {
-            var $book = $('<div class="book d-inline-block"/>');
-            var $link = $('<div class="link col-auto"/>')
-                .html(book.link)
-                .appendTo($book);
-            $book.appendTo($parent);
-        }
-    });
+function showBookForGrid() {
+    var $parent = $('#book-list');
+    var book = BOOKS[CURRENT_BOOK];
+    if (book && book.link != null) {
+        var $book = $('<div class="book d-inline-block"/>');
+        var $link = $('<div class="link col-auto"/>')
+            .html(book.link)
+            .appendTo($book);
+        $book.appendTo($parent);
+    }
 }
 
 function showAuthors() {
-    var view = $('#view-group .active').attr('id');
+    var $parent = $('#author-list').empty();
+    showAuthorsAux();
+}
+function showAuthorsAux() {
+    if(CURRENT_AUTHOR < AUTHORS.length) {
+        FRAME_AUTHORS = requestAnimationFrame(showAuthor);
+    } else {
+        cancelAnimationFrame(FRAME_AUTHORS);
+        CURRENT_AUTHOR = 0;
+    }
     
-    switch(view) {
-        case 'as-table': 
-            showAuthorsTable(); break;
-        case 'as-list':
-            showAuthorsList(); break;
-        case 'as-grid':
-            showAuthorsGrid(); break;
-        default: 
-            showAuthorsList(); break;
+}
+function showAuthor(timestamp) {
+    if($('#as-list').hasClass('active')) {
+        showAuthorForList();
+    }
+    if($('#as-grid').hasClass('active')) {
+        showAuthorForGrid();
+    }
+    CURRENT_AUTHOR = CURRENT_AUTHOR + 1;
+    showAuthorsAux();
+}
+function showAuthorForList() {
+    var author = AUTHORS[CURRENT_AUTHOR];
+    var $parent = $('#author-list');
+    if (author.name != null) {
+        var $author = $('<div class="author small  text-justify w-100 p-2 mb-2"/>')
+            .appendTo($parent)
+            .css({
+                backgroundColor: getRandomColor()
+            });
+
+        var $name = $('<div class="name"/>')
+            .html('<b>'+author.name+'</b>')
+            .appendTo($author);
+
+        var $wiki = $('<div class="wiki col-auto"/>')
+            .html(extractSectionIntro(author.wikipedia))
+            .appendTo($author);
+    }
+}
+function showAuthorForGrid() {
+    var author = AUTHORS[CURRENT_AUTHOR];
+    var $parent = $('#author-list');
+    if (author.name != null) {
+        var $author = $('<div class="author d-inline-block small text-justify"/>')
+            .appendTo($parent)
+            .css({
+                backgroundColor: getRandomColor()
+            });
+        var $name = $('<div class="name"/>')
+            .html('<b>'+author.name+'</b>')
+            .appendTo($author);
+
+        var $wiki = $('<div class="wiki"/>')
+            .html(extractSectionIntro(author.wikipedia))
+            .appendTo($author);
     }
 }
 
-function showAuthorsList() {
-    var $parent = $('#author-list').empty();
-    $.each(AUTHORS, function (key, author) {
-        if (author.name != null) {
-            var $author = $('<div class="author small  text-justify w-100 p-2"/>')
-                .appendTo($parent)
-                .css({
-                    backgroundColor: getRandomColor()
-                });
-            
-            var $name = $('<div class="name"/>')
-                .html('<b>'+author.name+'</b>')
-                .appendTo($author);
-            
-            var $wiki = $('<div class="wiki col-auto"/>')
-                .html(extractSectionIntro(author.wikipedia))
-                .appendTo($author);
-        }
-    });
-}
 
-function showAuthorsGrid() {
-    var $parent = $('#author-list').addClass('row').empty();
-    $.each(AUTHORS, function (key, author) {
-        if (author.name != null) {
-            var $author = $('<div class="author d-inline-block small text-justify col-4"/>')
-                .appendTo($parent)
-                .css({
-                    backgroundColor: getRandomColor()
-                });
-
-            
-            var $name = $('<div class="name"/>')
-                .html('<b>'+author.name+'</b>')
-                .appendTo($author);
-            
-            var $wiki = $('<div class="wiki"/>')
-                .html(extractSectionIntro(author.wikipedia))
-                .appendTo($author);
-        }
-    });
-}
 
 /**
  * Reaction to detail show hide depend  
