@@ -78,7 +78,8 @@ function handleEvents() {
 }
 
 function showBooks() {
-    if(FRAME_BOOKS != 0) {
+    if(CURRENT_BOOK != 0) {
+        alert("Animation Running");
         cancelAnimationFrame(FRAME_BOOKS);
         CURRENT_BOOK = 0;
     }
@@ -143,7 +144,8 @@ function showBookForGrid() {
 }
 
 function showAuthors() {
-    if(FRAME_AUTHORS != 0) {
+    if(CURRENT_AUTHOR != 0) {
+        alert("Animation Running");
         cancelAnimationFrame(FRAME_AUTHORS);
         CURRENT_AUTHOR = 0;
     }
