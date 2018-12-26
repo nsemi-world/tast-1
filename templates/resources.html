@@ -25,18 +25,53 @@
         <h3 class="h3 border-bottom">The Transatlantic Slave Trade: People and Books</h3>
         <div id="rplayer" class="bg-dark text-warning p-2 mb-1 sticky-top">
             <div class="row">
-                <div class="col-4">Freedom Library</div>
-                <div class="col-8">
+                <div class="col-auto text-left">Freedom Library</div>
+                <div class="col text-right">
                     <div class="btn-group">
-                        <button id="books-only" class="btn btn-sm btn-outline-warning">Books Only</button>
-                        <button id="books-and-details" class="btn btn-sm btn-outline-warning">Books + Details</button>
+                        <button id="toggle-authors" class="btn btn-sm btn-outline-light">Authors</button>
+                        <button id="toggle-books" class="btn btn-sm btn-outline-light active">Books</button>
+                    </div>
+                    <div id="books-commands" class="btn-group">
+                        <div id="book-criteria-group" class="btn-group ml-1">
+                            <button id="by-title" class="btn btn-sm btn-outline-primary active">by Title</button>
+                            <button id="by-author" class="btn btn-sm btn-outline-primary">by Author</button>
+                            <button id="by-price" class="btn btn-sm btn-outline-primary d-none">by Price</button>
+                        </div>
+                    </div>
+                    <div id="order-group" class="btn-group ml-1">
+                        <button id="order-asc" class="btn btn-sm btn-outline-primary active">ASC</button>
+                        <button id="order-desc" class="btn btn-sm btn-outline-primary">DESC</button>
+                    </div>
+                    <div id="view-group" class="btn-group">
+                        <button id="as-table" class="btn btn-sm btn-outline-success d-none">Table</button>
+                        <button id="as-list" class="btn btn-sm btn-outline-success active">List</button>
+                        <button id="as-grid" class="btn btn-sm btn-outline-success">Grid</button>
                     </div>
                 </div>
-                
-            </div>            
+
+            </div>
         </div>
-        <div id="book-list-by-author" class="container-fluid">
-        
+        <div id="book-list" class="container">
+
         </div>
+        <div id="author-list" class="container-fluid" style="display: none;"></div>
+    </section>
+    <section id="books-search-amazon" class="container my-5 p-5 bg-transparent" style="height: 800px;">
+        <script type="text/javascript">
+            amzn_assoc_ad_type = "responsive_search_widget";
+            amzn_assoc_tracking_id = "tastxplorer-21";
+            amzn_assoc_marketplace = "amazon";
+            amzn_assoc_region = "DE";
+            amzn_assoc_placement = "";
+            amzn_assoc_search_type = "search_widget";
+            amzn_assoc_width = "auto";
+            amzn_assoc_height = "auto";
+            amzn_assoc_default_search_category = "ForeignBooks";
+            amzn_assoc_default_search_key = "Slave Trade";
+            amzn_assoc_theme = "light";
+            amzn_assoc_bg_color = "FFFFFF";
+
+        </script>
+        <script src="//z-eu.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1&Marketplace=DE"></script>
     </section>
 </article>

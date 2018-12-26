@@ -9,7 +9,15 @@ header('Content-type:application/json;charset=utf-8');
 $authors = findAuthors();
 $authors = isolateSingleAuthors($authors);
 
-echo json_encode($authors);
+$result = [];
+foreach($authors as $author) {
+    $result[] = [
+        'name' => $author, 
+        'wikipedia' => getWikipediaArticleIntro($author)
+    ];
+}
+
+echo json_encode($result);
 
 // end: MAIN
 
@@ -31,6 +39,12 @@ function isolateSingleAuthors($authors) {
     }    
     return (array) array_unique($result);
 }
+
+function getWikipediaArticleIntro($search) {
+    $url = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=".urlencode($search);
+    return json_decode(file_get_contents($url));
+}
+
 
 ob_end_flush();
 ?>
