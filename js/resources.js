@@ -80,6 +80,7 @@ function handleEvents() {
 function showBooks() {
     if(FRAME_BOOKS != 0) {
         cancelAnimationFrame(FRAME_BOOKS);
+        CURRENT_BOOK = 0;
     }
     var $parent = $('#book-list').empty();
     showBooksAux();
@@ -144,6 +145,7 @@ function showBookForGrid() {
 function showAuthors() {
     if(FRAME_AUTHORS != 0) {
         cancelAnimationFrame(FRAME_AUTHORS);
+        CURRENT_AUTHOR = 0;
     }
     var $parent = $('#author-list').empty();
     showAuthorsAux();
