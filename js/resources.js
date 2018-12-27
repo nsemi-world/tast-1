@@ -69,7 +69,6 @@ function handleEvents() {
 
 function showBooks() {
     if(CURRENT_BOOK != 0) {
-        alert("Animation Running");
         cancelAnimationFrame(FRAME_BOOKS);
         CURRENT_BOOK = 0;
     }
@@ -281,8 +280,6 @@ function addAffiliateLinks(books, $parent) {
 function reorderBooks() {
     var order = $('#order-group .active').attr('id');
     var criteria = $('#criteria-group .active').attr('id');
-    alert(order);
-    alert(criteria);
     
     BOOKS = BOOKS.sort(function(a,b){
         var value = (criteria == 'by-title')
@@ -295,7 +292,7 @@ function reorderBooks() {
 
 function reorderAuthors() {
     var order = $('#order-group .active').attr('id');
-    alert(order);
+
     AUTHORS = AUTHORS.sort(function(a,b){
         var value = a.name.localeCompare(b.name);
         return (order=='order-asc') ? value : -value;
