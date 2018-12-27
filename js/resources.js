@@ -7,6 +7,9 @@ var CURRENT_BOOK = 0;
 var FRAME_AUTHORS = 0;
 var FRAME_BOOKS = 0;
 
+var BOOK_FILTER_ACTIVE = false;
+
+
 $(document).ready(function () {
     activate($('#toggle_resources'));
     handleEvents();
@@ -216,7 +219,7 @@ function clickBooks() {
 function goToAuthorBooks(name) {
     setTimeout(function(){
         var books = $('.book');
-
+        BOOK_FILTER_ACTIVE = true;
         $.each(books, function(key, ba){
             var $b = $(ba);
             var data = $b.attr('data-author');
@@ -224,7 +227,11 @@ function goToAuthorBooks(name) {
                 console.log('Exclude = ' + data);
                 $b.hide();
             }
+            else {
+                $b.show();
+            }
         });
+        
     }, 1500);
     
 }
