@@ -210,7 +210,7 @@ function showAuthorForGrid() {
 
 function clickBooks() {
     $('#toggle-books').click();
-    $('#by-author').click();
+    //$('#by-author').click();
 }
 
 function goToAuthorBooks(name) {
