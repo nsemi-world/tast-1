@@ -219,7 +219,9 @@ function goToAuthorBooks(name) {
 
         $.each(books, function(key, ba){
             var $b = $(ba);
-            if($b.attr('data-author') != name) {
+            var data = $b.attr('data-author');
+            if(!data.includes(name)) {
+                console.log('Exclude = ' + data);
                 $b.hide();
             }
         });
