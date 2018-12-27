@@ -102,7 +102,7 @@ function showBookForList() {
     var book = BOOKS[CURRENT_BOOK];
     
     if (book && book.link != null) {
-        var $book = $('<div class="book row"/>');
+        var $book = $('<div class="book row"/>').attr('data-author', book.author);
 
         var $link = $('<div class="link col-auto"/>')
             .html(book.link)
@@ -124,7 +124,7 @@ function showBookForGrid() {
     var $parent = $('#book-list');
     var book = BOOKS[CURRENT_BOOK];
     if (book && book.link != null) {
-        var $book = $('<div class="book d-inline-block"/>');
+        var $book = $('<div class="book d-inline-block"/>').attr('data-author', book.author);
         var $link = $('<div class="link col-auto"/>')
             .html(book.link)
             .appendTo($book);
@@ -170,9 +170,14 @@ function showAuthorForList() {
                 backgroundColor: getRandomColor()
             });
 
-        var $name = $('<div class="name"/>')
+        var $name = $('<a class="name" href="#"/>')
             .html('<b>'+author.name+'</b>')
-            .appendTo($author);
+            .appendTo($author)
+            .on('click', function(e){
+                e.preventDefault();
+                clickBooks();
+                goToAuthorBooks(author.name);
+            });
 
         var $wiki = $('<div class="wiki col-auto"/>')
             .html(extractSectionIntro(author.wikipedia))
@@ -198,6 +203,24 @@ function showAuthorForGrid() {
     }
 }
 
+function clickBooks() {
+    $('#toggle-books').click();
+    $('#by-author').click();
+}
+
+function goToAuthorBooks(name) {
+    setTimeout(function(){
+        var books = $('.book');
+
+        $.each(books, function(key, ba){
+            var $b = $(ba);
+            if($b.attr('data-author') != name) {
+                $b.hide();
+            }
+        });
+    }, 1500);
+    
+}
 
 
 /**
