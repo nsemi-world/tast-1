@@ -170,7 +170,7 @@ function showAuthorForList() {
                 backgroundColor: getRandomColor()
             });
 
-        var $name = $('<a class="name" href="#"/>')
+        var $name = $('<a class="name text-dark" href="#"/>')
             .html('<b>'+author.name+'</b>')
             .appendTo($author)
             .on('click', function(e){
@@ -193,9 +193,14 @@ function showAuthorForGrid() {
             .css({
                 backgroundColor: getRandomColor()
             });
-        var $name = $('<div class="name"/>')
+        var $name = $('<a class="name text-dark" href="#"/>')
             .html('<b>'+author.name+'</b>')
-            .appendTo($author);
+            .appendTo($author)
+            .on('click', function(e){
+                e.preventDefault();
+                clickBooks();
+                goToAuthorBooks(author.name);
+            });
 
         var $wiki = $('<div class="wiki"/>')
             .html(extractSectionIntro(author.wikipedia))
