@@ -134,7 +134,6 @@ function showBookForGrid() {
 
 function showAuthors() {
     if(CURRENT_AUTHOR != 0) {
-        alert("Animation Running");
         cancelAnimationFrame(FRAME_AUTHORS);
         CURRENT_AUTHOR = 0;
     }

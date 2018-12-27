@@ -34,7 +34,7 @@ function isolateSingleAuthors($authors) {
     foreach($authors as $author) {
         $parts = explode(", ", $author->author);        
         foreach($parts as $part) {
-            $result[] = $part;
+            $result[] = trim($part);
         }
     }    
     return (array) array_unique($result);
