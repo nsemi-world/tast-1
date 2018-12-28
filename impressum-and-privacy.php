@@ -5,7 +5,7 @@ $template = file_get_contents('./templates/template.html');
 
 $head           = file_get_contents('./templates/head.html');
 $header         = file_get_contents('./templates/header.html');
-$content        = file_get_contents('./templates/impressum.html');
+$content        = file_get_contents('./templates/impressum-and-privacy.html');
 $footer         = file_get_contents('./templates/footer.html');
 
 $my_scripts = '
