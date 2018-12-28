@@ -270,16 +270,13 @@ function reorderBooks() {
     });
     $books.appendTo('#book-list');    
 }
-
 function reorderAuthors() {
     var order = $('#order-group .active').attr('id');
     
     var $authors = $('.author');
     $authors.sort(function(a, b) {
-        var aname = $(a).find('.name');
-        var bname = $(b).find('.name');
-        
-        alert(aname + ' vs ' + bname);
+        var aname = $(a).find('.name').text();
+        var bname = $(b).find('.name').text();
         
         if(order == 'order-asc') {
             return aname.localeCompare(bname);
@@ -299,7 +296,6 @@ function clickBooks() {
 
 function goToAuthorBooks(name) {
     var books = $('.book');
-    BOOK_FILTER_ACTIVE = true;
     $.each(books, function (key, ba) {
         var $b = $(ba);
         var data = $b.attr('data-author');
@@ -389,16 +385,6 @@ function addAffiliateLinks(books, $parent) {
 
 }
 
-
-function reorderAuthors() {
-    var order = $('#order-group .active').attr('id');
-
-    AUTHORS = AUTHORS.sort(function (a, b) {
-        var value = a.name.localeCompare(b.name);
-        return (order == 'order-asc') ? value : -value;
-    });
-    showAuthors();
-}
 
 function addAuthorsSection() {
     var $container = $('#author-list');
