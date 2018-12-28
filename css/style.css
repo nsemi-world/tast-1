@@ -33,7 +33,7 @@ section {
  Frontpages
 ***********************************/
 .frontpage {
-    height: calc(var(--main-height) * 5 / 10);
+    height: calc(var(--main-height) * 10 / 10);
     font-weight: bold;
     position: relative;
 }

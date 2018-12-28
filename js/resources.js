@@ -8,6 +8,7 @@ var FRAME_AUTHORS = 0;
 var FRAME_BOOKS = 0;
 
 var BOOK_FILTER_ACTIVE = false;
+var BOOK_FILTER = null;
 
 
 $(document).ready(function () {
@@ -29,20 +30,20 @@ function handleEvents() {
         $(this).parent().find('.active').toggleClass('active');
         $(this).toggleClass('active');
     });
-    
-    $('#toggle-authors').on('click', function(event){
+
+    $('#toggle-authors').on('click', function (event) {
         event.preventDefault();
         $('#books-commands, #book-list').hide();
         $('#authors-commands, #author-list').show();
     });
-    $('#toggle-books').on('click', function(event){
+    $('#toggle-books').on('click', function (event) {
         event.preventDefault();
         $('#authors-commands, #author-list').hide();
         $('#books-commands, #book-list').show();
     });
-    
-    $('#by-title, #by-author, #order-asc, #order-desc').on('click', function(event){
-       event.preventDefault();
+
+    $('#by-title, #by-author, #order-asc, #order-desc').on('click', function (event) {
+        event.preventDefault();
         if($('#toggle-books').hasClass('active')) {
             reorderBooks();
         }
@@ -51,61 +52,61 @@ function handleEvents() {
         }
     });
 
-    $('#as-table, #as-list, #as-grid').on('click', function(event){
-       event.preventDefault();
-        if($('#toggle-books').hasClass('active')) {
-            showBooks();
-        }
-        else if($('#toggle-authors').hasClass('active')) {
-            showAuthors();
-        }
+    $('#as-table').on('click', function (event) {
+        event.preventDefault();
+        asTable();
+    });
+    $('#as-list').on('click', function (event) {
+        event.preventDefault();
+        asList();
+    });
+    $('#as-grid').on('click', function (event) {
+        event.preventDefault();
+        asGrid();
     });
 
     $(document).on('_books_loaded', function (event) {
         showBooks();
     });
-    
+
     $(document).on('_authors_loaded', function (event) {
         showAuthors();
     });
 }
 
 function showBooks() {
-    if(CURRENT_BOOK != 0) {
+    if (CURRENT_BOOK != 0) {
         cancelAnimationFrame(FRAME_BOOKS);
         CURRENT_BOOK = 0;
     }
     var $parent = $('#book-list').empty();
     showBooksAux();
 }
-
 function showBooksAux() {
-    if(CURRENT_BOOK < BOOKS.length) {
+    if (CURRENT_BOOK < BOOKS.length) {
         FRAME_BOOKS = requestAnimationFrame(showBook);
-    } 
-    else {
+    } else {
         cancelAnimationFrame(FRAME_BOOKS);
         CURRENT_BOOK = 0;
     }
-    
+
 }
 function showBook(timestamp) {
-    if($('#as-list').hasClass('active')) {
+    if ($('#as-list').hasClass('active')) {
         showBookForList();
     }
-    if($('#as-grid').hasClass('active')){
+    if ($('#as-grid').hasClass('active')) {
         showBookForGrid();
     }
     CURRENT_BOOK = CURRENT_BOOK + 1;
     showBooksAux();
 }
-
 function showBookForList() {
     var $parent = $('#book-list');
     var book = BOOKS[CURRENT_BOOK];
-    
+
     if (book && book.link != null) {
-        var $book = $('<div class="book row"/>').attr('data-author', book.author);
+        var $book = $('<div class="book row w-100"/>').attr('data-author', book.author);
 
         var $link = $('<div class="link col-auto"/>')
             .html(book.link)
@@ -136,7 +137,7 @@ function showBookForGrid() {
 }
 
 function showAuthors() {
-    if(CURRENT_AUTHOR != 0) {
+    if (CURRENT_AUTHOR != 0) {
         cancelAnimationFrame(FRAME_AUTHORS);
         CURRENT_AUTHOR = 0;
     }
@@ -144,25 +145,24 @@ function showAuthors() {
     showAuthorsAux();
 }
 function showAuthorsAux() {
-    if(CURRENT_AUTHOR < AUTHORS.length) {
+    if (CURRENT_AUTHOR < AUTHORS.length) {
         FRAME_AUTHORS = requestAnimationFrame(showAuthor);
     } else {
         cancelAnimationFrame(FRAME_AUTHORS);
         CURRENT_AUTHOR = 0;
     }
-    
+
 }
 function showAuthor(timestamp) {
-    if($('#as-list').hasClass('active')) {
+    if ($('#as-list').hasClass('active')) {
         showAuthorForList();
     }
-    if($('#as-grid').hasClass('active')) {
+    if ($('#as-grid').hasClass('active')) {
         showAuthorForGrid();
     }
     CURRENT_AUTHOR = CURRENT_AUTHOR + 1;
     showAuthorsAux();
 }
-
 function showAuthorForList() {
     var author = AUTHORS[CURRENT_AUTHOR];
     var $parent = $('#author-list');
@@ -174,9 +174,9 @@ function showAuthorForList() {
             });
 
         var $name = $('<a class="name text-dark" href="#"/>')
-            .html('<b>'+author.name+'</b>')
+            .html('<b>' + author.name + '</b>')
             .appendTo($author)
-            .on('click', function(e){
+            .on('click', function (e) {
                 e.preventDefault();
                 clickBooks();
                 goToAuthorBooks(author.name);
@@ -197,9 +197,9 @@ function showAuthorForGrid() {
                 backgroundColor: getRandomColor()
             });
         var $name = $('<a class="name text-dark" href="#"/>')
-            .html('<b>'+author.name+'</b>')
+            .html('<b>' + author.name + '</b>')
             .appendTo($author)
-            .on('click', function(e){
+            .on('click', function (e) {
                 e.preventDefault();
                 clickBooks();
                 goToAuthorBooks(author.name);
@@ -211,29 +211,106 @@ function showAuthorForGrid() {
     }
 }
 
+function asTable() {}
+function asList() {
+    var $collection;
+    if ($('#toggle-books').hasClass('active')) {
+        $collection = $('#book-list');
+        $collection.find('.details').show();
+        $collection.find('.book').removeClass('col-auto').addClass('w-100');
+    } 
+    else if ($('#toggle-authors').hasClass('active')) {
+        $collection = $('#author-list');
+        $collection.removeClass('card-columns');
+    }
+}
+function asGrid() {
+    var $collection;
+    if ($('#toggle-books').hasClass('active')) {
+        $collection = $('#book-list');
+        $collection.find('.details').hide();
+        $collection.find('.book').removeClass('w-100').addClass('col-auto');
+    } 
+    else if ($('#toggle-authors').hasClass('active')) {
+        $collection = $('#author-list');
+        $collection.addClass('card-columns');
+    }
+}
+
+
+function reorderBooks() {
+    var order = $('#order-group .active').attr('id');
+    var criteria = $('#criteria-group .active').attr('id');
+    
+    var $books = $('.book');
+    $books.sort(function(a, b) {
+        if(criteria == 'by-title') {
+            var atitle = $(a).find('.btitle').text();
+            var btitle = $(b).find('.btitle').text();
+            
+            if(order == 'order-asc') {
+                return atitle.localeCompare(btitle);
+            }
+            else {
+                return - atitle.localeCompare(btitle);
+            }
+        }
+        
+        else if(criteria == 'by-author') {
+            var aauthor = $(a).data('author');
+            var bauthor = $(b).data('author');
+            
+            if(order == 'order-asc') {
+                return aauthor.localeCompare(bauthor);
+            }
+            else {
+                return - aauthor.localeCompare(bauthor);
+            }
+        }
+    });
+    $books.appendTo('#book-list');    
+}
+
+function reorderAuthors() {
+    var order = $('#order-group .active').attr('id');
+    
+    var $authors = $('.author');
+    $authors.sort(function(a, b) {
+        var aname = $(a).find('.name');
+        var bname = $(b).find('.name');
+        
+        alert(aname + ' vs ' + bname);
+        
+        if(order == 'order-asc') {
+            return aname.localeCompare(bname);
+        }
+        else {
+            return - aname.localeCompare(bname);
+        }
+    });
+    $authors.appendTo('#author-list');    
+}
+
+
 function clickBooks() {
     $('#toggle-books').click();
     //$('#by-author').click();
 }
 
 function goToAuthorBooks(name) {
-    setTimeout(function(){
-        var books = $('.book');
-        BOOK_FILTER_ACTIVE = true;
-        $.each(books, function(key, ba){
-            var $b = $(ba);
-            var data = $b.attr('data-author');
-            if(!data.includes(name)) {
-                console.log('Exclude = ' + data);
-                $b.hide();
-            }
-            else {
-                $b.show();
-            }
-        });
-        
-    }, 1500);
-    
+    var books = $('.book');
+    BOOK_FILTER_ACTIVE = true;
+    $.each(books, function (key, ba) {
+        var $b = $(ba);
+        var data = $b.attr('data-author');
+        if (!data.includes(name)) {
+            console.log('Exclude = ' + data + ' for name ' + name);
+            $b.hide();
+        } else {
+            console.log('Include = ' + data + ' for name ' + name);
+            $b.show();
+        }
+    });
 }
 
 
@@ -313,51 +390,38 @@ function addAffiliateLinks(books, $parent) {
 }
 
 
-function reorderBooks() {
-    var order = $('#order-group .active').attr('id');
-    var criteria = $('#criteria-group .active').attr('id');
-    
-    BOOKS = BOOKS.sort(function(a,b){
-        var value = (criteria == 'by-title')
-            ? a.title.localeCompare(b.title)
-            : a.author.localeCompare(b.author);
-        return (order=='order-asc') ? value : -value;
-    });
-    showBooks();
-}
-
 function reorderAuthors() {
     var order = $('#order-group .active').attr('id');
 
-    AUTHORS = AUTHORS.sort(function(a,b){
+    AUTHORS = AUTHORS.sort(function (a, b) {
         var value = a.name.localeCompare(b.name);
-        return (order=='order-asc') ? value : -value;
+        return (order == 'order-asc') ? value : -value;
     });
     showAuthors();
 }
 
 function addAuthorsSection() {
     var $container = $('#author-list');
-    $.each(AUTHORS, function(key, author) {
+    $.each(AUTHORS, function (key, author) {
         createAuthorElement(author);
     });
-    
-    
+
+
 
 }
 
 function createAuthorElement(author) {
     var $author = $('<div class="author shadow small text-justify"/>')
         .css('background-color', getRandomColor());
-    
+
     var $name = $('<h4 class="author border-bottom"/>')
         .html('<b>' + author.name + '</b>')
         .appendTo($author);
-    
+
     var $wiki = $('<div class="wiki"/>')
         .text(extractSectionIntro(author.wikipedia))
         .appendTo($author);
-    
+
     $container.append($element);
 }
 
@@ -366,17 +430,16 @@ function extractSectionIntro(wikidata) {
     var pages = wikidata.query.pages;
     var section = null;
     var wikiBadge = '<span class="badge badge-dark"><i class="fab fa-wikipedia-w"></i></span> ';
-    
-    $.each(pages, function(key, page) {
-        if(page.extract && page.extract.includes('writer')) {
+
+    $.each(pages, function (key, page) {
+        if (page.extract && page.extract.includes('writer')) {
             section = '<span class="extract">' + page.extract + '</span>';
         }
     });
-    
-    if(section != null) {
-        return wikiBadge + section;    
-    }
-    else {
+
+    if (section != null) {
+        return wikiBadge + section;
+    } else {
         return wikiBadge + '<span class="extract">No wikipedia summary found.</span>';
     }
 }
