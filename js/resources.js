@@ -64,6 +64,10 @@ function handleEvents() {
         event.preventDefault();
         asGrid();
     });
+    $('#refresh').on('click', function (event) {
+        event.preventDefault();
+        refresh();
+    });
 
     $(document).on('_books_loaded', function (event) {
         showBooks();
@@ -288,6 +292,9 @@ function reorderAuthors() {
     $authors.appendTo('#author-list');    
 }
 
+function refresh() {
+    $('.book').show();
+}
 
 function clickBooks() {
     $('#toggle-books').click();
