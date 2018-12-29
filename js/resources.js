@@ -246,7 +246,7 @@ function reorderBooks() {
     var order = $('#order-group .active').attr('id');
     var criteria = $('#criteria-group .active').attr('id');
     
-    var $books = $('.book');
+    var $books = $('.book:visible');
     $books.sort(function(a, b) {
         if(criteria == 'by-title') {
             var atitle = $(a).find('.btitle').text();
