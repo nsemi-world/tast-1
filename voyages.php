@@ -9,7 +9,7 @@ $content        = file_get_contents('./templates/voyages.html');
 $footer         = file_get_contents('./templates/footer.html');
 
 $my_scripts = '
-    <script src="https://cdn.knightlab.com/libs/storymapjs/latest/js/storymap-min.js"></script>
+    <script src="https://cdn.knightlab.com/libs/storymapjs/latest/js/storymap.js"></script>
     <script src="js/voyages.js"></script>
 ';
 $head = str_replace('###MY_SCRIPTS###', $my_scripts, $head);

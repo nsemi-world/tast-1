@@ -2,7 +2,7 @@ var voyages = {
     storymap: null,
     ids: [],
     index: 0
-}
+};
 
 $(document).ready(function() {
     activate($('#toggle_voyages'));
@@ -13,7 +13,7 @@ $(document).ready(function() {
     $(window).on('resize', function() {
         debounce('#voyages .frontpage', 'voyages.jpg');
         centerVoyages();
-        if(voyages.storymap != null) {
+        if(voyages.storymap !== null) {
             voyages.storymap.updateDisplay(); // this isn't automatic
         }
     });
@@ -22,15 +22,22 @@ $(document).ready(function() {
         loadVoyageData(0);
     });
 
-    $('#voyages').on('_request_voyage_data', function (event, index) {
-        loadVoyageData(index);
-    });
-
     $('#voyages').on('_voyage_loaded', function (event, data, index) {
+        console.log('_voyage_loaded: ');
+        console.log(data);
+        console.log('index: '+ index);
+        console.log('ids[index]: '+ voyages.ids[index]);
+        
         createStoryMap(data, voyages.ids[index]);
         initData(data, index);
-        voyages.storymap.updateDisplay();
+        if(voyages.storymap !== null) {
+            voyages.storymap.updateDisplay();
+        }
         updateVPlayer(index);
+    });
+
+    $('#voyages').on('_request_voyage_data', function (event, index) {
+        loadVoyageData(index);
     });
 
     $('#voyages').on('click', 'a.filter', function (event) {
@@ -107,7 +114,7 @@ function loadFilteredVoyageIds(filter, filter_value) {
                 voyages.index = 0;
                 $('#voyages').trigger('_ids_loaded', [result.ids]);
             } else {
-                alert('Voyages not found!')
+                alert('Voyages not found!');
             }
         },
         error: function () {
@@ -136,20 +143,11 @@ function loadVoyageData(index) {
 function createStoryMap(data, id) {
     // storymap_data can be an URL or a Javascript object
     var slides = this.createSlides(data, id);
-    var storymap_data = {
-        storymap: {
-            map_type: "stamen:watercolor",
-            slides: slides,
-            font_css: "stock:amatic-andika"
-        }
-    };
-    // certain settings must be passed within a separate options object
+    var storymap_data = {storymap:{slides: slides}};
     var storymap_options = {};
-
+    
     $('#storymap').empty();
-    voyages.storymap = new VCO.StoryMap(
-        'storymap', storymap_data, storymap_options);
-
+    voyages.storymap = new VCO.StoryMap('storymap', storymap_data, storymap_options);
     $(document).trigger('_map_loaded');
 }
 
@@ -162,9 +160,10 @@ function createSlides(voyage_data, id) {
     $.each(voyage_data.itinerary, function (key, value) {
         var headline = '<div class="small">' + value.stage + '</div> <a href="place" class="filter">' + value.place + '</a>' + ' <a href="date" class="filter">' + value.date + '</a>';
         var text = '';
+        
+        console.log(value);
 
-
-        if (value.place != null) {
+        if (value.place !== null) {
             var slide = {
                 "date": value.date,
                 "text": {
@@ -173,8 +172,8 @@ function createSlides(voyage_data, id) {
                 },
                 "location": {
                     "name": value.place,
-                    "lat": value.geo.latitude,
-                    "lon": value.geo.longitude,
+                    "lat": (value.geo.latitude)  ? parseFloat(value.geo.latitude): null,
+                    "lon": (value.geo.longitude) ? parseFloat(value.geo.longitude): null,
                     "line": true
                 }
             }
