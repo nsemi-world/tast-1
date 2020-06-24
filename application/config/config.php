@@ -23,7 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+//$ini = parse_ini_file('../tast.ini');
+$config['base_url'] = 'http://localhost/tast/public';
 
 /*
 |--------------------------------------------------------------------------
