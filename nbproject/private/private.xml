@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/index.php</file>
-            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/php/utils.php</file>
-            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/tast_prod.ini</file>
-            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/tast.ini</file>
+            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/application/views/welcome/WelcomePage.php</file>
+            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/application/views/index.php</file>
+            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/application/views/Head.php</file>
+            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/public/index.php</file>
+            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/application/views/welcome/WelcomeBody.php</file>
+            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/application/views/index.html</file>
+            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/application/controllers/Welcome.php</file>
         </group>
     </open-files>
 </project-private>
