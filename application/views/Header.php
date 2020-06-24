@@ -1,4 +1,4 @@
-<nav class="container-fluid clearfix p-2 bg-dark text-center">
+<nav class="container-fluid clearfix p-2  text-center">
     <a class="navbar-brand float-left" href="index.php">
         <span>tast</span>
         <span class="loading">X</span>

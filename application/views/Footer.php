@@ -29,24 +29,8 @@
                 <div class="card-title text-secondary">Was this useful?
                 </div>
                 <div class="card-text">
-                    <div class="mt-5">
-                        <button class="btn btn-sm btn-outline-info w-100" disabled><i class="fab fa-facebook"></i> Recommend</button>
-                        <button class="btn btn-sm btn-outline-info w-100 mt-1" disabled><i class="fas fa-comment"></i> Write a Comment</button>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card shadow text-danger bg-transparent border border-danger">
-            <div class="card-header text-center"><i class="fas fa-heart text-danger"> ... and some Love too</i></div>
-            <div class="card-body">
-                <div class="card-title text-secondary">To help me going, you can:</div>
-                <div class="card-text text-danger">
-                    <div class="mt-5">
-                        <button class="btn btn-sm btn-outline-danger w-100" disabled><i class="fas fa-coffee text-center"></i> Buy me a Coffee</button>
-                        <button class="btn btn-sm btn-outline-danger w-100 mt-1" disabled><i class="fas fa-book text-center"></i> Buy me a Book</button>
-                        <button class="btn btn-sm btn-outline-danger w-100 mt-1" disabled><i class="fas fa-book text-center"></i> Or just send me a kiss</button>
-                    </div>
+                    <button class="btn btn-outline-info" disabled><i class="fab fa-facebook"></i><span class="ml-1">Recommend on Facebook</span></button>
+                    <button class="btn btn-outline-info" disabled><i class="fas fa-envelope"></i><span class="ml-1">Comments and Suggestions</span></button>
                 </div>
             </div>
         </div>
