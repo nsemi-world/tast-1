@@ -67,3 +67,7 @@ function loadUserIfAny() {
         switchUserIcon();
     }
 }
+
+function getDomain() {
+    return $('.navbar-brand').attr('href');
+}

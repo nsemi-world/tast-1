@@ -22,6 +22,11 @@ class ClientApi extends CI_Controller {
                 }
             }
         }
+        
+        public function json($filename) {
+            $data = file_get_contents(base_url().'json/'.$filename);
+            $this->createResponse(json_decode($data));
+        }
                 
         
         private function getImage($name) {

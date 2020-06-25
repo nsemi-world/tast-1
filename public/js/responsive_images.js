@@ -7,13 +7,9 @@ function loadSectionImage(sectionName, filename) {
     var height = $target.innerHeight();
 
     $.ajax({
-        url: 'ClientApi/getSectionImageFromDatabase',
-        data: {
-            name: filename,
-            width: width,
-            height: height
-        },
+        url: getDomain() + 'ClientApi/getSectionImageFromDatabase/'+ filename,
         success: function (data) {
+            console.log(data);
             if ($target) {
                 $target.css({
                     backgroundImage: "url(" + data.url + ")",
