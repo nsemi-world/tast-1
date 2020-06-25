@@ -67,14 +67,14 @@
                     </div>
                     <div id="timelines" class="container my-5">
                         <div id="start-timeline" class="row shadow my-5 py-2 d-none">
-                            <div id="start-draggables" class="col-4 draggables"></div>
+                            <div id="start-draggables" class=" draggables"></div>
                             <div id="start-droppables" class="col-8 droppables  bg-dark text-light">
                                 <div class="lines">
                                 </div>
                             </div>
                         </div>
                         <div id="end-timeline" class="row shadow my-5 py-2 d-none">
-                            <div id="end-draggables" class="col-4 draggables"></div>
+                            <div id="end-draggables" class=" draggables"></div>
                             <div id="end-droppables" class="col-8 droppables  bg-dark  text-light">
                                 <div class="lines">
                                 </div>
@@ -137,7 +137,7 @@
                 <p>Next we present maps and charts for each of the variables we talked earlier. Initially these refer to the full lifetime of the trans-atlantic slave trade voyages, but you can simulate how those numbers evolved year after year by clicking on the PLAY button. For a given variable, the numbers presented correspond to the aggregated sums from 1514 up to the current simulation year. You can confirm the target period by checking the values in the year progress bar and above, where this period is represented.</p>
             </div>
         </div>
-        <div id="participation-dashboard" class="container rounded  bg-dark shadow">
+        <div id="participation-dashboard" class="container rounded bg-dark shadow p-2">
             <div id="pplayer" class="my-auto py-1 bg-dark text-secondary sticky-top">
                 <div class="text-muted d-inline-block w-100 clearfix">
                     <span id="start-year" class="text-center">1514</span> -
@@ -165,7 +165,7 @@
                     </div>
                 </div>
                 <div class="progress shadow w-100 border-danger bg-transparent">
-                    <div class="progress-bar bg-danger clearfix my-auto">
+                    <div class="progress-bar bg-danger clearfix my-auto py-2">
                         <p>
                             <span class="begin float-left">1514</span> -
                             <span class="end float-right">1866</span>
@@ -173,9 +173,9 @@
                     </div>
                 </div>
             </div>
-            <div id="maps-and-charts" class="container-fluid my-4 text-secondary small">
-                <div class="row card-deck my-2">
-                    <div id="card-duration" class="col-4 card shadow">
+            <div class="container-fluid my-4 text-secondary small">
+                <div id="maps-and-charts" class="m-2">
+                    <div id="card-duration" class=" card shadow p-0">
                         <div class="card-header small bg-dark">
                             Duration Map by Country
                         </div>
@@ -186,7 +186,7 @@
                         </div>
                     </div>
 
-                    <div id="card-voyages" class="col-4 card shadow">
+                    <div id="card-voyages" class=" card shadow p-0">
                         <div class="card-header small bg-dark">
                             Voyages Map by Country
                         </div>
@@ -197,7 +197,7 @@
                         </div>
                     </div>
 
-                    <div id="card-ships" class="col-4 card shadow">
+                    <div id="card-ships" class=" card shadow p-0">
                         <div class="card-header small bg-dark">
                             Ships Map by Country
                         </div>
@@ -207,9 +207,7 @@
                             <canvas id="ships-chart" class="chart"></canvas>
                         </div>
                     </div>
-                </div>
-                <div class="row card-deck my-2">
-                    <div id="card-embarked" class="col-4 card shadow">
+                    <div id="card-embarked" class=" card shadow p-0">
                         <div class="card-header small bg-dark">
                             Embarked Map by Country
                         </div>
@@ -220,7 +218,7 @@
                         </div>
                     </div>
 
-                    <div id="card-disembarked" class="col-4 card shadow">
+                    <div id="card-disembarked" class=" card shadow p-0">
                         <div class="card-header small bg-dark">
                             Disembarked Map by Country
                         </div>
@@ -231,7 +229,7 @@
                         </div>
                     </div>
 
-                    <div id="card-died" class="col-4 card shadow">
+                    <div id="card-died" class=" card shadow p-0">
                         <div class="card-header small bg-dark">
                             Died Map by Country
                         </div>

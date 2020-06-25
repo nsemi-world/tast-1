@@ -560,7 +560,7 @@ function getDataset(series, criteria) {
 
     // create color palette function
     // color can be whatever you wish
-    var paletteScale = d3.scaleLinear()
+    var paletteScale = d3.scale.linear()
         .domain([0, maxValue])
         .range(getCriteriaRange(criteria)); // blue color
     //.interpolator(d3.interpolateRainbow);
