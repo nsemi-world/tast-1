@@ -6,9 +6,15 @@
     </a>
     <div id="menu" class="d-flex">
             <a id="toggle_home" href="<?=base_url();?>welcome" class="btn bg-transparent active" title="Home"><i class="fas fa-home"></i></a>
-
-            <div class="dropdown d-inline-block">
-                <button class="dropdown-toggle btn btn-transparent" type="button" id="explore-dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore</button>
+            
+            <div class="dropdown">
+                <button id="explore-dropdown-button" 
+                        class="dropdown-toggle btn btn-transparent" 
+                        type="button" 
+                        data-toggle="dropdown" 
+                        aria-haspopup="true" 
+                        aria-expanded="false">Explore</button>
+                
                 <div class="dropdown-menu bg-dark" aria-labelledby="explore-dropdown-button">
                     <a class="dropdown-item" id="toggle_participation" href="participation.php" title="Participation">
                         <i class="fas fa-crown"></i>
@@ -36,17 +42,14 @@
                     </a>
                 </div>
             </div>
-            <div class="dropdown d-none">
-                <button class="dropdown-toggle btn btn-transparent" type="button" id="understand-dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Understand</button>
-                <div class="dropdown-menu bg-dark" aria-labelledby="understand-dropdown-button">
-                    <a  class="dropdown-item" id="toggle_variables" href="understand.php#variables">
-                        <i class=""></i>
-                        Variable Names, Meaning and Coverage
-                    </a>
-                </div>
-            </div>
-            <div class="dropdown d-inline-block">
-                <button class="dropdown-toggle btn btn-transparent" type="button" id="resources-dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Resources</button>
+            <div class="dropdown">
+                <button id="resources-dropdown-button" 
+                        class="dropdown-toggle btn btn-transparent" 
+                        type="button" 
+                        data-toggle="dropdown" 
+                        aria-haspopup="true" 
+                        aria-expanded="false">Resources</button>
+                
                 <div class="dropdown-menu bg-dark" aria-labelledby="resources-dropdown-button">
                     <a class="dropdown-item" id="toggle_articles" href="articles.php" title="Articles">
                         <i class="fas fa-book-open"></i>
@@ -62,16 +65,8 @@
                     </a>
                 </div>
             </div>
-            <div class="dropdown d-none">
-                <button class="dropdown-toggle btn btn-transparent" type="button" id="contribute-dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contribute</button>
-                <div class="dropdown-menu bg-dark" aria-labelledby="contribute-dropdown-button">
-                    <a class="dropdown-item" id="toggle_contribute" href="contribute.php" title="Contribute">
-                        <i class="fas fa-heart"></i>
-                        Donate
-                    </a>
-                </div>
-            </div>
-            <div class="dropdown d-inline-block">
+            
+            <div class="dropdown">
                 <button class="dropdown-toggle btn btn-transparent" type="button" id="about-us-dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About Us</button>
                 <div class="dropdown-menu bg-dark" aria-labelledby="about-us-dropdown-button">
                     <a class="dropdown-item" id="toggle_about_us" href="about-us.php" title="About Us">
@@ -84,7 +79,7 @@
                     </a>
                 </div>
             </div>
-            <div class="dropdown d-inline-block">
+            <div class="dropdown">
                 <a id="toggle_login" href="#" class="btn bg-transparent dropdown-toggle" title="Login with Facebook" data-toggle="dropdown" aria-haspopup="true" aria-expanded=false>
                     <i id="user-photo" class="fas fa-user-circle"></i>
                     <img src="#" class=""/>
@@ -99,3 +94,22 @@
             </div>
         </div>
 </nav>
+
+<div class="dropdown d-none">
+    <button class="dropdown-toggle btn btn-transparent" type="button" id="contribute-dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contribute</button>
+    <div class="dropdown-menu bg-dark" aria-labelledby="contribute-dropdown-button">
+        <a class="dropdown-item" id="toggle_contribute" href="contribute.php" title="Contribute">
+            <i class="fas fa-heart"></i>
+            Donate
+        </a>
+    </div>
+</div>
+<div class="dropdown d-none">
+    <button class="dropdown-toggle btn btn-transparent" type="button" id="understand-dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Understand</button>
+    <div class="dropdown-menu bg-dark" aria-labelledby="understand-dropdown-button">
+        <a  class="dropdown-item" id="toggle_variables" href="understand.php#variables">
+            <i class=""></i>
+            Variable Names, Meaning and Coverage
+        </a>
+    </div>
+</div>

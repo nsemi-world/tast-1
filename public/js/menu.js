@@ -47,7 +47,7 @@ function updateSessionUser(userid, userimage) {
     // User Id
     // Username
     // Image
-    if(userid != null && userimage != null) {
+    if(userid !== null && userimage !== null) {
         sessionStorage.setItem('userid', userid);
         sessionStorage.setItem('userimage', userimage);
     } else {
