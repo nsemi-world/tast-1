@@ -1,11 +1,11 @@
-<nav class="container-fluid clearfix p-2  text-center">
-    <a class="navbar-brand float-left" href="index.php">
+<nav class="container-fluid d-flex justify-content-around m-0 p-0">
+    <a class="navbar-brand" href="<?=base_url();?>">
         <span>tast</span>
         <span class="loading">X</span>
         <span>plorer</span>
     </a>
-    <div id="menu" class="d-block-inline float-right pr-5">
-            <a id="toggle_home" href="index.php" class="btn bg-transparent active" title="Home"><i class="fas fa-home"></i></a>
+    <div id="menu" class="d-flex">
+            <a id="toggle_home" href="<?=base_url();?>welcome" class="btn bg-transparent active" title="Home"><i class="fas fa-home"></i></a>
 
             <div class="dropdown d-inline-block">
                 <button class="dropdown-toggle btn btn-transparent" type="button" id="explore-dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore</button>
