@@ -59,7 +59,7 @@ function resizeAll() {}
 
 function loadParticipationData() {
     $.ajax({
-        url: 'php/participation.json',
+        url: getDomain() + 'ClientApi/json/participation.json',
         success: function (data) {
             participationData = data;
             $(document).trigger('_data_loaded', [data]);
@@ -116,7 +116,7 @@ function updateChallenge(data) {
 }
 
 function updateTimeline(data, timelineId) {
-    if (timelineId == 0) {
+    if (timelineId === 0) {
         var sorted = data.sort(compareFirst);
 
         $.each(sorted, function (key, value) {
@@ -302,7 +302,7 @@ function addLineToDroppables($droppables, date, name, iso2, i) {
             var $draggable = ui.draggable;
             var $droppable = $(this);
 
-            if ($draggable.data('country') == $droppable.data('country')) {
+            if ($draggable.data('country') === $droppable.data('country')) {
                 $draggable.draggable("option", "revert", false);
                 $draggable.draggable("disable");
                 $draggable.position({
@@ -327,7 +327,7 @@ function addLineToDroppables($droppables, date, name, iso2, i) {
                     });
                 });
 
-                if ($droppables.find('.done').length == 17) {
+                if ($droppables.find('.done').length === 17) {
                     alert('Done');
                 }
 
@@ -581,33 +581,33 @@ function getDataset(series, criteria) {
 
 function getCriteriaRange(criteria) {
 
-    if (criteria == '#Embarked') {
+    if (criteria === '#Embarked') {
         return ["rgba(255,0,0,.1)", "rgba(255,0,0,1)"];
-    } else if (criteria == '#Disembarked') {
+    } else if (criteria === '#Disembarked') {
         return ["rgba(255,255,0,.1)", "rgba(255,255,0,1)"];
-    } else if (criteria == '#Died') {
+    } else if (criteria === '#Died') {
         return ["rgba(255,0,255,.1)", "rgba(255,0,255,1)"];
-    } else if (criteria == '#Voyages') {
+    } else if (criteria === '#Voyages') {
         return ["rgba(0,0,255,.1)", "rgba(0,0,255,1)"];
-    } else if (criteria == 'Duration') {
+    } else if (criteria === 'Duration') {
         return ["rgba(200,100,0,.1)", "rgba(200,100,0,1)"];
-    } else if (criteria == '#Ships') {
+    } else if (criteria === '#Ships') {
         return ["rgba(200,100,200,.1)", "rgba(200,100,200,1)"];
     } else return undefined;
 }
 
 function getObjectValue(obj, criteria) {
-    if (criteria == '#Embarked') {
+    if (criteria === '#Embarked') {
         return obj.embarked;
-    } else if (criteria == '#Disembarked') {
+    } else if (criteria === '#Disembarked') {
         return obj.disembarked;
-    } else if (criteria == '#Died') {
+    } else if (criteria === '#Died') {
         return obj.died;
-    } else if (criteria == '#Voyages') {
+    } else if (criteria === '#Voyages') {
         return obj.nvoyages;
-    } else if (criteria == 'Duration') {
+    } else if (criteria === 'Duration') {
         return obj.ldate - obj.fdate + 1;
-    } else if (criteria == '#Ships') {
+    } else if (criteria === '#Ships') {
         return obj.nships;
     } else return undefined;
 }
@@ -623,14 +623,14 @@ function getFills() {
         USA: 'cadetblue',
         BRA: 'yellowgreen',
         defaultFill: 'transparent'
-    }
+    };
 }
 
 function getTemplate() {
     return (
         function (geo, data) {
             // don't show tooltip if country don't present in dataset
-            if (!data || data.numberOfThings == 0) {
+            if (!data || data.numberOfThings === 0) {
                 return;
             }
             // tooltip content
@@ -686,7 +686,7 @@ function updateCircle(value) {
     var circles = document.getElementsByTagName('circle');
     //alert(circles.length);
     $.each(circles, function (key, circle) {
-        if (circle.getAttribute('data-info').centered == value.iso3) {
+        if (circle.getAttribute('data-info').centered === value.iso3) {
             circle.setAttribute('r', Math.sqrt(value.embarked / Math.PI) / 10);
         }
     });
@@ -789,7 +789,7 @@ function createChart(selector, data, criteria) {
 }
 
 function getChartData(data, criteria) {
-    if (criteria == '#Embarked') {
+    if (criteria === '#Embarked') {
         return [{
             label: '#Embarked',
             data: data.map(function (obj) {
@@ -797,7 +797,7 @@ function getChartData(data, criteria) {
             }),
             backgroundColor: getCriteriaRange(criteria)[1]
         }];
-    } else if (criteria == '#Disembarked') {
+    } else if (criteria === '#Disembarked') {
         return [{
             label: '#Disembarked',
             data: data.map(function (obj) {
@@ -805,7 +805,7 @@ function getChartData(data, criteria) {
             }),
             backgroundColor: getCriteriaRange(criteria)[1]
         }];
-    } else if (criteria == '#Died') {
+    } else if (criteria === '#Died') {
         return [{
             label: '#Died',
             data: data.map(function (obj) {
@@ -813,7 +813,7 @@ function getChartData(data, criteria) {
             }),
             backgroundColor: getCriteriaRange(criteria)[1]
         }];
-    } else if (criteria == '#Voyages') {
+    } else if (criteria === '#Voyages') {
         return [{
             label: '#Voyages',
             data: data.map(function (obj) {
@@ -821,7 +821,7 @@ function getChartData(data, criteria) {
             }),
             backgroundColor: getCriteriaRange(criteria)[1]
         }];
-    } else if (criteria == 'Duration') {
+    } else if (criteria === 'Duration') {
         return [{
             label: 'Duration (years)',
             data: data.map(function (obj) {
@@ -829,7 +829,7 @@ function getChartData(data, criteria) {
             }),
             backgroundColor: getCriteriaRange(criteria)[1]
         }];
-    } else if (criteria == '#Ships') {
+    } else if (criteria === '#Ships') {
         return [{
             label: 'Number of Ships',
             data: data.map(function (obj) {
@@ -849,7 +849,7 @@ function getObjectDuration(obj) {
     var year = getPlayerYearValue();
 
     $.each(participationData.all.countries, function (key, value) {
-        if (obj.name == value.name) {
+        if (obj.name === value.name) {
             absoluteFDate = value.fdate;
             absoluteLDate = value.ldate;
             if (year >= absoluteLDate) {
@@ -899,17 +899,17 @@ function updateChart(chart, data, criteria) {
 }
 
 function sortData(data, criteria) {
-    if (criteria == '#Embarked') {
+    if (criteria === '#Embarked') {
         return data.sort(compareEmbarkedDesc);
-    } else if (criteria == '#Disembarked') {
+    } else if (criteria === '#Disembarked') {
         return data.sort(compareDisembarkedDesc);
-    } else if (criteria == '#Died') {
+    } else if (criteria === '#Died') {
         return data.sort(compareDiedDesc);
-    } else if (criteria == '#Voyages') {
+    } else if (criteria === '#Voyages') {
         return data.sort(compareVoyagesDesc);
-    } else if (criteria == 'Duration') {
+    } else if (criteria === 'Duration') {
         return data.sort(compareDurationDesc);
-    } else if (criteria == '#Ships') {
+    } else if (criteria === '#Ships') {
         return data.sort(compareShipsDesc);
     } else return undefined;
 }

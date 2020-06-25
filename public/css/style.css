@@ -354,3 +354,13 @@ li.paginate_button.active {
 li.paginate_button.active  a {
     color: black ! important;
 }
+
+#maps-and-charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 4px;
+}
+
+#maps-and-charts .card {
+    width: 100%;
+}
