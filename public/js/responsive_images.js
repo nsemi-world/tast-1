@@ -7,7 +7,7 @@ function loadSectionImage(sectionName, filename) {
     var height = $target.innerHeight();
 
     $.ajax({
-        url: 'php/getSectionImageFromDatabase.php',
+        url: 'ClientApi/getSectionImageFromDatabase',
         data: {
             name: filename,
             width: width,
