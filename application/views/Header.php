@@ -16,7 +16,7 @@
                         aria-expanded="false">Explore</button>
                 
                 <div class="dropdown-menu bg-dark" aria-labelledby="explore-dropdown-button">
-                    <a class="dropdown-item" id="toggle_participation" href="participation.php" title="Participation">
+                    <a class="dropdown-item" id="toggle_participation" href="<?=base_url();?>explorer/participation" title="Participation">
                         <i class="fas fa-crown"></i>
                         World Participation
                     </a>

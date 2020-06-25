@@ -1,0 +1,248 @@
+<article id="participation" class="container-fluid text-justify">
+    <section class="frontpage">
+        <div class="title-wrapper display-3">
+            <h2 class="h2 title">Participation in the Trans-atlantic Slave Trade</h2>
+        </div>
+    </section>
+    <section id="introduction" class="container my-5 p-5 shadow">
+        <h3 class="h3 border-bottom">Introduction</h3>
+        <p>The <i>Voyages Database</i> reports a total of <span id="TOTAL_VOYAGES"></span> voyages, between <span id="FIRST_VOYAGE_DATE"></span> and <span id="LAST_VOYAGE_DATE"></span>. Not all voyages have dates assigned therefore these dates should not be taken as absolute, but only in the context of the database.</p>
+        <p>In the aftermath of the <i>Reconsquita</i>, christian Portugal and Spain established themselves as natural heirs, by culture and conquest, of millenia of Iberian civilization, a long-lasting afro-european center of science, culture, religion and race tolerance by which ancient Iberians, Phoenicians, Jews, Greeks, Romans, Goths and Moors contributed to one of the most intellectually and econommically vibrating civilization the old continent has ever experienced. Techonological advancements in naval instrumentation, sea navigation as much as the vicious of war, fuelled imperialist ambitions of expansion and further conquest.</p>
+
+        <p>As soon as the slave trade became recognizagble as a tremendously profitable activity, many other countries followed them, pushing the slave trade from an Iberian to a broader European, Atlantic and global economy. The information here presented is extracted from the records of the Voyages database as available for public use.</p>
+    </section>
+    <section id="when-how-long" class="container my-5 p-5 shadow clearfix ">
+        <h3 class="h3 border-bottom">When and How Long...</h3>
+
+        <p>Unlike other questions (How and Why) these two are easily answered in the relative context of the Voyages database that represents only a fraction of the actual data regarding the Trans-atlantic Slave Trade. The countries that took part in the slave trade are listed in table Table 1.</p>
+
+        <div class="m-5">
+            <table id="participation-period-table" class="table small compact text-left shadow">
+                <caption><b>Table 1</b>: List of countries involved in the Trans-Atlantic Slave Trade and in which period of time.
+                </caption>
+                <thead>
+                    <th>Country</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Duration</th>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div>
+            <p>Table 1 introduces the following variables:</p>
+            <ul>
+                <li><b>Country:</b> the name of a participant country</li>
+                <li><b>Start:</b> the earlist date a voyage was registered</li>
+                <li><b>End:</b> the latest date a voyage was registered</li>
+                <li><b>Duration:</b> how many years a country conducted slave voyages</li>
+            </ul>
+            <p class="">Looking at variable/column <var><b>Start</b></var> it is possible to group countries according to their first voyage. We detected four main waves of participation that we separate into distinct a phase:</p>
+            <ul>
+                <li>early 16th century, the Iberian phase</li>
+                <li>middle and late 16th century, the West European Phase</li>
+                <li>middle and late 17th century, the North Atlantic Phase</li>
+                <li>early and middle 19th century, the Pan-Atlantic Phase</li>
+            </ul>
+        </div>
+        <div>
+            <p><b>The Iberian Phase.</b> Portugal (1514-1866) is the first reported participant followed by Spain (1519-1865). They were also the latest, in practice and according to the data, to ban slave trade voyages becoming the longest practicioners of that activity: Portugal (353 years) and Spain (347 years).</p>
+
+            <p><b>The West European Phase.</b> The United Kingdom (1562-1811), France (1571-1864) and The Netherlands (1596-1829), north along the atlantic coast, joined the early group of iberian countries. Together these countries appear to have dominated alone the first 150 years of the trans-atlantic slave trade. The United Kingdom and The Netherlands were among the first nations to ban slave voyages, nevertheless completing around 250 years of active participation each. France (294 years) seams to have been less prompt to stop the activity, being one of the latest to leave the slave economy.</p>
+
+            <p><b>The North Atlantic Phase.</b> In the seconda half of the 17th century another group of countries developed the naval and military resources to participate in the slave trade: Denmark/Baltic (1641-1842, 202 years), USA (1644-1864, 221 years), Sweden (1646-1820, 175 years), Sardinia (1649-1851, 203 years) and the previleged german Hanseatic Cities together with the state of Brandenburg (1682-1847, 166 years).
+            </p>
+
+            <p><b>The Pan-Atlantic Phase.</b> Newly created countries in former colonies continued the practice of slave trading: Brazil (1802), Uruguay (1832), Argentina (1836) and Mexico(1849). Far north atlantic countries also had their fingerprint in the slave trade: Russia (1838) and Norway (1858)
+            </p>
+        </div>
+        <section id="challenge" class="container my-5 p-5 shadow">
+            <h4 class="h4 border-bottom">Summary: A Challenge or Two?</h4>
+            <div class="card-body">
+                <div class="card-text">
+                    <p>Let's take time to exercie a bit. The following presents two challenges. In the first challenge we have sort countries according to the earliest date they appear in the records of the Voyages Database. The second challange, the lastest date. Interaction is implemented as dragg and drop; so drag and drop countries flags into the correct position.</p>
+                    <div class="text-center">
+                        <button id="earliest" class="btn btn-sm btn-outline-secondary">Earliest Voyage</button>
+                        <button id="latest" class="btn btn-sm btn-outline-secondary">Latest Voyage</button>
+                    </div>
+                    <div id="timelines" class="container my-5">
+                        <div id="start-timeline" class="row shadow my-5 py-2 d-none">
+                            <div id="start-draggables" class="col-4 draggables"></div>
+                            <div id="start-droppables" class="col-8 droppables  bg-dark text-light">
+                                <div class="lines">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="end-timeline" class="row shadow my-5 py-2 d-none">
+                            <div id="end-draggables" class="col-4 draggables"></div>
+                            <div id="end-droppables" class="col-8 droppables  bg-dark  text-light">
+                                <div class="lines">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    <section id="participation-measures" class="container my-5 p-5 shadow">
+        <h3 id="ptitle" class="border-bottom">Measuring the Participation in the Trans-atlantic Slave Trade</h3>
+
+        <div>
+            <p>The duration conducting slave voyages is one important measure, but only the tip of provided data. Portugal, Spain and the <i>Unknown</i> participant took part during all the timesapn referencend in the Voyages Database. The details of each country's participation can be be made much precise by means of the variables exposed below. Will these 3 participants prevail as the leaders of the slave economy or will other countries show more resources or efficiency to benefit with the slave trade? Let's look at these variables:</p>
+
+            <ul>
+                <li>Number of voyages</li>
+                <li>Number of ships</li>
+                <li>Number of people embarked</li>
+                <li>Number of people disembarked</li>
+                <li>Number of people died in the Middle Passage</li>
+            </ul>
+
+            <p><b>Number of Voyages.</b> This variable describes the level of activity in the slave economy. The number of voyages evidentiates itself the existence, development and prevalence of a deep form of <i>criminal</i> racism in the timespan they occurred. Targetted people were abducted and illegally purchased not only by individuals who could be damned as criminals, but by nations, under their flags and sovereignty.</p>
+            <p><b>Number of Ships.</b> Well built and armed ships are needed to cross the Atlantic, engage in human subjugation and perform comercial voyages. Not only that. They must be of a very specific and fine-tunned design to maximize the outcome of each single voyage. This variables show us who was ready to invest and had the academic, technological and finantial resources to take the risks of confronting the seas. In a traditional war prone unstable Europe, ships were loaded with gun power making their owners able to impose their demands by negotiation or by force. The indigenous populations of Africa and the Americas had nothing to match. The Slave Trade was an act of war against these indigenous populations and the ships were the measure of power.</p>
+            <p><b>Number of People Embarked.</b>Number of people embarked into ships and transported out of Africa. We must remember that for each embarked person, many others had already perished, due to the civil wars and other aggressive capturing methods.</p>
+            <p><b>Number of Disembarked People.</b> The number embarked people that survided the voyages and reached the Americas.</p>
+            <p><b>Number of People Died in the Middle Passage.</b> A trans-atlantic voyage in confined conditions, under arbitrary and continous risk of life, and the constant realisation of the freedom loss, is just the first challenge people had to face. Many didn't make it.</p>
+        </div>
+        <div>
+            <table id="numbers-table" class="table small compact display">
+                <caption><b>Table 2:</b> Selected Variables descriminated by country: number of voyages, number of registered ships, number of people embarked, number of people disembarked and number of people who died during the Middle Passage.</caption>
+                <thead>
+                    <th>Country</th>
+                    <th>Duration</th>
+                    <th>Voyages</th>
+                    <th>Ships</th>
+                    <th>Embarked</th>
+                    <th>Disembarked</th>
+                    <th>Died</th>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div>
+            <p>
+                What says the database? Table 2 show these numbers descriminated by country, for the full timespan of the Voyages Database, 1514-1866. These table can be sorted by any column, just by clicking in the columns header names. Feel free to explore to gain perspective. Let's start by sorting by voyages. Great Britain (1st), who started voyages in 1562 and who was the first country leaving the slave voyages in 1811, was also the country with more voyages, 11990 against 10585 from Portugal (2nd), 2135 from Unknown (5th) and 1832 from Spain(6th). France(3rd) and The Netherlands (7th), also from the West European phase, make the those who entered the Voyages in 16th century strategically positioned to dominate it. Yet looking at the number of voyages, we see two suprising results. The USA, who entered the slave voyages only in 1641, performs an incredible 4th place with a total of 2262 voyages, way beyond all other countries of the North Atlantic Phase, the next being Denmark/Baltic with 331 voyages. Another outlier is Brazil, a Pan-Atlantic country accounting participations only from the early 19th century, overrunning all North Atlantic countries with a total of 792 voyages.
+            </p>
+            <p>
+                Sorting the data now according to the number of ships tell us a similar story, although here it is clear that Iberian countries had the infrastructure not only to adventure but to endure those voyages. Portugal is the country with more ships registered (3529), followed by Great Britain (2701), France (1664) and Spain (1012). The group of relevant ship owners includes, as in the number of voyages comparison, the USA (896), Unknown (868), the Netherlands (724) and Brazil (444). The USA and Brazil overrun all other countries who entered after middle 17th century, in the North Atlantic and Pan-Atlantic phases. Since Great Britain was the country with more voyages and has less ships than Portugal they have a higher Voyages per Ship ratio, making the investment in ships economically more effective.
+            </p>
+            <p>I leave to you the ranks for the other variables, <var>Embarked</var>, <var>Disembarked</var> and <var>Died</var>. But as a summary, the pattern we saw for the number of voyages and number of ships will repeat it self. Portugal will have the more people embarked and disembarked, while Great Britain will have more people dying during the Middle Passage. It seams that Great Britain had conducted more voyages with less ships but higher casualties than Portugal. Denmark/Baltic and the german Hanse Twons and Brandengurg show a small but relevant participation fingerprint. The remaing countries have a less proeminent presence, just enougth to leave their fingerprint in the Voyages database.</p>
+        </div>
+    </section>
+    <section id="participation-viewer" class="container my-5 p-5 shadow">
+        <div>
+            <h3 class="h3 border-bottom">Mapping and Charting Participation Measures</h3>
+            <div class="">
+                <p>Next we present maps and charts for each of the variables we talked earlier. Initially these refer to the full lifetime of the trans-atlantic slave trade voyages, but you can simulate how those numbers evolved year after year by clicking on the PLAY button. For a given variable, the numbers presented correspond to the aggregated sums from 1514 up to the current simulation year. You can confirm the target period by checking the values in the year progress bar and above, where this period is represented.</p>
+            </div>
+        </div>
+        <div id="participation-dashboard" class="container rounded  bg-dark shadow">
+            <div id="pplayer" class="my-auto py-1 bg-dark text-secondary sticky-top">
+                <div class="text-muted d-inline-block w-100 clearfix">
+                    <span id="start-year" class="text-center">1514</span> -
+                    <span id="year" class="text-center">1866</span>
+                    <div class="mx-auto float-right">
+                        <div class="btn-group small" role="group" aria-label="Criteria button group">
+                            <button id="pduration" class="btn btn-sm btn-outline-primary border-0">Duration</button>
+                            <button id="pvoyages" class="btn btn-sm btn-outline-primary border-0">Voyages</button>
+                            <button id="pships" class="btn btn-sm btn-outline-primary border-0">Ships</button>
+                            <button id="pembarked" class="btn btn-sm btn-outline-primary border-0">Embarked</button>
+                            <button id="pdisembarked" class="btn btn-sm btn-outline-primary border-0">Disembarked</button>
+                            <button id="pdied" class="btn btn-sm btn-outline-primary border-0">Died</button>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Mode button group">
+                            <button id="pmaps" class="btn btn-sm btn-outline-success border-0"><i class="fas fa-globe p-1"></i>Maps</button>
+                            <button id="pcharts" class="btn btn-sm btn-outline-success border-0"><i class="fas fa-chart-bar p-1"></i>Charts</button>
+                            <button id="ptables" class="btn btn-sm btn-outline-success border-0"><i class="fas fa-table p-1"></i>Tables</button>
+                        </div>
+
+                        <div class="btn-group" role="group" aria-label="Player command group">
+                            <button id="prefresh" class="btn btn-sm btn-outline-warning border-0"><i class="fas fa-undo p-1"></i>Restart</button>
+                            <button id="ppause" class="btn btn-sm btn-outline-warning border-0"><i class=" fas fa-pause p-1"></i>Pause</button>
+                            <button id="pplay" class="btn btn-sm btn-outline-warning border-0"><i class=" fas fa-play p-1"></i>Play</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress shadow w-100 border-danger bg-transparent">
+                    <div class="progress-bar bg-danger clearfix my-auto">
+                        <p>
+                            <span class="begin float-left">1514</span> -
+                            <span class="end float-right">1866</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div id="maps-and-charts" class="container-fluid my-4 text-secondary small">
+                <div class="row card-deck my-2">
+                    <div id="card-duration" class="col-4 card shadow">
+                        <div class="card-header small bg-dark">
+                            Duration Map by Country
+                        </div>
+                        <div class="card-body p-0 m-0 bg-dark">
+                            <div id="duration-map" class="map"></div>
+                            <hr/>
+                            <canvas id="duration-chart" class="chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div id="card-voyages" class="col-4 card shadow">
+                        <div class="card-header small bg-dark">
+                            Voyages Map by Country
+                        </div>
+                        <div class="card-body p-0 m-0 bg-dark">
+                            <div id="voyages-map" class="map"></div>
+                            <hr/>
+                            <canvas id="voyages-chart" class="chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div id="card-ships" class="col-4 card shadow">
+                        <div class="card-header small bg-dark">
+                            Ships Map by Country
+                        </div>
+                        <div class="card-body p-0 m-0 bg-dark">
+                            <div id="ships-map" class="map"></div>
+                            <hr/>
+                            <canvas id="ships-chart" class="chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="row card-deck my-2">
+                    <div id="card-embarked" class="col-4 card shadow">
+                        <div class="card-header small bg-dark">
+                            Embarked Map by Country
+                        </div>
+                        <div class="card-body p-0 m-0 bg-dark">
+                            <div id="embarked-map" class="map"></div>
+                            <hr/>
+                            <canvas id="embarked-chart" class="chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div id="card-disembarked" class="col-4 card shadow">
+                        <div class="card-header small bg-dark">
+                            Disembarked Map by Country
+                        </div>
+                        <div class="card-body p-0 m-0 bg-dark">
+                            <div id="disembarked-map" class="map"></div>
+                            <hr/>
+                            <canvas id="disembarked-chart" class="chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div id="card-died" class="col-4 card shadow">
+                        <div class="card-header small bg-dark">
+                            Died Map by Country
+                        </div>
+                        <div class="card-body p-0 m-0 bg-dark">
+                            <div id="died-map" class="map"></div>
+                            <hr/>
+                            <canvas id="died-chart" class="chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</article>

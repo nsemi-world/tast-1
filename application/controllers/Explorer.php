@@ -25,6 +25,8 @@ class Explorer extends CI_Controller {
         
         public function participation() 
         {
-		$this->load->view('explorer/ParticipationPage');
+		$this->load->view('participation/ParticipationPage');
         }
+        
+        
 }

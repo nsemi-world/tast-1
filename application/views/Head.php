@@ -31,7 +31,7 @@
 
     <script src="<?=base_url();?>js/jquery.ui.touch-punch.min.js"></script>
     <script src="<?=base_url();?>js/quizz-tops.js"></script>
-    <script src="<?=base_url();?>js/home.js"></script>
+    <script src="<?= base_url();?>js/menu.js"></script>
     <script src="<?=base_url();?>js/frontpages.js"></script>
 
 </head>
