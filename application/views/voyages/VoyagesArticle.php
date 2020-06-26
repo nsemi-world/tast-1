@@ -42,27 +42,26 @@
                 </div>
             </div>
             <div class="container-fluid">
-                        <div id="storymap-container" class="bg-dark shadow">
-                            <div id="storymap"></div>
+                <div id="storymap-container" class="bg-dark shadow">
+                    <div id="storymap"></div>
+                </div>
+                <div id="details" class="bg-dark text-light small shadow container">
+                    <div class="row">
+                        <div id="d-info" class="col-md-6 bg-info shadow">
+                            <div class="card-text text-light"></div>
                         </div>
-                        <div id="details" class="bg-dark text-light small shadow container">
-                            <div class="row">
-                                <div id="d-info" class="col-md-6 bg-info shadow">
-                                    <div class="card-text text-light"></div>
-                                </div>
-                                <div id="d-outcome" class="col-md-6 bg-secondary shadow">
-                                    <div class="card-text text-light"></div>
-                                </div>
-                                <div id="d-ownership" class="col-md-6 bg-danger shadow">
-                                    <div class="card-text text-light"></div>
-                                </div>
-                                <div id="d-numbers" class="col-md-6 bg-success shadow">
-                                    <div class="card-text text-light"></div>
-                                </div>
-                            </div>
+                        <div id="d-outcome" class="col-md-6 bg-secondary shadow">
+                            <div class="card-text text-light"></div>
+                        </div>
+                        <div id="d-ownership" class="col-md-6 bg-danger shadow">
+                            <div class="card-text text-light"></div>
+                        </div>
+                        <div id="d-numbers" class="col-md-6 bg-success shadow">
+                            <div class="card-text text-light"></div>
                         </div>
                     </div>
+                </div>
+            </div>
         </div>
     </section>
 </article>
-    

@@ -25,8 +25,6 @@
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-
-    <script src="plugins/richtext/jquery.richtext.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>    
     
     
@@ -53,4 +51,5 @@
     <script src="<?= base_url();?>js/menu.js"></script>
     <script src="<?=base_url();?>js/frontpages.js"></script>
     <script src="<?=base_url();?>js/responsive_images.js"></script>
+    <script src="<?=base_url();?>plugins/richtext/jquery.richtext.min.js"></script>
 </head>

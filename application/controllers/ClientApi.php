@@ -17,27 +17,66 @@ class ClientApi extends CI_Controller {
             if($name) {
                 $image = $this->getImage($name);
                 if($image) {
-                    $data = json_encode(['url' => $this->toDataUrl($image->data)]);
+                    $data = json_encode(['url' => $this->toDataUrl($image['data'])]);
                     $this->createResponse($data);
                 }
             }
-        }
-        
-        public function json($filename) {
-            $data = file_get_contents(base_url().'json/'.$filename);
-            $this->createResponse(json_decode($data));
-        }
+        }      
                 
-        
-        private function getImage($name) {
+        private function getImage($name) 
+        {
             $this->load->model('ImagesModel');
             $image = $this->ImagesModel->get_where_single(array('name' => $name));
             return $image;
         }
 
-        private function toDataUrl($blob) {
+        private function toDataUrl($blob) 
+        {
             return 'data:image/jpg;base64,' . base64_encode($blob);
         }        
+
+        public function data($filename) {
+            $data = file_get_contents(base_url().'json/'.$filename);
+            $this->createResponse(json_decode($data));
+        }
+        
+        public function getVoyageIds($include_summary=false)
+        {
+            $this->load->model('VoyagesModel');
+            $result['ids'] = $this->VoyagesModel->get_all_ids();
+ 
+            if($include_summary) {
+                $summary = $this->VoyagesModel->findAllVoyagesSummary();
+                $result['summary'] = $summary;
+            }
+            
+            $this->createResponse($result);
+        }
+        
+        public function getVoyageItineraryById($voyageid)
+        {
+            $this->load->model('VoyageItineraryModel');
+            $vinfo = $this->VoyageItineraryModel->getItinerary($voyageid);
+            $result = [];
+            $result['itinerary'] = $vinfo->getStages();
+            $result['details']   = $vinfo->getDetails();
+            $result['summary']   = $vinfo->getSummary();
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         private function createResponse($data, $status = 200) 
         {

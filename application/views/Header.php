@@ -20,7 +20,7 @@
                         <i class="fas fa-crown"></i>
                         World Participation
                     </a>
-                    <a class="dropdown-item" id="toggle_voyages" href="voyages.php">
+                    <a class="dropdown-item" id="toggle_voyages" href="<?=base_url();?>explorer/voyages">
                         <i class="fas fa-atlas" title="Voyages"></i>
                         Voyage Itineraries
                     </a>

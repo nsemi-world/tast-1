@@ -82,13 +82,14 @@ function configureVoyagesPlayer() {
 }
 
 function loadVoyageIds() {
-    var url = 'php/getVoyageIds.php';
+    var url = getDomain() + 'ClientApi/getVoyageIds';
     $.ajax({
         url: url,
         data: {
             include_summary: true
         },
         success: function (result) {
+            console.log(result);
             if (result.ids) {
                 voyages.ids = result.ids;
                 voyages.index = 0;
