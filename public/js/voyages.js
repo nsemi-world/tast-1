@@ -125,12 +125,9 @@ function loadFilteredVoyageIds(filter, filter_value) {
 }
 
 function loadVoyageData(index) {
-    var url = 'php/getVoyageItineraryById.php';
+    var url = getDomain() + 'ClientApi/getVoyageItineraryById/' + voyages.ids[index].voyageid;
     $.ajax({
         url: url,
-        data: {
-            voyageid: voyages.ids[index]
-        },
         dataType: 'json',
         success: function (result) {
             $('#voyages').trigger('_voyage_loaded', [result, index]);
