@@ -35,34 +35,33 @@
         <div class="my-5">
             <div id="vplayer" class="container-fluid text-right bg-dark sticky-top p-2">
                 <div class="btn-group">
-                    <button id="vprev" class="btn btn-sm btn-outline-warning fas fa-angle-left"></button>
-                    <button id="vnext" class="btn btn-sm btn-outline-warning fas fa-angle-right"></button>
-                    <button id="vplay" class="btn btn-sm btn-outline-warning fas fa-play"></button>
-                    <button id="vpause" class="btn btn-sm btn-outline-warning fas fa-pause"></button>
+                    <button id="vprev" class="btn btn-sm btn-outline-warning"><i class="fas fa-angle-left"></i></button>
+                    <button id="vnext" class="btn btn-sm btn-outline-warning"><i class="fas fa-angle-right"></i></button>
+                    <button id="vplay" class="btn btn-sm btn-outline-warning"><i class="fas fa-play"></i></button>
+                    <button id="vpause" class="btn btn-sm btn-outline-warning"><i class="fas fa-pause"></i></button>
                 </div>
             </div>
             <div class="container-fluid">
-                        <div id="storymap-container" class="bg-dark shadow">
-                            <div id="storymap"></div>
+                <div id="storymap-container" class="bg-dark shadow">
+                    <div id="storymap"></div>
+                </div>
+                <div id="details" class="bg-dark text-light small shadow container">
+                    <div class="row">
+                        <div id="d-info" class="col-md-6 bg-info shadow">
+                            <div class="card-text text-light"></div>
                         </div>
-                        <div id="details" class="bg-dark text-light small shadow container">
-                            <div class="row">
-                                <div id="d-info" class="col-md-6 bg-info shadow">
-                                    <div class="card-text text-light"></div>
-                                </div>
-                                <div id="d-outcome" class="col-md-6 bg-secondary shadow">
-                                    <div class="card-text text-light"></div>
-                                </div>
-                                <div id="d-ownership" class="col-md-6 bg-danger shadow">
-                                    <div class="card-text text-light"></div>
-                                </div>
-                                <div id="d-numbers" class="col-md-6 bg-success shadow">
-                                    <div class="card-text text-light"></div>
-                                </div>
-                            </div>
+                        <div id="d-outcome" class="col-md-6 bg-secondary shadow">
+                            <div class="card-text text-light"></div>
+                        </div>
+                        <div id="d-ownership" class="col-md-6 bg-danger shadow">
+                            <div class="card-text text-light"></div>
+                        </div>
+                        <div id="d-numbers" class="col-md-6 bg-success shadow">
+                            <div class="card-text text-light"></div>
                         </div>
                     </div>
+                </div>
+            </div>
         </div>
     </section>
 </article>
-    

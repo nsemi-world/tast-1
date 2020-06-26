@@ -28,5 +28,9 @@ class Explorer extends CI_Controller {
 		$this->load->view('participation/ParticipationPage');
         }
         
+        public function voyages() 
+        {
+		$this->load->view('voyages/VoyagesPage');
+        }
         
 }

@@ -59,7 +59,7 @@ function resizeAll() {}
 
 function loadParticipationData() {
     $.ajax({
-        url: getDomain() + 'ClientApi/json/participation.json',
+        url: getDomain() + 'ClientApi/data/participation.json',
         success: function (data) {
             participationData = data;
             $(document).trigger('_data_loaded', [data]);

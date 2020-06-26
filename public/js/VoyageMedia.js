@@ -2,10 +2,10 @@ var source = 'sounds/SlaveShipSoundEffectsImages.mp3';
 var audio;
 
 
-function VoyageMedia() {
+var VoyageMedia = function() {
     
     this.init = function() {
-        createAudioElements();
+        this.createAudioElements();
         $('#play').on('click', function (event) {
             event.preventDefault();
             audio.play();
@@ -15,17 +15,19 @@ function VoyageMedia() {
             audio.pause();
         });
     };
-}
+    
+    this.createAudioElements = function() {
+        var $audio = $('<audio id="audio1" controls></audio>')
+            .attr('src', source)
+            .attr('type','audio/mpeg');
 
-function createAudioElements() {
-    var $audio = $('<audio id="audio1" controls></audio>')
-        .attr('src', source)
-        .attr('type','audio/mpeg');
+        $('#media')
+            .append($audio);
+
+        audio = document.getElementById('audio1');
+        audio.loop = true;
+        audio.volume = 0.5;
+    };
     
-    $('#media')
-        .append($audio);
-    
-    audio = document.getElementById('audio1');
-    audio.loop = true;
-    audio.volume = 0.5;
-}
+};
+
