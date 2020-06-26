@@ -25,7 +25,10 @@ class VoyageInfo {
      * Constructor of VoyageInfo objects
      * @param $voyageid: Voyage id in the database
      */
-    public function __construct($voyageid, $db) {
+    public function __construct() {
+    }
+    
+    public function init($voyageid, $db) {
         $this->db = $db;
         $this->voyageid = $voyageid;
         $this->voyage = $this->findItinerary($this->voyageid);
