@@ -11,6 +11,13 @@
  *
  * @author Alexandre Zua Caldeira<zuacaldeira at nsemi.org>
  */
+require_once 'StageInfo.php';
+require_once 'DepartureInfo.php';
+require_once 'PurchaseInfo.php';
+require_once 'OutOfAfricaInfo.php';
+require_once 'LandingInfo.php';
+require_once 'EndInfo.php';
+
 class VoyageInfo {
     
     private $voyageid;
@@ -32,6 +39,9 @@ class VoyageInfo {
         $this->db = $db;
         $this->voyageid = $voyageid;
         $this->voyage = $this->findItinerary($this->voyageid);
+        
+        log_message('debug', json_encode($this->voyage));
+        
         $this->initDetails();
         $this->initStages();
         $this->initSummary();
@@ -163,11 +173,11 @@ class VoyageInfo {
 
         $query = $this->queryByVariableList($voyageid, $variable_list);
         $erg = $this->db->query($query);
-        return $erg->result_array();    
+        return $erg->result()[0];    
     }
     public function findAllVariableNames() {
         $erg = $this->db->query("SELECT name FROM variables");
-        return $erg->result_array();
+        return $erg->result();
     }
     public function createVariableList($arr) {
         $result = [];
@@ -262,8 +272,8 @@ class VoyageInfo {
     }
 
     public function findVoyageSummary($id) {
-        $erg = $this->query($this->queryVoyageSummary($id));
-        return $erg->result_array();
+        $erg = $this->db->query($this->queryVoyageSummary($id));
+        return $erg->result();
     }
     
     public function queryVoyageSummary($id) { 

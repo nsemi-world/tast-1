@@ -13,8 +13,11 @@ class VoyageItineraryModel extends MY_Model
     public function getItinerary($voyageid) {
         $this->load->library('VoyageInfo');
         $this->voyageinfo->init($voyageid, $this->db);
-        $vinfo = $this->VoyageInfo;
-        return $vinfo;
+        $result = array(
+            'itinerary' => $this->voyageinfo->getStages(),
+            'details'   => $this->voyageinfo->getDetails(),
+            'summary'   => $this->voyageinfo->getSummary());
+        return $result;
     }
     
 }

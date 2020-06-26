@@ -57,10 +57,7 @@ class ClientApi extends CI_Controller {
         {
             $this->load->model('VoyageItineraryModel');
             $vinfo = $this->VoyageItineraryModel->getItinerary($voyageid);
-            $result = [];
-            $result['itinerary'] = $vinfo->getStages();
-            $result['details']   = $vinfo->getDetails();
-            $result['summary']   = $vinfo->getSummary();
+            $this->createResponse($vinfo);
         }
         
         
