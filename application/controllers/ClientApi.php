@@ -43,8 +43,18 @@ class ClientApi extends CI_Controller {
         public function getVoyageIds($include_summary=false)
         {
             $this->load->model('VoyagesModel');
-            $result['ids'] = $this->VoyagesModel->get_all_ids();
+            $voyages = $this->VoyagesModel->get_all_ids();
  
+            $result = array(
+                'ids' => array(),
+                'summary' => ""
+            );
+            
+            foreach($voyages as $id) {
+                $result['ids'][] = $id['voyageid'];
+            }
+            
+            
             if($include_summary) {
                 $summary = $this->VoyagesModel->findAllVoyagesSummary();
                 $result['summary'] = $summary;

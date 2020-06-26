@@ -24,9 +24,6 @@ $(document).ready(function() {
 
     $('#voyages').on('_voyage_loaded', function (event, data, index) {
         console.log('_voyage_loaded: ');
-        console.log(data);
-        console.log('index: '+ index);
-        console.log('ids[index]: '+ voyages.ids[index]);
         
         createStoryMap(data, voyages.ids[index]);
         initData(data, index);
@@ -89,7 +86,6 @@ function loadVoyageIds() {
             include_summary: true
         },
         success: function (result) {
-            console.log(result);
             if (result.ids) {
                 voyages.ids = result.ids;
                 voyages.index = 0;
@@ -125,7 +121,7 @@ function loadFilteredVoyageIds(filter, filter_value) {
 }
 
 function loadVoyageData(index) {
-    var url = getDomain() + 'ClientApi/getVoyageItineraryById/' + voyages.ids[index].voyageid;
+    var url = getDomain() + 'ClientApi/getVoyageItineraryById/' + voyages.ids[index];
     $.ajax({
         url: url,
         dataType: 'json',
@@ -141,8 +137,11 @@ function loadVoyageData(index) {
 function createStoryMap(data, id) {
     // storymap_data can be an URL or a Javascript object
     var slides = this.createSlides(data, id);
+    console.log(slides);
+    
     var storymap_data = {storymap:{slides: slides}};
     var storymap_options = {};
+    console.log(storymap_data);
     
     $('#storymap').empty();
     voyages.storymap = new VCO.StoryMap('storymap', storymap_data, storymap_options);
@@ -158,27 +157,33 @@ function createSlides(voyage_data, id) {
     $.each(voyage_data.itinerary, function (key, value) {
         var headline = '<div class="small">' + value.stage + '</div> <a href="place" class="filter">' + value.place + '</a>' + ' <a href="date" class="filter">' + value.date + '</a>';
         var text = '';
-        
-        console.log(value);
 
-        if (value.place !== null) {
-            var slide = {
-                "date": value.date,
-                "text": {
-                    "headline": headline,
-                    "text": text
-                },
-                "location": {
-                    "name": value.place,
-                    "lat": (value.geo.latitude)  ? parseFloat(value.geo.latitude): null,
-                    "lon": (value.geo.longitude) ? parseFloat(value.geo.longitude): null,
-                    "line": true
-                }
+        var slide = {
+            date: value.date,
+            text: {
+                "headline": headline,
+                "text": text
             }
+        };
+
+        var latitude = 0;
+        var longitude = 0;
+        var name = null;
+        
+        if(value.place !== null && value.geo !== null) {
+            latitude = parseFloat(value.geo.latitude);
+            longitude = parseFloat(value.geo.longitude);
+            name = value.place;
+            slide["location"] = {
+                name: name,
+                lat: latitude,
+                lon: longitude,
+                zoom: 20,
+                line: true
+            };
             slides.push(slide);
         }
     });
-
     return slides;
 }
 
@@ -341,7 +346,7 @@ function initSlaveNumbers(data) {
 
     var $resistance = createElement('resistance', 'Resistance', data.details.resistance);
 
-    if (data.details.resistance != null) {
+    if (data.details.resistance !== null) {
         addResistanceIcon();
     }
 
@@ -420,7 +425,7 @@ function getVoyagePlaces(data) {
     if (data) {
         var places = [];
         $.each(data.itinerary, function (i, v) {
-            if (v.place != null) {
+            if (v.place !== undefined && v.place !== null) {
                 var new_value = v.place
                     .replace(", port unspecified", "")
                     .replace("., port unspecified", "")

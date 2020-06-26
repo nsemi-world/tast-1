@@ -28,8 +28,9 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>    
     
     
-    
-    
+    <!-- STORYMAP -->
+    <link rel="stylesheet" href="https://cdn.knightlab.com/libs/storymapjs/latest/css/storymap.css">
+    <script src="https://cdn.knightlab.com/libs/storymapjs/latest/js/storymap.js"></script>
     
     
     

@@ -120,6 +120,6 @@ abstract class StageInfo {
     public function findPlaceLatLong() {
         $query = "SELECT latitude, longitude FROM places WHERE label=\"$this->place\"";
         $erg = $this->db->query($query);
-        return $erg->result_array();
+        return $erg->row_array();
     }
 }

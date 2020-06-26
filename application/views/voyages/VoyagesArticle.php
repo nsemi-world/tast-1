@@ -35,10 +35,10 @@
         <div class="my-5">
             <div id="vplayer" class="container-fluid text-right bg-dark sticky-top p-2">
                 <div class="btn-group">
-                    <button id="vprev" class="btn btn-sm btn-outline-warning fas fa-angle-left"></button>
-                    <button id="vnext" class="btn btn-sm btn-outline-warning fas fa-angle-right"></button>
-                    <button id="vplay" class="btn btn-sm btn-outline-warning fas fa-play"></button>
-                    <button id="vpause" class="btn btn-sm btn-outline-warning fas fa-pause"></button>
+                    <button id="vprev" class="btn btn-sm btn-outline-warning"><i class="fas fa-angle-left"></i></button>
+                    <button id="vnext" class="btn btn-sm btn-outline-warning"><i class="fas fa-angle-right"></i></button>
+                    <button id="vplay" class="btn btn-sm btn-outline-warning"><i class="fas fa-play"></i></button>
+                    <button id="vpause" class="btn btn-sm btn-outline-warning"><i class="fas fa-pause"></i></button>
                 </div>
             </div>
             <div class="container-fluid">
