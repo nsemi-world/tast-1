@@ -51,5 +51,5 @@
     <script src="<?= base_url();?>js/menu.js"></script>
     <script src="<?=base_url();?>js/frontpages.js"></script>
     <script src="<?=base_url();?>js/responsive_images.js"></script>
-    <script src="<?=base_url();?>plugins/richtext/jquery.richtext.min.js"></script>
+    <script src="<?=base_url();?>js/jquery.richtext.min.js"></script>
 </head>

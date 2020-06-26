@@ -14,7 +14,7 @@
 abstract class StageInfo {
     
     private $voyage;
-    public $pdo;
+    public $db;
     private $date;
     private $place;
     private $region;
@@ -25,9 +25,9 @@ abstract class StageInfo {
     
     // CONSTRUCTOR
     
-    public function __construct($voyage, $pdo) {
+    public function __construct($voyage, $db) {
         $this->voyage = $voyage;
-        $this->pdo = $pdo;
+        $this->db = $db;
         $this->initInfo();
     }
     
@@ -119,7 +119,7 @@ abstract class StageInfo {
     
     public function findPlaceLatLong() {
         $query = "SELECT latitude, longitude FROM places WHERE label=\"$this->place\"";
-        $erg = $this->pdo->query($query);
-        return $erg->fetch(PDO::FETCH_OBJ);
+        $erg = $this->db->query($query);
+        return $erg->result_array();
     }
 }

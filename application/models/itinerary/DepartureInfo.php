@@ -13,8 +13,8 @@
  */
 class DepartureInfo extends StageInfo {
     
-    public function __construct($voyage, $pdo) {
-        parent::__construct($voyage, $pdo);
+    public function __construct($voyage, $db) {
+        parent::__construct($voyage, $db);
     }
     
     public function getInfo() {

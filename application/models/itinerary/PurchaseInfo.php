@@ -15,9 +15,9 @@ class PurchaseInfo extends StageInfo {
     
     private $step;
     
-    public function __construct($step, $voyage, $pdo) {
+    public function __construct($step, $voyage, $db) {
         $this->step = $step;
-        parent::__construct($voyage, $pdo);
+        parent::__construct($voyage, $db);
     }
 
     public function getInfo() {
