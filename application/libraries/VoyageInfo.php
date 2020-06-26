@@ -20,9 +20,9 @@ require_once 'EndInfo.php';
 
 class VoyageInfo {
     
+    private $db; 
     private $voyageid;
     private $voyage;
-    private $db; 
     private $stages;
     private $details;
     private $summary;
@@ -113,7 +113,7 @@ class VoyageInfo {
         $this->details['resistance']    = $this->voyage->resistance;
         $this->details['slaves']        = [ 'embarked' => $this->voyage->slaximp,
                                             'disembarked' => $this->voyage->slamimp,
-                                            'died' => $this->voyage->slaximp - $this->voyage->slamimp,
+                                            'died' => (intval($this->voyage->slaximp) - intval($this->voyage->slamimp)),
                                             'died_africa' => $this->voyage->sladafri,
                                             'died_voyage' => $this->voyage->sladvoy,
                                             'died_americas' => $this->voyage->sladamer];

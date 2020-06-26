@@ -97,9 +97,10 @@ function loadVoyageIds() {
 }
 
 function loadFilteredVoyageIds(filter, filter_value) {
-    var url = 'php/getFilteredVoyageIds.php';
+    var url = getDomain() + 'ClientApi/getFilteredVoyageIds';
     $.ajax({
         url: url,
+        type: 'POST',
         data: {
             filter: filter,
             value: filter_value,

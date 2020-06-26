@@ -70,7 +70,31 @@ class ClientApi extends CI_Controller {
             $this->createResponse($vinfo);
         }
         
-        
+        public function getFilteredVoyageIds() {
+            $filter = $this->input->post('filter');
+            $value = $this->input->post('value');
+            $include_summary = $this->input->post('include_summary');
+            
+            $this->load->model('VoyagesModel');
+            $voyages = $this->VoyagesModel->get_all_ids_filtered($filter, $value);
+            
+            $result = array(
+                'ids' => array(),
+                'summary' => ""
+            );
+            
+            foreach($voyages as $id) {
+                $result['ids'][] = intval($id['voyageid']);
+            }
+            
+            
+            if($include_summary) {
+                $summary = $this->VoyagesModel->findAllVoyagesSummary();
+                $result['summary'] = $summary;
+            }
+            
+            $this->createResponse($result);
+        }
         
         
         
