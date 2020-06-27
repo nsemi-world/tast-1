@@ -91,10 +91,6 @@ function findCountriesSummariesForYear($pdo, $year) {
     $erg = $pdo->query($sql);
     return $erg->fetchAll(PDO::FETCH_OBJ);
 }
-function findTopCountriesBy($pdo, $myvar, $limit) {
-    $erg = $pdo->query(getQueryTopCountriesGroupByCode($myvar, $limit));
-    return $erg->fetchAll(PDO::FETCH_OBJ);
-}
 function getQueryTopCountriesGroupByName($myvar, $limit) {
     $sql = "
         SELECT n.label as name, n.iso2 as iso2, SUM($myvar) as total 
@@ -103,19 +99,6 @@ function getQueryTopCountriesGroupByName($myvar, $limit) {
                 ON (v.national=n.value OR v.natinimp=n.value)
         WHERE n.label != 'Other'
         GROUP BY n.label
-        ORDER BY total DESC
-    ";
-    
-    return $sql;
-}
-function getQueryTopCountriesGroupByCode($myvar, $limit) {
-    $sql = "
-        SELECT n.label as name, n.iso2 as iso2, SUM($myvar) as total 
-        FROM voyages as v
-            JOIN (SELECT * FROM national UNION SELECT * FROM natinimp) as n 
-                ON (v.national=n.value OR v.natinimp=n.value)
-        WHERE n.label != 'Other' AND n.label != ''
-        GROUP BY n.iso2
         ORDER BY total DESC
     ";
     
@@ -501,5 +484,21 @@ function is_place($var) {
     ]);
 }
 
+function findTopCountriesBy($myvar, $limit) {
+    return getQueryTopCountriesGroupByCode($myvar, $limit);
+}
+function getQueryTopCountriesGroupByCode($myvar, $limit) {
+    $sql = "
+        SELECT n.label as name, n.iso2 as iso2, SUM($myvar) as total 
+        FROM voyages as v
+            JOIN (SELECT * FROM national UNION SELECT * FROM natinimp) as n 
+                ON (v.national=n.value OR v.natinimp=n.value)
+        WHERE n.label != 'Other' AND n.label != ''
+        GROUP BY n.iso2
+        ORDER BY total DESC
+    ";
+    
+    return $sql;
+}
 
 ?>
