@@ -57,13 +57,14 @@
                             <div class="form-group col-md-4  text-left">
                                 <label for="type">Category:</label>
                                 <select id="top-category" name="category" class="form-control" placeholder="Top Category:" required>
-                                <option id="option-top-countries">Top Countries</option>
-                                <option id="option-top-owners" class="d-none">Top Owners</option>
-                                <option id="option-top-captains" class="d-none">Top Captains</option>
-                                <option  id="option-top-ships" class="d-none">Top Ships</option>
-                                <option id="option-top-purchasing" class="d-none">Top Purchasing Places</option>
-                                <option id="option-top-landing" class="d-none">Top Landing Places</option>
-                            </select>
+                                    <option id="option-top-countries">Top Countries</option>
+                                    <option id="option-top-owners" class="d-none">Top Owners</option>
+                                    <option id="option-top-captains" class="d-none">Top Captains</option>
+                                    <option  id="option-top-ships" class="d-none">Top Ships</option>
+                                    <option id="option-top-purchasing" class="d-none">Top Purchasing Places</option>
+                                    <option id="option-top-landing" class="d-none">Top Landing Places</option>
+                                </select>
+                                
                                 <div class="valid-feedback">
                                     Looks good!
                                 </div>
@@ -86,7 +87,7 @@
                 <!-- USER WORKING AREA -->
                 <div id="working-area" class="col">
                     <div id="score" class="my-1 rounded  text-right">
-                        <span class="badge">Score</span>
+                        <span class="badge text-secondary">Score</span>
                         <div id="score-badge" class="badge badge-info" style="padding: .4125em">
                             <span class="ncorrect">0</span> |
                             <span class="ntotal">0</span> |
@@ -95,12 +96,12 @@
                                     </span>
                         </div>
                     </div>
-                    <div id="user-area" class="w-auto rounded p-3 shadow border border-secondary">
+                    <div id="user-area" class="rounded p-3 shadow border border-secondary">
                         <div id="user-answers" class="text-left text-secondary">
                         </div>
-                        <div id="sum" class="badge w-100 text-right my-2"></div>
+                        <div id="sum" class="badge w-100 text-right text-secondary my-2"></div>
                         <!-- POSSIBLE ANSWERS -->
-                        <div id="possible-answers" class="container-fluid rounded my-5"></div>
+                        <div id="possible-answers" class="container-fluid d-flex flex-wrap rounded my-3 "></div>
                         <div id="#user-actions" class="clearfix text-primary">
                             <button id="gotomenu" class="btn btn-outline-secondary" inactive>Take another quizz</button>
                             <button id="save-results" class="btn btn-outline-secondary" inactive>Save My Results</button>

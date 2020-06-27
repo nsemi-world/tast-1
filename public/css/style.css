@@ -364,3 +364,8 @@ li.paginate_button.active  a {
 #maps-and-charts .card {
     width: 100%;
 }
+
+
+.answer {
+    max-width: 300px ! important;
+}

@@ -538,16 +538,16 @@ function getSum() {
 function appendButtonFor(countryData) {
     if (countryData.iso2) {
         var countryCode = countryData.iso2.toLowerCase();
-        var $flag = $('<img></img')
-            .addClass('flag flag-' + countryCode)
-            .attr('src', 'img/blank.gif')
-            .attr('alt', countryData.name + ' flag')
+        var $flag = $('<div/>').append($('<i/>').addClass('flag flag-' + countryCode))
+            
+            //.attr('src', 'img/blank.gif')
+            //.attr('alt', countryData.name + ' flag')
             .attr('title', countryData.name);
 
-        var $name = $('<span class="name"></span>')
+        var $name = $('<span class="name ml-2"></span>')
             .html('<b>' + countryData.name + '</b>');
 
-        var $flagAndName = $('<span class="text-secondary"></span>')
+        var $flagAndName = $('<div class="d-flex justify-content-start align-items-center text-secondary"/>')
             .append($flag)
             .append($name);
         //$name.hide();
@@ -558,10 +558,10 @@ function appendButtonFor(countryData) {
 
         $ntriesHolder.append($ntries).append($x);
 
-        var $answer = $('<div></div>')
+        var $answer = $('<div class="d-flex align-items-center"/>')
             .addClass('draggable badge')
             .addClass('container-fluid')
-            .addClass('w-50 m-0 text-left text-truncate d-inline-block')
+            .addClass('m-0 text-left')
             .data('rank', countryData.rank)
             .append($flagAndName)
             .append($ntriesHolder);
