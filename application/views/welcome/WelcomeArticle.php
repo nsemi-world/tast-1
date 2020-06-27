@@ -124,10 +124,10 @@
             <div class="col-md-6 text-center my-auto">
                 <div class="row">
                     <div class="col-lg-6 w-100 pt-1">
-                        <a href="database.php" id="go-database" class="btn btn-outline-light text-center w-100"><i class="fas fa-database"></i> Look Deep into the Database</a>
+                        <a href="<?= base_url()?>explorer/database" id="go-database" class="btn btn-outline-light text-center w-100"><i class="fas fa-database"></i> Look Deep into the Database</a>
                     </div>
                     <div class="col-lg-6 w-100 pt-1">
-                        <a href="charts.php" id="go-charts" class="btn btn-outline-light text-center w-100"><i class="fas fa-chart-pie"></i> Put it on Charts</a>
+                        <a href="<?= base_url()?>explorer/charts" id="go-charts" class="btn btn-outline-light text-center w-100"><i class="fas fa-chart-pie"></i> Put it on Charts</a>
                     </div>
                 </div>
             </div>
