@@ -105,6 +105,16 @@ class ClientApi extends CI_Controller {
             $this->createResponse($data);
         }
         
+        public function getTops() {
+            $min        = $this->input->post('min');
+            $type       = $this->input->post('type');
+            $criteria   = $this->input->post('criteria');
+            
+            $this->load->model('QuizzModel');
+            $data = $this->QuizzModel->getTops($min, $type, $criteria);
+            $this->createResponse($data);
+        }
+
         private function createResponse($data, $status = 200) 
         {
             return $this->output

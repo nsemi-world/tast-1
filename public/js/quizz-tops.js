@@ -25,15 +25,15 @@ function initQuizz() {
     getType().on('change', function(event) {
         event.preventDefault();
         updateTitle(getTypeValue(), getCategoryValue(), getCriteriaValue());
-    })
+    });
     getCategory().on('change', function(event) {
         event.preventDefault();
         updateTitle(getTypeValue(), getCategoryValue(), getCriteriaValue());
-    })
+    });
     getCriteria().on('change', function(event) {
         event.preventDefault();
         updateTitle(getTypeValue(), getCategoryValue(), getCriteriaValue());
-    })
+    });
     
     $('#gotomenu').on('click', function(event){
         event.preventDefault();
@@ -217,17 +217,17 @@ function validateForm() {
  * Quizz States
  ********************************************/
 function configureState(stage) {
-    if(stage == stages.init) {
+    if(stage === stages.init) {
         getWorkingArea().hide();
         getMenu().show();
     }
 
-    else if(stage == stages.work) {
+    else if(stage === stages.work) {
         getMenu().hide();
         getWorkingArea().show();
     }
     
-    else if(stage == stages.end) {
+    else if(stage === stages.end) {
         getWorkingArea().hide();
         getMenu().show();
     }
@@ -301,7 +301,7 @@ function createDroppables() {
 function onDrop($droppable, $draggable) {
     var evaluation = evaluateAnswer($droppable.data('rank'), $draggable.data('rank'));
 
-    if (evaluation == true) {
+    if (evaluation === true) {
         updateDraggableOnSuccess($droppable, $draggable);
     } else {
         updateDraggableOnFail($droppable, $draggable);
@@ -388,7 +388,7 @@ function updateScore(doit, rank) {
         sum += parseInt(findValueWithRank(rank));
         getSum().text(toNumeral(sum)).data('sum', sum);
         
-        if (correctValue == totalValue) {
+        if (correctValue === totalValue) {
             addWinActions();
             quizzStarted = false;
         }
@@ -411,36 +411,36 @@ function getUserNotificationArea() {
 }
 
 function createQuestion(optionId, criteriaId) {
-    if (optionId == 'option-top-countries') {
-        if (criteriaId == 'criteria-embarked') {
+    if (optionId === 'option-top-countries') {
+        if (criteriaId === 'criteria-embarked') {
             return 'Which country had more people embarked from Afrika?';
-        } else if (criteriaId == 'criteria-disembarked') {
+        } else if (criteriaId === 'criteria-disembarked') {
             return 'Which country had more people disembarked in Europe or in the Americas?';
-        } else if (criteriaId == 'criteria-died') {
+        } else if (criteriaId === 'criteria-died') {
             return 'Which country had more people dying during the Middle Passage?';
         }
-    } else if (optionId == 'option-top-owners') {
-        if (criteria == 'criteria-embarked') {
+    } else if (optionId === 'option-top-owners') {
+        if (criteria === 'criteria-embarked') {
             return 'Which ship owners had more people embarked from Afrika?';
-        } else if (criteriaId == 'criteria-disembarked') {
+        } else if (criteriaId === 'criteria-disembarked') {
             return 'Which ship owners had more people disembarked in Europe or in the Americas?';
-        } else if (criteriaId == 'criteria-died') {
+        } else if (criteriaId === 'criteria-died') {
             return 'Which ship owners had more people dead during the Middle Passage?';
         }
-    } else if (optionId == 'option-top-captains') {
-        if (criteriaId == 'criteria-embarked') {
+    } else if (optionId === 'option-top-captains') {
+        if (criteriaId === 'criteria-embarked') {
             return 'Which ship captains had more people embarked from Afrika?';
-        } else if (criteriaId == 'criteria-disembarked') {
+        } else if (criteriaId === 'criteria-disembarked') {
             return 'Which ship captains had more people disembarked in Europe or in the Americas?';
-        } else if (criteriaId == 'criteria-died') {
+        } else if (criteriaId === 'criteria-died') {
             return 'Which ship captains had more people dead during the Middle Passage?';
         }
-    } else if (optionId == 'option-top-ships') {
-        if (criteriaId == 'criteria-embarked') {
+    } else if (optionId === 'option-top-ships') {
+        if (criteriaId === 'criteria-embarked') {
             return 'Which ships had more people embarked from Afrika?';
-        } else if (criteriaId == 'criteria-disembarked') {
+        } else if (criteriaId === 'criteria-disembarked') {
             return 'Which ship had more people disembarked in Europe or in the Americas?';
-        } else if (criteriaId == 'criteria-died') {
+        } else if (criteriaId === 'criteria-died') {
             return 'Which ship had more people dead during the Middle Passage?';
         }
     }
@@ -462,14 +462,15 @@ function createUserAnswers(type, option, criteria) {
 
 function loadAnswerFromServer(min, type, criteria) {
     $.ajax({
-        url: 'php/getTops.php',
+        url: getDomain() + 'ClientApi/getTops',
+        type: 'POST',
         data: {
             min: min,
             type: type,
             criteria: criteria
         },
         success: function (data) {
-            quizzData = JSON.parse(data);
+            quizzData = data;
             createPossibleAnswers(quizzData, min);
         },
         error: function () {
@@ -537,16 +538,16 @@ function getSum() {
 function appendButtonFor(countryData) {
     if (countryData.iso2) {
         var countryCode = countryData.iso2.toLowerCase();
-        var $flag = $('<img></img')
-            .addClass('flag flag-' + countryCode)
-            .attr('src', 'img/blank.gif')
-            .attr('alt', countryData.name + ' flag')
+        var $flag = $('<div/>').append($('<i/>').addClass('flag flag-' + countryCode))
+            
+            //.attr('src', 'img/blank.gif')
+            //.attr('alt', countryData.name + ' flag')
             .attr('title', countryData.name);
 
-        var $name = $('<span class="name"></span>')
+        var $name = $('<span class="name ml-2"></span>')
             .html('<b>' + countryData.name + '</b>');
 
-        var $flagAndName = $('<span class="text-secondary"></span>')
+        var $flagAndName = $('<div class="d-flex justify-content-start align-items-center text-secondary"/>')
             .append($flag)
             .append($name);
         //$name.hide();
@@ -557,10 +558,10 @@ function appendButtonFor(countryData) {
 
         $ntriesHolder.append($ntries).append($x);
 
-        var $answer = $('<div></div>')
+        var $answer = $('<div class="d-flex align-items-center"/>')
             .addClass('draggable badge')
             .addClass('container-fluid')
-            .addClass('w-50 m-0 text-left text-truncate d-inline-block')
+            .addClass('m-0 text-left')
             .data('rank', countryData.rank)
             .append($flagAndName)
             .append($ntriesHolder);
