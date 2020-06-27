@@ -501,4 +501,11 @@ function getQueryTopCountriesGroupByCode($myvar, $limit) {
     return $sql;
 }
 
+function getChartDataQuery($select, $groupBy, $orderByVariable, $orderByDirection) {
+    $query = getQuery([$groupBy, $select.' as value ']) ;
+    $query = $query . " GROUP BY $groupBy ORDER BY $orderByVariable $orderByDirection";
+    return $query;
+}
+
+
 ?>

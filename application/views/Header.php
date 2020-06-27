@@ -28,17 +28,13 @@
                         <i class="fas fa-database"></i>
                         Database
                     </a>
-                    <a class="dropdown-item" id="toggle_charts" href="<?=base_url();?>charts" title="Charts">
+                    <a class="dropdown-item" id="toggle_charts" href="<?=base_url();?>explorer/charts" title="Charts">
                         <i class="fas fa-chart-pie"></i>
                         Charts
                     </a>
-                    <a class="dropdown-item" id="toggle_quizz" href="<?=base_url();?>index#explore">
+                    <a class="dropdown-item" id="toggle_quizz" href="<?=base_url();?>welcome#explore">
                         <i class="fas fa-brain" title="Voyages"></i>
                         exQUIZZme!
-                    </a>
-                    <a class="dropdown-item" id="toggle_resources" href="<?=base_url();?>resources" title="Resources">
-                        <i class="fab fa-amazon"></i>
-                        Books on Slavery
                     </a>
                 </div>
             </div>
@@ -54,6 +50,10 @@
                     <a class="dropdown-item" id="toggle_articles" href="<?=base_url();?>resources/articles" title="Articles">
                         <i class="fas fa-book-open"></i>
                         Articles
+                    </a>
+                    <a class="dropdown-item" id="toggle_resources" href="<?=base_url();?>resources" title="Resources">
+                        <i class="fab fa-amazon"></i>
+                        Books on Slavery
                     </a>
                     <a class="dropdown-item d-none" id="toggle_external" href="<?=base_url();?>resources/videos" title="Videos">
                         <i class="fas fa-globe"></i>

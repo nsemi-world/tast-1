@@ -37,4 +37,9 @@ class Explorer extends CI_Controller {
         {
 		$this->load->view('database/DatabasePage');
         }
+        
+        public function charts() 
+        {
+		$this->load->view('charts/ChartsPage');
+        }
 }
