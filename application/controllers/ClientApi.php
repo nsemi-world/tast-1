@@ -98,17 +98,6 @@ class ClientApi extends CI_Controller {
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         private function createResponse($data, $status = 200) 
         {
             return $this->output
