@@ -3,13 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/application/views/welcome/WelcomePage.php</file>
-            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/application/views/index.php</file>
+            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/public/php/getObservations.php</file>
+            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/application/controllers/ClientApi.php</file>
+            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/application/controllers/Explorer.php</file>
+            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/application/views/database/DatabaseBody.php</file>
             <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/application/views/Head.php</file>
-            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/public/index.php</file>
-            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/application/views/welcome/WelcomeBody.php</file>
-            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/application/views/index.html</file>
-            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/application/controllers/Welcome.php</file>
+            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/application/views/Header.php</file>
+            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/public/js/database.js</file>
+            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/application/views/database/DatabasePage.php</file>
+            <file>file:/C:/Users/CC-Student/Documents/GitHub/nsemi-world/tast/public/php/DBQueries.php</file>
         </group>
     </open-files>
 </project-private>

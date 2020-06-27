@@ -214,7 +214,7 @@ function removeBadgeSelector(id) {
         var name = id.replace('badge-', '');
         var $first_td = $tr.find('td').first();
         
-        if($first_td.text() == name) {
+        if($first_td.text() === name) {
             $tr.removeClass('bg-primary');
         }
     }); 
@@ -222,7 +222,8 @@ function removeBadgeSelector(id) {
 
 function loadObservations(variables) {
     $.ajax({
-        url: 'php/getObservations.php',
+        url: getDomain() + 'ClientApi/getObservations',
+        type: 'POST',
         data: {
             variables: variables,
             join: shouldJoin()
