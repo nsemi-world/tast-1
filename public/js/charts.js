@@ -74,7 +74,7 @@ function handleEvents() {
 
 function loadVariables() {
     $.ajax({
-        url: 'php/variables.json',
+        url: getDomain() + 'ClientApi/data/variables.json',
         success: function (result) {
             $(document).trigger('_variables_loaded', [result]);
         },
@@ -165,7 +165,8 @@ function getOrderBy() {
 function loadChartData(selectVariable, groupByVariable, chartType) {
     //updateFormula(selectVariable, groupByVariable);
     $.ajax({
-        url: 'php/getChartData.php',
+        url: getDomain() + 'ClientApi/getChartData',
+        type: 'POST',
         data: {
             select: selectVariable,
             groupBy: groupByVariable
@@ -178,14 +179,15 @@ function loadChartData(selectVariable, groupByVariable, chartType) {
             $('#chart-wrapper .chart-caption').html(code);
         },
         error: function () {
-            alert('Error while loading chart data...')
+            alert('Error while loading chart data...');
         }
-    })
+    });
 }
 
+/* TODO. REVIEW THIS METHOD: CHARTS BROKEN...*/
 function createChart(selector, data, chartType, label) {
     var $chart = $(selector).empty();
-    if (selector == '#chart-1') {
+    if (selector === '#chart-1') {
         if (CHART2) {
             CHART2.destroy();
         }
@@ -194,7 +196,7 @@ function createChart(selector, data, chartType, label) {
             data: getChartData(data, label),
             options: getChartOptions(data, chartType)
         });
-    } else if (selector == '#chart') {
+    } else if (selector === '#chart') {
         if (CHART1) {
             CHART1.destroy();
         }
@@ -240,7 +242,8 @@ function loadChartData1() {
     var chartType = $('#charts-type').val();
 
     $.ajax({
-        url: 'php/getChartData.php',
+        url: getDomain() + 'ClientApi/getChartData',
+        type: 'POST',
         data: {
             select: chartFunction + '(' + functionArgument + ')',
             groupBy: groupBy,
@@ -258,7 +261,7 @@ function loadChartData1() {
             $('#chart-wrapper-1 .chart-caption').html(code);
         },
         error: function () {
-            alert('Error while loading chart data...')
+            alert('Error while loading chart data...');
         }
     });
 }
@@ -274,8 +277,8 @@ function createOption(variable, activeVar) {
     var $option = $('<option/>');
     $option.attr('value', variable.name).text(variable.name + ' - ' + variable.description);
 
-    if (variable.name == activeVar) {
+    if (variable.name === activeVar) {
         $option.addClass('active');
     }
-    return $option
+    return $option;
 }

@@ -115,6 +115,16 @@ class ClientApi extends CI_Controller {
             $this->createResponse($data);
         }
 
+        public function getChartData() {
+            $select        = $this->input->post('select');
+            $groupBy       = $this->input->post('groupBy');
+            $orderBy       = $this->input->post('orderBy');
+            
+            $this->load->model('ChartsModel');
+            $data = $this->ChartsModel->getChartsData($select, $groupBy, $orderBy);
+            $this->createResponse($data);
+        }
+
         private function createResponse($data, $status = 200) 
         {
             return $this->output
