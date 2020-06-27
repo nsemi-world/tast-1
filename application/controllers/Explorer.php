@@ -33,4 +33,8 @@ class Explorer extends CI_Controller {
 		$this->load->view('voyages/VoyagesPage');
         }
         
+        public function database() 
+        {
+		$this->load->view('database/DatabasePage');
+        }
 }
