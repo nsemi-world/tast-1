@@ -14,18 +14,6 @@ $observations = getObservations($pdo, $variables, $must_join);
 header('Content-type:application/json;charset=utf-8');
 echo json_encode($observations);
 
-function getObservations($pdo, $variables, $must_join) {
-    if($must_join) {
-        $query = getQuery($variables);
-    }
-    else {
-        $columns = implode(", ", $variables);
-        $query = "SELECT $columns FROM voyages";
-    }
-    
-    $erg = $pdo->query($query);
-    return $erg->fetchAll(PDO::FETCH_NUM);
-}
 
 
 

@@ -24,19 +24,19 @@
                         <i class="fas fa-atlas" title="Voyages"></i>
                         Voyage Itineraries
                     </a>
-                    <a  class="dropdown-item" id="toggle_database" href="database.php"title="Database">
+                    <a  class="dropdown-item" id="toggle_database" href="<?=base_url();?>explorer/database"title="Database">
                         <i class="fas fa-database"></i>
                         Database
                     </a>
-                    <a class="dropdown-item" id="toggle_charts" href="charts.php" title="Charts">
+                    <a class="dropdown-item" id="toggle_charts" href="<?=base_url();?>charts" title="Charts">
                         <i class="fas fa-chart-pie"></i>
                         Charts
                     </a>
-                    <a class="dropdown-item" id="toggle_quizz" href="index.php#explore">
+                    <a class="dropdown-item" id="toggle_quizz" href="<?=base_url();?>index#explore">
                         <i class="fas fa-brain" title="Voyages"></i>
                         exQUIZZme!
                     </a>
-                    <a class="dropdown-item" id="toggle_resources" href="resources.php" title="Resources">
+                    <a class="dropdown-item" id="toggle_resources" href="<?=base_url();?>resources" title="Resources">
                         <i class="fab fa-amazon"></i>
                         Books on Slavery
                     </a>
@@ -51,15 +51,15 @@
                         aria-expanded="false">Resources</button>
                 
                 <div class="dropdown-menu bg-dark" aria-labelledby="resources-dropdown-button">
-                    <a class="dropdown-item" id="toggle_articles" href="articles.php" title="Articles">
+                    <a class="dropdown-item" id="toggle_articles" href="<?=base_url();?>resources/articles" title="Articles">
                         <i class="fas fa-book-open"></i>
                         Articles
                     </a>
-                    <a class="dropdown-item d-none" id="toggle_external" href="videos.php" title="Videos">
+                    <a class="dropdown-item d-none" id="toggle_external" href="<?=base_url();?>resources/videos" title="Videos">
                         <i class="fas fa-globe"></i>
                         Videos
                     </a>
-                    <a class="dropdown-item d-none" id="toggle_external" href="external-links.php" title="External links">
+                    <a class="dropdown-item d-none" id="toggle_external" href="<?=base_url();?>resources/external-links" title="External links">
                         <i class="fas fa-globe"></i>
                         External Links
                     </a>

@@ -1,6 +1,6 @@
 <?php
 
-
+/*
 function findCountriesSummaries($pdo) {
     $sql = "SELECT \n"
         . "	label as name, \n"
@@ -91,13 +91,10 @@ function findCountriesSummariesForYear($pdo, $year) {
     $erg = $pdo->query($sql);
     return $erg->fetchAll(PDO::FETCH_OBJ);
 }
-
-
 function findTopCountriesBy($pdo, $myvar, $limit) {
     $erg = $pdo->query(getQueryTopCountriesGroupByCode($myvar, $limit));
     return $erg->fetchAll(PDO::FETCH_OBJ);
 }
-
 function getQueryTopCountriesGroupByName($myvar, $limit) {
     $sql = "
         SELECT n.label as name, n.iso2 as iso2, SUM($myvar) as total 
@@ -111,7 +108,6 @@ function getQueryTopCountriesGroupByName($myvar, $limit) {
     
     return $sql;
 }
-
 function getQueryTopCountriesGroupByCode($myvar, $limit) {
     $sql = "
         SELECT n.label as name, n.iso2 as iso2, SUM($myvar) as total 
@@ -125,7 +121,6 @@ function getQueryTopCountriesGroupByCode($myvar, $limit) {
     
     return $sql;
 }
-
 function getData($pdo) {
     $sql = "
         SELECT 
@@ -217,25 +212,21 @@ function getData($pdo) {
     $erg = $pdo->query($sql);
     return $erg->fetchAll(PDO::FETCH_ASSOC);    
 }
-
 function getTotalVoyages($pdo) {
     $sql = "SELECT COUNT(*) FROM voyages";
     $erg = $pdo->query($sql);
     return $erg->fetch(PDO::FETCH_NUM)[0];
 }
-
 function getFirstVoyageDate($pdo) {
     $sql = "SELECT MIN(yeardep) FROM `voyages`";
     $erg = $pdo->query($sql);
     return $erg->fetch(PDO::FETCH_NUM)[0];
 }
-
 function getLastVoyageDate($pdo) {
     $sql = "SELECT MAX(yeardep) FROM `voyages`";
     $erg = $pdo->query($sql);
     return $erg->fetch(PDO::FETCH_NUM)[0];
 }
-
 function getDataForYear($pdo, $year) {
     $sql = "
         SELECT 
@@ -328,13 +319,11 @@ function getDataForYear($pdo, $year) {
     $erg = $pdo->query($sql);
     return $erg->fetchAll(PDO::FETCH_ASSOC);    
 }
-
 function getTotalVoyagesForYear($pdo, $year) {
     $sql = "SELECT COUNT(*) FROM voyages WHERE yeardep=$year";
     $erg = $pdo->query($sql);
     return $erg->fetch(PDO::FETCH_NUM)[0];
 }
-
 function getDataFromToYear($pdo, $begin, $year) {
     $sql = "
         SELECT 
@@ -427,17 +416,48 @@ function getDataFromToYear($pdo, $begin, $year) {
     $erg = $pdo->query($sql);
     return $erg->fetchAll(PDO::FETCH_ASSOC);    
 }
-
 function getTotalVoyagesFromToYear($pdo, $begin, $year) {
     $sql = "SELECT COUNT(*) FROM voyages WHERE yeardep>=$begin AND yeardep<=$year";
     $erg = $pdo->query($sql);
     return $erg->fetch(PDO::FETCH_NUM)[0];
 }
+*/
 
+function getQuery($variables) {
+    $columns = [];
+    $joins = [];
+
+    foreach($variables as $key => $value) {
+        if(is_labelled($value)) {
+            array_push($columns, "$value.label AS $value");
+            array_push($joins, "LEFT JOIN $value $value ON v.`$value`=$value.value");
+        }
+        else if(is_place($value)) {
+            array_push($columns, "$value.label AS $value");
+            array_push($joins, "LEFT JOIN places $value ON v.`$value`=$value.value");
+        }
+
+        else if($value == 'xmimpflag') {
+            array_push($columns, "CONCAT($value.flag, ' ', $value.period) as grouping");
+            array_push($joins, "JOIN $value $value ON v.`$value`=$value.value");
+        }
+        else {
+            array_push($columns, $value);
+        }
+    }
+
+    $select = "SELECT ";
+    $select .= implode(", ", $columns);
+    $select .= " FROM voyages v ";
+    $select .= implode(" ", $joins);
+
+    //var_dump($select);
+
+    return $select;
+}
 function is_labelled($var) {
     return in_array($var, ['fate', 'fate2', 'fate3', 'fate4', 'natinimp', 'national', 'resistance', 'rig', 'tontype']);
 }
-
 function is_place($var) {
     return in_array($var, [
          'placcons', 
@@ -481,37 +501,5 @@ function is_place($var) {
     ]);
 }
 
-function getQuery($variables) {
-    $columns = [];
-    $joins = [];
-
-    foreach($variables as $key => $value) {
-        if(is_labelled($value)) {
-            array_push($columns, "$value.label AS $value");
-            array_push($joins, "LEFT JOIN $value $value ON v.`$value`=$value.value");
-        }
-        else if(is_place($value)) {
-            array_push($columns, "$value.label AS $value");
-            array_push($joins, "LEFT JOIN places $value ON v.`$value`=$value.value");
-        }
-
-        else if($value == 'xmimpflag') {
-            array_push($columns, "CONCAT($value.flag, ' ', $value.period) as grouping");
-            array_push($joins, "JOIN $value $value ON v.`$value`=$value.value");
-        }
-        else {
-            array_push($columns, $value);
-        }
-    }
-
-    $select = "SELECT ";
-    $select .= implode(", ", $columns);
-    $select .= " FROM voyages v ";
-    $select .= implode(" ", $joins);
-
-    //var_dump($select);
-
-    return $select;
-}
 
 ?>

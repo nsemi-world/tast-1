@@ -1,7 +1,7 @@
 var SERVER_DATA = {
     variables: [],
     observations: []
-}
+};
 var observationsTable;
 
 $(document).ready(function () {
@@ -58,7 +58,7 @@ function configureDatabasePage() {
         var variables = vars.split(', ');
         addBadgesFor(variables);
         //loadObservations(variables);
-    })
+    });
 }
 
 function addBadgesFor(variables) {
@@ -81,7 +81,7 @@ function collectVariablesFromBadgeList() {
     var variables = ['voyageid'];
     $.each($('#variables-checklist-badges .badge'), function () {
         var name = $(this).text();
-        if(name != 'voyageid') {
+        if(name !== 'voyageid') {
             variables.push(name);
         }
     });
@@ -108,7 +108,7 @@ function initDatabase() {
 
 function loadVariablesList() {
     $.ajax({
-        url: 'php/variables.json',
+        url: getDomain() + 'ClientApi/data/variables.json',
         success: function (response) {
             SERVER_DATA.variables = response;
             updatePageTemplates(response.length, response[266].coverage);
@@ -214,7 +214,7 @@ function removeBadgeSelector(id) {
         var name = id.replace('badge-', '');
         var $first_td = $tr.find('td').first();
         
-        if($first_td.text() == name) {
+        if($first_td.text() === name) {
             $tr.removeClass('bg-primary');
         }
     }); 
@@ -222,7 +222,8 @@ function removeBadgeSelector(id) {
 
 function loadObservations(variables) {
     $.ajax({
-        url: 'php/getObservations.php',
+        url: getDomain() + 'ClientApi/getObservations',
+        type: 'POST',
         data: {
             variables: variables,
             join: shouldJoin()

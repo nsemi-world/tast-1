@@ -96,18 +96,14 @@ class ClientApi extends CI_Controller {
             $this->createResponse($result);
         }
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        public function getObservations() {
+            $variables  = $this->input->post('variables');
+            $join       = $this->input->post('join');
+            
+            $this->load->model('ObservationsModel');
+            $data = $this->ObservationsModel->getObservations($variables, $join);
+            $this->createResponse($data);
+        }
         
         private function createResponse($data, $status = 200) 
         {
