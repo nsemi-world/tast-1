@@ -5,9 +5,10 @@ function loadSectionImage(sectionName, filename) {
     var $target = $(sectionName);
     var width = $target.innerWidth();
     var height = $target.innerHeight();
+    alert(filename);
 
     $.ajax({
-        url: getDomain() + 'ClientApi/getSectionImageFromDatabase/'+ filename,
+        url: getDomain() + 'assets/img/'+ filename,
         success: function (data) {
             console.log(data);
             if ($target) {

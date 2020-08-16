@@ -7,17 +7,18 @@ body {
     min-height: 100vh;
     font-family: var(--main-font);
     font-size: 20px;
-    background: linear-gradient(to bottom right, white, gray);
+    background: linear-gradient(to bottom right, pink, gray);
 }
 
 
 header {
-    min-height: var(--header-height);
+    height: 7.5vh!important;
+    background: white;
 }
 
 
 main {
-    min-height: var(--main-height);
+    min-height: 95vh;
 }
 
 footer {
@@ -55,27 +56,18 @@ section {
  Articles 
 ***********************************/
 
-
-/**********************************
- Frontpages
-***********************************/
-.frontpage {
-    height: calc(var(--main-height) * 10 / 10);
-    font-weight: bold;
-    position: relative;
-}
-
-.frontpage.small {
-    height: calc(var(--main-height) * 5 / 10);
-}
-
-
-.frontpage .title-wrapper {
-    height: 100%;
-}
-
-.frontpage.small .title-wrapper {
+#services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     background: transparent;
+}
+#services .card {
+    background: white;
+    margin: 1rem;
+}
+#services .card:hover button,
+#services .card:hover a {
+    background: pink;
 }
 
 .title-wrapper .title {

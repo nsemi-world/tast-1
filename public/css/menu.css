@@ -1,5 +1,6 @@
 header {
     width: 100%;
+    height: 7.5vh;
 }
 header .navbar-brand {
     font-family: var(--brand-font);
@@ -7,7 +8,6 @@ header .navbar-brand {
 }
 
 #menu {
-    min-height: var(--header-height);
     text-align: center;
 }
 
@@ -16,6 +16,7 @@ header .navbar-brand {
     background: transparent;
     font-family: var(--main-font);
     font-weight: bold;
+    font-variant: small-caps;
 }
 
 #menu a.active, 

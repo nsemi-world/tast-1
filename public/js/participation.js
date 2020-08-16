@@ -5,8 +5,8 @@ $(document).ready(function () {
     activate($('#toggle_participation'));
 
     onParticipation();
-
     loadSectionImage('#participation .frontpage', 'participation.jpg');
+    alert('JUJUJU');
     setArticleBackground();
     loadParticipationData();
 });
